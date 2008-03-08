@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<organigram 
+    isToolTipEnabled="true"
+    backgroundColor="200,150,150" 
+    boxFrameColor="0,0,0" boxBackgroundColor="80,12,178" boxForegroundColor="255,255,255" lineColor="0,0,0"
+    boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10"
+    boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6"
+    boxTextAlignment="center"> 
+    <unit>
+        <lines>
+            <line>.</line>
+        </lines>
+        <subUnits>
+            <unit>
+                <lines>
+                    <line>com</line>
+                </lines>
+                <subUnits>
+                    <unit link="http://fbergeron.com">
+                        <lines>
+                            <line color="50,255,50" fontStyle="Bold+Italic">fbergeron</line>
+                            <line>My personal website</line>
+                        </lines>
+                        <subUnits/>
+                    </unit>
+                    <unit link="http://google.com">
+                        <lines>
+                            <line>google</line>
+                        </lines>
+                        <subUnits/>
+                    </unit>
+                    <unit link="http://yahoo.com">
+                        <lines>
+                            <line>yahoo</line>
+                        </lines>
+                        <subUnits/>
+                    </unit>
+                </subUnits>
+            </unit>
+            <unit>
+                <lines>
+                    <line>org</line>
+                </lines>
+                <subUnits>
+                    <unit link="http://slashdot.org">
+                        <lines>
+                            <line>slashdot</line>
+                        </lines>
+                        <subUnits>
+                        </subUnits>
+                    </unit>
+                    <unit link="http://debian.org">
+                        <lines>
+                            <line>debian</line>
+                        </lines>
+                        <subUnits>
+                            <unit link="http://wiki.debian.org">
+                                <lines>
+                                    <line>wiki</line>
+                                </lines>
+                                <subUnits>
+                                </subUnits>
+                            </unit>
+                        </subUnits>
+                    </unit>
+                </subUnits>
+            </unit>
+            <unit>
+                <lines>
+                    <line>net</line>
+                </lines>
+                <subUnits>
+                    <unit link="http://sourceforge.net">
+                        <lines>
+                            <line>sourceforge</line>
+                        </lines>
+                        <subUnits>
+                            <unit link="http://kanasensei.sourceforge.net">
+                                <lines>
+                                    <line color="50,255,50" fontStyle="Bold+Italic">kanasensei</line>
+                                </lines>
+                                <subUnits>
+                                </subUnits>
+                            </unit>
+                            <unit link="http://javasol.sourceforge.net">
+                                <lines>
+                                    <line color="50,255,50" fontStyle="Bold+Italic">javasol</line>
+                                </lines>
+                                <subUnits>
+                                </subUnits>
+                            </unit>
+                            <unit link="http://orgapp.sourceforge.net">
+                                <lines>
+                                    <line color="255,50,50" fontStyle="Bold+Italic">orgapp</line>
+                                </lines>
+                                <subUnits>
+                                </subUnits>
+                            </unit>
+                        </subUnits>
+                    </unit>
+                </subUnits>
+            </unit>
+        </subUnits>
+    </unit>
+</organigram>
+
+

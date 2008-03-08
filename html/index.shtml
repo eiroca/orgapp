@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>OrgApp Applet Demonstration</title>
+    </head>
+    <body>
+        <h1>OrgApp : Java applet displaying an organigram.</h1>
+        <p>
+        To view the applet, you need the a browser supporting Java Plug-in.  I may develop a AWT version of this
+        applet eventually but for a first version, I will use the Swing library.
+        </p>
+        Last modification: <!--#config timefmt="%Y-%m-%d; %H:%M %Z"--><!--#echo var="LAST_MODIFIED"-->.<br/>
+        <applet 
+            name="Organigram" 
+            code="com.fbergeron.organigram.view.OrganigramApplet.class" 
+            archive="orgapp.jar"
+            width="800" 
+            height="400">
+            <param name="DataSource" value="data.xml"/>
+        </applet>
+        <br/>
+        Check the source page and <a href="data.xml">data file</a> for usage.
+        <hr/>
+        <table width="800">
+            <tr>
+                <td width="50%" valign="top">
+                    <h2>Todo</h2>
+                    <ul>
+                        <li>Individual box colors</li>
+                        <li>Individual line font</li>
+                        <li>Hyperlinks on box lines</li>
+                        <li>Offscreen (?)</li>
+                        <li>MouseOver effect</li>
+                        <li>Search</li>
+                        <li>Subgraphs (layers)</li>
+                        <li>Graph editor (?)</li>
+                        <li>Server-side implementation in PHP/JSP</li>
+                        <li>Improve the web site (CSS, etc.)</li>
+                        <li>Package the source</li>
+                    </ul>
+                </td>
+                <td width="50%" valign="top">
+                    <h2>Changes log</h2>
+                    <table width="100%">
+                        <tr>
+                            <p>2005/11/20</p>
+                            <ul>
+                                <li>Improved scrollbars management.</li>
+                                <li>Improved the layout management and moved it to a dedicated class.</li>
+                                <li>Implemented basic individual line font management and horizontal alignment.</li>
+                                <li>Implemented cursor and tooltip update for boxes with a defined link.</li>
+                            </ul>
+                        </tr>
+                        <tr>
+                            <p>2005/11/13</p>
+                            <ul>
+                                <li>Implemented box hyperlinks (not on lines yet).</li>
+                            </ul>
+                        </tr>
+                        <tr>
+                            <p>2005/11/6</p>
+                            <ul>
+                                <li>Began to implement color, font and style for box lines.</li>
+                                <li>Introduced scrollbars.</li>
+                            </ul>
+                        </tr>
+                        <tr>
+                            <p>2005/10/30</p>
+                            <ul>
+                                <li>Added link tag for box lines.</li>
+                            </ul>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
