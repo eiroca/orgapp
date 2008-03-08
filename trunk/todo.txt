@@ -1,0 +1,20 @@
+Todo
+----
+- Move the graph layout logic to a dedicated class.  The box class should be dumb.
+- Offscreen
+- Scrollbars
+- Individual box colors
+- Individual line font
+- Optimization
+- Tests with invalid data
+
+Optional
+--------
+- MouseOver effect
+- Hyperlinks on box
+- Search
+- Subgraphs (layers)
+
+In your dreams!
+---------------
+- Graph editor
