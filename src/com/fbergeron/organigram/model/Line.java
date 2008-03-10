@@ -1,21 +1,22 @@
-/* 
- * Copyright (C) 2005  FrÃ©dÃ©ric Bergeron (fbergeron@users.sourceforge.net)
+/**
+ * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
+ * Copyright (C) 2006-2008 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
  *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the:
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin St, Fifth Floor,
+ *   Boston, MA 02110-1301
+ *   USA
  */
-
 package com.fbergeron.organigram.model;
 
 import java.awt.Color;
@@ -23,56 +24,80 @@ import java.awt.Font;
 
 public class Line {
 
-    public Line() {
-    }
+  public static final Font LINE_FONT = new Font(null, Font.PLAIN, 12);
 
-    public Line( String text ) {
-        this.text = text;
-    }
+  private boolean visible = true;
+  private String type;
+  private String text;
+  private String link;
+  private Color color = null;
+  private Font font = Line.LINE_FONT;
 
-    public Line( String text, String link, Font font, Color color ) {
-        this.text = text;
-        this.link = link;
-        this.color = color;
-        this.font = font;
-    }
+  public Line() {
+    //
+  }
 
-    public String getText() {
-        return( text );
-    }
+  public Line(final String text, final int fontStyle, final int fontSize) {
+    this.text = text;
+    font = new Font(null, fontStyle, fontSize);
+  }
 
-    public void setText( String text ) {
-        this.text = text;
-    }
+  public Line(final String text, final String link, final Font font, final Color color) {
+    this.text = text;
+    this.link = link;
+    this.color = color;
+    this.font = font;
+  }
 
-    public String getLink() {
-        return( link );
-    }
+  public String getText() {
+    return text;
+  }
 
-    public void setLink( String link ) {
-        this.link = link;
-    }
+  public void setText(final String text) {
+    this.text = text;
+  }
 
-    public Font getFont() {
-        return( font );
-    }
+  public String getLink() {
+    return link;
+  }
 
-    public void setFont( Font font ) {
-        this.font = font;
-    }
+  public void setLink(final String link) {
+    this.link = link;
+  }
 
-    public Color getColor() {
-        return( color );
-    }
+  public Font getFont() {
+    return font;
+  }
 
-    public void setColor( Color color ) {
-        this.color = color;
-    }
+  public void setFont(final Font font) {
+    this.font = font;
+  }
 
-    private String  text;
-    private String  link;
-    private Color   color;
-    private Font    font;
+  public Color getColor() {
+    return color;
+  }
+
+  public void setColor(final Color color) {
+    this.color = color;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(final String type) {
+    this.type = type;
+    if (type != null) {
+      visible = false;
+    }
+  }
+
+  public boolean isVisible() {
+    return visible;
+  }
+
+  public void setVisible(final boolean visible) {
+    this.visible = visible;
+  }
 
 }
-

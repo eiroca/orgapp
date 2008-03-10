@@ -1,12 +1,11 @@
 Todo
 ----
-- Move the graph layout logic to a dedicated class.  The box class should be dumb.
 - Offscreen
 - Scrollbars
-- Individual box colors
-- Individual line font
-- Optimization
-- Tests with invalid data
+- More Optimization
+- Unit tests
+- Compact rendering
+- ...
 
 Optional
 --------
