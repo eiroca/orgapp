@@ -1,112 +1,220 @@
 /**
- * Copyright (C) 2006-2008 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+ * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the:
- *   Free Software Foundation, Inc.,
- *   51 Franklin St, Fifth Floor,
- *   Boston, MA 02110-1301
- *   USA
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * 
  */
 package com.fbergeron.organigram.model;
 
 import java.awt.Color;
 import java.awt.Label;
 
+/**
+ * The Layout definition of a Box.
+ */
 public class BoxLayout {
 
+  /** The Constant COLOR_BOXFRAME. */
   public static final Color COLOR_BOXFRAME = Color.black;
-  public static final Color COLOR_BOXBACKGROUND = Color.white;
-  public static final Color COLOR_BOXFOREGROUND = Color.black;
-  public static final int PADDING_BOXRIGHT = 4;
-  public static final int PADDING_BOXLEFT = 4;
-  public static final int PADDING_BOXTOP = 4;
-  public static final int PADDING_BOXBOTTOM = 4;
-  public static final int ALIGN_BOXTEXT = Label.CENTER;
 
-  private Color boxFrameColor = COLOR_BOXFRAME;
-  private Color boxBackgroundColor = COLOR_BOXBACKGROUND;
-  private Color boxForegroundColor = COLOR_BOXFOREGROUND;
-  private int boxRightPadding = PADDING_BOXRIGHT;
-  private int boxLeftPadding = PADDING_BOXLEFT;
-  private int boxTopPadding = PADDING_BOXTOP;
-  private int boxBottomPadding = PADDING_BOXBOTTOM;
-  private int boxTextAlignment = ALIGN_BOXTEXT;
+  /** The Constant COLOR_BOXBACKGROUND. */
+  public static final Color COLOR_BACKGROUND = Color.white;
 
-  public BoxLayout() {
-    super();
+  /** The Constant COLOR_BOXFOREGROUND. */
+  public static final Color COLOR_FOREGROUND = Color.black;
+
+  /** The Constant PADDING_BOXRIGHT. */
+  public static final int PADDING_RIGHT = 4;
+
+  /** The Constant PADDING_BOXLEFT. */
+  public static final int PADDING_LEFT = 4;
+
+  /** The Constant PADDING_BOXTOP. */
+  public static final int PADDING_TOP = 4;
+
+  /** The Constant PADDING_BOXBOTTOM. */
+  public static final int PADDING_BOTTOM = 4;
+
+  /** The Constant ALIGN_BOXTEXT. */
+  public static final int TEXT_ALIGN = Label.CENTER;
+
+  /** The box frame color. */
+  private Color frameColor = BoxLayout.COLOR_BOXFRAME;
+
+  /** The box background color. */
+  private Color backgroundColor = BoxLayout.COLOR_BACKGROUND;
+
+  /** The box foreground color. */
+  private Color foregroundColor = BoxLayout.COLOR_FOREGROUND;
+
+  /** The box right padding. */
+  private int rightPadding = BoxLayout.PADDING_RIGHT;
+
+  /** The box left padding. */
+  private int leftPadding = BoxLayout.PADDING_LEFT;
+
+  /** The box top padding. */
+  private int topPadding = BoxLayout.PADDING_TOP;
+
+  /** The box bottom padding. */
+  private int bottomPadding = BoxLayout.PADDING_BOTTOM;
+
+  /** The box text alignment. */
+  private int textAlignment = BoxLayout.TEXT_ALIGN;
+
+  /**
+   * Gets the box background color.
+   * 
+   * @return the box background color
+   */
+  public Color getBackgroundColor() {
+    return backgroundColor;
   }
 
-  public Color getBoxBackgroundColor() {
-    return boxBackgroundColor;
+  /**
+   * Sets the box background color.
+   * 
+   * @param backgroundColor the new box background color
+   */
+  public void setBackgroundColor(final Color backgroundColor) {
+    this.backgroundColor = backgroundColor;
   }
 
-  public void setBoxBackgroundColor(Color boxBackgroundColor) {
-    this.boxBackgroundColor = boxBackgroundColor;
+  /**
+   * Gets the box foreground color.
+   * 
+   * @return the box foreground color
+   */
+  public Color getForegroundColor() {
+    return foregroundColor;
   }
 
-  public Color getBoxForegroundColor() {
-    return boxForegroundColor;
+  /**
+   * Sets the box foreground color.
+   * 
+   * @param foregroundColor the new box foreground color
+   */
+  public void setForegroundColor(final Color foregroundColor) {
+    this.foregroundColor = foregroundColor;
   }
 
-  public void setBoxForegroundColor(Color boxForegroundColor) {
-    this.boxForegroundColor = boxForegroundColor;
+  /**
+   * Gets the box frame color.
+   * 
+   * @return the box frame color
+   */
+  public Color getFrameColor() {
+    return frameColor;
   }
 
-  public Color getBoxFrameColor() {
-    return boxFrameColor;
+  /**
+   * Sets the box frame color.
+   * 
+   * @param frameColor the new box frame color
+   */
+  public void setFrameColor(final Color frameColor) {
+    this.frameColor = frameColor;
   }
 
-  public void setBoxFrameColor(Color boxFrameColor) {
-    this.boxFrameColor = boxFrameColor;
+  /**
+   * Gets the box top padding.
+   * 
+   * @return the box top padding
+   */
+  public int getTopPadding() {
+    return topPadding;
   }
 
-  public int getBoxTopPadding() {
-    return boxTopPadding;
+  /**
+   * Sets the box top padding.
+   * 
+   * @param topPadding the new box top padding
+   */
+  public void setTopPadding(final int topPadding) {
+    this.topPadding = topPadding;
   }
 
-  public void setBoxTopPadding(int boxTopPadding) {
-    this.boxTopPadding = boxTopPadding;
+  /**
+   * Gets the box bottom padding.
+   * 
+   * @return the box bottom padding
+   */
+  public int getBottomPadding() {
+    return bottomPadding;
   }
 
-  public int getBoxBottomPadding() {
-    return boxBottomPadding;
+  /**
+   * Sets the box bottom padding.
+   * 
+   * @param bottomPadding the new box bottom padding
+   */
+  public void setBottomPadding(final int bottomPadding) {
+    this.bottomPadding = bottomPadding;
   }
 
-  public void setBoxBottomPadding(int boxBottomPadding) {
-    this.boxBottomPadding = boxBottomPadding;
+  /**
+   * Gets the box left padding.
+   * 
+   * @return the box left padding
+   */
+  public int getLeftPadding() {
+    return leftPadding;
   }
 
-  public int getBoxLeftPadding() {
-    return boxLeftPadding;
+  /**
+   * Sets the box left padding.
+   * 
+   * @param leftPadding the new box left padding
+   */
+  public void setLeftPadding(final int leftPadding) {
+    this.leftPadding = leftPadding;
   }
 
-  public void setBoxLeftPadding(int boxLeftPadding) {
-    this.boxLeftPadding = boxLeftPadding;
+  /**
+   * Gets the box right padding.
+   * 
+   * @return the box right padding
+   */
+  public int getRightPadding() {
+    return rightPadding;
   }
 
-  public int getBoxRightPadding() {
-    return boxRightPadding;
+  /**
+   * Sets the box right padding.
+   * 
+   * @param rightPadding the new box right padding
+   */
+  public void setRightPadding(final int rightPadding) {
+    this.rightPadding = rightPadding;
   }
 
-  public void setBoxRightPadding(int boxRightPadding) {
-    this.boxRightPadding = boxRightPadding;
+  /**
+   * Gets the box text alignment.
+   * 
+   * @return the box text alignment
+   */
+  public int getTextAlignment() {
+    return textAlignment;
   }
 
-  public int getBoxTextAlignment() {
-    return boxTextAlignment;
-  }
-
-  public void setBoxTextAlignment(int boxTextAlignment) {
-    this.boxTextAlignment = boxTextAlignment;
+  /**
+   * Sets the box text alignment.
+   * 
+   * @param textAlignment the new box text alignment
+   */
+  public void setTextAlignment(final int textAlignment) {
+    this.textAlignment = textAlignment;
   }
 
 }
