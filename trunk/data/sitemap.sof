@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<organigram mode="1" layout="1" compact="1">
+ <unit>
+  <childs>
+   <unit link="http://fbergeron.com" />
+   <unit link="http://debian.org" />
+   <unit link="http://wiki.debian.org" />
+   <unit link="http://slashdot.org" />
+   <unit link="http://www.freshmeat.net/" />
+   <unit link="http://www.eiroca.net" />
+   <unit link="http://sourceforge.net" />
+   <unit link="http://kanasensei.sourceforge.net" />
+   <unit link="http://javasol.sourceforge.net" />
+   <unit link="http://orgapp.sourceforge.net" />
+  </childs>
+ </unit>
+</organigram>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<organigram mode="0" layout="0" compact="1" isToolTipEnabled="true" backgroundColor="200,150,150" lineColor="0,0,0" boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" boxFrameColor="0,0,0" boxBackgroundColor="80,12,178" boxForegroundColor="255,255,255" boxTextAlignment="center" firm="Test Tree">
+ <unit name="Doe, John" department="CEO" role="H">
+  <childs>
+   <unit>
+    <info>com</info>
+    <childs>
+     <unit link="http://fbergeron.com">
+      <info fontName="Arial" fontColor="50,255,50" fontStyle="Bold+Italic">fbergeron</info>
+      <info fontName="Courier">My personal website</info>
+     </unit>
+    </childs>
+   </unit>
+   <unit>
+    <info>org</info>
+    <childs>
+     <unit id="de" link="http://debian.org">
+      <info>debian</info>
+      <childs>
+       <unit link="http://wiki.debian.org">
+        <info>wiki</info>
+       </unit>
+      </childs>
+     </unit>
+     <unit link="http://slashdot.org">
+      <info>slashdot</info>
+     </unit>
+    </childs>
+   </unit>
+   <unit id="net">
+    <info>net</info>
+    <childs>
+     <unit id="fm" link="http://www.freshmeat.net/" target="_self">
+      <info>Freshmeat</info>
+     </unit>
+     <unit id="ei" boxBackgroundColor="255,255,255" boxForegroundColor="0,0,0" link="http://www.eiroca.net">
+      <info>eIrOcA</info>
+     </unit>
+     <unit id="sf" link="http://sourceforge.net">
+      <info>sourceforge</info>
+      <childs>
+       <unit link="http://kanasensei.sourceforge.net">
+        <info fontColor="50,255,50" fontStyle="bold">kanasensei</info>
+       </unit>
+       <unit link="http://javasol.sourceforge.net">
+        <info fontColor="50,255,50" fontStyle="ITALIC">javasol</info>
+       </unit>
+       <unit link="http://orgapp.sourceforge.net">
+        <info fontColor="255,50,50" fontStyle="Bold+Italic">orgapp</info>
+        <childs>
+         <unit name="A" />
+         <unit name="B" />
+        </childs>
+       </unit>
+      </childs>
+     </unit>
+    </childs>
+   </unit>
+  </childs>
+ </unit>
+</organigram>

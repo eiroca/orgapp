@@ -1,76 +1,54 @@
 /**
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
- * Copyright (C) 2006-2008 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+ * Copyright (C) 2005 FrÃ©dÃ©ric Bergeron (fbergeron@users.sourceforge.net)
+ * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the:
- *   Free Software Foundation, Inc.,
- *   51 Franklin St, Fifth Floor,
- *   Boston, MA 02110-1301
- *   USA
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * 
  */
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.net.MalformedURLException;
 import java.net.URL;
-
 import javax.swing.JApplet;
-import javax.swing.JScrollPane;
-
+import com.fbergeron.organigram.Util;
 import com.fbergeron.organigram.io.BuildInfo;
-import com.fbergeron.organigram.io.XMLOrganigramReader;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.view.OrganigramView;
 
+/**
+ * The Class OrganigramApplet.
+ */
 public class OrganigramApplet extends JApplet {
 
-  /**
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = -90456351900821320L;
+
+  /*
+   * (non-Javadoc)
    *
+   * @see java.applet.Applet#init()
    */
-  private static final long serialVersionUID = 1L;
-
-  public URL getURL(final String dataSource, final String defPath) {
-    URL xmlSourceUrl = null;
-    try {
-      if (dataSource != null) {
-        if (dataSource.startsWith("http")) {
-          xmlSourceUrl = new URL(dataSource);
-        }
-        else {
-          xmlSourceUrl = new URL(getDocumentBase(), dataSource);
-        }
-      }
-    }
-    catch (final MalformedURLException malformedUrlException) {
-      System.err.print("Invalid data source: " + malformedUrlException);
-    }
-    if (xmlSourceUrl == null) {
-      xmlSourceUrl = getClass().getResource(defPath);
-    }
-    return xmlSourceUrl;
-  }
-
-  public static void addOrganigramView(final Container me, final URL xmlSourceUrl) {
-    final XMLOrganigramReader xmlHandler = new XMLOrganigramReader();
-    final Organigram o = xmlHandler.readOrganigram(xmlSourceUrl);
-    o.execute(new BuildInfo(), true);
-    final OrganigramView view = new OrganigramView(o);
-    me.setLayout(new BorderLayout());
-    me.add(new JScrollPane(view), BorderLayout.CENTER);
-  }
-
   @Override
   public void init() {
-    final URL xmlSourceUrl = getURL(getParameter("DataSource"), "/data.xml");
-    OrganigramApplet.addOrganigramView(getContentPane(), xmlSourceUrl);
+    final String source = getParameter("DataSource");
+    final String target = getParameter("Target");
+    final URL xmlSourceUrl = Util.buildURL(getDocumentBase(), source);
+    final Container me = getContentPane();
+    final Organigram o = Util.readOrganigram(xmlSourceUrl);
+    o.execute(new BuildInfo(), true);
+    final OrganigramView view = new OrganigramView(o, target);
+    me.setLayout(new BorderLayout());
+    me.add(view.getView(), BorderLayout.CENTER);
   }
 
 }

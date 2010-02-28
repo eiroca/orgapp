@@ -14,7 +14,7 @@
 </td>
         </tr>
         <tr>
-            <td class="MENU" rowspan="2" align="left" valign="top"><table class="MENU_LIST"><tr><td><a class="MENU_LINK" href="http://sourceforge.net/projects/orgapp"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Source Forge Project Page</span></a></td></tr><tr><td><a class="MENU_LINK" href="http://orgapp.svn.sourceforge.net/viewvc/orgapp/"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">SVN Repository</span></a></td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td><a class="MENU_LINK" href="#Features"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Features</span></a></td></tr><tr><td><a class="MENU_LINK" href="#Demo"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Demo</span></a></td></tr><tr><td><a class="MENU_LINK" href="http://sourceforge.net/project/showfiles.php?group_id=152060"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Download</span></a></td></tr><tr><td><a class="MENU_LINK" href="#ToDo"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">To Do</span></a></td></tr><tr><td><a class="MENU_LINK" href="#ChangeLogs"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Changes Log</span></a></td></tr><tr><td><a class="MENU_LINK" href="#Licence"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Licence</span></a></td></tr></table><div style="margin-left: auto; margin-right: auto; text-align: center;">
+            <td class="MENU" rowspan="2" align="left" valign="top"><table class="MENU_LIST"><tr><td><a class="MENU_LINK" href="http://sourceforge.net/projects/orgapp"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Source Forge Project Page</span></a></td></tr><tr><td><a class="MENU_LINK" href="http://orgapp.svn.sourceforge.net/viewvc/orgapp/"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">SVN Repository</span></a></td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td><a class="MENU_LINK" href="#Features"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Features</span></a></td></tr><tr><td><a class="MENU_LINK" href="#Docs"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Docs</span></a></td></tr><tr><td><a class="MENU_LINK" href="http://sourceforge.net/project/showfiles.php?group_id=152060"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Download</span></a></td></tr><tr><td><a class="MENU_LINK" href="#ToDo"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">To Do</span></a></td></tr><tr><td><a class="MENU_LINK" href="#ChangeLog"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Change Log</span></a></td></tr><tr><td><a class="MENU_LINK" href="#Licence"><span class="MENU_ICON"><img src="img/minilogo.gif" alt="-"/></span><span class="MENU_TEXT">Licence</span></a></td></tr></table><div style="margin-left: auto; margin-right: auto; text-align: center;">
   <hr width="50%"/>Project hosted on:<br/>
   <a href="http://sourceforge.net/"><img src="http://sourceforge.net/sflogo.php?group_id=152060" alt="SourceForge Logo" border="0"/></a><br/>
 Project supported by:<br/><a href="http://www.eiroca.net"><img src="img/eiroca.gif" alt="eIrOcA"/></a><br/><a href="http://www.fbergeron.com"><img src="img/fbergeron.gif" alt="FBergeron"/></a><br/></div></td>
@@ -30,19 +30,56 @@ Project supported by:<br/><a href="http://www.eiroca.net"><img src="img/eiroca.g
    The library has also an applet and a Swing Java client able to draw an organigram read from a XML definition file.<br/>
    The applet supports clickable boxes with hyperlinks, customizable colors, sizes, positions, etc., layers (or sub-graphes), search facilities, ... and it is easy to embed in a HTML page.
  </p>
-
-<a name="Demo"/><h2>Demo</h2>
- <p>
-   To view the applet, you need the a browser supporting Java Plug-in.
- </p>
- <p>
-  <div style="text-align: center">
-   <applet name="Organigram" code="OrganigramApplet.class" archive="orgapp.jar" height="275" width="800"><param name="DataSource" value="data1.xml"></applet><br/>
-   <applet name="Organigram" code="OrganigramApplet.class" archive="orgapp.jar" height="475" width="450"><param name="DataSource" value="data2.xml"></applet><br/>
+ <p><a href="http://sourceforge.net/project/showfiles.php?group_id=152060">Download</a> the application.<p>
+ 
+ <div style="text-align: top">
+   <applet name="Organigram" code="OrganigramApplet.class" archive="OrgApplet.jar" height="500" width="48%">
+     <param name="DataSource" value="data1.xml" />
+     <param name="Target" value="_blank" />
+   </applet>
+   <applet name="Organigram" code="OrganigramApplet.class" archive="OrgApplet.jar" height="500" width="48%">
+     <param name="DataSource" value="data2.xml">
+     <param name="Target" value="_blank" />
+   </applet>
   </div>
-  Check the source page and data file of the <a href="data1.xml">first organigram</a> and of the <a href="data2.xml">second one</a> for usage.
- </p>
 
+<a name="Docs"/><h2>Documentation</h2>
+<h3>Organigram Applet</h3>
+ <p>To view the applet, it is necessary a browser supporting Java Plug-in (with a Java version higher than 1.5). The syntax is:</p>
+ <pre>
+   &lt;applet name="Organigram" code="OrganigramApplet.class" archive="URLTO_OrgApplet.jar"&gt;
+     &lt;param name="DataSource" value="URLTO_organigram.xml" /&gt;
+     &lt;param name="Target" value="_blank" /&gt;
+   &lt;/applet&gt;</pre>
+ <p>The parameters meaning is:
+ <ul>
+   <li><b>DataSource</b> is the URL of the resource that contains the definition of the orgnanigram in any of the supported formats. The parameter is mandatory.</li>
+   <li><b>Target</b> is the target used in links (unless a more specific will be present in the definition of the organigram node). The parameter is optional.</li>
+ </ul>
+ </p>
+ <p>Check the source page to see a real usage.</p>
+ 
+<h3>Organigram Application</h3>
+ <p>OrgApp.jar is a stand alone Java application to view the organigrams, that can be launched with the syntax:</p>
+ <pre>java -jar OrgApp.jar path_to_organigram.xml</pre>
+ <p>where <i>path_to_organigram.xml</i> is obviously the path to the organigram in any of the supported format.</p>
+
+<h3>Organigram Converter</h3>
+ <p>Convert.jar is a tool to transform a organigram file from a format to another, the syntax:</p>
+ <pre>java -jar Convert.jar input_file output_type</pre>
+ <p><i>input_file</i> is the path of the input organigram</p>
+ <p><i>output_type</i> is the type of the output organigram, with the following encoding: 0 simple organigram format, 1 text organigram, 2 sitemap.</p>
+ <p>The output will be printed to the screen but can be redirected to a file (adding <i>&gt; path_to_output</i> to the command).</p>
+ <p>The conversion form SOF format to another format can loose lot of information...</p>
+
+<h3>Organigram File format</h3>
+OrgApp support three organigram file formats. 
+<ul>
+<li><b>SOF</b>, Simple Organigram Format is a XML based file format</li>
+<li><b>Text Format</b>, is a format where each node</li>
+<li><b>Sitemap</b> format, as described in <a href="http://www.sitemaps.org/">http://www.sitemaps.org</a></li>
+</ul>
+<p>See data file of the <a href="data1.xml">first organigram</a> and of the <a href="data2.xml">second one</a> for examples of the file format.</p>
 
 <a name="ToDo"/><h2>To Do</h2>
  <ul>
@@ -57,7 +94,6 @@ Project supported by:<br/><a href="http://www.eiroca.net"><img src="img/eiroca.g
   <li>Package the source</li>
   <li>staff drawing</li>
   <li>matrix dependencies</li>
-  <li>Compact alignment
    <pre>
              B
              |-S
@@ -70,7 +106,15 @@ Project supported by:<br/><a href="http://www.eiroca.net"><img src="img/eiroca.g
   </li>
  </ul>
 
-<a name="ChangesLog"/><h2>Changes log</h2>
+<a name="ChangeLog"/><h2>Change log</h2>
+ <p>Version 0.3.0<br/>
+  <ul>
+   <li>Compact aligment</li>
+   <li>Reading/writing organigram from sitemap.xml</li>
+   <li>Target of the link can be specified</li>
+   <li>Bugs fixing</li>
+  </ul>
+ </p>
  <p>Version 0.2.0<br/>
   <ul>
    <li>XML file format refactory</li>
@@ -102,26 +146,11 @@ Project supported by:<br/><a href="http://www.eiroca.net"><img src="img/eiroca.g
  </p>
 
 <a name="Licence"/><h2>Licence & Copyright</h2>
- <p>
-  Copyright (C) 2005 Frédéric Bergeron<br/>
-  Copyright (C) 2006-2008 eIrOcA (eNrIcO Croce & sImOnA Burzio)<br/>
-  <pre>
-  This library is free software; you can redistribute it and/or modify it under
-  the terms of the GNU Lesser General Public License as published by the Free
-  Software Foundation; either version 2.1 of the License, or (at your option)
-  any later version.
-
-  This library is distributed in the hope that it will be useful, but WITHOUT
-  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-  FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
-  details. You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the:
-    Free Software Foundation, Inc.,
-    51 Franklin St, Fifth Floor,
-    Boston, MA 02110-1301
-    USA
-  </pre>
- </p>        </td>
+ <p><img src="img/lgplv3-88x31.png" alt="LGPL3" />Copyright (c) 2005-2010 Frédéric Bergeron & eIrOcA (eNrIcO Croce & sImOnA Burzio)</p>
+ <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+ <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</p>
+ <p>You should have received a copy of the GNU Lesser General Public License along with this program.  If not, see <a href=http://www.gnu.org/licenses/>http://www.gnu.org/licenses/</a></p>
+         </td>
         </tr>
         <tr>
             <td class="VERSION"><!--#config timefmt="%Y-%m-%d; %H:%M %Z"--><!--#echo var="LAST_MODIFIED"--><br/></td>

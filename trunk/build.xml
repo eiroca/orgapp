@@ -2,60 +2,126 @@
 <!-- Author: Frederic Bergeron -->
 <project name="orgapp" default="build" basedir=".">
 
-    <!-- Directories -->
-    <property name="classes"                value="classes"/>
-    <property name="doc"                    value="doc"/>
-    <property name="javadoc"                value="${doc}/javadoc"/>
-    <property name="properties"             value="properties"/>
-    <property name="src"                    value="src"/>
-    <property name="img"                    value="img"/>
-    <property name="build"                  value="html"/>
-
     <!-- Custom properties -->
-    <property file="build.properties"/>
+    <property file="build.properties" />
+
+    <!-- Proguard -->
+    <taskdef resource="proguard/ant/task.properties" classpath="${proguard.home}/lib/proguard.jar" />
+
+    <!-- Directories -->
+    <property name="classes" value="classes" />
+    <property name="jars" value="jars" />
+    <property name="doc" value="doc" />
+    <property name="javadoc" value="${doc}/javadoc" />
+    <property name="properties" value="properties" />
+    <property name="src" value="src" />
+    <property name="img" value="img" />
+    <property name="build" value="html" />
 
     <path id="classpath">
-        <pathelement location="${classes}"/>
+        <pathelement location="${classes}" />
     </path>
 
     <target name="compile">
-        <mkdir dir="${classes}"/>
-        <javac srcdir="${src}" destdir="${classes}" 
-            source="${build.compiler.source}" target="${build.compiler.target}" 
-            debug="${build.compiler.debug}" 
-            nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}">
-            <classpath refid="classpath"/>
+        <mkdir dir="${classes}" />
+        <javac srcdir="${src}" destdir="${classes}" source="${build.compiler.source}" target="${build.compiler.target}" debug="${build.compiler.debug}" nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}">
+            <classpath refid="classpath" />
         </javac>
     </target>
 
     <target name="javadoc" depends="compile">
-        <javadoc
-            sourcepath="${src}"
-            destdir="${javadoc}"
-            packagenames="*"
-            author="true"
-            version="true"
-            use="true"
-            package="true"
-            windowtitle="Organigram API"
-            doctitle="Organigram"
-            source="${build.compiler.source}">
-            <classpath refid="classpath"/>
+        <javadoc sourcepath="${src}" destdir="${javadoc}" packagenames="*" author="true" version="true" use="true" package="true" windowtitle="Organigram API" doctitle="Organigram" source="${build.compiler.source}">
+            <classpath refid="classpath" />
         </javadoc>
     </target>
 
     <target name="clean">
-        <delete dir="${classes}"/>
+        <delete dir="${classes}" />
     </target>
 
     <target name="cleanAll" depends="clean">
-        <delete dir="${javadoc}"/>
+        <delete dir="${javadoc}" />
     </target>
 
-    <target name="build" depends="compile">
-        <jar destfile="${build}/orgapp.jar" basedir="classes"/>
+    <target name="rebuild" depends="clean,build" />
+
+    <target name="build" depends="applet, app, convert" description="Create release">
     </target>
 
-    <target name="rebuild" depends="clean,build"/>
+    <target name="applet" depends="applet_shrink" description="Create applet">
+        <echo>Applet created.</echo>
+    </target>
+
+    <target name="applet_jar" depends="compile">
+        <mkdir dir="${jars}" />
+        <jar destfile="${jars}/applet.jar" basedir="classes">
+        </jar>
+    </target>
+
+    <target name="applet_shrink" depends="applet_jar" description="Obfuscate compiled classes">
+        <proguard>
+            -libraryjars "${java.home}\lib\rt.jar"
+            -injars "${jars}/applet.jar"
+            -outjars "${build}/OrgApplet.jar"
+            -dontoptimize           
+            -dontusemixedcaseclassnames
+            -defaultpackage ''
+            -keep public class OrganigramApplet
+        </proguard>
+    </target>
+
+    <target name="app" depends="app_shrink" description="Create application">
+        <echo>Application created.</echo>
+    </target>
+
+    <target name="app_jar" depends="compile">
+        <mkdir dir="${jars}" />
+        <jar destfile="${jars}/app.jar" basedir="classes">
+            <manifest>
+                <attribute name="Main-Class" value="OrganigramApp" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="app_shrink" depends="app_jar" description="Obfuscate compiled classes">
+        <proguard>
+            -libraryjars "${java.home}\lib\rt.jar"
+            -injars "${jars}/app.jar"
+            -outjars "${build}/OrgApp.jar"
+            -dontusemixedcaseclassnames
+            -dontoptimize           
+            -defaultpackage ''
+            -keep public class OrganigramApp {
+                public static void main(java.lang.String[]);
+            }
+        </proguard>
+    </target>
+
+    <target name="convert" depends="convert_shrink" description="Create convert application">
+        <echo>Convert application created.</echo>
+    </target>
+
+    <target name="convert_jar" depends="compile">
+        <mkdir dir="${jars}" />
+        <jar destfile="${jars}/convert.jar" basedir="classes">
+            <manifest>
+                <attribute name="Main-Class" value="Convert" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="convert_shrink" depends="convert_jar" description="Obfuscate compiled classes">
+        <proguard>
+            -libraryjars "${java.home}\lib\rt.jar"
+            -injars "${jars}/convert.jar"
+            -outjars "${build}/Convert.jar"
+            -dontusemixedcaseclassnames
+            -dontoptimize           
+            -defaultpackage ''
+            -keep public class Convert {
+                public static void main(java.lang.String[]);
+            }
+        </proguard>
+    </target>
 
 </project>
