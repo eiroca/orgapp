@@ -56,7 +56,7 @@ public class BuildURLDesc implements UnitTraversal {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
    */
-  public void process(final Unit unit) {
+  public void process(final Unit unit, int level) {
     final String loc = unit.getMeta("link");
     final String title = unit.getMeta("title");
     if (title != null) {

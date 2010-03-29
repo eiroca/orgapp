@@ -139,7 +139,7 @@ public class Organigram implements MetaDataCollector {
    * @param nodeFirst the node first
    */
   public void execute(final UnitTraversal action, final boolean nodeFirst) {
-    root.execute(action, nodeFirst);
+    root.execute(action, nodeFirst, 0);
   }
 
 }

@@ -21,7 +21,7 @@ import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import com.fbergeron.organigram.Util;
+import com.fbergeron.organigram.OrgUtils;
 import com.fbergeron.organigram.io.BuildInfo;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.view.OrganigramView;
@@ -72,8 +72,8 @@ public class OrganigramApp extends JFrame {
    */
   public OrganigramApp() {
     super();
-    final URL source = Util.find(OrganigramApp.organigramFile);
-    final Organigram org = Util.readOrganigram(source);
+    final URL source = OrgUtils.find(OrganigramApp.organigramFile);
+    final Organigram org = OrgUtils.readOrganigram(source);
     if (org == null) {
       System.err.println("Invalid data: "+OrganigramApp.organigramFile);
       System.exit(ERROR);

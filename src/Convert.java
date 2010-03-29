@@ -16,7 +16,7 @@
  * 
  */
 import java.net.URL;
-import com.fbergeron.organigram.Util;
+import com.fbergeron.organigram.OrgUtils;
 import com.fbergeron.organigram.model.Organigram;
 
 /**
@@ -43,8 +43,8 @@ public class Convert {
     }
     catch (final NumberFormatException e) {
     }
-    final URL xmlSource = Util.find(inFile);
-    final Organigram org = Util.readOrganigram(xmlSource);
-    System.out.println(Util.writeOrganigram(org, type, false));
+    final URL xmlSource = OrgUtils.find(inFile);
+    final Organigram org = OrgUtils.readOrganigram(xmlSource);
+    System.out.println(OrgUtils.writeOrganigram(org, type, false));
   }
 }
