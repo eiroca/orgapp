@@ -22,6 +22,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
@@ -148,6 +149,7 @@ public final class XMLUtil {
   public static final String VAL_ITALIC = "italic";
 
   private static final HashSet<String> boxLayoutAttrs = new HashSet<String>();
+  private static final HashMap<String, String> colors = new HashMap<String, String>();
 
   static {
     boxLayoutAttrs.add(ATR_BOX_PADDING_RIGHT);
@@ -159,6 +161,24 @@ public final class XMLUtil {
     boxLayoutAttrs.add(ATR_BOX_COLOR_FOREGROUND);
     boxLayoutAttrs.add(ATR_BOX_TEXT_ALIGMENT);
     boxLayoutAttrs.add(ATR_BOX_EXPENDED);
+    colors.put("aqua", "#00ffff");
+    colors.put("cyan", "#00ffff");
+    colors.put("gray", "#808080");
+    colors.put("navy", "#000080");
+    colors.put("silver", "#c0c0c0");
+    colors.put("black", "#000000");
+    colors.put("green", "#008000");
+    colors.put("olive", "#808000");
+    colors.put("teal", "#008080");
+    colors.put("blue", "#0000ff");
+    colors.put("lime", "#00ff00");
+    colors.put("purple", "#800080");
+    colors.put("white", "#ffffff");
+    colors.put("fuchsia", "#ff00ff");
+    colors.put("magenta", "#ff00ff");
+    colors.put("maroon", "#800000");
+    colors.put("red", "#ff0000");
+    colors.put("yellow", "#ffff00");
   }
 
   /**
@@ -194,33 +214,46 @@ public final class XMLUtil {
    * 
    * @throws ParseException the parse exception
    */
-  public static Color parseColor(final String strColor) throws ParseException {
-    final int indexOfFirstComma = strColor.indexOf(',');
-    final int indexOfSecondComma = strColor.indexOf(',', indexOfFirstComma + 1);
-    if (indexOfFirstComma == -1) { throw (new ParseException("First comma not found.", 0)); }
-    if (indexOfSecondComma == -1) { throw (new ParseException("Second comma not found.", indexOfFirstComma)); }
-    int red = 0;
-    int green = 0;
-    int blue = 0;
-    try {
-      red = Integer.parseInt(strColor.substring(0, indexOfFirstComma));
+  public static Color parseColor(String strColor) throws ParseException {
+    int rd = 0;
+    int gr = 0;
+    int bl = 0;
+    if (strColor != null) {
+      try {
+        strColor = strColor.toLowerCase();
+        if (colors.containsKey(strColor)) {
+          strColor = colors.get(strColor);
+        }
+        if (strColor.startsWith("#")) {
+          if (strColor.length() == 4) {
+            StringBuffer sb = new StringBuffer();
+            sb.append('#').append(strColor.charAt(1)).append(strColor.charAt(1)).append(strColor.charAt(2)).append(strColor.charAt(2)).append(strColor.charAt(3)).append(strColor.charAt(3));
+            strColor = sb.toString();
+          }
+          if (strColor.length() == 7) {
+            rd = Integer.parseInt(strColor.substring(1, 3), 16);
+            gr = Integer.parseInt(strColor.substring(3, 5), 16);
+            bl = Integer.parseInt(strColor.substring(5, 7), 16);
+          }
+          else {
+            throw (new ParseException(strColor+" has an invalid length.", 0));
+          }
+        }
+        else {
+          final int indexOfFirstComma = strColor.indexOf(',');
+          final int indexOfSecondComma = strColor.indexOf(',', indexOfFirstComma + 1);
+          if (indexOfFirstComma == -1) { throw (new ParseException("First comma not found.", 0)); }
+          if (indexOfSecondComma == -1) { throw (new ParseException("Second comma not found.", indexOfFirstComma)); }
+          rd = Integer.parseInt(strColor.substring(0, indexOfFirstComma));
+          gr = Integer.parseInt(strColor.substring(indexOfFirstComma + 1, indexOfSecondComma));
+          bl = Integer.parseInt(strColor.substring(indexOfSecondComma + 1));
+        }
+      }
+      catch (final NumberFormatException numberFormatException) {
+        throw (new ParseException(strColor + " is an invalid color", 0));
+      }
     }
-    catch (final NumberFormatException numberFormatException) {
-      throw (new ParseException("Red color is not a number.", 0));
-    }
-    try {
-      green = Integer.parseInt(strColor.substring(indexOfFirstComma + 1, indexOfSecondComma));
-    }
-    catch (final NumberFormatException numberFormatException) {
-      throw (new ParseException("Green color is not a number.", indexOfFirstComma + 1));
-    }
-    try {
-      blue = Integer.parseInt(strColor.substring(indexOfSecondComma + 1));
-    }
-    catch (final NumberFormatException numberFormatException) {
-      throw (new ParseException("Blue color is not a number.", indexOfSecondComma + 1));
-    }
-    return new Color(red, green, blue);
+    return new Color(rd, gr, bl);
   }
 
   /**
