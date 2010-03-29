@@ -107,6 +107,11 @@ OrgApp support three organigram file formats.
  </ul>
 
 <a name="ChangeLog"/><h2>Change log</h2>
+ <p>Version 0.4.0<br/>
+  <ul>
+   <li>Collapsable nodes</li>
+  </ul>
+ </p>
  <p>Version 0.3.0<br/>
   <ul>
    <li>Compact aligment</li>

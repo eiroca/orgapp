@@ -1,19 +1,19 @@
 /**
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.view;
@@ -24,6 +24,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
 
 /**
@@ -33,6 +35,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /** The unit. */
   public final Unit unit;
+  public final BoxLayout layout;
 
   /** The organigram view. */
   public final OrganigramView organigramView;
@@ -64,6 +67,8 @@ public class UnitView implements Iterable<UnitView> {
   public UnitView(final Unit unit, final OrganigramView organigramView) {
     this.unit = unit;
     this.organigramView = organigramView;
+    BoxLayout boxLay = unit.getBoxLayout();
+    this.layout = (boxLay != null ? boxLay : organigramView.getOrganigram().getBoxLayout());
   }
 
   /**
@@ -73,6 +78,10 @@ public class UnitView implements Iterable<UnitView> {
    */
   public Unit getUnit() {
     return unit;
+  }
+
+  public BoxLayout getLayout() {
+    return layout;
   }
 
   /**
@@ -145,11 +154,15 @@ public class UnitView implements Iterable<UnitView> {
 
   /*
    * (non-Javadoc)
-   *
    * @see java.lang.Iterable#iterator()
    */
   public Iterator<UnitView> iterator() {
     return children.iterator();
+  }
+
+  public boolean hasChildren() {
+    if (layout.isExpanded()) { return (children.size() > 0); }
+    return false;
   }
 
   /**
@@ -220,7 +233,6 @@ public class UnitView implements Iterable<UnitView> {
 
   /*
    * (non-Javadoc)
-   *
    * @see java.lang.Object#toString()
    */
   @Override

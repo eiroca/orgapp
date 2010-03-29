@@ -1,19 +1,19 @@
 /**
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.io.xml;
@@ -22,7 +22,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.text.ParseException;
+import java.util.HashSet;
 import java.util.StringTokenizer;
+
 import com.fbergeron.organigram.io.TAG;
 import com.fbergeron.organigram.model.BoxLayout;
 
@@ -75,6 +77,9 @@ public final class XMLUtil {
 
   /** The Constant ATR_BOX_TEXT_ALIGMENT. */
   public static final String ATR_BOX_TEXT_ALIGMENT = "boxTextAlignment";
+
+  /** The Constant ATR_BOX_EXPENDED. */
+  public static final String ATR_BOX_EXPENDED = "boxExpanded";
 
   /** The Constant ATR_MARGIN_RIGHT. */
   public static final String ATR_MARGIN_RIGHT = "boxRightMargin";
@@ -141,6 +146,20 @@ public final class XMLUtil {
 
   /** The Constant VAL_ITALIC. */
   public static final String VAL_ITALIC = "italic";
+
+  private static final HashSet<String> boxLayoutAttrs = new HashSet<String>();
+
+  static {
+    boxLayoutAttrs.add(ATR_BOX_PADDING_RIGHT);
+    boxLayoutAttrs.add(ATR_BOX_PADDING_LEFT);
+    boxLayoutAttrs.add(ATR_BOX_PADDING_TOP);
+    boxLayoutAttrs.add(ATR_BOX_PADDING_BOTTOM);
+    boxLayoutAttrs.add(ATR_BOX_COLOR_FRAME);
+    boxLayoutAttrs.add(ATR_BOX_COLOR_BACKGROUND);
+    boxLayoutAttrs.add(ATR_BOX_COLOR_FOREGROUND);
+    boxLayoutAttrs.add(ATR_BOX_TEXT_ALIGMENT);
+    boxLayoutAttrs.add(ATR_BOX_EXPENDED);
+  }
 
   /**
    * Instantiates a new XML utility
@@ -457,26 +476,7 @@ public final class XMLUtil {
    * @return true, if is box layout atr
    */
   public static boolean isBoxLayoutAtr(final String name, final String value) {
-    boolean res = true;
-    if (name.equals(XMLUtil.ATR_BOX_PADDING_RIGHT)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_PADDING_LEFT)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_PADDING_TOP)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_PADDING_BOTTOM)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_COLOR_FRAME)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_COLOR_BACKGROUND)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_COLOR_FOREGROUND)) {
-    }
-    else if (name.equals(XMLUtil.ATR_BOX_TEXT_ALIGMENT)) {
-    }
-    else {
-      res = false;
-    }
+    boolean res = boxLayoutAttrs.contains(name);
     return res;
   }
 
@@ -511,6 +511,9 @@ public final class XMLUtil {
     }
     else if (name.equals(XMLUtil.ATR_BOX_TEXT_ALIGMENT)) {
       boxLay.setTextAlignment(XMLUtil.readAligment(value, boxLay.getTextAlignment()));
+    }
+    else if (name.equals(XMLUtil.ATR_BOX_EXPENDED)) {
+      boxLay.setExpanded(XMLUtil.readBoolean(value, boxLay.isExpanded()));
     }
   }
 
