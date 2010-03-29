@@ -23,7 +23,7 @@ import java.awt.Label;
 /**
  * The Layout definition of a Box.
  */
-public class BoxLayout {
+public class BoxLayout implements Cloneable {
 
   /** The Constant COLOR_BOXFRAME */
   public static final Color COLOR_BOXFRAME = Color.black;
@@ -75,6 +75,21 @@ public class BoxLayout {
 
   /** The children(s) of the box are displayed */
   private boolean expanded = true;
+
+  public BoxLayout() {
+  }
+
+  public BoxLayout(BoxLayout source) {
+    this.frameColor = source.frameColor;
+    this.backgroundColor = source.backgroundColor;
+    this.foregroundColor = source.foregroundColor;
+    this.rightPadding = source.rightPadding;
+    this.leftPadding = source.leftPadding;
+    this.topPadding = source.topPadding;
+    this.bottomPadding = source.bottomPadding;
+    this.textAlignment = source.textAlignment;
+    this.expanded = source.expanded;
+  }
 
   /**
    * Gets the box background color.

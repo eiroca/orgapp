@@ -18,8 +18,8 @@
 package com.fbergeron.organigram.view.render.organigram;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Point;
+
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.view.OrganigramView;
 import com.fbergeron.organigram.view.UnitView;
@@ -36,8 +36,8 @@ public class HorizontalRender extends AbstractRender {
    * @param graphic the graphic
    * @param compact the compact
    */
-  public HorizontalRender(final OrganigramView orgView, final Graphics graphic, final boolean compact) {
-    super(orgView, graphic, compact);
+  public HorizontalRender(final OrganigramView orgView, final boolean compact) {
+    super(orgView, compact);
   }
 
   /*
@@ -49,6 +49,7 @@ public class HorizontalRender extends AbstractRender {
    */
   @Override
   public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level) {
+    validLayout = true;
     // Set dimension of the box to the dimension of the box of this level
     final Dimension sizLevB = getBoxSize(level);
     unit.setSize(sizLevB);

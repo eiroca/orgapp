@@ -110,6 +110,7 @@ OrgApp support three organigram file formats.
  <p>Version 0.4.0<br/>
   <ul>
    <li>Collapsable nodes</li>
+   <li>Added handling of collapsed flag in the GUI (right click toggles it)</li>
   </ul>
  </p>
  <p>Version 0.3.0<br/>

@@ -68,7 +68,12 @@ public class UnitView implements Iterable<UnitView> {
     this.unit = unit;
     this.organigramView = organigramView;
     BoxLayout boxLay = unit.getBoxLayout();
-    this.layout = (boxLay != null ? boxLay : organigramView.getOrganigram().getBoxLayout());
+    if (boxLay != null) {
+      this.layout = boxLay;
+    }
+    else {
+      this.layout = new BoxLayout(organigramView.getOrganigram().getBoxLayout());
+    }
   }
 
   /**
@@ -131,6 +136,16 @@ public class UnitView implements Iterable<UnitView> {
   public void setLocation(final Point boxPos) {
     boxRect.x = boxPos.x;
     boxRect.y = boxPos.y;
+  }
+
+  public void reset() {
+    boxRect.x = 0;
+    boxRect.y = 0;
+    boxRect.width = 0;
+    boxRect.height = 0;
+    for (final UnitView child : this) {
+      child.reset();
+    }
   }
 
   /**

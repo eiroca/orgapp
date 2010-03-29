@@ -33,11 +33,13 @@ import com.fbergeron.organigram.view.render.BoxRender;
  */
 public class ClassicBoxRender implements BoxRender {
 
+  private boolean vertical;
+
   /**
    * Instantiates a new classic box render.
    */
-  public ClassicBoxRender() {
-    //
+  public ClassicBoxRender(boolean layoutIsVertical) {
+    this.vertical = !layoutIsVertical;
   }
 
   /**
@@ -65,14 +67,26 @@ public class ClassicBoxRender implements BoxRender {
         graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
         break;
     }
-    if (!boxLay.isExpanded()) {
-      int cx = box.boxRect.x + box.boxRect.width / 2;
-      int cy = box.boxRect.y + box.boxRect.height;
+    if (!boxLay.isExpanded() && (box.countChildren() > 0)) {
       Polygon p = new Polygon();
-      p.addPoint(cx + 0, cy + 5);
-      p.addPoint(cx - 5, cy);
-      p.addPoint(cx + 5, cy);
-      p.addPoint(cx + 0, cy + 5);
+      if (vertical) {
+        int cx = box.boxRect.x + box.boxRect.width / 2;
+        int cy = box.boxRect.y + box.boxRect.height;
+        int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
+        p.addPoint(cx, cy + sz);
+        p.addPoint(cx - sz, cy);
+        p.addPoint(cx + sz, cy);
+        p.addPoint(cx, cy + sz);
+      }
+      else {
+        int cx = box.boxRect.x + box.boxRect.width;
+        int cy = box.boxRect.y + box.boxRect.height / 2;
+        int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
+        p.addPoint(cx + sz, cy);
+        p.addPoint(cx, cy - sz);
+        p.addPoint(cx, cy + sz);
+        p.addPoint(cx + sz, cy);
+      }
       graphic.fillPolygon(p);
     }
   }
