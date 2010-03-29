@@ -35,7 +35,7 @@ import com.fbergeron.organigram.model.Organigram;
 /**
  * The Class Util.
  */
-public class Util {
+public class OrgUtils {
 
   /**
    * Write organigram.
@@ -70,7 +70,7 @@ public class Util {
    * @return the organigram
    */
   static public Organigram readOrganigram(final URL sourceUrl) {
-    return (sourceUrl == null ? null : Util.readOrganigram(sourceUrl, Util.getType(sourceUrl)));
+    return (sourceUrl == null ? null : OrgUtils.readOrganigram(sourceUrl, OrgUtils.getType(sourceUrl)));
   }
 
   /**
@@ -158,7 +158,7 @@ public class Util {
     final String classpath = System.getProperty("java.class.path");
     final String[] paths = classpath.split(File.pathSeparator);
     for (final String path : paths) {
-      res = Util.findInDirectory(path, filename);
+      res = OrgUtils.findInDirectory(path, filename);
       if (res != null) { return res; }
     }
     return null;
@@ -175,7 +175,7 @@ public class Util {
     if (!name.startsWith("/")) {
       name = "/" + name;
     }
-    final URL res = Util.class.getResource(name);
+    final URL res = OrgUtils.class.getResource(name);
     return res;
   }
 
@@ -188,9 +188,9 @@ public class Util {
    */
   static public URL find(final String name) {
     URL res = null;
-    res = Util.findInClasspath(name);
+    res = OrgUtils.findInClasspath(name);
     if (res != null) {
-      res = Util.findInResource(name);
+      res = OrgUtils.findInResource(name);
     }
     return res;
   }

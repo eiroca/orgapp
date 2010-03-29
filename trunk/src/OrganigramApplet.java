@@ -20,7 +20,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.net.URL;
 import javax.swing.JApplet;
-import com.fbergeron.organigram.Util;
+import com.fbergeron.organigram.OrgUtils;
 import com.fbergeron.organigram.io.BuildInfo;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.view.OrganigramView;
@@ -42,9 +42,9 @@ public class OrganigramApplet extends JApplet {
   public void init() {
     final String source = getParameter("DataSource");
     final String target = getParameter("Target");
-    final URL xmlSourceUrl = Util.buildURL(getDocumentBase(), source);
+    final URL xmlSourceUrl = OrgUtils.buildURL(getDocumentBase(), source);
     final Container me = getContentPane();
-    final Organigram o = Util.readOrganigram(xmlSourceUrl);
+    final Organigram o = OrgUtils.readOrganigram(xmlSourceUrl);
     o.execute(new BuildInfo(), true);
     final OrganigramView view = new OrganigramView(o, target);
     me.setLayout(new BorderLayout());

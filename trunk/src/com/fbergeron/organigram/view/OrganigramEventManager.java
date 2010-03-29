@@ -109,9 +109,11 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
   public UnitView contains(final UnitView box, final Point point) {
     if (box == null) { return null; }
     if (box.contains(point)) { return box; }
-    for (final UnitView child : box) {
-      final UnitView unitView = contains(child, point);
-      if (unitView != null) { return unitView; }
+    if (box.hasChildren()) {
+      for (final UnitView child : box) {
+        final UnitView unitView = contains(child, point);
+        if (unitView != null) { return unitView; }
+      }
     }
     return null;
   }

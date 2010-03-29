@@ -32,7 +32,7 @@ public class BuildInfo implements UnitTraversal {
    *
    * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
    */
-  public void process(final Unit unit) {
+  public void process(final Unit unit, int level) {
     int count = 0;
     for (final Line l : unit.getInfo()) {
       if (l.isVisible()) {

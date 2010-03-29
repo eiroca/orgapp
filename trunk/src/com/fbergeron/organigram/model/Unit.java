@@ -1,19 +1,19 @@
 /**
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.model;
@@ -86,7 +86,6 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /*
    * (non-Javadoc)
-   *
    * @see java.lang.Iterable#iterator()
    */
   public Iterator<Unit> iterator() {
@@ -113,7 +112,6 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /*
    * (non-Javadoc)
-   *
    * @see java.lang.Object#toString()
    */
   @Override
@@ -133,9 +131,9 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /*
    * (non-Javadoc)
-   *
-   * @see com.fbergeron.organigram.model.MetaDataCollector#setMeta(java.lang.String,
-   *      java.lang.String)
+   * @see
+   * com.fbergeron.organigram.model.MetaDataCollector#setMeta(java.lang.String,
+   * java.lang.String)
    */
   public void setMeta(final String name, final String val) {
     if (val == null) {
@@ -148,8 +146,8 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /*
    * (non-Javadoc)
-   *
-   * @see com.fbergeron.organigram.model.MetaDataCollector#getMeta(java.lang.String)
+   * @see
+   * com.fbergeron.organigram.model.MetaDataCollector#getMeta(java.lang.String)
    */
   public String getMeta(final String name) {
     return meta.get(name);
@@ -240,17 +238,18 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @param action the action
    * @param nodeFirst the node first
    */
-  public void execute(final UnitTraversal action, final boolean nodeFirst) {
+  public void execute(final UnitTraversal action, final boolean nodeFirst, int level) {
     final boolean more = true;
     if (nodeFirst) {
-      action.process(this);
+      action.process(this, level);
     }
     if (!more) { return; }
+    int newLevel = level+1;
     for (final Unit u : this) {
-      u.execute(action, nodeFirst);
+      u.execute(action, nodeFirst, newLevel);
     }
     if (!nodeFirst) {
-      action.process(this);
+      action.process(this, level);
     }
   }
 
