@@ -1,19 +1,19 @@
 /**
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.view;
@@ -28,12 +28,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
 
 /**
  * LinkManager handles the user interaction.
  */
-public class LinkManager extends MouseAdapter implements MouseMotionListener {
+public class OrganigramEventManager extends MouseAdapter implements MouseMotionListener {
 
   /** The organigram. */
   private final OrganigramView organigram;
@@ -52,24 +54,35 @@ public class LinkManager extends MouseAdapter implements MouseMotionListener {
    * 
    * @param organigram the organigram
    */
-  public LinkManager(final OrganigramView organigram) {
+  public OrganigramEventManager(final OrganigramView organigram) {
     super();
     this.organigram = organigram;
   }
 
   /*
    * (non-Javadoc)
-   *
    * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
    */
   @Override
   public void mousePressed(final MouseEvent event) {
-    if (currentLink != null) {
-      try {
-        showPage(currentLink, currentTarget);
+    if (event.getButton() == 1) {
+      if (currentLink != null) {
+        try {
+          showPage(currentLink, currentTarget);
+        }
+        catch (final MalformedURLException e) {
+          e.printStackTrace();
+        }
       }
-      catch (final MalformedURLException e) {
-        e.printStackTrace();
+    }
+    else {
+      final Point where = event.getPoint();
+      final UnitView unitView = contains(organigram.getRootUnitView(), where);
+      if (unitView != null) {
+        BoxLayout layout = unitView.getLayout();
+        layout.setExpanded(!layout.isExpanded());
+        organigram.orgRender.invalidate();
+        organigram.repaint();
       }
     }
   }
@@ -77,8 +90,8 @@ public class LinkManager extends MouseAdapter implements MouseMotionListener {
   // @Override
   /*
    * (non-Javadoc)
-   *
-   * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
+   * @see
+   * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
    */
   @Override
   public void mouseDragged(final MouseEvent event) {
@@ -106,8 +119,8 @@ public class LinkManager extends MouseAdapter implements MouseMotionListener {
   // @Override
   /*
    * (non-Javadoc)
-   *
-   * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
+   * @see
+   * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
    */
   @Override
   public void mouseMoved(final MouseEvent event) {

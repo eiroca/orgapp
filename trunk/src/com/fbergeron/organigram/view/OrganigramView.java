@@ -1,19 +1,19 @@
 /**
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.view;
@@ -50,7 +50,7 @@ public class OrganigramView extends JPanel {
   public UnitView root;
 
   /** The link manager. */
-  private final LinkManager linkManager;
+  private final OrganigramEventManager linkManager;
 
   /** The preferred size. */
   private final Dimension preferredSize = new Dimension(100, 100);
@@ -68,7 +68,7 @@ public class OrganigramView extends JPanel {
     super();
     this.organigram = organigram;
     owner = new JScrollPane(this);
-    linkManager = new LinkManager(this);
+    linkManager = new OrganigramEventManager(this);
     linkManager.setBaseTarget(target);
     root = initUnitTreeRec(organigram.getRoot());
     addMouseMotionListener(linkManager);
@@ -104,7 +104,6 @@ public class OrganigramView extends JPanel {
 
   /*
    * (non-Javadoc)
-   *
    * @see javax.swing.JComponent#getPreferredSize()
    */
   @Override
@@ -114,7 +113,6 @@ public class OrganigramView extends JPanel {
 
   /*
    * (non-Javadoc)
-   *
    * @see javax.swing.JComponent#setPreferredSize(java.awt.Dimension)
    */
   @Override
@@ -125,7 +123,6 @@ public class OrganigramView extends JPanel {
 
   /*
    * (non-Javadoc)
-   *
    * @see javax.swing.JComponent#getToolTipText(java.awt.event.MouseEvent)
    */
   @Override
@@ -137,12 +134,11 @@ public class OrganigramView extends JPanel {
     return res;
   }
 
-  /** The r. */
+  /** The render. */
   OrganigramRender orgRender = null;
 
   /*
    * (non-Javadoc)
-   *
    * @see javax.swing.JComponent#paint(java.awt.Graphics)
    */
   @Override
@@ -150,14 +146,16 @@ public class OrganigramView extends JPanel {
     if (orgRender == null) {
       final OrganigramLayout orgLay = organigram.getOrganigramLayout();
       LineRender lineRender;
-      final ClassicBoxRender boxRender = new ClassicBoxRender();
+      ClassicBoxRender boxRender;
       if (orgLay.getOrgLayout() == OrganigramLayout.ORGLAYOUT_HORIZ) {
         lineRender = new HorizLineRender();
-        orgRender = new HorizontalRender(this, graphics, (orgLay.getOrgCompact() == OrganigramLayout.ORGCOMPACT_YES));
+        orgRender = new HorizontalRender(this, (orgLay.getOrgCompact() == OrganigramLayout.ORGCOMPACT_YES));
+        boxRender = new ClassicBoxRender(false);
       }
       else {
         lineRender = new VertLineRender();
-        orgRender = new VerticalRender(this, graphics, (orgLay.getOrgCompact() == OrganigramLayout.ORGCOMPACT_YES));
+        orgRender = new VerticalRender(this, (orgLay.getOrgCompact() == OrganigramLayout.ORGCOMPACT_YES));
+        boxRender = new ClassicBoxRender(true);
       }
       orgRender.setLineRender(lineRender);
       orgRender.setBoxRender(boxRender);

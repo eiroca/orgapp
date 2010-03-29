@@ -58,6 +58,8 @@ abstract public class AbstractRender implements OrganigramRender {
   /** The compact. */
   protected boolean compact;
 
+  protected boolean validLayout = false;
+
   /**
    * Instantiates a new new render.
    * 
@@ -65,10 +67,9 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param graphic the graphic
    * @param compact the compact
    */
-  public AbstractRender(final OrganigramView orgView, final Graphics graphic, final boolean compact) {
+  public AbstractRender(final OrganigramView orgView, final boolean compact) {
     this.orgView = orgView;
     this.compact = compact;
-    layoutBoxes(graphic);
   }
 
   /*
@@ -115,6 +116,9 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param graphics the graphics
    */
   public synchronized void paint(final Graphics graphics) {
+    if (!validLayout) {
+      layoutBoxes(graphics);
+    }
     final Dimension dim = orgView.getSize();
     final OrganigramLayout orgLay = orgView.getOrganigram().getOrganigramLayout();
     // Draw background.
@@ -137,6 +141,7 @@ abstract public class AbstractRender implements OrganigramRender {
       organigramMaxSize.setSize(orgLay.getLeftMargin() + orgLay.getRightMargin(), orgLay.getTopMargin() + orgLay.getBottomMargin());
     }
     else {
+      pointLevel.clear();
       calcBoxMaximumSize(graphic);
       organigramMaxSize.setSize(layoutBoxes());
     }
@@ -301,6 +306,12 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param parent the parent
    * @param level the level
    */
-  abstract public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level);
+  public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level) {
+    validLayout = true;
+  }
+
+  public void invalidate() {
+    validLayout = false;
+  }
 
 }
