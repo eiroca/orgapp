@@ -1,19 +1,19 @@
 /**
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.view.render.organigram;
@@ -24,6 +24,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.OrganigramLayout;
@@ -70,15 +71,21 @@ abstract public class AbstractRender implements OrganigramRender {
     layoutBoxes(graphic);
   }
 
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.view.render.OrganigramRender#setLineRender(com.fbergeron.organigram.view.render.LineRender)
+  /*
+   * (non-Javadoc)
+   * @see
+   * com.fbergeron.organigram.view.render.OrganigramRender#setLineRender(com
+   * .fbergeron.organigram.view.render.LineRender)
    */
   public void setLineRender(final LineRender lineRender) {
     this.lineRender = lineRender;
   }
 
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.view.render.OrganigramRender#setBoxRender(com.fbergeron.organigram.view.render.BoxRender)
+  /*
+   * (non-Javadoc)
+   * @see
+   * com.fbergeron.organigram.view.render.OrganigramRender#setBoxRender(com.
+   * fbergeron.organigram.view.render.BoxRender)
    */
   public void setBoxRender(final BoxRender boxRender) {
     this.boxRender = boxRender;
@@ -93,7 +100,7 @@ abstract public class AbstractRender implements OrganigramRender {
    */
   private void paintBox(final UnitView box, final Graphics graphics, final OrganigramLayout orgLay) {
     boxRender.paint(graphics, box);
-    if (!box.children.isEmpty()) {
+    if (box.hasChildren()) {
       lineRender.paint(graphics, box, orgLay);
       // Draw the children boxes.
       for (final UnitView child : box) {
@@ -172,10 +179,7 @@ abstract public class AbstractRender implements OrganigramRender {
         }
       }
     }
-    BoxLayout boxLay = unit.getBoxLayout();
-    if (boxLay == null) {
-      boxLay = orgView.getOrganigram().getBoxLayout();
-    }
+    BoxLayout boxLay = box.getLayout();
     size.width += boxLay.getLeftPadding() + boxLay.getRightPadding();
     size.height += boxLay.getTopPadding() + boxLay.getBottomPadding();
     return size;
@@ -263,7 +267,8 @@ abstract public class AbstractRender implements OrganigramRender {
     return pointLevel.get(level);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
    * @see com.fbergeron.organigram.view.render.GenericRender#layoutBoxes()
    */
   /**

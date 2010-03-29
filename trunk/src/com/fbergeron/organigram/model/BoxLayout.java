@@ -1,18 +1,18 @@
 /**
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  * 
  */
 package com.fbergeron.organigram.model;
@@ -25,53 +25,56 @@ import java.awt.Label;
  */
 public class BoxLayout {
 
-  /** The Constant COLOR_BOXFRAME. */
+  /** The Constant COLOR_BOXFRAME */
   public static final Color COLOR_BOXFRAME = Color.black;
 
-  /** The Constant COLOR_BOXBACKGROUND. */
+  /** The Constant COLOR_BOXBACKGROUND */
   public static final Color COLOR_BACKGROUND = Color.white;
 
-  /** The Constant COLOR_BOXFOREGROUND. */
+  /** The Constant COLOR_BOXFOREGROUND */
   public static final Color COLOR_FOREGROUND = Color.black;
 
-  /** The Constant PADDING_BOXRIGHT. */
+  /** The Constant PADDING_BOXRIGHT */
   public static final int PADDING_RIGHT = 4;
 
-  /** The Constant PADDING_BOXLEFT. */
+  /** The Constant PADDING_BOXLEFT */
   public static final int PADDING_LEFT = 4;
 
-  /** The Constant PADDING_BOXTOP. */
+  /** The Constant PADDING_BOXTOP */
   public static final int PADDING_TOP = 4;
 
-  /** The Constant PADDING_BOXBOTTOM. */
+  /** The Constant PADDING_BOXBOTTOM */
   public static final int PADDING_BOTTOM = 4;
 
-  /** The Constant ALIGN_BOXTEXT. */
+  /** The Constant ALIGN_BOXTEXT */
   public static final int TEXT_ALIGN = Label.CENTER;
 
-  /** The box frame color. */
+  /** The box frame color */
   private Color frameColor = BoxLayout.COLOR_BOXFRAME;
 
-  /** The box background color. */
+  /** The box background color */
   private Color backgroundColor = BoxLayout.COLOR_BACKGROUND;
 
-  /** The box foreground color. */
+  /** The box foreground color */
   private Color foregroundColor = BoxLayout.COLOR_FOREGROUND;
 
-  /** The box right padding. */
+  /** The box right padding */
   private int rightPadding = BoxLayout.PADDING_RIGHT;
 
-  /** The box left padding. */
+  /** The box left padding */
   private int leftPadding = BoxLayout.PADDING_LEFT;
 
-  /** The box top padding. */
+  /** The box top padding */
   private int topPadding = BoxLayout.PADDING_TOP;
 
-  /** The box bottom padding. */
+  /** The box bottom padding */
   private int bottomPadding = BoxLayout.PADDING_BOTTOM;
 
-  /** The box text alignment. */
+  /** The box text alignment */
   private int textAlignment = BoxLayout.TEXT_ALIGN;
+
+  /** The children(s) of the box are displayed */
+  private boolean expanded = true;
 
   /**
    * Gets the box background color.
@@ -215,6 +218,23 @@ public class BoxLayout {
    */
   public void setTextAlignment(final int textAlignment) {
     this.textAlignment = textAlignment;
+  }
+
+  /**
+   * Get the expanded flag
+   * 
+   * @return the expanded flag
+   */
+  public boolean isExpanded() {
+    return expanded;
+  }
+
+  /**
+   * Sets the box expanded flag
+   * @param expanded the new expanded flag
+   */
+  public void setExpanded(boolean expanded) {
+    this.expanded = expanded;
   }
 
 }

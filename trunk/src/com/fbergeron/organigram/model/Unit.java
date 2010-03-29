@@ -29,22 +29,22 @@ import java.util.Map;
  */
 public class Unit implements Iterable<Unit>, MetaDataCollector {
 
-  /** The ID. */
+  /** The unit ID */
   private String unitID;
 
-  /** The parent. */
+  /** The parent */
   private Unit parent;
 
-  /** The children. */
+  /** The childrens */
   private final List<Unit> children = new ArrayList<Unit>();
 
-  /** The info. */
+  /** The info */
   private final List<Line> info = new ArrayList<Line>();
 
-  /** The box layout. */
+  /** The box layout */
   private BoxLayout boxLayout = null;
 
-  /** The meta. */
+  /** The meta */
   private final Map<String, String> meta = new HashMap<String, String>();
 
   /**
