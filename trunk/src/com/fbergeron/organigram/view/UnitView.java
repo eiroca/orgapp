@@ -24,7 +24,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
 
@@ -67,12 +66,12 @@ public class UnitView implements Iterable<UnitView> {
   public UnitView(final Unit unit, final OrganigramView organigramView) {
     this.unit = unit;
     this.organigramView = organigramView;
-    BoxLayout boxLay = unit.getBoxLayout();
+    final BoxLayout boxLay = unit.getBoxLayout();
     if (boxLay != null) {
-      this.layout = boxLay;
+      layout = boxLay;
     }
     else {
-      this.layout = new BoxLayout(organigramView.getOrganigram().getBoxLayout());
+      layout = new BoxLayout(organigramView.getOrganigram().getBoxLayout());
     }
   }
 

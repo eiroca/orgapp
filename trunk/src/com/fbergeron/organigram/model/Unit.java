@@ -35,7 +35,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   /** The parent */
   private Unit parent;
 
-  /** The childrens */
+  /** The children */
   private final List<Unit> children = new ArrayList<Unit>();
 
   /** The info */
@@ -238,13 +238,13 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @param action the action
    * @param nodeFirst the node first
    */
-  public void execute(final UnitTraversal action, final boolean nodeFirst, int level) {
+  public void execute(final UnitTraversal action, final boolean nodeFirst, final int level) {
     final boolean more = true;
     if (nodeFirst) {
       action.process(this, level);
     }
     if (!more) { return; }
-    int newLevel = level+1;
+    final int newLevel = level + 1;
     for (final Unit u : this) {
       u.execute(action, nodeFirst, newLevel);
     }

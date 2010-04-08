@@ -76,7 +76,7 @@ public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
    */
-  public void process(final Unit unit, int level) {
+  public void process(final Unit unit, final int level) {
     final String link = unit.getMeta("link");
     if (link != null) {
       SiteMapUtils.URL.open(buf, false);

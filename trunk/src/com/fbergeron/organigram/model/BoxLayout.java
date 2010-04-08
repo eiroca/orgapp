@@ -73,22 +73,22 @@ public class BoxLayout implements Cloneable {
   /** The box text alignment */
   private int textAlignment = BoxLayout.TEXT_ALIGN;
 
-  /** The children(s) of the box are displayed */
+  /** The children of the box are displayed */
   private boolean expanded = true;
 
   public BoxLayout() {
   }
 
-  public BoxLayout(BoxLayout source) {
-    this.frameColor = source.frameColor;
-    this.backgroundColor = source.backgroundColor;
-    this.foregroundColor = source.foregroundColor;
-    this.rightPadding = source.rightPadding;
-    this.leftPadding = source.leftPadding;
-    this.topPadding = source.topPadding;
-    this.bottomPadding = source.bottomPadding;
-    this.textAlignment = source.textAlignment;
-    this.expanded = source.expanded;
+  public BoxLayout(final BoxLayout source) {
+    frameColor = source.frameColor;
+    backgroundColor = source.backgroundColor;
+    foregroundColor = source.foregroundColor;
+    rightPadding = source.rightPadding;
+    leftPadding = source.leftPadding;
+    topPadding = source.topPadding;
+    bottomPadding = source.bottomPadding;
+    textAlignment = source.textAlignment;
+    expanded = source.expanded;
   }
 
   /**
@@ -248,7 +248,7 @@ public class BoxLayout implements Cloneable {
    * Sets the box expanded flag
    * @param expanded the new expanded flag
    */
-  public void setExpanded(boolean expanded) {
+  public void setExpanded(final boolean expanded) {
     this.expanded = expanded;
   }
 
