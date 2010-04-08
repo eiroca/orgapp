@@ -17,6 +17,7 @@
  * 
  */
 import java.awt.BorderLayout;
+import java.awt.image.ImageObserver;
 import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,7 +42,7 @@ public class OrganigramApp extends JFrame {
   private JPanel jContentPane = null;
 
   /** The view. */
-  private OrganigramView view;
+  private final OrganigramView view;
 
   /**
    * The main method.
@@ -75,8 +76,8 @@ public class OrganigramApp extends JFrame {
     final URL source = OrgUtils.find(OrganigramApp.organigramFile);
     final Organigram org = OrgUtils.readOrganigram(source);
     if (org == null) {
-      System.err.println("Invalid data: "+OrganigramApp.organigramFile);
-      System.exit(ERROR);
+      System.err.println("Invalid data: " + OrganigramApp.organigramFile);
+      System.exit(ImageObserver.ERROR);
     }
     org.execute(new BuildInfo(), true);
     view = new OrganigramView(org, null);

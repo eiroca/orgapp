@@ -50,7 +50,7 @@ public class OrganigramView extends JPanel {
   public UnitView root;
 
   /** The link manager. */
-  private final OrganigramEventManager linkManager;
+  private final OrganigramEventManager eventManager;
 
   /** The preferred size. */
   private final Dimension preferredSize = new Dimension(100, 100);
@@ -68,11 +68,11 @@ public class OrganigramView extends JPanel {
     super();
     this.organigram = organigram;
     owner = new JScrollPane(this);
-    linkManager = new OrganigramEventManager(this);
-    linkManager.setBaseTarget(target);
+    eventManager = new OrganigramEventManager(this);
+    eventManager.setBaseTarget(target);
     root = initUnitTreeRec(organigram.getRoot());
-    addMouseMotionListener(linkManager);
-    addMouseListener(linkManager);
+    addMouseMotionListener(eventManager);
+    addMouseListener(eventManager);
   }
 
   /**

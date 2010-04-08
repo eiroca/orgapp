@@ -19,7 +19,6 @@ package com.fbergeron.organigram.view.render.organigram;
 
 import java.awt.Dimension;
 import java.awt.Point;
-
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.view.OrganigramView;
 import com.fbergeron.organigram.view.UnitView;
@@ -76,7 +75,7 @@ public class HorizontalRender extends AbstractRender {
       // Step 2 - center childs with parent
       int xN = pN.x;
       final int cB = pB.x + wB / 2;
-      int cN = (xN - xB) / 2 + xB;
+      final int cN = (xN - xB) / 2 + xB;
       int d = 0;
       if (cN < cB) {
         d = cB - cN;
@@ -93,7 +92,7 @@ public class HorizontalRender extends AbstractRender {
         // Step 3 - center parent with childs
         d = (xN - xB - wB);
         if (d > 0) {
-          d = (d / 2) + xB;
+          d = ((d + 1) / 2) + xB;
           if (d > pB.x) {
             pB.x = d;
           }

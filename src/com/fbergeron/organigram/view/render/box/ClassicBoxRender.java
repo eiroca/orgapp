@@ -22,7 +22,6 @@ import java.awt.Graphics;
 import java.awt.Label;
 import java.awt.Polygon;
 import java.util.List;
-
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.OrganigramLayout;
@@ -34,36 +33,36 @@ import com.fbergeron.organigram.view.render.BoxRender;
  */
 public class ClassicBoxRender implements BoxRender {
 
-  private boolean vertical;
+  private final boolean vertical;
 
   /**
    * Instantiates a new classic box render.
    */
-  public ClassicBoxRender(boolean layoutIsVertical) {
-    this.vertical = !layoutIsVertical;
+  public ClassicBoxRender(final boolean layoutIsVertical) {
+    vertical = !layoutIsVertical;
   }
 
   /**
-   * Draws the icon to rappresents that the node has unexpanded childrens
+   * Draws the icon to rappresents that the node has unexpanded children
    * @param graphic
    * @param box
    * @param boxLay
    */
   private final void drawBoxExpand(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
-    Polygon p = new Polygon();
+    final Polygon p = new Polygon();
     if (vertical) {
-      int cx = box.boxRect.x + box.boxRect.width / 2;
-      int cy = box.boxRect.y + box.boxRect.height;
-      int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
+      final int cx = box.boxRect.x + box.boxRect.width / 2;
+      final int cy = box.boxRect.y + box.boxRect.height;
+      final int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
       p.addPoint(cx, cy + sz);
       p.addPoint(cx - sz, cy);
       p.addPoint(cx + sz, cy);
       p.addPoint(cx, cy + sz);
     }
     else {
-      int cx = box.boxRect.x + box.boxRect.width;
-      int cy = box.boxRect.y + box.boxRect.height / 2;
-      int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
+      final int cx = box.boxRect.x + box.boxRect.width;
+      final int cy = box.boxRect.y + box.boxRect.height / 2;
+      final int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
       p.addPoint(cx + sz, cy);
       p.addPoint(cx, cy - sz);
       p.addPoint(cx, cy + sz);
@@ -149,8 +148,8 @@ public class ClassicBoxRender implements BoxRender {
    * com.fbergeron.organigram.view.render.BoxRender#paint(java.awt.Graphics,
    * com.fbergeron.organigram.view.UnitView)
    */
-  public void paint(final Graphics graphic, final UnitView box, OrganigramLayout orgLay) {
-    BoxLayout boxLay = box.getLayout();
+  public void paint(final Graphics graphic, final UnitView box, final OrganigramLayout orgLay) {
+    final BoxLayout boxLay = box.getLayout();
     drawBox(graphic, box, boxLay);
     drawText(graphic, box, boxLay);
   }

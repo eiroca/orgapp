@@ -24,7 +24,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.OrganigramLayout;
@@ -184,7 +183,7 @@ abstract public class AbstractRender implements OrganigramRender {
         }
       }
     }
-    BoxLayout boxLay = box.getLayout();
+    final BoxLayout boxLay = box.getLayout();
     size.width += boxLay.getLeftPadding() + boxLay.getRightPadding();
     size.height += boxLay.getTopPadding() + boxLay.getBottomPadding();
     return size;

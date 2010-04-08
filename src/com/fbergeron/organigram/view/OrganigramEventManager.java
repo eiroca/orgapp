@@ -28,7 +28,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.text.MessageFormat;
+import com.fbergeron.organigram.Messages;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
 
@@ -79,7 +80,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
       final Point where = event.getPoint();
       final UnitView unitView = contains(organigram.getRootUnitView(), where);
       if (unitView != null) {
-        BoxLayout layout = unitView.getLayout();
+        final BoxLayout layout = unitView.getLayout();
         layout.setExpanded(!layout.isExpanded());
         organigram.orgRender.invalidate();
         organigram.repaint();
@@ -132,14 +133,14 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
     currentLink = null;
     if (unitView != null) {
       if (unitView.canExpand()) {
-        tipText = "Right click to expand the node";
+        tipText = Messages.getString("RightClick"); //$NON-NLS-1$
       }
       final Unit unit = unitView.getUnit();
-      final String link = unit.getMeta("link");
+      final String link = unit.getMeta("link"); //$NON-NLS-1$
       if (link != null) {
         currentLink = link;
-        tipText = "Go to " + currentLink;
-        final String linkTarget = unit.getMeta("target");
+        tipText = MessageFormat.format(Messages.getString("GoToLink"), currentLink); //$NON-NLS-1$
+        final String linkTarget = unit.getMeta("target"); //$NON-NLS-1$
         if (linkTarget != null) {
           currentTarget = linkTarget;
         }

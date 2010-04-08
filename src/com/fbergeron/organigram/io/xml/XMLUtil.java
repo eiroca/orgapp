@@ -25,7 +25,6 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
-
 import com.fbergeron.organigram.io.TAG;
 import com.fbergeron.organigram.model.BoxLayout;
 
@@ -152,33 +151,33 @@ public final class XMLUtil {
   private static final HashMap<String, String> colors = new HashMap<String, String>();
 
   static {
-    boxLayoutAttrs.add(ATR_BOX_PADDING_RIGHT);
-    boxLayoutAttrs.add(ATR_BOX_PADDING_LEFT);
-    boxLayoutAttrs.add(ATR_BOX_PADDING_TOP);
-    boxLayoutAttrs.add(ATR_BOX_PADDING_BOTTOM);
-    boxLayoutAttrs.add(ATR_BOX_COLOR_FRAME);
-    boxLayoutAttrs.add(ATR_BOX_COLOR_BACKGROUND);
-    boxLayoutAttrs.add(ATR_BOX_COLOR_FOREGROUND);
-    boxLayoutAttrs.add(ATR_BOX_TEXT_ALIGMENT);
-    boxLayoutAttrs.add(ATR_BOX_EXPENDED);
-    colors.put("aqua", "#00ffff");
-    colors.put("cyan", "#00ffff");
-    colors.put("gray", "#808080");
-    colors.put("navy", "#000080");
-    colors.put("silver", "#c0c0c0");
-    colors.put("black", "#000000");
-    colors.put("green", "#008000");
-    colors.put("olive", "#808000");
-    colors.put("teal", "#008080");
-    colors.put("blue", "#0000ff");
-    colors.put("lime", "#00ff00");
-    colors.put("purple", "#800080");
-    colors.put("white", "#ffffff");
-    colors.put("fuchsia", "#ff00ff");
-    colors.put("magenta", "#ff00ff");
-    colors.put("maroon", "#800000");
-    colors.put("red", "#ff0000");
-    colors.put("yellow", "#ffff00");
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_RIGHT);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_LEFT);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_TOP);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_BOTTOM);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_COLOR_FRAME);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_COLOR_BACKGROUND);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_COLOR_FOREGROUND);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_TEXT_ALIGMENT);
+    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_EXPENDED);
+    XMLUtil.colors.put("aqua", "#00ffff");
+    XMLUtil.colors.put("cyan", "#00ffff");
+    XMLUtil.colors.put("gray", "#808080");
+    XMLUtil.colors.put("navy", "#000080");
+    XMLUtil.colors.put("silver", "#c0c0c0");
+    XMLUtil.colors.put("black", "#000000");
+    XMLUtil.colors.put("green", "#008000");
+    XMLUtil.colors.put("olive", "#808000");
+    XMLUtil.colors.put("teal", "#008080");
+    XMLUtil.colors.put("blue", "#0000ff");
+    XMLUtil.colors.put("lime", "#00ff00");
+    XMLUtil.colors.put("purple", "#800080");
+    XMLUtil.colors.put("white", "#ffffff");
+    XMLUtil.colors.put("fuchsia", "#ff00ff");
+    XMLUtil.colors.put("magenta", "#ff00ff");
+    XMLUtil.colors.put("maroon", "#800000");
+    XMLUtil.colors.put("red", "#ff0000");
+    XMLUtil.colors.put("yellow", "#ffff00");
   }
 
   /**
@@ -221,12 +220,12 @@ public final class XMLUtil {
     if (strColor != null) {
       try {
         strColor = strColor.toLowerCase();
-        if (colors.containsKey(strColor)) {
-          strColor = colors.get(strColor);
+        if (XMLUtil.colors.containsKey(strColor)) {
+          strColor = XMLUtil.colors.get(strColor);
         }
         if (strColor.startsWith("#")) {
           if (strColor.length() == 4) {
-            StringBuffer sb = new StringBuffer();
+            final StringBuffer sb = new StringBuffer();
             sb.append('#').append(strColor.charAt(1)).append(strColor.charAt(1)).append(strColor.charAt(2)).append(strColor.charAt(2)).append(strColor.charAt(3)).append(strColor.charAt(3));
             strColor = sb.toString();
           }
@@ -236,7 +235,7 @@ public final class XMLUtil {
             bl = Integer.parseInt(strColor.substring(5, 7), 16);
           }
           else {
-            throw (new ParseException(strColor+" has an invalid length.", 0));
+            throw (new ParseException(strColor + " has an invalid length.", 0));
           }
         }
         else {
@@ -509,7 +508,7 @@ public final class XMLUtil {
    * @return true, if is box layout atr
    */
   public static boolean isBoxLayoutAtr(final String name, final String value) {
-    boolean res = boxLayoutAttrs.contains(name);
+    final boolean res = XMLUtil.boxLayoutAttrs.contains(name);
     return res;
   }
 
