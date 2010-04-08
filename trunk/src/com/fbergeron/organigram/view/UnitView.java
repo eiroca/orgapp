@@ -360,4 +360,8 @@ public class UnitView implements Iterable<UnitView> {
     }
   }
 
+  public boolean canExpand() {
+    return (!layout.isExpanded() && (countChildren() > 0));
+  }
+
 }

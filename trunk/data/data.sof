@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<organigram mode="0" layout="1" compact="1" isToolTipEnabled="true" 
+<organigram layout="0" mode="2" compact="1" isToolTipEnabled="true" 
   backgroundColor="silver" 
   lineColor="black" 
   boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" 
@@ -7,7 +7,7 @@
   boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="255,255,255" 
   boxTextAlignment="center" 
   firm="Test Tree">
- <unit name="Doe, John" department="CEO" role="H">
+ <unit department="Org App" name="http://orgapp.sourceforge.net/" link="http://orgapp.sourceforge.net/" role="H">
   <childs>
    <unit boxExpanded="true">
     <info>com</info>
@@ -55,8 +55,8 @@
        <unit link="http://orgapp.sourceforge.net">
         <info fontColor="255,50,50" fontStyle="Bold+Italic">orgapp</info>
         <childs>
-         <unit name="A" />
-         <unit name="B" />
+         <unit name="H" />
+         <unit name="V" />
         </childs>
        </unit>
       </childs>

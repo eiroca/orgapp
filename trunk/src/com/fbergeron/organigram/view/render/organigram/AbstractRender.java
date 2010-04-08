@@ -100,7 +100,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param orgLay the org lay
    */
   private void paintBox(final UnitView box, final Graphics graphics, final OrganigramLayout orgLay) {
-    boxRender.paint(graphics, box);
+    boxRender.paint(graphics, box, orgLay);
     if (box.hasChildren()) {
       lineRender.paint(graphics, box, orgLay);
       // Draw the children boxes.
