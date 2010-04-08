@@ -49,15 +49,14 @@ public class HorizontalRender extends AbstractRender {
    */
   @Override
   public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level) {
+    // pB is the first available position of the box in the current level
+    // pN is the first available position of the box in the next level
     validLayout = true;
     // Set dimension of the box to the dimension of the box of this level
     final Dimension sizLevB = getBoxSize(level);
     unit.setSize(sizLevB);
-    // pB is the first available position of the box in the current level
-    // pN is the first available position of the box in the next level
     final Point pB = getPoint(level, orgLay.getLeftMargin(), orgLay.getTopMargin());
     final int wB = sizLevB.width + orgLay.getLeftMargin() + orgLay.getRightMargin();
-
     final int h = orgLay.getTopMargin() + orgLay.getBottomMargin() + unit.getHeight();
     final Point pN = getPoint(level + 1, orgLay.getLeftMargin(), pB.y + h);
     if (!compact) {
@@ -70,35 +69,39 @@ public class HorizontalRender extends AbstractRender {
     }
     if (unit.hasChildren()) {
       // Step 1 - layout childs
-      int w1 = pN.x;
+      int xB = pN.x;
       for (final UnitView child : unit) {
         layoutBoxes(orgLay, child, unit, level + 1);
       }
       // Step 2 - center childs with parent
-      int d;
-      int w2 = pN.x;
+      int xN = pN.x;
       final int cB = pB.x + wB / 2;
-      final int cN = (w2 - w1) / 2 + w1;
+      int cN = (xN - xB) / 2 + xB;
+      int d = 0;
       if (cN < cB) {
         d = cB - cN;
+      }
+      if (d > 0) {
         for (final UnitView child : unit) {
           child.move(d, 0, true);
         }
         pN.x = pN.x + d;
-        w1 += d;
-        w2 += d;
+        xB += d;
+        xN += d;
       }
-      // Step 3 - center parent with childs
-      d = (w2 - w1 - wB);
-      if (d > 0) {
-        d = ((d + 1) / 2) + w1;
-        if (d > pB.x) {
-          pB.x = d;
+      else {
+        // Step 3 - center parent with childs
+        d = (xN - xB - wB);
+        if (d > 0) {
+          d = (d / 2) + xB;
+          if (d > pB.x) {
+            pB.x = d;
+          }
         }
-      }
-      else if (w1 > pB.x) {
-        // Adjust parent to be aligned with childs
-        pB.x = w1;
+        else if (xB > pB.x) {
+          // Adjust parent to be aligned with childs
+          pB.x = xB;
+        }
       }
     }
     // Update box position

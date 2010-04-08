@@ -18,6 +18,8 @@
 package com.fbergeron.organigram.view.render;
 
 import java.awt.Graphics;
+
+import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.view.UnitView;
 
 /**
@@ -31,6 +33,6 @@ public interface BoxRender {
    * @param graphic the graphic
    * @param box the box
    */
-  public void paint(final Graphics graphic, final UnitView box);
+  void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay);
 
 }

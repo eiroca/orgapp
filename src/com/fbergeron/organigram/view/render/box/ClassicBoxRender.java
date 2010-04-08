@@ -25,6 +25,7 @@ import java.util.List;
 
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
+import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.view.UnitView;
 import com.fbergeron.organigram.view.render.BoxRender;
 
@@ -40,6 +41,35 @@ public class ClassicBoxRender implements BoxRender {
    */
   public ClassicBoxRender(boolean layoutIsVertical) {
     this.vertical = !layoutIsVertical;
+  }
+
+  /**
+   * Draws the icon to rappresents that the node has unexpanded childrens
+   * @param graphic
+   * @param box
+   * @param boxLay
+   */
+  private final void drawBoxExpand(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
+    Polygon p = new Polygon();
+    if (vertical) {
+      int cx = box.boxRect.x + box.boxRect.width / 2;
+      int cy = box.boxRect.y + box.boxRect.height;
+      int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
+      p.addPoint(cx, cy + sz);
+      p.addPoint(cx - sz, cy);
+      p.addPoint(cx + sz, cy);
+      p.addPoint(cx, cy + sz);
+    }
+    else {
+      int cx = box.boxRect.x + box.boxRect.width;
+      int cy = box.boxRect.y + box.boxRect.height / 2;
+      int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
+      p.addPoint(cx + sz, cy);
+      p.addPoint(cx, cy - sz);
+      p.addPoint(cx, cy + sz);
+      p.addPoint(cx + sz, cy);
+    }
+    graphic.fillPolygon(p);
   }
 
   /**
@@ -61,33 +91,14 @@ public class ClassicBoxRender implements BoxRender {
     switch (roleType) {
       case 'H':
         graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
-        graphic.drawRect(box.boxRect.x - 1, box.boxRect.y - 1, box.boxRect.width + 2, box.boxRect.height + 2);
+        graphic.drawRect(box.boxRect.x + 1, box.boxRect.y + 1, box.boxRect.width - 2, box.boxRect.height - 2);
         break;
       default:
         graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
         break;
     }
-    if (!boxLay.isExpanded() && (box.countChildren() > 0)) {
-      Polygon p = new Polygon();
-      if (vertical) {
-        int cx = box.boxRect.x + box.boxRect.width / 2;
-        int cy = box.boxRect.y + box.boxRect.height;
-        int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
-        p.addPoint(cx, cy + sz);
-        p.addPoint(cx - sz, cy);
-        p.addPoint(cx + sz, cy);
-        p.addPoint(cx, cy + sz);
-      }
-      else {
-        int cx = box.boxRect.x + box.boxRect.width;
-        int cy = box.boxRect.y + box.boxRect.height / 2;
-        int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
-        p.addPoint(cx + sz, cy);
-        p.addPoint(cx, cy - sz);
-        p.addPoint(cx, cy + sz);
-        p.addPoint(cx + sz, cy);
-      }
-      graphic.fillPolygon(p);
+    if (box.canExpand()) {
+      drawBoxExpand(graphic, box, boxLay);
     }
   }
 
@@ -104,19 +115,19 @@ public class ClassicBoxRender implements BoxRender {
     yPos = box.boxRect.y + boxLay.getTopPadding();
     final List<Line> lines = box.unit.getInfo();
     FontMetrics fontMetr;
-    for (final Line line : lines) {
-      if (line.isVisible()) {
-        if (line.getColor() == null) {
+    for (final Line text : lines) {
+      if (text.isVisible()) {
+        if (text.getColor() == null) {
           graphic.setColor(boxLay.getForegroundColor());
         }
         else {
-          graphic.setColor(line.getColor());
+          graphic.setColor(text.getColor());
         }
-        if (line.getFont() != null) {
-          graphic.setFont(line.getFont());
+        if (text.getFont() != null) {
+          graphic.setFont(text.getFont());
         }
         fontMetr = graphic.getFontMetrics();
-        final int textWidth = fontMetr.stringWidth(line.getText());
+        final int textWidth = fontMetr.stringWidth(text.getText());
         if (boxLay.getTextAlignment() == Label.CENTER) {
           xPos = box.boxRect.x + (box.boxRect.width - textWidth) / 2;
         }
@@ -126,7 +137,7 @@ public class ClassicBoxRender implements BoxRender {
         else {
           xPos = box.boxRect.x + boxLay.getLeftPadding();
         }
-        graphic.drawString(line.getText(), xPos, yPos + fontMetr.getAscent() + fontMetr.getLeading());
+        graphic.drawString(text.getText(), xPos, yPos + fontMetr.getAscent() + fontMetr.getLeading());
         yPos += fontMetr.getHeight();
       }
     }
@@ -138,7 +149,7 @@ public class ClassicBoxRender implements BoxRender {
    * com.fbergeron.organigram.view.render.BoxRender#paint(java.awt.Graphics,
    * com.fbergeron.organigram.view.UnitView)
    */
-  public void paint(final Graphics graphic, final UnitView box) {
+  public void paint(final Graphics graphic, final UnitView box, OrganigramLayout orgLay) {
     BoxLayout boxLay = box.getLayout();
     drawBox(graphic, box, boxLay);
     drawText(graphic, box, boxLay);

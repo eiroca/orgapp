@@ -128,12 +128,17 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
   public void mouseMoved(final MouseEvent event) {
     final Point where = event.getPoint();
     final UnitView unitView = contains(organigram.getRootUnitView(), where);
+    String tipText = null;
     currentLink = null;
     if (unitView != null) {
+      if (unitView.canExpand()) {
+        tipText = "Right click to expand the node";
+      }
       final Unit unit = unitView.getUnit();
       final String link = unit.getMeta("link");
       if (link != null) {
         currentLink = link;
+        tipText = "Go to " + currentLink;
         final String linkTarget = unit.getMeta("target");
         if (linkTarget != null) {
           currentTarget = linkTarget;
@@ -144,13 +149,12 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
       }
     }
     if (currentLink == null) {
-      organigram.setToolTipText(null);
       organigram.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
     else {
-      organigram.setToolTipText(currentLink);
       organigram.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
+    organigram.setToolTipText(tipText);
   }
 
   /**
