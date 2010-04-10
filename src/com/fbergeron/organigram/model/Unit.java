@@ -1,4 +1,4 @@
-/**
+/** LGPL > 3.0
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  * 
@@ -14,7 +14,6 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
- * 
  */
 package com.fbergeron.organigram.model;
 
