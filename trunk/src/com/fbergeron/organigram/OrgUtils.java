@@ -1,5 +1,5 @@
-/** LGPL > 3.0
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/**
+ * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -102,26 +102,40 @@ public class OrgUtils {
   static public Organigram readOrganigram(final URL sourceUrl, final int type) {
     Organigram org = null;
     if (sourceUrl != null) {
-      OrganigramReader handler = null;
-      switch (type) {
-        case 1:
-          handler = new TXTOrganigramReader();
-          break;
-        case 2:
-          handler = new SiteMapReader();
-          break;
-        default:
-          handler = new XMLOrganigramReader();
-          break;
-      }
       InputStream source;
       try {
         source = sourceUrl.openStream();
-        org = handler.readOrganigram(source);
+        org = readOrganigram(source, type);
       }
-      catch (final IOException e) {
+      catch (IOException e) {
+        //
       }
     }
+    return org;
+  }
+
+  /**
+   * Read organigram.
+   * 
+   * @param source
+   * @param type
+   * @return
+   */
+  static public Organigram readOrganigram(final InputStream source, final int type) {
+    Organigram org = null;
+    OrganigramReader handler = null;
+    switch (type) {
+      case 1:
+        handler = new TXTOrganigramReader();
+        break;
+      case 2:
+        handler = new SiteMapReader();
+        break;
+      default:
+        handler = new XMLOrganigramReader();
+        break;
+    }
+    org = handler.readOrganigram(source);
     return org;
   }
 
