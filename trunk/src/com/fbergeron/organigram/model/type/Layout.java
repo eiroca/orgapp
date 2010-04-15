@@ -16,6 +16,17 @@
  */
 package com.fbergeron.organigram.model.type;
 
+/**
+ * The Enum Layout.
+ */
 public enum Layout {
-  TOP, LEFT, BOTTOM, RIGHT
+  
+  /** The TOP. */
+  TOP, 
+ /** The LEFT. */
+ LEFT, 
+ /** The BOTTOM. */
+ BOTTOM, 
+ /** The RIGHT. */
+ RIGHT
 }

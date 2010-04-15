@@ -29,7 +29,7 @@ public class HorizontalRender extends AbstractRender {
 
   /**
    * Instantiates a new compact horizontal render.
-   *
+   * 
    * @param orgView the organigram view
    * @param graphic the graphic
    * @param compact the compact

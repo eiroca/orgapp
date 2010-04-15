@@ -64,7 +64,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Instantiates a new new render.
-   *
+   * 
    * @param orgView the org view
    * @param graphic the graphic
    * @param compact the compact
@@ -99,7 +99,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Paint the organigram box.
-   *
+   * 
    * @param box the box
    * @param graphics the graphics
    * @param orgLay the org lay
@@ -117,7 +117,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Paint.
-   *
+   * 
    * @param graphics the graphics
    */
   public synchronized void paint(final Graphics graphics) {
@@ -136,7 +136,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Layout boxes.
-   *
+   * 
    * @param graphic the graphic
    */
   public void layoutBoxes(final Graphics graphic) {
@@ -156,7 +156,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Update max.
-   *
+   * 
    * @param dim the dim
    * @param max the max
    */
@@ -171,10 +171,10 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Calc box maximum.
-   *
+   * 
    * @param box the box
    * @param graphic the graphic
-   *
+   * 
    * @return the dimension
    */
   private Dimension calcBoxMaximum(final Graphics graphic, final UnitView box) {
@@ -198,7 +198,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Calc box maximum size.
-   *
+   * 
    * @param box the box
    * @param max the max
    * @param level the level
@@ -217,7 +217,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Calc box maximum size.
-   *
+   * 
    * @param graphic the graphic
    */
   private void calcBoxMaximumSize(final Graphics graphic) {
@@ -257,9 +257,9 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Gets the box size.
-   *
+   * 
    * @param level the level
-   *
+   * 
    * @return the box size
    */
   public Dimension getBoxSize(final int level) {
@@ -271,11 +271,11 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Gets the box size.
-   *
+   * 
    * @param level the level
    * @param xPos the x
    * @param yPos the y
-   *
+   * 
    * @return the box size
    */
   public Point getPoint(final int level, final int xPos, final int yPos) {
@@ -291,7 +291,7 @@ abstract public class AbstractRender implements OrganigramRender {
    */
   /**
    * Layout boxes.
-   *
+   * 
    * @return the dimension
    */
   public Dimension layoutBoxes() {
@@ -319,7 +319,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /**
    * Layout boxes.
-   *
+   * 
    * @param orgLay the org lay
    * @param unit the unit
    * @param parent the parent

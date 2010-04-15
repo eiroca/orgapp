@@ -29,7 +29,7 @@ public class VerticalRender extends AbstractRender {
 
   /**
    * Instantiates a new compact vert render.
-   *
+   * 
    * @param orgView the org view
    * @param graphic the graphic
    * @param compact the compact

@@ -59,7 +59,7 @@ public class DirectLineRender extends AbstractLineRender {
 
   /**
    * Draw lines vert.
-   *
+   * 
    * @param box the box
    * @param graphics the graphics
    * @param orgLay the org lay

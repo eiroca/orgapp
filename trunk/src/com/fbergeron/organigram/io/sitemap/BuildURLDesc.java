@@ -31,7 +31,7 @@ public class BuildURLDesc implements UnitTraversal {
 
   /**
    * Instantiates a new builds the url description.
-   *
+   * 
    * @param full the full
    */
   public BuildURLDesc(final boolean full) {
@@ -40,7 +40,7 @@ public class BuildURLDesc implements UnitTraversal {
 
   /**
    * Adds the.
-   *
+   * 
    * @param unit the unit
    * @param desc the description
    * @param what the what

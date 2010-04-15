@@ -16,6 +16,15 @@
  */
 package com.fbergeron.organigram.model.type;
 
+/**
+ * The Enum OrgMode.
+ */
 public enum OrgMode {
-  MAX, MIN, GROW
+  
+  /** The MAX. */
+  MAX, 
+ /** The MIN. */
+ MIN, 
+ /** The GROW. */
+ GROW
 }

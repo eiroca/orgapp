@@ -43,7 +43,7 @@ public class BoxSpace {
 
   /**
    * Instantiates a new box space.
-   *
+   * 
    * @param small the small
    * @param full the full
    */

@@ -28,27 +28,27 @@ import java.util.Map;
  */
 public class Unit implements Iterable<Unit>, MetaDataCollector {
 
-  /** The unit ID */
+  /** The unit ID. */
   private String unitID;
 
-  /** The parent */
+  /** The parent. */
   private Unit parent;
 
-  /** The children */
+  /** The children. */
   private final List<Unit> children = new ArrayList<Unit>();
 
-  /** The info */
+  /** The info. */
   private final List<Line> info = new ArrayList<Line>();
 
-  /** The box layout */
+  /** The box layout. */
   private BoxLayout boxLayout = null;
 
-  /** The meta */
+  /** The meta. */
   private final Map<String, String> meta = new HashMap<String, String>();
 
   /**
    * Gets the info.
-   *
+   * 
    * @return the info
    */
   public List<Line> getInfo() {
@@ -57,7 +57,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Adds the info.
-   *
+   * 
    * @param line the line
    */
   public void addInfo(final Line line) {
@@ -66,7 +66,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the parent.
-   *
+   * 
    * @return the parent
    */
   public Unit getParent() {
@@ -75,7 +75,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Adds the child.
-   *
+   * 
    * @param child the child
    */
   public void addChild(final Unit child) {
@@ -93,7 +93,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Checks for children.
-   *
+   * 
    * @return true, if successful
    */
   public boolean hasChildren() {
@@ -102,7 +102,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the children count.
-   *
+   * 
    * @return the children count
    */
   public int getChildrenCount() {
@@ -121,7 +121,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Sets the parent.
-   *
+   * 
    * @param parent the new parent
    */
   private void setParent(final Unit parent) {
@@ -154,7 +154,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the meta.
-   *
+   * 
    * @return the meta
    */
   public Map<String, String> getMeta() {
@@ -163,7 +163,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the iD.
-   *
+   * 
    * @return the iD
    */
   public String getID() {
@@ -172,7 +172,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Sets the id.
-   *
+   * 
    * @param aID the new id
    */
   public void setID(final String aID) {
@@ -181,10 +181,10 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Find by id.
-   *
+   * 
    * @param aID the iD
    * @param exact the exact
-   *
+   * 
    * @return the unit
    */
   public Unit findByID(final String aID, final boolean exact) {
@@ -217,7 +217,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Builds the id.
-   *
+   * 
    * @param prefix the prefix
    * @param pos the pos
    */
@@ -233,9 +233,10 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Execute.
-   *
+   * 
    * @param action the action
    * @param nodeFirst the node first
+   * @param level the level
    */
   public void execute(final UnitTraversal action, final boolean nodeFirst, final int level) {
     final boolean more = true;
@@ -254,7 +255,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the box layout.
-   *
+   * 
    * @return the box layout
    */
   public BoxLayout getBoxLayout() {
@@ -263,7 +264,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Sets the box layout.
-   *
+   * 
    * @param boxLayout the new box layout
    */
   public void setBoxLayout(final BoxLayout boxLayout) {

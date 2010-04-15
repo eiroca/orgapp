@@ -36,7 +36,7 @@ public class TagFactory {
 
   /**
    * Register.
-   *
+   * 
    * @param processor the processor
    */
   public static void register(final TagProcessor processor) {
@@ -45,9 +45,9 @@ public class TagFactory {
 
   /**
    * Gets the processor.
-   *
+   * 
    * @param tagName the tag name
-   *
+   * 
    * @return the processor
    */
   public static TagProcessor getProcessor(final String tagName) {

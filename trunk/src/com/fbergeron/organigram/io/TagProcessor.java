@@ -25,14 +25,14 @@ public interface TagProcessor {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   String getName();
 
   /**
    * Start.
-   *
+   * 
    * @param reader the reader
    * @param attribs the attributes
    */
@@ -40,7 +40,7 @@ public interface TagProcessor {
 
   /**
    * Characters.
-   *
+   * 
    * @param reader the reader
    * @param chr the char
    * @param start the start
@@ -50,7 +50,7 @@ public interface TagProcessor {
 
   /**
    * End.
-   *
+   * 
    * @param reader the reader
    */
   void end(OrganigramReader reader);

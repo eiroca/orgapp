@@ -43,7 +43,7 @@ public final class XMLUtil {
   public static final TAG UNIT = new UnitProcessor();
 
   /** The Constant CHILDS. */
-  public static final TAG CHILDS = new ChildsProcessor();
+  // public static final TAG CHILDS = new ChildrenProcessor();
 
   /** The Constant INFO. */
   public static final TAG INFO = new InfoProcessor();
@@ -56,6 +56,8 @@ public final class XMLUtil {
 
   /** The Constant ATR_LINECOLOR. */
   public static final String ATR_LINECOLOR = "lineColor";
+
+  /** The Constant ATR_LINEMODE. */
   public static final String ATR_LINEMODE = "lineMode";
 
   /** The Constant ATR_BOX_COLOR_FRAME. */
@@ -151,14 +153,33 @@ public final class XMLUtil {
   /** The Constant VAL_ITALIC. */
   public static final String VAL_ITALIC = "italic";
 
+  /** The Constant boxLayoutAttrs. */
   private static final HashSet<String> boxLayoutAttrs = new HashSet<String>();
+
+  /** The Constant colors. */
   private static final HashMap<String, String> colors = new HashMap<String, String>();
+
+  /** The Constant layouts. */
   private static final HashMap<String, Layout> layouts = new HashMap<String, Layout>();
+
+  /** The Constant orgModes. */
   private static final HashMap<String, OrgMode> orgModes = new HashMap<String, OrgMode>();
+
+  /** The Constant lineModes. */
   private static final HashMap<String, LineMode> lineModes = new HashMap<String, LineMode>();
+
+  /** The Constant bools. */
   private static final HashMap<String, Boolean> bools = new HashMap<String, Boolean>();
+
+  /** The Constant alignments. */
   private static final HashMap<String, Alignment> alignments = new HashMap<String, Alignment>();
 
+  /**
+   * Adds the enum.
+   * 
+   * @param set the set
+   * @param v the v
+   */
   @SuppressWarnings("unchecked")
   private static void addEnum(final HashMap set, final Enum v) {
     final String name = v.name().toLowerCase();
@@ -217,14 +238,17 @@ public final class XMLUtil {
   }
 
   /**
-   * Instantiates a new XML utility
+   * Instantiates a new XML utility.
    */
   private XMLUtil() {
     super();
   }
 
   /**
-   * Write two digits Hex
+   * Write two digits Hex.
+   * 
+   * @param out the out
+   * @param val the val
    */
   public static void writeHH(final StringBuffer out, final int val) {
     if (val < 16) {
@@ -329,11 +353,10 @@ public final class XMLUtil {
   }
 
   /**
-   * Read integer
+   * Read integer.
    * 
    * @param val the value
    * @param def the default
-   * 
    * @return the integer
    */
   public static int readInt(final String val, final int def) {
@@ -350,11 +373,11 @@ public final class XMLUtil {
   }
 
   /**
-   * Read layout tag, mapping in done using "layouts"
+   * Read layout tag, mapping in done using "layouts".
    * 
-   * @param val
-   * @param def
-   * @return
+   * @param val the val
+   * @param def the def
+   * @return the layout
    */
   public static Layout readLayout(final String val, final Layout def) {
     Layout res = null;
@@ -364,6 +387,13 @@ public final class XMLUtil {
     return (res != null) ? res : def;
   }
 
+  /**
+   * Read org mode.
+   * 
+   * @param val the val
+   * @param def the def
+   * @return the org mode
+   */
   public static OrgMode readOrgMode(final String val, final OrgMode def) {
     OrgMode res = null;
     if (val != null) {
@@ -372,6 +402,13 @@ public final class XMLUtil {
     return (res != null) ? res : def;
   }
 
+  /**
+   * Read line mode.
+   * 
+   * @param val the val
+   * @param def the def
+   * @return the line mode
+   */
   public static LineMode readLineMode(final String val, final LineMode def) {
     LineMode res = null;
     if (val != null) {
@@ -474,13 +511,13 @@ public final class XMLUtil {
   }
 
   /**
-   * Write layout tag
+   * Write layout tag.
    * 
-   * @param tag
-   * @param buf
-   * @param atr
-   * @param defVal
-   * @param val
+   * @param tag the tag
+   * @param buf the buf
+   * @param atr the atr
+   * @param defVal the def val
+   * @param val the val
    */
   @SuppressWarnings("unchecked")
   public static void writeEnum(final TAG tag, final StringBuffer buf, final String atr, final Enum defVal, final Enum val) {

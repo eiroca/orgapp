@@ -48,7 +48,7 @@ public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
 
   /**
    * Write.
-   *
+   * 
    * @param unit the unit
    * @param processor the processor
    * @param what the what
@@ -64,7 +64,7 @@ public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
 
   /**
    * Write.
-   *
+   * 
    * @param unit the unit
    * @param processor the processor
    */

@@ -46,7 +46,7 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write meta.
-   *
+   * 
    * @param tag the me
    * @param buf the output buffer
    * @param meta the meta
@@ -69,10 +69,10 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write lines.
-   *
+   * 
    * @param buf the stringbuffer
    * @param lines the lines
-   *
+   * 
    * @return true, if successful
    */
   public boolean writeLines(final StringBuffer buf, final List<Line> lines) {
@@ -95,11 +95,11 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write unit.
-   *
+   * 
    * @param buf the sb
    * @param unit the root
    * @param writeInfo the write info
-   *
+   * 
    * @return true, if successful
    */
   public boolean writeUnit(final StringBuffer buf, final Unit unit, final boolean writeInfo) {
@@ -127,11 +127,11 @@ public class XMLOrganigramWriter implements OrganigramWriter {
         XMLUtil.UNIT.openClose(buf);
         compact = false;
       }
-      XMLUtil.CHILDS.open(buf, false);
+//      XMLUtil.CHILDS.open(buf, false);
       for (final Unit u : unit) {
         writeUnit(buf, u, writeInfo);
       }
-      XMLUtil.CHILDS.close(buf, false);
+//      XMLUtil.CHILDS.close(buf, false);
     }
     XMLUtil.UNIT.close(buf, compact);
     return true;

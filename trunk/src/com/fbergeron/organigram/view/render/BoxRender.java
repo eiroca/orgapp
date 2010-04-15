@@ -27,9 +27,10 @@ public interface BoxRender {
 
   /**
    * Paint a box.
-   *
-   * @param graphic the graphic
+   * 
+   * @param graphics the graphics
    * @param box the box
+   * @param orgLay the org lay
    */
   void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay);
 

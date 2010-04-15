@@ -38,9 +38,9 @@ public class OrganigramProcessor extends TAG {
 
   /**
    * Process organigram begin.
-   *
-   * @param attribs the attributes
+   * 
    * @param reader the reader
+   * @param attribs the attributes
    */
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {

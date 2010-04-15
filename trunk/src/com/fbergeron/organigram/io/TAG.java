@@ -32,7 +32,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Instantiates a new generic processor.
-   *
+   * 
    * @param name the name
    */
   public TAG(final String name) {
@@ -49,7 +49,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Sets the name.
-   *
+   * 
    * @param name the new name
    */
   public void setName(final String name) {
@@ -86,7 +86,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Open.
-   *
+   * 
    * @param buf the buffer
    * @param open the open
    */
@@ -100,7 +100,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Open close.
-   *
+   * 
    * @param buf the buffer
    */
   public void openClose(final StringBuffer buf) {
@@ -109,7 +109,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Write c data.
-   *
+   * 
    * @param buf the buffer
    * @param data the data
    */
@@ -121,7 +121,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Encode.
-   *
+   * 
    * @param buf the buffer
    * @param str the string
    */
@@ -146,7 +146,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Write attribute.
-   *
+   * 
    * @param buf the buffer
    * @param name the name
    * @param value the value
@@ -165,7 +165,7 @@ public class TAG implements TagProcessor {
 
   /**
    * Close.
-   *
+   * 
    * @param buf the buffer
    * @param compact the compact
    */

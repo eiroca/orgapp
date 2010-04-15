@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+ <xs:element name="organigram">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element ref="unit" minOccurs="1" maxOccurs="unbounded" />
+   </xs:sequence>
+   <xs:attribute name="boxBackgroundColor" use="optional" type="xs:string" />
+   <xs:attribute name="boxBottomMargin" use="optional" type="xs:integer" />
+   <xs:attribute name="boxBottomPadding" use="optional" type="xs:integer" />
+   <xs:attribute name="boxForegroundColor" use="optional" type="xs:string" />
+   <xs:attribute name="boxFrameColor" use="optional" type="xs:string" />
+   <xs:attribute name="boxLeftMargin" use="optional" type="xs:integer" />
+   <xs:attribute name="boxLeftPadding" use="optional" type="xs:integer" />
+   <xs:attribute name="boxRightMargin" use="optional" type="xs:integer" />
+   <xs:attribute name="boxRightPadding" use="optional" type="xs:integer" />
+   <xs:attribute name="boxTextAlignment" use="optional" type="xs:string" />
+   <xs:attribute name="boxTopMargin" use="optional" type="xs:integer" />
+   <xs:attribute name="boxTopPadding" use="optional" type="xs:integer" />
+   <xs:attribute name="backgroundColor" use="optional" type="xs:string" />
+   <xs:attribute name="compact" use="optional" type="xs:boolean" />
+   <xs:attribute name="firm" use="optional" type="xs:string" />
+   <xs:attribute name="isToolTipEnabled" use="optional" type="xs:boolean" />
+   <xs:attribute name="layout" use="optional" type="xs:string" />
+   <xs:attribute name="lineColor" use="optional" type="xs:string" />
+   <xs:attribute name="lineMode" use="optional" type="xs:string" />
+   <xs:attribute name="mode" use="optional" type="xs:string" />
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="unit">
+  <xs:complexType>
+   <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element ref="unit" minOccurs="0" maxOccurs="unbounded" />
+    <xs:element ref="info" minOccurs="0" maxOccurs="unbounded" />
+   </xs:choice>
+   <xs:attribute name="boxBackgroundColor" use="optional" type="xs:string" />
+   <xs:attribute name="boxExpanded" use="optional" type="xs:boolean" />
+   <xs:attribute name="boxForegroundColor" use="optional" type="xs:string" />
+   <xs:attribute name="department" use="optional" type="xs:string" />
+   <xs:attribute name="id" use="optional" type="xs:string" />
+   <xs:attribute name="link" use="optional" type="xs:anyURI" />
+   <xs:attribute name="name" use="optional" type="xs:string" />
+   <xs:attribute name="role" use="optional" type="xs:string" />
+   <xs:attribute name="target" use="optional" type="xs:string" />
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="info">
+  <xs:complexType mixed="true">
+   <xs:attribute name="fontColor" use="optional" type="xs:string" />
+   <xs:attribute name="fontName" use="optional" type="xs:string" />
+   <xs:attribute name="fontStyle" use="optional" type="xs:string" />
+  </xs:complexType>
+ </xs:element>
+</xs:schema>

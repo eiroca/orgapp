@@ -1,70 +1,47 @@
 <?xml version="1.0"?>
-<organigram 
-  layout="right" mode="grow" compact="true" 
-  backgroundColor="silver" 
-  lineColor="red" lineMode="connector"
-  boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" 
-  boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" 
-  boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" 
-  boxTextAlignment="center" 
-  isToolTipEnabled="true" 
-  firm="Test Tree">
+<organigram layout="right" mode="grow" compact="true" backgroundColor="silver" lineColor="red" lineMode="connector" boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" boxTextAlignment="center" isToolTipEnabled="true" firm="Test Tree">
  <unit department="Org App" name="http://orgapp.sourceforge.net/" link="http://orgapp.sourceforge.net/" role="H">
-  <childs>
-   <unit boxExpanded="true">
-    <info>com</info>
-    <childs>
-     <unit link="http://fbergeron.com">
-      <info fontName="Arial" fontColor="50,255,50" fontStyle="Bold+Italic">fbergeron</info>
-      <info fontName="Courier">My personal website</info>
-     </unit>
-    </childs>
+  <unit boxExpanded="true">
+   <info>com</info>
+   <unit link="http://fbergeron.com">
+    <info fontName="Arial" fontColor="50,255,50" fontStyle="Bold+Italic">fbergeron</info>
+    <info fontName="Courier">My personal website</info>
    </unit>
-   <unit boxExpanded="false">
-    <info>org</info>
-    <childs>
-     <unit id="de" link="http://debian.org">
-      <info>debian</info>
-      <childs>
-       <unit link="http://wiki.debian.org">
-        <info>wiki</info>
-       </unit>
-      </childs>
-     </unit>
-     <unit link="http://slashdot.org">
-      <info>slashdot</info>
-     </unit>
-    </childs>
+  </unit>
+  <unit boxExpanded="false">
+   <info>org</info>
+   <unit id="de" link="http://debian.org">
+    <info>debian</info>
+    <unit link="http://wiki.debian.org">
+     <info>wiki</info>
+    </unit>
    </unit>
-   <unit id="net">
-    <info>net</info>
-    <childs>
-     <unit id="fm" link="http://www.freshmeat.net/" target="_self">
-      <info>Freshmeat</info>
-     </unit>
-     <unit id="ei" boxBackgroundColor="white" boxForegroundColor="black" link="http://www.eiroca.net">
-      <info>eIrOcA</info>
-     </unit>
-     <unit id="sf" link="http://sourceforge.net">
-      <info>sourceforge</info>
-      <childs>
-       <unit link="http://kanasensei.sourceforge.net">
-        <info fontColor="50,255,50" fontStyle="bold">kanasensei</info>
-       </unit>
-       <unit link="http://javasol.sourceforge.net">
-        <info fontColor="50,255,50" fontStyle="ITALIC">javasol</info>
-       </unit>
-       <unit link="http://orgapp.sourceforge.net">
-        <info fontColor="255,50,50" fontStyle="Bold+Italic">orgapp</info>
-        <childs>
-         <unit name="H" />
-         <unit name="V" />
-        </childs>
-       </unit>
-      </childs>
-     </unit>
-    </childs>
+   <unit link="http://slashdot.org">
+    <info>slashdot</info>
    </unit>
-  </childs>
+  </unit>
+  <unit id="net">
+   <info>net</info>
+   <unit id="fm" link="http://www.freshmeat.net/" target="_self">
+    <info>Freshmeat</info>
+   </unit>
+   <unit id="ei" boxBackgroundColor="white" boxForegroundColor="black" link="http://www.eiroca.net">
+    <info>eIrOcA</info>
+   </unit>
+   <unit id="sf" link="http://sourceforge.net">
+    <info>sourceforge</info>
+    <unit link="http://kanasensei.sourceforge.net">
+     <info fontColor="50,255,50" fontStyle="bold">kanasensei</info>
+    </unit>
+    <unit link="http://javasol.sourceforge.net">
+     <info fontColor="50,255,50" fontStyle="ITALIC">javasol</info>
+    </unit>
+    <unit link="http://orgapp.sourceforge.net">
+     <info fontColor="255,50,50" fontStyle="Bold+Italic">orgapp</info>
+     <unit name="H" />
+     <unit name="V" />
+    </unit>
+   </unit>
+  </unit>
  </unit>
 </organigram>

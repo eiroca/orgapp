@@ -24,60 +24,68 @@ import com.fbergeron.organigram.model.type.Alignment;
  */
 public class BoxLayout implements Cloneable {
 
-  /** The Constant COLOR_BOXFRAME */
+  /** The Constant COLOR_BOXFRAME. */
   public static final Color DEF_BOXFRAMECOLOR = Color.black;
 
-  /** The Constant COLOR_BOXBACKGROUND */
+  /** The Constant COLOR_BOXBACKGROUND. */
   public static final Color DEF_BACKGROUNDCOLOR = Color.white;
 
-  /** The Constant COLOR_BOXFOREGROUND */
+  /** The Constant COLOR_BOXFOREGROUND. */
   public static final Color DEF_FOREGROUNDCOLOR = Color.black;
 
-  /** The Constant PADDING_BOXRIGHT */
+  /** The Constant PADDING_BOXRIGHT. */
   public static final int DEF_PADDINGRIGHT = 4;
 
-  /** The Constant PADDING_BOXLEFT */
+  /** The Constant PADDING_BOXLEFT. */
   public static final int DEF_PADDINGLEFT = 4;
 
-  /** The Constant PADDING_BOXTOP */
+  /** The Constant PADDING_BOXTOP. */
   public static final int DEF_PADDINGTOP = 4;
 
-  /** The Constant PADDING_BOXBOTTOM */
+  /** The Constant PADDING_BOXBOTTOM. */
   public static final int DEF_PADDINGBOTTOM = 4;
 
-  /** The Constant ALIGN_BOXTEXT */
+  /** The Constant ALIGN_BOXTEXT. */
   public static final Alignment DEF_TEXTALIGN = Alignment.CENTER;
 
-  /** The box frame color */
+  /** The box frame color. */
   private Color frameColor = BoxLayout.DEF_BOXFRAMECOLOR;
 
-  /** The box background color */
+  /** The box background color. */
   private Color backgroundColor = BoxLayout.DEF_BACKGROUNDCOLOR;
 
-  /** The box foreground color */
+  /** The box foreground color. */
   private Color foregroundColor = BoxLayout.DEF_FOREGROUNDCOLOR;
 
-  /** The box right padding */
+  /** The box right padding. */
   private int rightPadding = BoxLayout.DEF_PADDINGRIGHT;
 
-  /** The box left padding */
+  /** The box left padding. */
   private int leftPadding = BoxLayout.DEF_PADDINGLEFT;
 
-  /** The box top padding */
+  /** The box top padding. */
   private int topPadding = BoxLayout.DEF_PADDINGTOP;
 
-  /** The box bottom padding */
+  /** The box bottom padding. */
   private int bottomPadding = BoxLayout.DEF_PADDINGBOTTOM;
 
-  /** The box text alignment */
+  /** The box text alignment. */
   private Alignment textAlignment = BoxLayout.DEF_TEXTALIGN;
 
-  /** The children of the box are displayed */
+  /** The children of the box are displayed. */
   private boolean expanded = true;
 
+  /**
+   * Instantiates a new box layout.
+   */
   public BoxLayout() {
   }
 
+  /**
+   * Instantiates a new box layout.
+   * 
+   * @param source the source
+   */
   public BoxLayout(final BoxLayout source) {
     frameColor = source.frameColor;
     backgroundColor = source.backgroundColor;
@@ -92,7 +100,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box background color.
-   *
+   * 
    * @return the box background color
    */
   public Color getBackgroundColor() {
@@ -101,7 +109,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box background color.
-   *
+   * 
    * @param backgroundColor the new box background color
    */
   public void setBackgroundColor(final Color backgroundColor) {
@@ -110,7 +118,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box foreground color.
-   *
+   * 
    * @return the box foreground color
    */
   public Color getForegroundColor() {
@@ -119,7 +127,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box foreground color.
-   *
+   * 
    * @param foregroundColor the new box foreground color
    */
   public void setForegroundColor(final Color foregroundColor) {
@@ -128,7 +136,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box frame color.
-   *
+   * 
    * @return the box frame color
    */
   public Color getFrameColor() {
@@ -137,7 +145,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box frame color.
-   *
+   * 
    * @param frameColor the new box frame color
    */
   public void setFrameColor(final Color frameColor) {
@@ -146,7 +154,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box top padding.
-   *
+   * 
    * @return the box top padding
    */
   public int getTopPadding() {
@@ -155,7 +163,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box top padding.
-   *
+   * 
    * @param topPadding the new box top padding
    */
   public void setTopPadding(final int topPadding) {
@@ -164,7 +172,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box bottom padding.
-   *
+   * 
    * @return the box bottom padding
    */
   public int getBottomPadding() {
@@ -173,7 +181,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box bottom padding.
-   *
+   * 
    * @param bottomPadding the new box bottom padding
    */
   public void setBottomPadding(final int bottomPadding) {
@@ -182,7 +190,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box left padding.
-   *
+   * 
    * @return the box left padding
    */
   public int getLeftPadding() {
@@ -191,7 +199,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box left padding.
-   *
+   * 
    * @param leftPadding the new box left padding
    */
   public void setLeftPadding(final int leftPadding) {
@@ -200,7 +208,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box right padding.
-   *
+   * 
    * @return the box right padding
    */
   public int getRightPadding() {
@@ -209,7 +217,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box right padding.
-   *
+   * 
    * @param rightPadding the new box right padding
    */
   public void setRightPadding(final int rightPadding) {
@@ -218,7 +226,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box text alignment.
-   *
+   * 
    * @return the box text alignment
    */
   public Alignment getTextAlignment() {
@@ -227,7 +235,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box text alignment.
-   *
+   * 
    * @param textAlignment the new box text alignment
    */
   public void setTextAlignment(final Alignment textAlignment) {
@@ -235,8 +243,8 @@ public class BoxLayout implements Cloneable {
   }
 
   /**
-   * Get the expanded flag
-   *
+   * Get the expanded flag.
+   * 
    * @return the expanded flag
    */
   public boolean isExpanded() {
@@ -244,7 +252,8 @@ public class BoxLayout implements Cloneable {
   }
 
   /**
-   * Sets the box expanded flag
+   * Sets the box expanded flag.
+   * 
    * @param expanded the new expanded flag
    */
   public void setExpanded(final boolean expanded) {

@@ -41,6 +41,7 @@ public class OrganigramLayout {
   /** The Constant COLOR_LINE. */
   public static final Color DEF_LINECOLOR = Color.black;
 
+  /** The Constant DEF_LINEMODE. */
   public static final LineMode DEF_LINEMODE = LineMode.CONNECTOR;
 
   /** The Constant MARGIN_BOXRIGHT. */
@@ -73,6 +74,7 @@ public class OrganigramLayout {
   /** The line color. */
   private Color lineColor = OrganigramLayout.DEF_LINECOLOR;
 
+  /** The line mode. */
   private LineMode lineMode = OrganigramLayout.DEF_LINEMODE;
 
   /** The box right margin. */
@@ -92,7 +94,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the background color.
-   *
+   * 
    * @return the background color
    */
   public Color getBackgroundColor() {
@@ -101,7 +103,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the background color.
-   *
+   * 
    * @param backgroundColor the new background color
    */
   public void setBackgroundColor(final Color backgroundColor) {
@@ -110,7 +112,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the org compact.
-   *
+   * 
    * @return the org compact
    */
   public boolean isCompact() {
@@ -119,24 +121,34 @@ public class OrganigramLayout {
 
   /**
    * Sets the org compact.
-   *
+   * 
    * @param compact the new org compact
    */
   public void setCompact(final boolean compact) {
     this.compact = compact;
   }
 
+  /**
+   * Gets the line mode.
+   * 
+   * @return the line mode
+   */
   public LineMode getLineMode() {
     return lineMode;
   }
 
+  /**
+   * Sets the line mode.
+   * 
+   * @param lineMode the new line mode
+   */
   public void setLineMode(final LineMode lineMode) {
     this.lineMode = lineMode;
   }
 
   /**
    * Gets the org layout.
-   *
+   * 
    * @return the org layout
    */
   public Layout getLayout() {
@@ -145,7 +157,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the org layout.
-   *
+   * 
    * @param layout the new org layout
    */
   public void setLayout(final Layout layout) {
@@ -154,7 +166,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the org mode.
-   *
+   * 
    * @return the org mode
    */
   public OrgMode getMode() {
@@ -163,7 +175,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the org mode.
-   *
+   * 
    * @param mode the new org mode
    */
   public void setMode(final OrgMode mode) {
@@ -172,7 +184,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the box right margin.
-   *
+   * 
    * @return the box right margin
    */
   public int getRightMargin() {
@@ -181,7 +193,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the box right margin.
-   *
+   * 
    * @param rightMargin the new box right margin
    */
   public void setRightMargin(final int rightMargin) {
@@ -190,7 +202,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the box top margin.
-   *
+   * 
    * @return the box top margin
    */
   public int getTopMargin() {
@@ -199,7 +211,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the box top margin.
-   *
+   * 
    * @param topMargin the new box top margin
    */
   public void setTopMargin(final int topMargin) {
@@ -208,7 +220,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the box bottom margin.
-   *
+   * 
    * @return the box bottom margin
    */
   public int getBottomMargin() {
@@ -217,7 +229,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the box bottom margin.
-   *
+   * 
    * @param bottomMargin the new box bottom margin
    */
   public void setBottomMargin(final int bottomMargin) {
@@ -226,7 +238,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the box left margin.
-   *
+   * 
    * @return the box left margin
    */
   public int getLeftMargin() {
@@ -235,7 +247,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the box left margin.
-   *
+   * 
    * @param leftMargin the new box left margin
    */
   public void setLeftMargin(final int leftMargin) {
@@ -244,7 +256,7 @@ public class OrganigramLayout {
 
   /**
    * Checks if is tool tip enabled.
-   *
+   * 
    * @return true, if is tool tip enabled
    */
   public boolean isToolTipEnabled() {
@@ -253,7 +265,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the tool tip enabled.
-   *
+   * 
    * @param toolTipEnabled the new tool tip enabled
    */
   public void setToolTipEnabled(final boolean toolTipEnabled) {
@@ -262,7 +274,7 @@ public class OrganigramLayout {
 
   /**
    * Gets the line color.
-   *
+   * 
    * @return the line color
    */
   public Color getLineColor() {
@@ -271,7 +283,7 @@ public class OrganigramLayout {
 
   /**
    * Sets the line color.
-   *
+   * 
    * @param lineColor the new line color
    */
   public void setLineColor(final Color lineColor) {
