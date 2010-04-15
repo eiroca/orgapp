@@ -27,7 +27,7 @@ public interface BoxRender {
 
   /**
    * Paint a box.
-   * 
+   *
    * @param graphic the graphic
    * @param box the box
    */

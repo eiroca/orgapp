@@ -27,30 +27,30 @@ public interface OrganigramReader {
 
   /**
    * Read organigram.
-   * 
+   *
    * @param path the path
-   * 
+   *
    * @return the organigram
    */
   Organigram readOrganigram(InputStream source);
 
   /**
    * Returns the organigram.
-   * 
+   *
    * @return the organigram
    */
   Organigram getOrganigram();
 
   /**
    * Set the organigram.
-   * 
+   *
    * @param organigram the organigram
    */
   void setOrganigram(Organigram organigram);
 
   /**
    * Organigram data.
-   * 
+   *
    * @return the data
    */
   Map<String, String> getData();

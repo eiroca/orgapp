@@ -1,17 +1,18 @@
-/** LGPL > 3.0
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+/**
+ * LGPL > 3.0 Copyright (C) 2005 Frédéric Bergeron
+ * (fbergeron@users.sourceforge.net) Copyright (C) 2006-2010 eIrOcA (eNrIcO
+ * Croce & sImOnA Burzio)
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -19,13 +20,16 @@ package com.fbergeron.organigram.io.xml;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Label;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 import com.fbergeron.organigram.io.TAG;
 import com.fbergeron.organigram.model.BoxLayout;
+import com.fbergeron.organigram.model.type.Alignment;
+import com.fbergeron.organigram.model.type.Layout;
+import com.fbergeron.organigram.model.type.LineMode;
+import com.fbergeron.organigram.model.type.OrgMode;
 
 /**
  * The Class XMLUtil.
@@ -52,6 +56,7 @@ public final class XMLUtil {
 
   /** The Constant ATR_LINECOLOR. */
   public static final String ATR_LINECOLOR = "lineColor";
+  public static final String ATR_LINEMODE = "lineMode";
 
   /** The Constant ATR_BOX_COLOR_FRAME. */
   public static final String ATR_BOX_COLOR_FRAME = "boxFrameColor";
@@ -148,6 +153,19 @@ public final class XMLUtil {
 
   private static final HashSet<String> boxLayoutAttrs = new HashSet<String>();
   private static final HashMap<String, String> colors = new HashMap<String, String>();
+  private static final HashMap<String, Layout> layouts = new HashMap<String, Layout>();
+  private static final HashMap<String, OrgMode> orgModes = new HashMap<String, OrgMode>();
+  private static final HashMap<String, LineMode> lineModes = new HashMap<String, LineMode>();
+  private static final HashMap<String, Boolean> bools = new HashMap<String, Boolean>();
+  private static final HashMap<String, Alignment> alignments = new HashMap<String, Alignment>();
+
+  @SuppressWarnings("unchecked")
+  private static void addEnum(final HashMap set, final Enum v) {
+    final String name = v.name().toLowerCase();
+    set.put(name, v);
+    set.put(name.substring(0, 1), v);
+    set.put(Integer.toString(v.ordinal()), v);
+  }
 
   static {
     XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_RIGHT);
@@ -177,6 +195,25 @@ public final class XMLUtil {
     XMLUtil.colors.put("maroon", "#800000");
     XMLUtil.colors.put("red", "#ff0000");
     XMLUtil.colors.put("yellow", "#ffff00");
+    XMLUtil.bools.put("0", Boolean.FALSE);
+    XMLUtil.bools.put("f", Boolean.FALSE);
+    XMLUtil.bools.put("false", Boolean.FALSE);
+    XMLUtil.bools.put("1", Boolean.TRUE);
+    XMLUtil.bools.put("-1", Boolean.TRUE);
+    XMLUtil.bools.put("t", Boolean.TRUE);
+    XMLUtil.bools.put("true", Boolean.TRUE);
+    for (final Layout x : Layout.values()) {
+      XMLUtil.addEnum(XMLUtil.layouts, x);
+    }
+    for (final OrgMode x : OrgMode.values()) {
+      XMLUtil.addEnum(XMLUtil.orgModes, x);
+    }
+    for (final LineMode x : LineMode.values()) {
+      XMLUtil.addEnum(XMLUtil.lineModes, x);
+    }
+    for (final Alignment x : Alignment.values()) {
+      XMLUtil.addEnum(XMLUtil.alignments, x);
+    }
   }
 
   /**
@@ -187,29 +224,38 @@ public final class XMLUtil {
   }
 
   /**
+   * Write two digits Hex
+   */
+  public static void writeHH(final StringBuffer out, final int val) {
+    if (val < 16) {
+      out.append('0');
+    }
+    out.append(Integer.toString(val, 16));
+  }
+
+  /**
    * Write color.
-   * 
+   *
    * @param col the color
-   * 
+   *
    * @return the string
    */
   public static String writeColor(final Color col) {
     final StringBuffer buf = new StringBuffer();
-    buf.append(col.getRed());
-    buf.append(',');
-    buf.append(col.getGreen());
-    buf.append(',');
-    buf.append(col.getBlue());
+    buf.append('#');
+    XMLUtil.writeHH(buf, col.getRed());
+    XMLUtil.writeHH(buf, col.getGreen());
+    XMLUtil.writeHH(buf, col.getBlue());
     return buf.toString();
   }
 
   /**
    * Parses the color.
-   * 
+   *
    * @param strColor the string color
-   * 
+   *
    * @return the color
-   * 
+   *
    * @throws ParseException the parse exception
    */
   public static Color parseColor(String strColor) throws ParseException {
@@ -218,7 +264,7 @@ public final class XMLUtil {
     int bl = 0;
     if (strColor != null) {
       try {
-        strColor = strColor.toLowerCase();
+        strColor = strColor.trim().toLowerCase();
         if (XMLUtil.colors.containsKey(strColor)) {
           strColor = XMLUtil.colors.get(strColor);
         }
@@ -238,6 +284,13 @@ public final class XMLUtil {
           }
         }
         else {
+          if (strColor.startsWith("rgb")) {
+            int endIndex = strColor.length();
+            if (strColor.endsWith(")")) {
+              endIndex--;
+            }
+            strColor = strColor.substring(4, endIndex);
+          }
           final int indexOfFirstComma = strColor.indexOf(',');
           final int indexOfSecondComma = strColor.indexOf(',', indexOfFirstComma + 1);
           if (indexOfFirstComma == -1) { throw (new ParseException("First comma not found.", 0)); }
@@ -256,10 +309,10 @@ public final class XMLUtil {
 
   /**
    * Read color.
-   * 
+   *
    * @param val the value
    * @param def the default
-   * 
+   *
    * @return the color
    */
   public static Color readColor(final String val, final Color def) {
@@ -277,10 +330,10 @@ public final class XMLUtil {
 
   /**
    * Read integer
-   * 
+   *
    * @param val the value
    * @param def the default
-   * 
+   *
    * @return the integer
    */
   public static int readInt(final String val, final int def) {
@@ -297,45 +350,66 @@ public final class XMLUtil {
   }
 
   /**
+   * Read layout tag, mapping in done using "layouts"
+   *
+   * @param val
+   * @param def
+   * @return
+   */
+  public static Layout readLayout(final String val, final Layout def) {
+    Layout res = null;
+    if (val != null) {
+      res = XMLUtil.layouts.get(val.trim().toLowerCase());
+    }
+    return (res != null) ? res : def;
+  }
+
+  public static OrgMode readOrgMode(final String val, final OrgMode def) {
+    OrgMode res = null;
+    if (val != null) {
+      res = XMLUtil.orgModes.get(val.trim().toLowerCase());
+    }
+    return (res != null) ? res : def;
+  }
+
+  public static LineMode readLineMode(final String val, final LineMode def) {
+    LineMode res = null;
+    if (val != null) {
+      res = XMLUtil.lineModes.get(val.trim().toLowerCase());
+    }
+    return (res != null) ? res : def;
+  }
+
+  /**
    * Read alignment.
-   * 
+   *
    * @param val the value
    * @param def the default
-   * 
+   *
    * @return the alignment (int)
    */
-  public static int readAligment(final String val, final int def) {
-    int res = def;
+  public static Alignment readAligment(final String val, final Alignment def) {
+    Alignment res = null;
     if (val != null) {
-      if (XMLUtil.VAL_CENTER.equalsIgnoreCase(val)) {
-        res = Label.CENTER;
-      }
-      else if (XMLUtil.VAL_LEFT.equalsIgnoreCase(val)) {
-        res = Label.LEFT;
-      }
-      else if (XMLUtil.VAL_RIGHT.equalsIgnoreCase(val)) {
-        res = Label.RIGHT;
-      }
+      res = XMLUtil.alignments.get(val.trim().toLowerCase());
     }
-    return res;
+    return (res != null) ? res : def;
   }
 
   /**
    * Read boolean.
-   * 
+   *
    * @param val the value
    * @param def the default
-   * 
+   *
    * @return true, if successful
    */
   public static boolean readBoolean(final String val, final boolean def) {
     boolean res = def;
     if (val != null) {
-      if (XMLUtil.VAL_TRUE.equals(val)) {
-        res = true;
-      }
-      else if (XMLUtil.VAL_FALSE.equals(val)) {
-        res = false;
+      final Boolean x = XMLUtil.bools.get(val.trim().toLowerCase());
+      if (x != null) {
+        res = x;
       }
     }
     return res;
@@ -343,10 +417,10 @@ public final class XMLUtil {
 
   /**
    * Read font style.
-   * 
+   *
    * @param val the value
    * @param def the default
-   * 
+   *
    * @return the font style (int)
    */
   public static int readFontStyle(final String val, final int def) {
@@ -371,7 +445,7 @@ public final class XMLUtil {
 
   /**
    * Write color.
-   * 
+   *
    * @param tag the me
    * @param buf the stringbuffer
    * @param atr the attribute
@@ -386,7 +460,7 @@ public final class XMLUtil {
 
   /**
    * Write integer.
-   * 
+   *
    * @param tag the me
    * @param buf the stringbuffer
    * @param atr the attribute
@@ -400,8 +474,24 @@ public final class XMLUtil {
   }
 
   /**
+   * Write layout tag
+   *
+   * @param tag
+   * @param buf
+   * @param atr
+   * @param defVal
+   * @param val
+   */
+  @SuppressWarnings("unchecked")
+  public static void writeEnum(final TAG tag, final StringBuffer buf, final String atr, final Enum defVal, final Enum val) {
+    if (val != defVal) {
+      tag.writeAttribute(buf, atr, val.toString(), false);
+    }
+  }
+
+  /**
    * Write font.
-   * 
+   *
    * @param tag the me
    * @param buf the stringbuffer
    * @param atrName1 the attribute name1
@@ -439,7 +529,7 @@ public final class XMLUtil {
 
   /**
    * Write boolean.
-   * 
+   *
    * @param tag the me
    * @param buf the stringbuffer
    * @param atr the attribute
@@ -458,35 +548,8 @@ public final class XMLUtil {
   }
 
   /**
-   * Write align.
-   * 
-   * @param tag the me
-   * @param buf the sb
-   * @param atr the atr
-   * @param defVal the def val
-   * @param val the val
-   */
-  public static void writeAlign(final TAG tag, final StringBuffer buf, final String atr, final int defVal, final int val) {
-    if (val != defVal) {
-      switch (val) {
-        case Label.CENTER:
-          tag.writeAttribute(buf, atr, XMLUtil.VAL_CENTER, false);
-          break;
-        case Label.LEFT:
-          tag.writeAttribute(buf, atr, XMLUtil.VAL_LEFT, false);
-          break;
-        case Label.RIGHT:
-          tag.writeAttribute(buf, atr, XMLUtil.VAL_RIGHT, false);
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
-  /**
    * Write string.
-   * 
+   *
    * @param tag the me
    * @param buf the sb
    * @param atr the atr
@@ -500,10 +563,10 @@ public final class XMLUtil {
 
   /**
    * Checks if is box layout atr.
-   * 
+   *
    * @param name the name
    * @param value the value
-   * 
+   *
    * @return true, if is box layout atr
    */
   public static boolean isBoxLayoutAtr(final String name, final String value) {
@@ -513,7 +576,7 @@ public final class XMLUtil {
 
   /**
    * Read box layout atr.
-   * 
+   *
    * @param name the name
    * @param value the value
    * @param boxLay the box lay
@@ -550,20 +613,20 @@ public final class XMLUtil {
 
   /**
    * Write box layout atr.
-   * 
+   *
    * @param tag the tag
    * @param buf the buf
    * @param boxLay the box lay
    */
   public static void writeBoxLayoutAtr(final TAG tag, final StringBuffer buf, final BoxLayout boxLay) {
-    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_FRAME, BoxLayout.COLOR_BOXFRAME, boxLay.getFrameColor());
-    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_BACKGROUND, BoxLayout.COLOR_BACKGROUND, boxLay.getBackgroundColor());
-    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_FOREGROUND, BoxLayout.COLOR_FOREGROUND, boxLay.getForegroundColor());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_TOP, BoxLayout.PADDING_TOP, boxLay.getTopPadding());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_LEFT, BoxLayout.PADDING_LEFT, boxLay.getLeftPadding());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_RIGHT, BoxLayout.PADDING_RIGHT, boxLay.getRightPadding());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_BOTTOM, BoxLayout.PADDING_BOTTOM, boxLay.getBottomPadding());
-    XMLUtil.writeAlign(tag, buf, XMLUtil.ATR_BOX_TEXT_ALIGMENT, BoxLayout.TEXT_ALIGN, boxLay.getTextAlignment());
+    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_FRAME, BoxLayout.DEF_BOXFRAMECOLOR, boxLay.getFrameColor());
+    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_BACKGROUND, BoxLayout.DEF_BACKGROUNDCOLOR, boxLay.getBackgroundColor());
+    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_FOREGROUND, BoxLayout.DEF_FOREGROUNDCOLOR, boxLay.getForegroundColor());
+    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_TOP, BoxLayout.DEF_PADDINGTOP, boxLay.getTopPadding());
+    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_LEFT, BoxLayout.DEF_PADDINGLEFT, boxLay.getLeftPadding());
+    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_RIGHT, BoxLayout.DEF_PADDINGRIGHT, boxLay.getRightPadding());
+    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_BOTTOM, BoxLayout.DEF_PADDINGBOTTOM, boxLay.getBottomPadding());
+    XMLUtil.writeEnum(tag, buf, XMLUtil.ATR_BOX_TEXT_ALIGMENT, BoxLayout.DEF_TEXTALIGN, boxLay.getTextAlignment());
   }
 
 }

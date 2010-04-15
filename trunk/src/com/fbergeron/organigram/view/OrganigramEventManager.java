@@ -1,17 +1,17 @@
 /** LGPL > 3.0
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -51,7 +51,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /**
    * The Constructor.
-   * 
+   *
    * @param organigram the organigram
    */
   public OrganigramEventManager(final OrganigramView organigram) {
@@ -100,10 +100,10 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /**
    * Contains.
-   * 
+   *
    * @param box the box
    * @param point the p
-   * 
+   *
    * @return the unit view
    */
   public UnitView contains(final UnitView box, final Point point) {
@@ -159,10 +159,10 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /**
    * Show page.
-   * 
+   *
    * @param pageUrl the page url
    * @param target the target
-   * 
+   *
    * @throws MalformedURLException the malformed url exception
    */
   public void showPage(final String pageUrl, final String target) throws MalformedURLException {
@@ -180,9 +180,9 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /**
    * Gets the applet context.
-   * 
+   *
    * @param organigram the organigram
-   * 
+   *
    * @return the applet context
    */
   public AppletContext getAppletContext(final Container organigram) {
@@ -201,7 +201,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /**
    * Gets the base target.
-   * 
+   *
    * @return the base target
    */
   public String getBaseTarget() {
@@ -210,7 +210,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /**
    * Sets the base target.
-   * 
+   *
    * @param baseTarget the new base target
    */
   public void setBaseTarget(final String baseTarget) {

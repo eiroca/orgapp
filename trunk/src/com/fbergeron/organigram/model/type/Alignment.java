@@ -1,5 +1,5 @@
-/** LGPL > 3.0
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/**
+ * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,36 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.view.render;
+package com.fbergeron.organigram.model.type;
 
-import java.awt.Graphics;
-
-/**
- * The Interface OrganigramRender.
- */
-public interface OrganigramRender {
-
-  /**
-   * Sets the line render.
-   *
-   * @param lineRender the new line render
-   */
-  void setLineRender(final LineRender lineRender);
-
-  /**
-   * Sets the box render.
-   *
-   * @param boxRender the new box render
-   */
-  void setBoxRender(final BoxRender boxRender);
-
-  /**
-   * Paint the organigram.
-   *
-   * @param graphics the graphics
-   */
-  void paint(final Graphics graphics);
-
-  void invalidate();
-
+public enum Alignment {
+  LEFT, CENTER, RIGHT
 }

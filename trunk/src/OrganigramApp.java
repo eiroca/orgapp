@@ -1,17 +1,18 @@
-/** LGPL > 3.0
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+/**
+ * LGPL > 3.0 Copyright (C) 2005 Frédéric Bergeron
+ * (fbergeron@users.sourceforge.net) Copyright (C) 2006-2010 eIrOcA (eNrIcO
+ * Croce & sImOnA Burzio)
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -45,7 +46,7 @@ public class OrganigramApp extends JFrame {
 
   /**
    * The main method.
-   * 
+   *
    * @param args the arguments
    */
   public static void main(final String[] args) {
@@ -80,12 +81,13 @@ public class OrganigramApp extends JFrame {
     }
     org.execute(new BuildInfo(), true);
     view = new OrganigramView(org, null);
+    System.out.println(OrgUtils.writeOrganigram(org, 0, false));
     initialize();
   }
 
   /**
    * This method initializes jContentPane.
-   * 
+   *
    * @return javax.swing.JPanel
    */
   private JPanel getJContentPane() {
@@ -99,7 +101,7 @@ public class OrganigramApp extends JFrame {
 
   /**
    * This method initializes this.
-   * 
+   *
    * @return void
    */
   private void initialize() {

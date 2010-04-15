@@ -38,7 +38,7 @@ public class OrganigramProcessor extends TAG {
 
   /**
    * Process organigram begin.
-   * 
+   *
    * @param attribs the attributes
    * @param reader the reader
    */
@@ -54,19 +54,22 @@ public class OrganigramProcessor extends TAG {
       name = attribs.getQName(i);
       value = attribs.getValue(i);
       if (name.equals(XMLUtil.ATR_ORG_MODE)) {
-        orgLay.setOrgMode(XMLUtil.readInt(value, orgLay.getOrgMode()));
+        orgLay.setMode(XMLUtil.readOrgMode(value, orgLay.getMode()));
       }
       else if (name.equals(XMLUtil.ATR_ORG_LAYOUT)) {
-        orgLay.setOrgLayout(XMLUtil.readInt(value, orgLay.getOrgLayout()));
+        orgLay.setLayout(XMLUtil.readLayout(value, orgLay.getLayout()));
       }
       else if (name.equals(XMLUtil.ATR_ORG_COMPACT)) {
-        orgLay.setOrgCompact(XMLUtil.readInt(value, orgLay.getOrgCompact()));
+        orgLay.setCompact(XMLUtil.readBoolean(value, orgLay.isCompact()));
       }
       else if (name.equals(XMLUtil.ATR_BACKGROUNDCOLOR)) {
         orgLay.setBackgroundColor(XMLUtil.readColor(value, orgLay.getBackgroundColor()));
       }
       else if (name.equals(XMLUtil.ATR_LINECOLOR)) {
         orgLay.setLineColor(XMLUtil.readColor(value, orgLay.getLineColor()));
+      }
+      else if (name.equals(XMLUtil.ATR_LINEMODE)) {
+        orgLay.setLineMode(XMLUtil.readLineMode(value, orgLay.getLineMode()));
       }
       else if (name.equals(XMLUtil.ATR_MARGIN_RIGHT)) {
         orgLay.setRightMargin(XMLUtil.readInt(value, orgLay.getRightMargin()));

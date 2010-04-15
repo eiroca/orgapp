@@ -1,16 +1,16 @@
 /**
  * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -38,11 +38,11 @@ public class OrgUtils {
 
   /**
    * Write organigram.
-   * 
+   *
    * @param org the org
    * @param type the type
    * @param compact the compact
-   * 
+   *
    * @return the string
    */
   static public String writeOrganigram(final Organigram org, final int type, final boolean compact) {
@@ -63,9 +63,9 @@ public class OrgUtils {
 
   /**
    * Read organigram.
-   * 
+   *
    * @param sourceUrl the source url
-   * 
+   *
    * @return the organigram
    */
   static public Organigram readOrganigram(final URL sourceUrl) {
@@ -74,9 +74,9 @@ public class OrgUtils {
 
   /**
    * Gets the type.
-   * 
+   *
    * @param sourceUrl the source url
-   * 
+   *
    * @return the type
    */
   static public int getType(final URL sourceUrl) {
@@ -93,10 +93,10 @@ public class OrgUtils {
 
   /**
    * Read organigram.
-   * 
+   *
    * @param sourceUrl the source url
    * @param type the type
-   * 
+   *
    * @return the organigram
    */
   static public Organigram readOrganigram(final URL sourceUrl, final int type) {
@@ -105,9 +105,9 @@ public class OrgUtils {
       InputStream source;
       try {
         source = sourceUrl.openStream();
-        org = readOrganigram(source, type);
+        org = OrgUtils.readOrganigram(source, type);
       }
-      catch (IOException e) {
+      catch (final IOException e) {
         //
       }
     }
@@ -116,7 +116,7 @@ public class OrgUtils {
 
   /**
    * Read organigram.
-   * 
+   *
    * @param source
    * @param type
    * @return
@@ -141,10 +141,10 @@ public class OrgUtils {
 
   /**
    * Find in directory.
-   * 
+   *
    * @param path the path
    * @param filename the filename
-   * 
+   *
    * @return the uRL
    */
   public static URL findInDirectory(final String path, final String filename) {
@@ -161,9 +161,9 @@ public class OrgUtils {
 
   /**
    * Find in classpath.
-   * 
+   *
    * @param filename the filename
-   * 
+   *
    * @return the uRL
    */
   public static URL findInClasspath(final String filename) {
@@ -179,9 +179,9 @@ public class OrgUtils {
 
   /**
    * Find in resource.
-   * 
+   *
    * @param name the name
-   * 
+   *
    * @return the uRL
    */
   public static URL findInResource(String name) {
@@ -194,9 +194,9 @@ public class OrgUtils {
 
   /**
    * Find.
-   * 
+   *
    * @param name the name
-   * 
+   *
    * @return the uRL
    */
   static public URL find(final String name) {
@@ -210,10 +210,10 @@ public class OrgUtils {
 
   /**
    * Builds the url.
-   * 
+   *
    * @param documentBase the document base
    * @param dataSource the data source
-   * 
+   *
    * @return the uRL
    */
   static public URL buildURL(final URL documentBase, final String dataSource) {

@@ -1,23 +1,23 @@
-/** LGPL > 3.0
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+/**
+ * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
 package com.fbergeron.organigram.model;
 
 import java.awt.Color;
-import java.awt.Label;
+import com.fbergeron.organigram.model.type.Alignment;
 
 /**
  * The Layout definition of a Box.
@@ -25,52 +25,52 @@ import java.awt.Label;
 public class BoxLayout implements Cloneable {
 
   /** The Constant COLOR_BOXFRAME */
-  public static final Color COLOR_BOXFRAME = Color.black;
+  public static final Color DEF_BOXFRAMECOLOR = Color.black;
 
   /** The Constant COLOR_BOXBACKGROUND */
-  public static final Color COLOR_BACKGROUND = Color.white;
+  public static final Color DEF_BACKGROUNDCOLOR = Color.white;
 
   /** The Constant COLOR_BOXFOREGROUND */
-  public static final Color COLOR_FOREGROUND = Color.black;
+  public static final Color DEF_FOREGROUNDCOLOR = Color.black;
 
   /** The Constant PADDING_BOXRIGHT */
-  public static final int PADDING_RIGHT = 4;
+  public static final int DEF_PADDINGRIGHT = 4;
 
   /** The Constant PADDING_BOXLEFT */
-  public static final int PADDING_LEFT = 4;
+  public static final int DEF_PADDINGLEFT = 4;
 
   /** The Constant PADDING_BOXTOP */
-  public static final int PADDING_TOP = 4;
+  public static final int DEF_PADDINGTOP = 4;
 
   /** The Constant PADDING_BOXBOTTOM */
-  public static final int PADDING_BOTTOM = 4;
+  public static final int DEF_PADDINGBOTTOM = 4;
 
   /** The Constant ALIGN_BOXTEXT */
-  public static final int TEXT_ALIGN = Label.CENTER;
+  public static final Alignment DEF_TEXTALIGN = Alignment.CENTER;
 
   /** The box frame color */
-  private Color frameColor = BoxLayout.COLOR_BOXFRAME;
+  private Color frameColor = BoxLayout.DEF_BOXFRAMECOLOR;
 
   /** The box background color */
-  private Color backgroundColor = BoxLayout.COLOR_BACKGROUND;
+  private Color backgroundColor = BoxLayout.DEF_BACKGROUNDCOLOR;
 
   /** The box foreground color */
-  private Color foregroundColor = BoxLayout.COLOR_FOREGROUND;
+  private Color foregroundColor = BoxLayout.DEF_FOREGROUNDCOLOR;
 
   /** The box right padding */
-  private int rightPadding = BoxLayout.PADDING_RIGHT;
+  private int rightPadding = BoxLayout.DEF_PADDINGRIGHT;
 
   /** The box left padding */
-  private int leftPadding = BoxLayout.PADDING_LEFT;
+  private int leftPadding = BoxLayout.DEF_PADDINGLEFT;
 
   /** The box top padding */
-  private int topPadding = BoxLayout.PADDING_TOP;
+  private int topPadding = BoxLayout.DEF_PADDINGTOP;
 
   /** The box bottom padding */
-  private int bottomPadding = BoxLayout.PADDING_BOTTOM;
+  private int bottomPadding = BoxLayout.DEF_PADDINGBOTTOM;
 
   /** The box text alignment */
-  private int textAlignment = BoxLayout.TEXT_ALIGN;
+  private Alignment textAlignment = BoxLayout.DEF_TEXTALIGN;
 
   /** The children of the box are displayed */
   private boolean expanded = true;
@@ -92,7 +92,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box background color.
-   * 
+   *
    * @return the box background color
    */
   public Color getBackgroundColor() {
@@ -101,7 +101,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box background color.
-   * 
+   *
    * @param backgroundColor the new box background color
    */
   public void setBackgroundColor(final Color backgroundColor) {
@@ -110,7 +110,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box foreground color.
-   * 
+   *
    * @return the box foreground color
    */
   public Color getForegroundColor() {
@@ -119,7 +119,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box foreground color.
-   * 
+   *
    * @param foregroundColor the new box foreground color
    */
   public void setForegroundColor(final Color foregroundColor) {
@@ -128,7 +128,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box frame color.
-   * 
+   *
    * @return the box frame color
    */
   public Color getFrameColor() {
@@ -137,7 +137,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box frame color.
-   * 
+   *
    * @param frameColor the new box frame color
    */
   public void setFrameColor(final Color frameColor) {
@@ -146,7 +146,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box top padding.
-   * 
+   *
    * @return the box top padding
    */
   public int getTopPadding() {
@@ -155,7 +155,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box top padding.
-   * 
+   *
    * @param topPadding the new box top padding
    */
   public void setTopPadding(final int topPadding) {
@@ -164,7 +164,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box bottom padding.
-   * 
+   *
    * @return the box bottom padding
    */
   public int getBottomPadding() {
@@ -173,7 +173,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box bottom padding.
-   * 
+   *
    * @param bottomPadding the new box bottom padding
    */
   public void setBottomPadding(final int bottomPadding) {
@@ -182,7 +182,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box left padding.
-   * 
+   *
    * @return the box left padding
    */
   public int getLeftPadding() {
@@ -191,7 +191,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box left padding.
-   * 
+   *
    * @param leftPadding the new box left padding
    */
   public void setLeftPadding(final int leftPadding) {
@@ -200,7 +200,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box right padding.
-   * 
+   *
    * @return the box right padding
    */
   public int getRightPadding() {
@@ -209,7 +209,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Sets the box right padding.
-   * 
+   *
    * @param rightPadding the new box right padding
    */
   public void setRightPadding(final int rightPadding) {
@@ -218,25 +218,25 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Gets the box text alignment.
-   * 
+   *
    * @return the box text alignment
    */
-  public int getTextAlignment() {
+  public Alignment getTextAlignment() {
     return textAlignment;
   }
 
   /**
    * Sets the box text alignment.
-   * 
+   *
    * @param textAlignment the new box text alignment
    */
-  public void setTextAlignment(final int textAlignment) {
+  public void setTextAlignment(final Alignment textAlignment) {
     this.textAlignment = textAlignment;
   }
 
   /**
    * Get the expanded flag
-   * 
+   *
    * @return the expanded flag
    */
   public boolean isExpanded() {
