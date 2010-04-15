@@ -25,10 +25,10 @@ public interface OrganigramWriter {
 
   /**
    * Write organigram.
-   * 
+   *
    * @param organigram the organigram
    * @param compact the compact
-   * 
+   *
    * @return the string
    */
   String writeOrganigram(Organigram organigram, boolean compact);

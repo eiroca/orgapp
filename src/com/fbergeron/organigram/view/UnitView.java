@@ -1,17 +1,17 @@
 /** LGPL > 3.0
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -58,7 +58,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Instantiates a new unit view.
-   * 
+   *
    * @param unit the unit
    * @param organigramView the organigram view
    */
@@ -76,7 +76,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the unit.
-   * 
+   *
    * @return the unit
    */
   public Unit getUnit() {
@@ -89,9 +89,9 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Contains.
-   * 
+   *
    * @param point the point
-   * 
+   *
    * @return true, if successful
    */
   public boolean contains(final Point point) {
@@ -100,7 +100,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the height.
-   * 
+   *
    * @return the height
    */
   public int getHeight() {
@@ -109,7 +109,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the width.
-   * 
+   *
    * @return the width
    */
   public int getWidth() {
@@ -118,7 +118,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the size.
-   * 
+   *
    * @param size the new size
    */
   public void setSize(final Dimension size) {
@@ -128,7 +128,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the location.
-   * 
+   *
    * @param boxPos the box position
    */
   public void setLocation(final Point boxPos) {
@@ -148,7 +148,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the parent.
-   * 
+   *
    * @return the parent
    */
   public UnitView getParent() {
@@ -157,7 +157,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Adds the child.
-   * 
+   *
    * @param child the child
    */
   public void addChild(final UnitView child) {
@@ -180,7 +180,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Count children.
-   * 
+   *
    * @return the int
    */
   public int countChildren() {
@@ -189,7 +189,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the parent.
-   * 
+   *
    * @param parent the new parent
    */
   private void setParent(final UnitView parent) {
@@ -198,7 +198,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the full height.
-   * 
+   *
    * @return the full height
    */
   public int getFullHeight() {
@@ -207,7 +207,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the small height.
-   * 
+   *
    * @return the small height
    */
   public int getSmallHeight() {
@@ -216,7 +216,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the full width.
-   * 
+   *
    * @return the full width
    */
   public int getFullWidth() {
@@ -225,7 +225,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the small width.
-   * 
+   *
    * @return the small width
    */
   public int getSmallWidth() {
@@ -234,7 +234,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the required size.
-   * 
+   *
    * @param size the size
    * @param smallChild the small child
    */
@@ -262,7 +262,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the box pos.
-   * 
+   *
    * @return the box pos
    */
   public Point getLocation() {
@@ -271,7 +271,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the box rect.
-   * 
+   *
    * @return the box rect
    */
   public Rectangle getBoxRect() {
@@ -280,7 +280,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the children.
-   * 
+   *
    * @return the children
    */
   public List<UnitView> getChildren() {
@@ -289,7 +289,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the organigram view.
-   * 
+   *
    * @return the organigram view
    */
   public OrganigramView getOrganigramView() {
@@ -298,7 +298,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the size.
-   * 
+   *
    * @return the size
    */
   public Dimension getSize() {
@@ -307,7 +307,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Checks if is small child.
-   * 
+   *
    * @return true, if is small child
    */
   public boolean isSmallChild() {
@@ -316,7 +316,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the space.
-   * 
+   *
    * @return the space
    */
   public BoxSpace getSpace() {
@@ -325,7 +325,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Checks if is space used.
-   * 
+   *
    * @return true, if is space used
    */
   public boolean isSpaceUsed() {
@@ -334,7 +334,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the space used.
-   * 
+   *
    * @param spaceUsed the new space used
    */
   public void setSpaceUsed(final boolean spaceUsed) {
@@ -343,7 +343,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Move.
-   * 
+   *
    * @param deltaX the dx
    * @param deltaY the dy
    * @param recursive the recursive

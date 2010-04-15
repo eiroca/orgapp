@@ -38,10 +38,10 @@ public class UnitProcessor extends TAG {
 
   /**
    * Gets the box layout.
-   * 
+   *
    * @param unit the u
    * @param organigram the organigram
-   * 
+   *
    * @return the box layout
    */
   public BoxLayout getBoxLayout(final Organigram organigram, final Unit unit) {
@@ -64,7 +64,7 @@ public class UnitProcessor extends TAG {
 
   /**
    * Process unit begin.
-   * 
+   *
    * @param attribs the attributes
    * @param reader the reader
    */

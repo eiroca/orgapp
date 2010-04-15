@@ -1,17 +1,17 @@
 /** LGPL > 3.0
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -48,7 +48,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the info.
-   * 
+   *
    * @return the info
    */
   public List<Line> getInfo() {
@@ -57,7 +57,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Adds the info.
-   * 
+   *
    * @param line the line
    */
   public void addInfo(final Line line) {
@@ -66,7 +66,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the parent.
-   * 
+   *
    * @return the parent
    */
   public Unit getParent() {
@@ -75,7 +75,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Adds the child.
-   * 
+   *
    * @param child the child
    */
   public void addChild(final Unit child) {
@@ -93,7 +93,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Checks for children.
-   * 
+   *
    * @return true, if successful
    */
   public boolean hasChildren() {
@@ -102,7 +102,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the children count.
-   * 
+   *
    * @return the children count
    */
   public int getChildrenCount() {
@@ -121,7 +121,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Sets the parent.
-   * 
+   *
    * @param parent the new parent
    */
   private void setParent(final Unit parent) {
@@ -154,7 +154,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the meta.
-   * 
+   *
    * @return the meta
    */
   public Map<String, String> getMeta() {
@@ -163,7 +163,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the iD.
-   * 
+   *
    * @return the iD
    */
   public String getID() {
@@ -172,7 +172,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Sets the id.
-   * 
+   *
    * @param aID the new id
    */
   public void setID(final String aID) {
@@ -181,10 +181,10 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Find by id.
-   * 
+   *
    * @param aID the iD
    * @param exact the exact
-   * 
+   *
    * @return the unit
    */
   public Unit findByID(final String aID, final boolean exact) {
@@ -217,7 +217,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Builds the id.
-   * 
+   *
    * @param prefix the prefix
    * @param pos the pos
    */
@@ -233,7 +233,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Execute.
-   * 
+   *
    * @param action the action
    * @param nodeFirst the node first
    */
@@ -254,7 +254,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Gets the box layout.
-   * 
+   *
    * @return the box layout
    */
   public BoxLayout getBoxLayout() {
@@ -263,7 +263,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /**
    * Sets the box layout.
-   * 
+   *
    * @param boxLayout the new box layout
    */
   public void setBoxLayout(final BoxLayout boxLayout) {

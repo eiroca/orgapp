@@ -50,9 +50,9 @@ public class TXTOrganigramReader implements OrganigramReader {
 
   /**
    * Gets the.
-   * 
+   *
    * @param tokenizer the string tokenizer
-   * 
+   *
    * @return the string
    */
   public String get(final StringTokenizer tokenizer) {
@@ -61,7 +61,7 @@ public class TXTOrganigramReader implements OrganigramReader {
 
   /**
    * Parses the line.
-   * 
+   *
    * @param organigram the organigram
    * @param line the line
    */
@@ -94,7 +94,7 @@ public class TXTOrganigramReader implements OrganigramReader {
 
   /**
    * Read.
-   * 
+   *
    * @param organigram the organigram
    * @param reader the reader
    */

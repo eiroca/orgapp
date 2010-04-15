@@ -27,7 +27,7 @@ public interface LineRender {
 
   /**
    * Draw lines.
-   * 
+   *
    * @param box the box
    * @param orgLay the org lay
    * @param graphics the graphics

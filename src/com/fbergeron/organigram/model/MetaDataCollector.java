@@ -23,7 +23,7 @@ public interface MetaDataCollector {
 
   /**
    * Sets the meta.
-   * 
+   *
    * @param name the name
    * @param value the value
    */
@@ -31,9 +31,9 @@ public interface MetaDataCollector {
 
   /**
    * Gets the meta.
-   * 
+   *
    * @param name the name
-   * 
+   *
    * @return the meta
    */
   String getMeta(String name);

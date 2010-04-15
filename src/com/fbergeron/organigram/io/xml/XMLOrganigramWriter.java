@@ -1,18 +1,18 @@
-/** LGPL > 3.0
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/**
+ * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/
+ * along with this program. If not, see <http://www.gnu.org/licenses/
  */
 package com.fbergeron.organigram.io.xml;
 
@@ -46,7 +46,7 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write meta.
-   * 
+   *
    * @param tag the me
    * @param buf the output buffer
    * @param meta the meta
@@ -69,10 +69,10 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write lines.
-   * 
+   *
    * @param buf the stringbuffer
    * @param lines the lines
-   * 
+   *
    * @return true, if successful
    */
   public boolean writeLines(final StringBuffer buf, final List<Line> lines) {
@@ -95,11 +95,11 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write unit.
-   * 
+   *
    * @param buf the sb
    * @param unit the root
    * @param writeInfo the write info
-   * 
+   *
    * @return true, if successful
    */
   public boolean writeUnit(final StringBuffer buf, final Unit unit, final boolean writeInfo) {
@@ -139,25 +139,26 @@ public class XMLOrganigramWriter implements OrganigramWriter {
 
   /*
    * (non-Javadoc)
-   *
-   * @see com.fbergeron.organigram.io.OrganigramWriter#writeOrganigram(com.fbergeron.organigram.model.Organigram,
-   *      boolean)
+   * @see
+   * com.fbergeron.organigram.io.OrganigramWriter#writeOrganigram(com.fbergeron
+   * .organigram.model.Organigram, boolean)
    */
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
     final StringBuffer buf = new StringBuffer(1024);
     buf.append("<?xml version=\"1.0\"?>");
     XMLUtil.ORGANIGRAM.open(buf, true);
     final OrganigramLayout orgLay = organigram.getOrganigramLayout();
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_MODE, OrganigramLayout.ORGMODE, orgLay.getOrgMode());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_LAYOUT, OrganigramLayout.LAYOUT, orgLay.getOrgLayout());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_COMPACT, OrganigramLayout.COMPACT, orgLay.getOrgCompact());
+    XMLUtil.writeEnum(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_LAYOUT, OrganigramLayout.DEF_LAYOUT, orgLay.getLayout());
+    XMLUtil.writeEnum(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_MODE, OrganigramLayout.DEF_ORGMODE, orgLay.getMode());
+    XMLUtil.writeBoolean(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_COMPACT, OrganigramLayout.DEF_COMPACT, orgLay.isCompact());
     XMLUtil.writeColor(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_BACKGROUNDCOLOR, OrganigramLayout.COLOR_BACKGROUND, orgLay.getBackgroundColor());
-    XMLUtil.writeColor(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_LINECOLOR, OrganigramLayout.COLOR_LINE, orgLay.getLineColor());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_TOP, OrganigramLayout.MARGIN_TOP, orgLay.getTopMargin());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_LEFT, OrganigramLayout.MARGIN_LEFT, orgLay.getLeftMargin());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_RIGHT, OrganigramLayout.MARGIN_RIGHT, orgLay.getRightMargin());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_BOTTOM, OrganigramLayout.MARGIN_BOTTOM, orgLay.getBottomMargin());
-    XMLUtil.writeBoolean(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_TOOLTIPENABLED, OrganigramLayout.TOOLTIP_ENABLED, orgLay.isToolTipEnabled());
+    XMLUtil.writeColor(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_LINECOLOR, OrganigramLayout.DEF_LINECOLOR, orgLay.getLineColor());
+    XMLUtil.writeEnum(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_LINEMODE, OrganigramLayout.DEF_LINEMODE, orgLay.getLineMode());
+    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_TOP, OrganigramLayout.DEF_MARGINTOP, orgLay.getTopMargin());
+    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_LEFT, OrganigramLayout.DEF_MARGINLEFT, orgLay.getLeftMargin());
+    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_RIGHT, OrganigramLayout.DEF_MARGINRIGHT, orgLay.getRightMargin());
+    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_BOTTOM, OrganigramLayout.DEF_MARGINBOTTOM, orgLay.getBottomMargin());
+    XMLUtil.writeBoolean(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_TOOLTIPENABLED, OrganigramLayout.DEF_TOOLTIP, orgLay.isToolTipEnabled());
     XMLUtil.writeBoxLayoutAtr(XMLUtil.ORGANIGRAM, buf, organigram.getBoxLayout());
     XMLOrganigramWriter.writeMeta(XMLUtil.ORGANIGRAM, buf, organigram.getMeta());
     XMLUtil.ORGANIGRAM.openClose(buf);

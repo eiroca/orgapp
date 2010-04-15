@@ -97,11 +97,11 @@ OrgApp support three organigram file formats.
    <pre>
              B
              |-S
-          -------
-          |     |
-          B     B
-          |-O
-          |-O
+          -----------
+          |     |   |
+          B     B.. |
+          |-O     ..M
+          |-O......
    </pre>
   </li>
  </ul>
@@ -109,6 +109,8 @@ OrgApp support three organigram file formats.
 <a name="ChangeLog"/><h2>Change log</h2>
  <p>Version 0.4.0<br/>
   <ul>
+   <li>It is possible to specify line mode (direct or connector) and use name instead of numbers (e.g. mode="grow" instead of mode="2")</li>
+   <li>Applet can take the chart definition from "Data" and "DataType" parameters</li>
    <li>Collapsable nodes</li>
    <li>Added handling of collapsed flag in the GUI (right click toggles it)</li>
    <li>Colors now can be expressed also with HTML color notation</li>
