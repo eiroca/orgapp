@@ -46,7 +46,7 @@ public class OrganigramApp extends JFrame {
 
   /**
    * The main method.
-   *
+   * 
    * @param args the arguments
    */
   public static void main(final String[] args) {
@@ -86,7 +86,7 @@ public class OrganigramApp extends JFrame {
 
   /**
    * This method initializes jContentPane.
-   *
+   * 
    * @return javax.swing.JPanel
    */
   private JPanel getJContentPane() {
@@ -100,7 +100,7 @@ public class OrganigramApp extends JFrame {
 
   /**
    * This method initializes this.
-   *
+   * 
    * @return void
    */
   private void initialize() {

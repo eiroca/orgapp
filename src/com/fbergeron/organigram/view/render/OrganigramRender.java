@@ -25,25 +25,28 @@ public interface OrganigramRender {
 
   /**
    * Sets the line render.
-   *
+   * 
    * @param lineRender the new line render
    */
   void setLineRender(final LineRender lineRender);
 
   /**
    * Sets the box render.
-   *
+   * 
    * @param boxRender the new box render
    */
   void setBoxRender(final BoxRender boxRender);
 
   /**
    * Paint the organigram.
-   *
+   * 
    * @param graphics the graphics
    */
   void paint(final Graphics graphics);
 
+  /**
+   * Invalidate.
+   */
   void invalidate();
 
 }

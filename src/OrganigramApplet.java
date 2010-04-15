@@ -63,7 +63,6 @@ public class OrganigramApplet extends JApplet {
     }
     o.execute(new BuildInfo(), true);
     o.buidID();
-    System.out.println(OrgUtils.writeOrganigram(o, 1, false));
     final OrganigramView view = new OrganigramView(o, target);
     final Container me = getContentPane();
     me.setLayout(new BorderLayout());

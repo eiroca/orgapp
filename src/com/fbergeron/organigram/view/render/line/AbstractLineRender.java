@@ -29,7 +29,7 @@ public abstract class AbstractLineRender implements LineRender {
 
   /**
    * Sets the organigram layout.
-   *
+   * 
    * @param orgLay the new organigram layout
    */
   public void setOrganigramLayout(final OrganigramLayout orgLay) {

@@ -16,6 +16,15 @@
  */
 package com.fbergeron.organigram.model.type;
 
+/**
+ * The Enum Alignment.
+ */
 public enum Alignment {
-  LEFT, CENTER, RIGHT
+  
+  /** The LEFT. */
+  LEFT, 
+ /** The CENTER. */
+ CENTER, 
+ /** The RIGHT. */
+ RIGHT
 }

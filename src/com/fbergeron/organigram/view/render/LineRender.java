@@ -27,10 +27,10 @@ public interface LineRender {
 
   /**
    * Draw lines.
-   *
+   * 
+   * @param graphics the graphics
    * @param box the box
    * @param orgLay the org lay
-   * @param graphics the graphics
    */
   void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay);
 

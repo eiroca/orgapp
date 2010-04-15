@@ -55,7 +55,7 @@ public class Line {
 
   /**
    * Instantiates a new line.
-   *
+   * 
    * @param text the text
    * @param fontStyle the font style
    * @param fontSize the font size
@@ -67,7 +67,7 @@ public class Line {
 
   /**
    * Instantiates a new line.
-   *
+   * 
    * @param text the text
    * @param link the link
    * @param font the font
@@ -82,7 +82,7 @@ public class Line {
 
   /**
    * Gets the text.
-   *
+   * 
    * @return the text
    */
   public String getText() {
@@ -91,7 +91,7 @@ public class Line {
 
   /**
    * Sets the text.
-   *
+   * 
    * @param text the new text
    */
   public void setText(final String text) {
@@ -100,7 +100,7 @@ public class Line {
 
   /**
    * Gets the link.
-   *
+   * 
    * @return the link
    */
   public String getLink() {
@@ -109,7 +109,7 @@ public class Line {
 
   /**
    * Sets the link.
-   *
+   * 
    * @param link the new link
    */
   public void setLink(final String link) {
@@ -118,7 +118,7 @@ public class Line {
 
   /**
    * Gets the font.
-   *
+   * 
    * @return the font
    */
   public Font getFont() {
@@ -127,7 +127,7 @@ public class Line {
 
   /**
    * Sets the font.
-   *
+   * 
    * @param font the new font
    */
   public void setFont(final Font font) {
@@ -136,7 +136,7 @@ public class Line {
 
   /**
    * Gets the color.
-   *
+   * 
    * @return the color
    */
   public Color getColor() {
@@ -145,7 +145,7 @@ public class Line {
 
   /**
    * Sets the color.
-   *
+   * 
    * @param color the new color
    */
   public void setColor(final Color color) {
@@ -154,7 +154,7 @@ public class Line {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public String getType() {
@@ -163,7 +163,7 @@ public class Line {
 
   /**
    * Sets the type.
-   *
+   * 
    * @param type the new type
    */
   public void setType(final String type) {
@@ -175,7 +175,7 @@ public class Line {
 
   /**
    * Checks if is visible.
-   *
+   * 
    * @return true, if is visible
    */
   public boolean isVisible() {
@@ -184,7 +184,7 @@ public class Line {
 
   /**
    * Sets the visible.
-   *
+   * 
    * @param visible the new visible
    */
   public void setVisible(final boolean visible) {

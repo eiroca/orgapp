@@ -38,10 +38,9 @@ public class UnitProcessor extends TAG {
 
   /**
    * Gets the box layout.
-   *
-   * @param unit the u
+   * 
    * @param organigram the organigram
-   *
+   * @param unit the u
    * @return the box layout
    */
   public BoxLayout getBoxLayout(final Organigram organigram, final Unit unit) {
@@ -64,9 +63,9 @@ public class UnitProcessor extends TAG {
 
   /**
    * Process unit begin.
-   *
-   * @param attribs the attributes
+   * 
    * @param reader the reader
+   * @param attribs the attributes
    */
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
@@ -80,6 +79,7 @@ public class UnitProcessor extends TAG {
       final Unit parentUnit = xor.parentUnits.peek();
       parentUnit.addChild(xor.newUnit);
     }
+    xor.parentUnits.push(xor.newUnit);
     String name;
     String value;
     for (int i = 0; i < attribs.getLength(); i++) {
@@ -95,6 +95,12 @@ public class UnitProcessor extends TAG {
         xor.newUnit.setMeta(name, value);
       }
     }
+  }
+
+  @Override
+  public void end(final OrganigramReader reader) {
+    final XMLOrganigramReader xor = (XMLOrganigramReader) reader;
+    xor.newUnit = xor.parentUnits.pop();
   }
 
 }

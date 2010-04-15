@@ -23,8 +23,9 @@ public interface UnitTraversal {
 
   /**
    * Process.
-   *
+   * 
    * @param unit the unit
+   * @param level the level
    */
   void process(Unit unit, int level);
 

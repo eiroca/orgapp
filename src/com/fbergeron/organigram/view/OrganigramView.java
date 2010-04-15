@@ -61,7 +61,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Instantiates a new organigram view.
-   *
+   * 
    * @param organigram the organigram
    * @param target the target
    */
@@ -78,7 +78,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Gets the root unit.
-   *
+   * 
    * @return the root unit
    */
   public Unit getRootUnit() {
@@ -87,7 +87,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Gets the root unit view.
-   *
+   * 
    * @return the root unit view
    */
   public UnitView getRootUnitView() {
@@ -96,7 +96,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Sets the root unit.
-   *
+   * 
    * @param rootUnit the new root unit
    */
   public void setRootUnit(final Unit rootUnit) {
@@ -155,25 +155,25 @@ public class OrganigramView extends JPanel {
         case LEFT:
           anchorParent = Layout.LEFT;
           anchorChild = Layout.RIGHT;
-          anchorCollapsed=Layout.RIGHT;
+          anchorCollapsed = Layout.RIGHT;
           orgRender = new VerticalRender(this, orgLay.isCompact(), false, false);
           break;
         case RIGHT:
           anchorParent = Layout.RIGHT;
           anchorChild = Layout.LEFT;
-          anchorCollapsed=Layout.LEFT;
+          anchorCollapsed = Layout.LEFT;
           orgRender = new VerticalRender(this, orgLay.isCompact(), true, false);
           break;
         case BOTTOM:
           anchorParent = Layout.TOP;
           anchorChild = Layout.BOTTOM;
-          anchorCollapsed=Layout.TOP;
+          anchorCollapsed = Layout.TOP;
           orgRender = new HorizontalRender(this, orgLay.isCompact(), false, true);
           break;
         default: // TOP
           anchorParent = Layout.BOTTOM;
           anchorChild = Layout.TOP;
-          anchorCollapsed=Layout.BOTTOM;
+          anchorCollapsed = Layout.BOTTOM;
           orgRender = new HorizontalRender(this, orgLay.isCompact(), false, false);
           break;
       }
@@ -194,9 +194,9 @@ public class OrganigramView extends JPanel {
 
   /**
    * Inits the unit tree rec.
-   *
+   * 
    * @param unit the unit
-   *
+   * 
    * @return the unit view
    */
   private UnitView initUnitTreeRec(final Unit unit) {
@@ -209,7 +209,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Gets the organigram.
-   *
+   * 
    * @return the organigram
    */
   public Organigram getOrganigram() {
@@ -218,7 +218,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Sets the organigram.
-   *
+   * 
    * @param organigram the new organigram
    */
   public void setOrganigram(final Organigram organigram) {
@@ -227,7 +227,7 @@ public class OrganigramView extends JPanel {
 
   /**
    * Get the view.
-   *
+   * 
    * @return the owner
    */
   public Component getView() {

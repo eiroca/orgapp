@@ -42,7 +42,7 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Gets the box layout.
-   *
+   * 
    * @return the box layout
    */
   public BoxLayout getBoxLayout() {
@@ -51,7 +51,7 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Gets the organigram layout.
-   *
+   * 
    * @return the organigram layout
    */
   public OrganigramLayout getOrganigramLayout() {
@@ -79,7 +79,7 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Gets the meta.
-   *
+   * 
    * @return the meta
    */
   public Map<String, String> getMeta() {
@@ -88,7 +88,7 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Gets the root.
-   *
+   * 
    * @return the root
    */
   public Unit getRoot() {
@@ -97,7 +97,7 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Sets the root.
-   *
+   * 
    * @param root the new root
    */
   public void setRoot(final Unit root) {
@@ -106,10 +106,10 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Find by id.
-   *
+   * 
    * @param theID the iD
    * @param exact the exact
-   *
+   * 
    * @return the unit
    */
   public Unit findByID(final String theID, final boolean exact) {
@@ -133,7 +133,7 @@ public class Organigram implements MetaDataCollector {
 
   /**
    * Execute.
-   *
+   * 
    * @param action the action
    * @param nodeFirst the node first
    */

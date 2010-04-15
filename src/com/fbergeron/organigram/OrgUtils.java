@@ -38,11 +38,11 @@ public class OrgUtils {
 
   /**
    * Write organigram.
-   *
+   * 
    * @param org the org
    * @param type the type
    * @param compact the compact
-   *
+   * 
    * @return the string
    */
   static public String writeOrganigram(final Organigram org, final int type, final boolean compact) {
@@ -63,9 +63,9 @@ public class OrgUtils {
 
   /**
    * Read organigram.
-   *
+   * 
    * @param sourceUrl the source url
-   *
+   * 
    * @return the organigram
    */
   static public Organigram readOrganigram(final URL sourceUrl) {
@@ -74,9 +74,9 @@ public class OrgUtils {
 
   /**
    * Gets the type.
-   *
+   * 
    * @param sourceUrl the source url
-   *
+   * 
    * @return the type
    */
   static public int getType(final URL sourceUrl) {
@@ -93,10 +93,10 @@ public class OrgUtils {
 
   /**
    * Read organigram.
-   *
+   * 
    * @param sourceUrl the source url
    * @param type the type
-   *
+   * 
    * @return the organigram
    */
   static public Organigram readOrganigram(final URL sourceUrl, final int type) {
@@ -116,10 +116,10 @@ public class OrgUtils {
 
   /**
    * Read organigram.
-   *
-   * @param source
-   * @param type
-   * @return
+   * 
+   * @param source the source
+   * @param type the type
+   * @return the organigram
    */
   static public Organigram readOrganigram(final InputStream source, final int type) {
     Organigram org = null;
@@ -141,10 +141,10 @@ public class OrgUtils {
 
   /**
    * Find in directory.
-   *
+   * 
    * @param path the path
    * @param filename the filename
-   *
+   * 
    * @return the uRL
    */
   public static URL findInDirectory(final String path, final String filename) {
@@ -161,9 +161,9 @@ public class OrgUtils {
 
   /**
    * Find in classpath.
-   *
+   * 
    * @param filename the filename
-   *
+   * 
    * @return the uRL
    */
   public static URL findInClasspath(final String filename) {
@@ -179,9 +179,9 @@ public class OrgUtils {
 
   /**
    * Find in resource.
-   *
+   * 
    * @param name the name
-   *
+   * 
    * @return the uRL
    */
   public static URL findInResource(String name) {
@@ -194,9 +194,9 @@ public class OrgUtils {
 
   /**
    * Find.
-   *
+   * 
    * @param name the name
-   *
+   * 
    * @return the uRL
    */
   static public URL find(final String name) {
@@ -210,10 +210,10 @@ public class OrgUtils {
 
   /**
    * Builds the url.
-   *
+   * 
    * @param documentBase the document base
    * @param dataSource the data source
-   *
+   * 
    * @return the uRL
    */
   static public URL buildURL(final URL documentBase, final String dataSource) {

@@ -26,10 +26,9 @@ import com.fbergeron.organigram.model.Unit;
 public class TXTOrganigramWriter implements OrganigramWriter {
 
   /**
-   * Write string
-   *
+   * Write string.
+   * 
    * @param str the string
-   *
    * @return the string
    */
   private static final String writeStr(final String str) {
@@ -38,7 +37,7 @@ public class TXTOrganigramWriter implements OrganigramWriter {
 
   /**
    * Write unit.
-   *
+   * 
    * @param buf the stringbuffer
    * @param unit the u
    */

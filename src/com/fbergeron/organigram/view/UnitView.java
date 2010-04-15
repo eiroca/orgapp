@@ -34,6 +34,8 @@ public class UnitView implements Iterable<UnitView> {
 
   /** The unit. */
   public final Unit unit;
+  
+  /** The layout. */
   public final BoxLayout layout;
 
   /** The organigram view. */
@@ -59,7 +61,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Instantiates a new unit view.
-   *
+   * 
    * @param unit the unit
    * @param organigramView the organigram view
    */
@@ -77,22 +79,27 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the unit.
-   *
+   * 
    * @return the unit
    */
   public Unit getUnit() {
     return unit;
   }
 
+  /**
+   * Gets the layout.
+   * 
+   * @return the layout
+   */
   public BoxLayout getLayout() {
     return layout;
   }
 
   /**
    * Contains.
-   *
+   * 
    * @param point the point
-   *
+   * 
    * @return true, if successful
    */
   public boolean contains(final Point point) {
@@ -101,7 +108,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the height.
-   *
+   * 
    * @return the height
    */
   public int getHeight() {
@@ -110,7 +117,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the width.
-   *
+   * 
    * @return the width
    */
   public int getWidth() {
@@ -119,7 +126,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the size.
-   *
+   * 
    * @param size the new size
    */
   public void setSize(final Dimension size) {
@@ -129,7 +136,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the location.
-   *
+   * 
    * @param boxPos the box position
    */
   public void setLocation(final Point boxPos) {
@@ -137,6 +144,9 @@ public class UnitView implements Iterable<UnitView> {
     boxRect.y = boxPos.y;
   }
 
+  /**
+   * Reset.
+   */
   public void reset() {
     boxRect.x = 0;
     boxRect.y = 0;
@@ -149,7 +159,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the parent.
-   *
+   * 
    * @return the parent
    */
   public UnitView getParent() {
@@ -158,7 +168,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Adds the child.
-   *
+   * 
    * @param child the child
    */
   public void addChild(final UnitView child) {
@@ -174,6 +184,11 @@ public class UnitView implements Iterable<UnitView> {
     return children.iterator();
   }
 
+  /**
+   * Checks for children.
+   * 
+   * @return true, if successful
+   */
   public boolean hasChildren() {
     if (layout.isExpanded()) { return (children.size() > 0); }
     return false;
@@ -181,7 +196,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Count children.
-   *
+   * 
    * @return the int
    */
   public int countChildren() {
@@ -190,7 +205,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the parent.
-   *
+   * 
    * @param parent the new parent
    */
   private void setParent(final UnitView parent) {
@@ -199,7 +214,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the full height.
-   *
+   * 
    * @return the full height
    */
   public int getFullHeight() {
@@ -208,7 +223,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the small height.
-   *
+   * 
    * @return the small height
    */
   public int getSmallHeight() {
@@ -217,7 +232,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the full width.
-   *
+   * 
    * @return the full width
    */
   public int getFullWidth() {
@@ -226,7 +241,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the small width.
-   *
+   * 
    * @return the small width
    */
   public int getSmallWidth() {
@@ -235,7 +250,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the required size.
-   *
+   * 
    * @param size the size
    * @param smallChild the small child
    */
@@ -263,7 +278,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the box pos.
-   *
+   * 
    * @return the box pos
    */
   public Point getLocation() {
@@ -272,7 +287,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the box rect.
-   *
+   * 
    * @return the box rect
    */
   public Rectangle getBoxRect() {
@@ -281,7 +296,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the children.
-   *
+   * 
    * @return the children
    */
   public List<UnitView> getChildren() {
@@ -290,7 +305,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the organigram view.
-   *
+   * 
    * @return the organigram view
    */
   public OrganigramView getOrganigramView() {
@@ -299,7 +314,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the size.
-   *
+   * 
    * @return the size
    */
   public Dimension getSize() {
@@ -308,7 +323,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Checks if is small child.
-   *
+   * 
    * @return true, if is small child
    */
   public boolean isSmallChild() {
@@ -317,7 +332,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Gets the space.
-   *
+   * 
    * @return the space
    */
   public BoxSpace getSpace() {
@@ -326,7 +341,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Checks if is space used.
-   *
+   * 
    * @return true, if is space used
    */
   public boolean isSpaceUsed() {
@@ -335,7 +350,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Sets the space used.
-   *
+   * 
    * @param spaceUsed the new space used
    */
   public void setSpaceUsed(final boolean spaceUsed) {
@@ -344,7 +359,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /**
    * Move.
-   *
+   * 
    * @param deltaX the dx
    * @param deltaY the dy
    * @param recursive the recursive
@@ -359,10 +374,21 @@ public class UnitView implements Iterable<UnitView> {
     }
   }
 
+  /**
+   * Can expand.
+   * 
+   * @return true, if successful
+   */
   public boolean canExpand() {
     return (!layout.isExpanded() && (countChildren() > 0));
   }
 
+  /**
+   * Flip x.
+   * 
+   * @param xFlip the x flip
+   * @param recursive the recursive
+   */
   public void flipX(final int xFlip, final boolean recursive) {
     boxRect.x = xFlip - boxRect.width - boxRect.x;
     if (recursive && !children.isEmpty()) {
@@ -372,6 +398,12 @@ public class UnitView implements Iterable<UnitView> {
     }
   }
 
+  /**
+   * Flip y.
+   * 
+   * @param yFlip the y flip
+   * @param recursive the recursive
+   */
   public void flipY(final int yFlip, final boolean recursive) {
     boxRect.y = yFlip - boxRect.height - boxRect.y;
     if (recursive && !children.isEmpty()) {

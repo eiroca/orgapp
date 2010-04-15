@@ -96,7 +96,7 @@ public class ClassicBoxRender implements BoxRender {
 
   /**
    * Draw box.
-   *
+   * 
    * @param graphic the graphic
    * @param boxLay the box lay
    * @param box the box
@@ -126,7 +126,7 @@ public class ClassicBoxRender implements BoxRender {
 
   /**
    * Draw text.
-   *
+   * 
    * @param graphic the graphic
    * @param boxLay the box lay
    * @param box the box
