@@ -1,92 +1,96 @@
 <!-- Ant script for orgapp -->
 <!-- Author: Frederic Bergeron -->
+<!-- Author: Enrico Croce -->
 <project name="orgapp" default="build" basedir=".">
 
-    <!-- Custom properties -->
-    <property file="build.properties" />
+	<!-- Custom properties -->
+	<property file="build.properties" />
 
-    <!-- Proguard -->
-    <taskdef resource="proguard/ant/task.properties" classpath="${proguard.home}/lib/proguard.jar" />
+	<!-- Proguard -->
+	<taskdef resource="proguard/ant/task.properties" classpath="${proguard.home}/lib/proguard.jar" />
 
-    <!-- Directories -->
-    <property name="classes" value="classes" />
-    <property name="jars" value="jars" />
-    <property name="doc" value="doc" />
-    <property name="javadoc" value="${doc}/javadoc" />
-    <property name="properties" value="properties" />
-    <property name="src" value="src" />
-    <property name="img" value="img" />
-    <property name="build" value="html" />
+	<!-- Directories -->
+	<property name="base" value="." />
+	<property name="classes" value="classes" />
+	<property name="dist" value="dist" />
+	<property name="doc" value="doc" />
+	<property name="javadoc" value="${doc}/javadoc" />
+	<property name="properties" value="properties" />
+	<property name="src" value="src" />
+	<property name="img" value="img" />
+	<property name="build" value="html" />
+	<property name="version" value="0.4.0" />
 
-    <path id="classpath">
-        <pathelement location="${classes}" />
-    </path>
+	<path id="classpath">
+		<pathelement location="${classes}" />
+	</path>
 
-    <target name="compile">
-        <mkdir dir="${classes}" />
-        <javac srcdir="${src}" destdir="${classes}" source="${build.compiler.source}" target="${build.compiler.target}" debug="${build.compiler.debug}" nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}">
-            <classpath refid="classpath" />
-        </javac>
-    </target>
+	<target name="compile">
+		<mkdir dir="${classes}" />
+		<javac srcdir="${src}" destdir="${classes}" source="${build.compiler.source}" target="${build.compiler.target}" debug="${build.compiler.debug}" nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}">
+			<classpath refid="classpath" />
+		</javac>
+	</target>
 
-    <target name="javadoc" depends="compile">
-        <javadoc sourcepath="${src}" destdir="${javadoc}" packagenames="*" author="true" version="true" use="true" package="true" windowtitle="Organigram API" doctitle="Organigram" source="${build.compiler.source}">
-            <classpath refid="classpath" />
-        </javadoc>
-    </target>
+	<target name="javadoc" depends="compile">
+		<javadoc sourcepath="${src}" destdir="${javadoc}" packagenames="*" author="true" version="true" use="true" package="true" windowtitle="Organigram API" doctitle="Organigram" source="${build.compiler.source}">
+			<classpath refid="classpath" />
+		</javadoc>
+	</target>
 
-    <target name="clean">
-        <delete dir="${classes}" />
-    </target>
+	<target name="clean">
+		<delete dir="${classes}" />
+		<delete dir="${dist}" />
+	</target>
 
-    <target name="cleanAll" depends="clean">
-        <delete dir="${javadoc}" />
-    </target>
+	<target name="cleanAll" depends="clean">
+		<delete dir="${javadoc}" />
+	</target>
 
-    <target name="rebuild" depends="clean,build" />
+	<target name="rebuild" depends="clean,build" />
 
-    <target name="build" depends="applet, app, convert" description="Create release">
-    </target>
+	<target name="build" depends="dist" description="Create release">
+	</target>
 
-    <target name="applet" depends="applet_shrink" description="Create applet">
-        <echo>Applet created.</echo>
-    </target>
+	<target name="applet" depends="applet_shrink" description="Create applet">
+		<echo>Applet created.</echo>
+	</target>
 
-    <target name="applet_jar" depends="compile">
-        <mkdir dir="${jars}" />
-        <jar destfile="${jars}/applet.jar" basedir="classes">
-        </jar>
-    </target>
+	<target name="applet_jar" depends="compile">
+		<mkdir dir="${dist}" />
+		<jar destfile="${dist}/applet.jar" basedir="classes">
+		</jar>
+	</target>
 
-    <target name="applet_shrink" depends="applet_jar" description="Obfuscate compiled classes">
-        <proguard>
+	<target name="applet_shrink" depends="applet_jar" description="Obfuscate compiled classes">
+		<proguard>
             -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${jars}/applet.jar"
+            -injars "${dist}/applet.jar"
             -outjars "${build}/OrgApplet.jar"
             -dontoptimize           
             -dontusemixedcaseclassnames
             -defaultpackage ''
             -keep public class OrganigramApplet
         </proguard>
-    </target>
+	</target>
 
-    <target name="app" depends="app_shrink" description="Create application">
-        <echo>Application created.</echo>
-    </target>
+	<target name="app" depends="app_shrink" description="Create application">
+		<echo>Application created.</echo>
+	</target>
 
-    <target name="app_jar" depends="compile">
-        <mkdir dir="${jars}" />
-        <jar destfile="${jars}/app.jar" basedir="classes">
-            <manifest>
-                <attribute name="Main-Class" value="OrganigramApp" />
-            </manifest>
-        </jar>
-    </target>
+	<target name="app_jar" depends="compile">
+		<mkdir dir="${dist}" />
+		<jar destfile="${dist}/app.jar" basedir="classes">
+			<manifest>
+				<attribute name="Main-Class" value="OrganigramApp" />
+			</manifest>
+		</jar>
+	</target>
 
-    <target name="app_shrink" depends="app_jar" description="Obfuscate compiled classes">
-        <proguard>
+	<target name="app_shrink" depends="app_jar" description="Obfuscate compiled classes">
+		<proguard>
             -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${jars}/app.jar"
+            -injars "${dist}/app.jar"
             -outjars "${build}/OrgApp.jar"
             -dontusemixedcaseclassnames
             -dontoptimize           
@@ -95,25 +99,25 @@
                 public static void main(java.lang.String[]);
             }
         </proguard>
-    </target>
+	</target>
 
-    <target name="convert" depends="convert_shrink" description="Create convert application">
-        <echo>Convert application created.</echo>
-    </target>
+	<target name="convert" depends="convert_shrink" description="Create convert application">
+		<echo>Convert application created.</echo>
+	</target>
 
-    <target name="convert_jar" depends="compile">
-        <mkdir dir="${jars}" />
-        <jar destfile="${jars}/convert.jar" basedir="classes">
-            <manifest>
-                <attribute name="Main-Class" value="Convert" />
-            </manifest>
-        </jar>
-    </target>
+	<target name="convert_jar" depends="compile">
+		<mkdir dir="${dist}" />
+		<jar destfile="${dist}/convert.jar" basedir="classes">
+			<manifest>
+				<attribute name="Main-Class" value="Convert" />
+			</manifest>
+		</jar>
+	</target>
 
-    <target name="convert_shrink" depends="convert_jar" description="Obfuscate compiled classes">
-        <proguard>
+	<target name="convert_shrink" depends="convert_jar" description="Obfuscate compiled classes">
+		<proguard>
             -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${jars}/convert.jar"
+            -injars "${dist}/convert.jar"
             -outjars "${build}/Convert.jar"
             -dontusemixedcaseclassnames
             -dontoptimize           
@@ -122,6 +126,32 @@
                 public static void main(java.lang.String[]);
             }
         </proguard>
-    </target>
+	</target>
+
+	<target name="dist" depends="applet, app, convert, javadoc" description="Create distribution">
+		<echo>Convert application created.</echo>
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}/${version}" />
+		<delete file="${dist}/app.jar" />
+		<delete file="${dist}/applet.jar" />
+		<delete file="${dist}/convert.jar" />
+		<zip destfile="${dist}/${version}/OrgApp_src.zip">
+			<zipfileset dir="${base}/src" prefix="src" />
+			<zipfileset dir="${base}/data" prefix="data" />
+			<zipfileset dir="${base}/doc" prefix="doc" />
+			<fileset file="${base}/build.xml" />
+			<fileset file="${base}/COPYING" />
+			<fileset file="${base}/COPYING.LESSER" />
+			<fileset file="${base}/README.txt" />
+			<fileset file="${base}/todo.txt" />
+			<fileset file="${base}/sample-build.properties" />
+		</zip>
+		<copy todir="${dist}/${version}">
+			<fileset file="${build}/OrgApplet.jar" />
+			<!-- <fileset file="${build}/OrgApp.jar" /> -->
+			<!-- <fileset file="${build}/Convert.jar" /> -->
+		</copy>
+
+	</target>
 
 </project>
