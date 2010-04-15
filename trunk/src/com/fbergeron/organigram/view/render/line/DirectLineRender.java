@@ -39,20 +39,20 @@ public class DirectLineRender extends AbstractLineRender {
     final Point pos = box.getLocation();
     switch (anchor) {
       case LEFT:
-        xx[idx] = pos.x + box.getWidth();
+        xx[idx] = pos.x + box.getWidth() + 1;
         yy[idx] = pos.y + box.getHeight() / 2;
         break;
       case RIGHT:
-        xx[idx] = pos.x;
+        xx[idx] = pos.x - 1;
         yy[idx] = pos.y + box.getHeight() / 2;
         break;
       case BOTTOM:
         xx[idx] = pos.x + box.getWidth() / 2;
-        yy[idx] = pos.y + box.getHeight();
+        yy[idx] = pos.y + box.getHeight() + 1;
         break;
       default: // TOP
         xx[idx] = pos.x + box.getWidth() / 2;
-        yy[idx] = pos.y;
+        yy[idx] = pos.y - 1;
         break;
     }
   }

@@ -1,6 +1,7 @@
-/** LGPL > 3.0
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/**
+ * LGPL > 3.0 Copyright (C) 2005 Frédéric Bergeron
+ * (fbergeron@users.sourceforge.net) Copyright (C) 2006-2010 eIrOcA (eNrIcO
+ * Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -360,6 +361,24 @@ public class UnitView implements Iterable<UnitView> {
 
   public boolean canExpand() {
     return (!layout.isExpanded() && (countChildren() > 0));
+  }
+
+  public void flipX(final int xFlip, final boolean recursive) {
+    boxRect.x = xFlip - boxRect.width - boxRect.x;
+    if (recursive && !children.isEmpty()) {
+      for (final UnitView child : this) {
+        child.flipX(xFlip, recursive);
+      }
+    }
+  }
+
+  public void flipY(final int yFlip, final boolean recursive) {
+    boxRect.y = yFlip - boxRect.height - boxRect.y;
+    if (recursive && !children.isEmpty()) {
+      for (final UnitView child : this) {
+        child.flipY(yFlip, recursive);
+      }
+    }
   }
 
 }

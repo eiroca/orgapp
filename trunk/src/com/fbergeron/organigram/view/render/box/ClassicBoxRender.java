@@ -1,5 +1,5 @@
-/** LGPL > 3.0
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/**
+ * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,7 @@ import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.type.Alignment;
+import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.UnitView;
 import com.fbergeron.organigram.view.render.BoxRender;
 
@@ -32,13 +33,13 @@ import com.fbergeron.organigram.view.render.BoxRender;
  */
 public class ClassicBoxRender implements BoxRender {
 
-  private final boolean vertical;
+  private final Layout collapsedAnchor;
 
   /**
    * Instantiates a new classic box render.
    */
-  public ClassicBoxRender(final boolean layoutIsVertical) {
-    vertical = !layoutIsVertical;
+  public ClassicBoxRender(final Layout collapsedAnchor) {
+    this.collapsedAnchor = collapsedAnchor;
   }
 
   /**
@@ -49,23 +50,46 @@ public class ClassicBoxRender implements BoxRender {
    */
   private final void drawBoxExpand(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
     final Polygon p = new Polygon();
-    if (vertical) {
-      final int cx = box.boxRect.x + box.boxRect.width / 2;
-      final int cy = box.boxRect.y + box.boxRect.height;
-      final int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
-      p.addPoint(cx, cy + sz);
-      p.addPoint(cx - sz, cy);
-      p.addPoint(cx + sz, cy);
-      p.addPoint(cx, cy + sz);
-    }
-    else {
-      final int cx = box.boxRect.x + box.boxRect.width;
-      final int cy = box.boxRect.y + box.boxRect.height / 2;
-      final int sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
-      p.addPoint(cx + sz, cy);
-      p.addPoint(cx, cy - sz);
-      p.addPoint(cx, cy + sz);
-      p.addPoint(cx + sz, cy);
+    final int cx;
+    final int cy;
+    final int sz;
+    switch (collapsedAnchor) {
+      case LEFT:
+        cx = box.boxRect.x;
+        cy = box.boxRect.y + box.boxRect.height / 2;
+        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getLeftMargin() / 2;
+        p.addPoint(cx - sz, cy);
+        p.addPoint(cx, cy - sz);
+        p.addPoint(cx, cy + sz);
+        p.addPoint(cx - sz, cy);
+        break;
+      case RIGHT:
+        cx = box.boxRect.x + box.boxRect.width;
+        cy = box.boxRect.y + box.boxRect.height / 2;
+        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
+        p.addPoint(cx + sz, cy);
+        p.addPoint(cx, cy - sz);
+        p.addPoint(cx, cy + sz);
+        p.addPoint(cx + sz, cy);
+        break;
+      case BOTTOM:
+        cx = box.boxRect.x + box.boxRect.width / 2;
+        cy = box.boxRect.y + box.boxRect.height;
+        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
+        p.addPoint(cx, cy + sz);
+        p.addPoint(cx - sz, cy);
+        p.addPoint(cx + sz, cy);
+        p.addPoint(cx, cy + sz);
+        break;
+      default:// TOP
+        cx = box.boxRect.x + box.boxRect.width / 2;
+        cy = box.boxRect.y;
+        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getTopMargin() / 2;
+        p.addPoint(cx, cy - sz);
+        p.addPoint(cx - sz, cy);
+        p.addPoint(cx + sz, cy);
+        p.addPoint(cx, cy - sz);
+        break;
     }
     graphic.fillPolygon(p);
   }

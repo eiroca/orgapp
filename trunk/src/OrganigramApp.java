@@ -81,7 +81,6 @@ public class OrganigramApp extends JFrame {
     }
     org.execute(new BuildInfo(), true);
     view = new OrganigramView(org, null);
-    System.out.println(OrgUtils.writeOrganigram(org, 0, false));
     initialize();
   }
 

@@ -59,6 +59,9 @@ abstract public class AbstractRender implements OrganigramRender {
 
   protected boolean validLayout = false;
 
+  private final boolean flipX;
+  private final boolean flipY;
+
   /**
    * Instantiates a new new render.
    *
@@ -66,9 +69,12 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param graphic the graphic
    * @param compact the compact
    */
-  public AbstractRender(final OrganigramView orgView, final boolean compact) {
+  public AbstractRender(final OrganigramView orgView, final boolean compact, final boolean flipX, final boolean flipY) {
     this.orgView = orgView;
     this.compact = compact;
+    this.flipX = flipX;
+    this.flipY = flipY;
+
   }
 
   /*
@@ -142,7 +148,8 @@ abstract public class AbstractRender implements OrganigramRender {
     else {
       pointLevel.clear();
       calcBoxMaximumSize(graphic);
-      organigramMaxSize.setSize(layoutBoxes());
+      final Dimension size = layoutBoxes();
+      organigramMaxSize.setSize(size);
     }
     orgView.setPreferredSize(organigramMaxSize);
   }
@@ -300,6 +307,12 @@ abstract public class AbstractRender implements OrganigramRender {
       if (rect.height < pos.y) {
         rect.height = pos.y;
       }
+    }
+    if (flipX) {
+      unit.flipX(rect.width, true);
+    }
+    if (flipY) {
+      unit.flipY(rect.height, true);
     }
     return rect;
   }

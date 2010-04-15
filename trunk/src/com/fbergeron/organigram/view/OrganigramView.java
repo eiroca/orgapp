@@ -146,6 +146,7 @@ public class OrganigramView extends JPanel {
   public void paint(final Graphics graphics) {
     Layout anchorParent;
     Layout anchorChild;
+    Layout anchorCollapsed;
     if (orgRender == null) {
       final OrganigramLayout orgLay = organigram.getOrganigramLayout();
       LineRender lineRender;
@@ -154,14 +155,26 @@ public class OrganigramView extends JPanel {
         case LEFT:
           anchorParent = Layout.LEFT;
           anchorChild = Layout.RIGHT;
-          orgRender = new VerticalRender(this, (orgLay.isCompact()));
-          boxRender = new ClassicBoxRender(true);
+          anchorCollapsed=Layout.RIGHT;
+          orgRender = new VerticalRender(this, orgLay.isCompact(), false, false);
+          break;
+        case RIGHT:
+          anchorParent = Layout.RIGHT;
+          anchorChild = Layout.LEFT;
+          anchorCollapsed=Layout.LEFT;
+          orgRender = new VerticalRender(this, orgLay.isCompact(), true, false);
+          break;
+        case BOTTOM:
+          anchorParent = Layout.TOP;
+          anchorChild = Layout.BOTTOM;
+          anchorCollapsed=Layout.TOP;
+          orgRender = new HorizontalRender(this, orgLay.isCompact(), false, true);
           break;
         default: // TOP
           anchorParent = Layout.BOTTOM;
           anchorChild = Layout.TOP;
-          orgRender = new HorizontalRender(this, (orgLay.isCompact()));
-          boxRender = new ClassicBoxRender(false);
+          anchorCollapsed=Layout.BOTTOM;
+          orgRender = new HorizontalRender(this, orgLay.isCompact(), false, false);
           break;
       }
       switch (orgLay.getLineMode()) {
@@ -172,6 +185,7 @@ public class OrganigramView extends JPanel {
           lineRender = new DirectLineRender(anchorParent, anchorChild);
           break;
       }
+      boxRender = new ClassicBoxRender(anchorCollapsed);
       orgRender.setLineRender(lineRender);
       orgRender.setBoxRender(boxRender);
     }

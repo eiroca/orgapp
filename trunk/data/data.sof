@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <organigram 
-  layout="left" mode="grow" compact="true" 
+  layout="right" mode="grow" compact="true" 
   backgroundColor="silver" 
   lineColor="red" lineMode="connector"
   boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" 
