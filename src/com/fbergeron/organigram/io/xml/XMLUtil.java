@@ -2,17 +2,17 @@
  * LGPL > 3.0 Copyright (C) 2005 Frédéric Bergeron
  * (fbergeron@users.sourceforge.net) Copyright (C) 2006-2010 eIrOcA (eNrIcO
  * Croce & sImOnA Burzio)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -235,9 +235,9 @@ public final class XMLUtil {
 
   /**
    * Write color.
-   *
+   * 
    * @param col the color
-   *
+   * 
    * @return the string
    */
   public static String writeColor(final Color col) {
@@ -251,11 +251,11 @@ public final class XMLUtil {
 
   /**
    * Parses the color.
-   *
+   * 
    * @param strColor the string color
-   *
+   * 
    * @return the color
-   *
+   * 
    * @throws ParseException the parse exception
    */
   public static Color parseColor(String strColor) throws ParseException {
@@ -309,10 +309,10 @@ public final class XMLUtil {
 
   /**
    * Read color.
-   *
+   * 
    * @param val the value
    * @param def the default
-   *
+   * 
    * @return the color
    */
   public static Color readColor(final String val, final Color def) {
@@ -330,10 +330,10 @@ public final class XMLUtil {
 
   /**
    * Read integer
-   *
+   * 
    * @param val the value
    * @param def the default
-   *
+   * 
    * @return the integer
    */
   public static int readInt(final String val, final int def) {
@@ -351,7 +351,7 @@ public final class XMLUtil {
 
   /**
    * Read layout tag, mapping in done using "layouts"
-   *
+   * 
    * @param val
    * @param def
    * @return
@@ -382,10 +382,10 @@ public final class XMLUtil {
 
   /**
    * Read alignment.
-   *
+   * 
    * @param val the value
    * @param def the default
-   *
+   * 
    * @return the alignment (int)
    */
   public static Alignment readAligment(final String val, final Alignment def) {
@@ -398,10 +398,10 @@ public final class XMLUtil {
 
   /**
    * Read boolean.
-   *
+   * 
    * @param val the value
    * @param def the default
-   *
+   * 
    * @return true, if successful
    */
   public static boolean readBoolean(final String val, final boolean def) {
@@ -417,10 +417,10 @@ public final class XMLUtil {
 
   /**
    * Read font style.
-   *
+   * 
    * @param val the value
    * @param def the default
-   *
+   * 
    * @return the font style (int)
    */
   public static int readFontStyle(final String val, final int def) {
@@ -445,7 +445,7 @@ public final class XMLUtil {
 
   /**
    * Write color.
-   *
+   * 
    * @param tag the me
    * @param buf the stringbuffer
    * @param atr the attribute
@@ -460,7 +460,7 @@ public final class XMLUtil {
 
   /**
    * Write integer.
-   *
+   * 
    * @param tag the me
    * @param buf the stringbuffer
    * @param atr the attribute
@@ -475,7 +475,7 @@ public final class XMLUtil {
 
   /**
    * Write layout tag
-   *
+   * 
    * @param tag
    * @param buf
    * @param atr
@@ -485,13 +485,13 @@ public final class XMLUtil {
   @SuppressWarnings("unchecked")
   public static void writeEnum(final TAG tag, final StringBuffer buf, final String atr, final Enum defVal, final Enum val) {
     if (val != defVal) {
-      tag.writeAttribute(buf, atr, val.toString(), false);
+      tag.writeAttribute(buf, atr, val.toString().toLowerCase(), false);
     }
   }
 
   /**
    * Write font.
-   *
+   * 
    * @param tag the me
    * @param buf the stringbuffer
    * @param atrName1 the attribute name1
@@ -529,7 +529,7 @@ public final class XMLUtil {
 
   /**
    * Write boolean.
-   *
+   * 
    * @param tag the me
    * @param buf the stringbuffer
    * @param atr the attribute
@@ -549,7 +549,7 @@ public final class XMLUtil {
 
   /**
    * Write string.
-   *
+   * 
    * @param tag the me
    * @param buf the sb
    * @param atr the atr
@@ -563,10 +563,10 @@ public final class XMLUtil {
 
   /**
    * Checks if is box layout atr.
-   *
+   * 
    * @param name the name
    * @param value the value
-   *
+   * 
    * @return true, if is box layout atr
    */
   public static boolean isBoxLayoutAtr(final String name, final String value) {
@@ -576,7 +576,7 @@ public final class XMLUtil {
 
   /**
    * Read box layout atr.
-   *
+   * 
    * @param name the name
    * @param value the value
    * @param boxLay the box lay
@@ -613,7 +613,7 @@ public final class XMLUtil {
 
   /**
    * Write box layout atr.
-   *
+   * 
    * @param tag the tag
    * @param buf the buf
    * @param boxLay the box lay

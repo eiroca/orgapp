@@ -34,8 +34,8 @@ public class VerticalRender extends AbstractRender {
    * @param graphic the graphic
    * @param compact the compact
    */
-  public VerticalRender(final OrganigramView orgView, final boolean compact) {
-    super(orgView, compact);
+  public VerticalRender(final OrganigramView orgView, final boolean compact, final boolean flipX, final boolean flipY) {
+    super(orgView, compact, flipX, flipY);
   }
 
   /*

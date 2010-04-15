@@ -109,6 +109,7 @@ OrgApp support three organigram file formats.
 <a name="ChangeLog"/><h2>Change log</h2>
  <p>Version 0.4.0<br/>
   <ul>
+   <li>New layouts: TOP (e.g. organization chart), LEFT (e.g. classic tree chart), BOTTOM (e.g. family tree), RIGHT (e.g. direct elimination matches)</li>
    <li>It is possible to specify line mode (direct or connector) and use name instead of numbers (e.g. mode="grow" instead of mode="2")</li>
    <li>Applet can take the chart definition from "Data" and "DataType" parameters</li>
    <li>Collapsable nodes</li>
