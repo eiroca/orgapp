@@ -66,16 +66,13 @@
 		The library has also an applet and a Swing Java client able to draw an organigram read from a XML definition file.<br />
 		The applet supports clickable boxes with hyperlinks, customizable colors, sizes, positions, etc., layers (or sub-graphes), search facilities, ... and it is easy to embed in a HTML page.</p>
 		<p><a href="http://sourceforge.net/project/showfiles.php?group_id=152060">Download</a> the application.</p>
-		<div style="text-align: top">
-		<applet name="Organigram" code="OrganigramApplet.class" archive="OrgApplet.jar" height="500" width="48%">
+		<div style="text-align: top"><applet name="Organigram" code="OrganigramApplet.class" archive="OrgApplet.jar" height="500" width="48%">
 		<param name="DataSource" value="data1.xml" />
 		<param name="Target" value="_blank" />
-		</applet> 
-		<applet name="Organigram" code="OrganigramApplet.class" archive="OrgApplet.jar" height="500" width="48%">
+		</applet> <applet name="Organigram" code="OrganigramApplet.class" archive="OrgApplet.jar" height="500" width="48%">
 		<param name="DataSource" value="data2.xml" />
 		<param name="Target" value="_blank" />
-		</applet>
-		</div>
+		</applet></div>
 
 		<a name="Docs" />
 		<h2>Documentation</h2>
@@ -83,13 +80,17 @@
 		<p>To view the applet, it is necessary a browser supporting Java Plug-in (with a Java version higher than 1.5). The syntax is:</p>
 		<pre>
    &lt;applet name="Organigram" code="OrganigramApplet.class" archive="URLTO_OrgApplet.jar"&gt;
-     &lt;param name="DataSource" value="URLTO_organigram.xml" /&gt;
      &lt;param name="Target" value="_blank" /&gt;
+     &lt;param name="DataSource" value="URLTO_organigram.xml" /&gt;
+     &lt;param name="Data" value="organization chart definition" /&gt;
+     &lt;param name="DataType" value="type of the definition" /&gt;
    &lt;/applet&gt;</pre>
 		<p>The parameters meaning is:</p>
 		<ul>
-			<li><b>DataSource</b> is the URL of the resource that contains the definition of the orgnanigram in any of the supported formats. The parameter is mandatory.</li>
-			<li><b>Target</b> is the target used in links (unless a more specific will be present in the definition of the organigram node). The parameter is optional.</li>
+			<li><b>Target</b> is the target used in links (unless a more specific will be present in the definition of the organigram node).</li>
+			<li><b>DataSource</b> is the URL of the resource that contains the definition of the orgnanigram in any of the supported formats.</li>
+			<li><b>Data</b>, if DataSource is not definied is the embedded defininition of the chart in one of the supported format.</li>
+			<li><b>DataType</b> is the type of the embedded definition, 0=SOF, 1=TXT, 2=sitemap.</li>
 		</ul>
 		<p>Check the source page to see a real usage.</p>
 
@@ -125,7 +126,6 @@
 			<li>Subgraphs (layers)</li>
 			<li>Graph editor (?)</li>
 			<li>Server-side implementation in PHP/JSP</li>
-			<li>Package the source</li>
 			<li>staff drawing</li>
 			<li>matrix dependencies<pre>
              B
