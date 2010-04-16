@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
-<organigram layout="right" mode="grow" compact="true" backgroundColor="silver" lineColor="red" lineMode="connector" boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" boxTextAlignment="center" isToolTipEnabled="true" firm="Test Tree">
+<organigram 
+ layout="bottom" mode="max" compact="true" 
+ backgroundColor="silver" 
+ lineColor="black" lineMode="line" 
+ boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" 
+ boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" 
+ boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" 
+ boxTextAlignment="center" 
+ isToolTipEnabled="true" 
+ firm="Test Tree">
  <unit department="Org App" name="http://orgapp.sourceforge.net/" link="http://orgapp.sourceforge.net/" role="H">
   <unit boxExpanded="true">
    <info>com</info>
