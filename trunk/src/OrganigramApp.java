@@ -22,9 +22,9 @@ import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import com.fbergeron.organigram.OrgUtils;
-import com.fbergeron.organigram.io.BuildInfo;
 import com.fbergeron.organigram.model.Organigram;
+import com.fbergeron.organigram.util.OrgCharFixUp;
+import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.view.OrganigramView;
 
 /**
@@ -79,7 +79,7 @@ public class OrganigramApp extends JFrame {
       System.err.println("Invalid data: " + OrganigramApp.organigramFile);
       System.exit(ImageObserver.ERROR);
     }
-    org.execute(new BuildInfo(), true);
+    org.execute(new OrgCharFixUp(), true);
     view = new OrganigramView(org, null);
     initialize();
   }

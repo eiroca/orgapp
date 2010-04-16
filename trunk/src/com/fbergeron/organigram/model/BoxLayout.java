@@ -1,16 +1,16 @@
 /**
  * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -18,35 +18,39 @@ package com.fbergeron.organigram.model;
 
 import java.awt.Color;
 import com.fbergeron.organigram.model.type.Alignment;
+import com.fbergeron.organigram.model.type.BoxType;
 
 /**
  * The Layout definition of a Box.
  */
 public class BoxLayout implements Cloneable {
 
-  /** The Constant COLOR_BOXFRAME. */
+  /** The default frame color. */
   public static final Color DEF_BOXFRAMECOLOR = Color.black;
 
-  /** The Constant COLOR_BOXBACKGROUND. */
+  /** The default background color. */
   public static final Color DEF_BACKGROUNDCOLOR = Color.white;
 
-  /** The Constant COLOR_BOXFOREGROUND. */
+  /** The default foreground color. */
   public static final Color DEF_FOREGROUNDCOLOR = Color.black;
 
-  /** The Constant PADDING_BOXRIGHT. */
+  /** The default right padding. */
   public static final int DEF_PADDINGRIGHT = 4;
 
-  /** The Constant PADDING_BOXLEFT. */
+  /** The default left padding. */
   public static final int DEF_PADDINGLEFT = 4;
 
-  /** The Constant PADDING_BOXTOP. */
+  /** The default top padding. */
   public static final int DEF_PADDINGTOP = 4;
 
-  /** The Constant PADDING_BOXBOTTOM. */
+  /** The default bottom padding. */
   public static final int DEF_PADDINGBOTTOM = 4;
 
-  /** The Constant ALIGN_BOXTEXT. */
+  /** The default text alignment. */
   public static final Alignment DEF_TEXTALIGN = Alignment.CENTER;
+
+  /** The default box type. */
+  public static final BoxType DEF_BOXTYPE = BoxType.NORMAL;
 
   /** The box frame color. */
   private Color frameColor = BoxLayout.DEF_BOXFRAMECOLOR;
@@ -72,6 +76,9 @@ public class BoxLayout implements Cloneable {
   /** The box text alignment. */
   private Alignment textAlignment = BoxLayout.DEF_TEXTALIGN;
 
+  /** The box type. */
+  private BoxType type = BoxLayout.DEF_BOXTYPE;
+
   /** The children of the box are displayed. */
   private boolean expanded = true;
 
@@ -96,6 +103,7 @@ public class BoxLayout implements Cloneable {
     bottomPadding = source.bottomPadding;
     textAlignment = source.textAlignment;
     expanded = source.expanded;
+    type = source.type;
   }
 
   /**
@@ -258,6 +266,23 @@ public class BoxLayout implements Cloneable {
    */
   public void setExpanded(final boolean expanded) {
     this.expanded = expanded;
+  }
+
+  /**
+   * Returns the box type.
+   * @return
+   */
+  public BoxType getType() {
+    return type;
+  }
+
+  /**
+   * Sets the box type.
+   * 
+   * @param type
+   */
+  public void setType(BoxType type) {
+    this.type = type;
   }
 
 }

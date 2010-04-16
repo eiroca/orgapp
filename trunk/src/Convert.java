@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
 import java.net.URL;
-import com.fbergeron.organigram.OrgUtils;
 import com.fbergeron.organigram.model.Organigram;
+import com.fbergeron.organigram.util.OrgUtils;
 
 /**
  * The Class Convert.

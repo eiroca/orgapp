@@ -1,16 +1,16 @@
 /**
  * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -104,14 +104,9 @@ public class ClassicBoxRender implements BoxRender {
   private final void drawBox(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
     graphic.setColor(boxLay.getBackgroundColor());
     graphic.fillRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
-    final String role = box.unit.getMeta("role");
     graphic.setColor(boxLay.getFrameColor());
-    char roleType = ' ';
-    if (role != null) {
-      roleType = role.charAt(0);
-    }
-    switch (roleType) {
-      case 'H':
+    switch (boxLay.getType()) {
+      case HIGHLIGHT:
         graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
         graphic.drawRect(box.boxRect.x + 1, box.boxRect.y + 1, box.boxRect.width - 2, box.boxRect.height - 2);
         break;

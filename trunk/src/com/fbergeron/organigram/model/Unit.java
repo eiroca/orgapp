@@ -1,17 +1,18 @@
-/** LGPL > 3.0
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
- * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- *
+/**
+ * LGPL > 3.0 Copyright (C) 2005 Frédéric Bergeron
+ * (fbergeron@users.sourceforge.net) Copyright (C) 2006-2010 eIrOcA (eNrIcO
+ * Croce & sImOnA Burzio)
+ * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -31,8 +32,8 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   /** The unit ID. */
   private String unitID;
 
-  /** The parent. */
-  private Unit parent;
+  /** The Owner. */
+  private Organigram owner;
 
   /** The children. */
   private final List<Unit> children = new ArrayList<Unit>();
@@ -45,6 +46,10 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /** The meta. */
   private final Map<String, String> meta = new HashMap<String, String>();
+
+  public Unit(Organigram owner) {
+    setOrganigram(owner);
+  }
 
   /**
    * Gets the info.
@@ -69,8 +74,8 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * 
    * @return the parent
    */
-  public Unit getParent() {
-    return parent;
+  public Organigram getOrganigram() {
+    return owner;
   }
 
   /**
@@ -80,7 +85,6 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    */
   public void addChild(final Unit child) {
     children.add(child);
-    child.setParent(this);
   }
 
   /*
@@ -124,8 +128,8 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * 
    * @param parent the new parent
    */
-  private void setParent(final Unit parent) {
-    this.parent = parent;
+  private void setOrganigram(final Organigram owner) {
+    this.owner = owner;
   }
 
   /*
@@ -269,6 +273,21 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    */
   public void setBoxLayout(final BoxLayout boxLayout) {
     this.boxLayout = boxLayout;
+  }
+
+  /**
+   * Gets the box layout.
+   * 
+   * @param organigram the organigram
+   * @param unit the u
+   * @return the box layout
+   */
+  public BoxLayout getBoxLayout(boolean always) {
+    if (boxLayout == null) {
+      final BoxLayout obl = getOrganigram().getBoxLayout();
+      boxLayout = new BoxLayout(obl);
+    }
+    return boxLayout;
   }
 
 }
