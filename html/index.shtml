@@ -115,6 +115,22 @@
   </ul>
   <p>See data file of the <a href="data1.xml">first organigram</a> and of the <a href="data2.xml">second one</a> for examples of the file format, or the SOF file format documentation present
   inside the <i>doc</i> directory in distribution.</p>
+  <h3>Server library</h3>
+  <h4>PHP Script</h4>
+  The <i>OrgApp.inc</i> is a php script to easly generate the html code necessary to draw the organization chart. Sample code:<br/>
+<code>
+require_once("lib\OrgApp.inc");<br />
+$OC = new OrgApp();<br />
+//Set the dimension of the chats
+$OC-&gt;width=400;<br />
+$OC-&gt;height=300;<br />
+//Generate a chart, the data is a URL<br />
+$OC-&gt;emitRef('data.xml'); <br />
+//Generate a chart, the data is read from a file and embedded in the html page<br />
+$OC-&gt;emitFile('data.xml', 0); <br />
+//Generate a chart with the data given<br />
+$OC-&gt;emitData('&lt;organigram&gt;&lt;unit name=&quot;Doe, John&quot; department=&quot;CEO&quot; role=&quot;H&quot;/&gt;&lt;/organigram&gt;', 0); <br />
+</code>  
   <h3>Screenshoots</h3>
   <p><img src="img/img01.png" alt="Top layout" width="320" /> <img src="img/img02.png" alt="Left layout" width="320" /> <br />
   <img src="img/img03.png" alt="Right layout" width="320" /> <img src="img/img04.png" alt="Bottom layout" width="320" /></p>
@@ -128,7 +144,6 @@
    <li>Search</li>
    <li>Subgraphs (layers)</li>
    <li>Graph editor (?)</li>
-   <li>Server-side implementation in PHP/JSP</li>
    <li>staff drawing</li>
    <li>matrix dependencies<pre>
              B
@@ -144,6 +159,7 @@
   <h2>Change log</h2>
   <p>Version 0.4.0</p>
   <ul>
+   <li>PHP script to easly generate the applet tag to embed the chart</li>
    <li>New layouts: TOP (e.g. organization chart), LEFT (e.g. classic tree chart), BOTTOM (e.g. family tree), RIGHT (e.g. direct elimination matches)</li>
    <li>It is possible to specify line mode (direct or connector) and use name instead of numbers (e.g. mode="grow" instead of mode="2")</li>
    <li>Applet can take the chart definition from "Data" and "DataType" parameters</li>
