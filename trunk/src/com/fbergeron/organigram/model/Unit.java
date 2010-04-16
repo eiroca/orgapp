@@ -290,4 +290,18 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
     return boxLayout;
   }
 
+  private Unit findParent(Unit child) {
+    for (Unit c : children) {
+      if (c == child) { return this; }
+      Unit f = c.findParent(child);
+      if (f != null) { return f; }
+    }
+    return null;
+  }
+
+  public Unit getParent() {
+    Unit root = getOrganigram().getRoot();
+    return root.findParent(this);
+  }
+
 }
