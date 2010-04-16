@@ -41,7 +41,7 @@ public class TXTOrganigramReader implements OrganigramReader {
    */
   public Organigram readOrganigram(final InputStream source) {
     organigram = new Organigram();
-    final Unit root = new Unit();
+    final Unit root = new Unit(organigram);
     organigram.setRoot(root);
     final BufferedReader reader = new BufferedReader(new InputStreamReader(source));
     read(organigram, reader);
@@ -81,7 +81,7 @@ public class TXTOrganigramReader implements OrganigramReader {
     }
     Unit unit = organigram.findByID(unitID, false);
     if (!unitID.equals(unit.getID())) {
-      final Unit newUnit = new Unit();
+      final Unit newUnit = new Unit(organigram);
       unit.addChild(newUnit);
       unit = newUnit;
     }

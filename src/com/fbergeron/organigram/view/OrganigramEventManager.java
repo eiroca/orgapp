@@ -28,9 +28,9 @@ import java.awt.event.MouseMotionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
-import com.fbergeron.organigram.Messages;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
+import com.fbergeron.organigram.util.Messages;
 
 /**
  * LinkManager handles the user interaction.

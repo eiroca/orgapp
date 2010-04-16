@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <organigram 
- layout="bottom" mode="max" compact="true" 
+ layout="left" mode="grow" compact="true" 
  backgroundColor="silver" 
- lineColor="black" lineMode="line" 
+ lineColor="black" lineMode="connector" 
  boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" 
  boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" 
  boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" 

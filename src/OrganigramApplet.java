@@ -21,9 +21,9 @@ import java.awt.Container;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import javax.swing.JApplet;
-import com.fbergeron.organigram.OrgUtils;
-import com.fbergeron.organigram.io.BuildInfo;
 import com.fbergeron.organigram.model.Organigram;
+import com.fbergeron.organigram.util.OrgCharFixUp;
+import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.view.OrganigramView;
 
 /**
@@ -61,7 +61,7 @@ public class OrganigramApplet extends JApplet {
       final ByteArrayInputStream src = new ByteArrayInputStream(data.getBytes());
       o = OrgUtils.readOrganigram(src, type);
     }
-    o.execute(new BuildInfo(), true);
+    o.execute(new OrgCharFixUp(), true);
     o.buidID();
     final OrganigramView view = new OrganigramView(o, target);
     final Container me = getContentPane();
