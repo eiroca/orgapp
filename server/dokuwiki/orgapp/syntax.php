@@ -7,7 +7,7 @@
  * @version 1.0.0
  * @link http://www.eiroca.net
  */
-if (!defined('DOKU_INC')) define('DOKU_INC', realpath(dirname( __FILE__ ).'/../../../').'/');
+if (!defined('DOKU_INC')) die();
 if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN', DOKU_INC.'lib/plugins/');
 require_once (DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_orgapp extends DokuWiki_Syntax_Plugin {
