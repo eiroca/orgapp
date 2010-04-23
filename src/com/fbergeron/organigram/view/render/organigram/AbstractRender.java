@@ -57,17 +57,22 @@ abstract public class AbstractRender implements OrganigramRender {
   /** The compact. */
   protected boolean compact;
 
+  /** The valid layout. */
   protected boolean validLayout = false;
 
+  /** The flip x. */
   private final boolean flipX;
+  
+  /** The flip y. */
   private final boolean flipY;
 
   /**
    * Instantiates a new new render.
    * 
    * @param orgView the org view
-   * @param graphic the graphic
    * @param compact the compact
+   * @param flipX the flip x
+   * @param flipY the flip y
    */
   public AbstractRender(final OrganigramView orgView, final boolean compact, final boolean flipX, final boolean flipY) {
     this.orgView = orgView;
@@ -172,9 +177,8 @@ abstract public class AbstractRender implements OrganigramRender {
   /**
    * Calc box maximum.
    * 
-   * @param box the box
    * @param graphic the graphic
-   * 
+   * @param box the box
    * @return the dimension
    */
   private Dimension calcBoxMaximum(final Graphics graphic, final UnitView box) {
@@ -199,10 +203,10 @@ abstract public class AbstractRender implements OrganigramRender {
   /**
    * Calc box maximum size.
    * 
+   * @param graphic the graphic
    * @param box the box
    * @param max the max
    * @param level the level
-   * @param graphic the graphic
    */
   private void calcBoxMaximumSize(final Graphics graphic, final UnitView box, final Dimension max, final int level) {
     final Dimension boxMax = calcBoxMaximum(graphic, box);
@@ -249,7 +253,9 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
-   * Returns maximum levels
+   * Returns maximum levels.
+   * 
+   * @return the levels
    */
   public int getLevels() {
     return boxMaxSizeLevel.size();
@@ -329,6 +335,9 @@ abstract public class AbstractRender implements OrganigramRender {
     validLayout = true;
   }
 
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.view.render.OrganigramRender#invalidate()
+   */
   public void invalidate() {
     validLayout = false;
   }

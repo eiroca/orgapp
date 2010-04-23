@@ -72,6 +72,9 @@ public class UnitProcessor extends TAG {
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.io.TAG#end(com.fbergeron.organigram.io.OrganigramReader)
+   */
   @Override
   public void end(final OrganigramReader reader) {
     final XMLOrganigramReader xor = (XMLOrganigramReader) reader;

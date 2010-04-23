@@ -27,14 +27,32 @@ import com.fbergeron.organigram.view.UnitView;
  */
 public class DirectLineRender extends AbstractLineRender {
 
+  /** The anchor parent. */
   protected Layout anchorParent;
+  
+  /** The anchor child. */
   protected Layout anchorChild;
 
+  /**
+   * Instantiates a new direct line render.
+   * 
+   * @param anchorParent the anchor parent
+   * @param anchorChild the anchor child
+   */
   public DirectLineRender(final Layout anchorParent, final Layout anchorChild) {
     this.anchorParent = anchorParent;
     this.anchorChild = anchorChild;
   }
 
+  /**
+   * Sets the anchor pos.
+   * 
+   * @param box the box
+   * @param anchor the anchor
+   * @param idx the idx
+   * @param xx the xx
+   * @param yy the yy
+   */
   final protected void setAnchorPos(final UnitView box, final Layout anchor, final int idx, final int[] xx, final int[] yy) {
     final Point pos = box.getLocation();
     switch (anchor) {
@@ -60,8 +78,8 @@ public class DirectLineRender extends AbstractLineRender {
   /**
    * Draw lines vert.
    * 
-   * @param box the box
    * @param graphics the graphics
+   * @param box the box
    * @param orgLay the org lay
    */
   public void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay) {

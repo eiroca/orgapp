@@ -31,8 +31,9 @@ public class HorizontalRender extends AbstractRender {
    * Instantiates a new compact horizontal render.
    * 
    * @param orgView the organigram view
-   * @param graphic the graphic
    * @param compact the compact
+   * @param flipX the flip x
+   * @param flipY the flip y
    */
   public HorizontalRender(final OrganigramView orgView, final boolean compact, final boolean flipX, final boolean flipY) {
     super(orgView, compact, flipX, flipY);

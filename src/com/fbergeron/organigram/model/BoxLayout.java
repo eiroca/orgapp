@@ -270,7 +270,7 @@ public class BoxLayout implements Cloneable {
 
   /**
    * Returns the box type.
-   * @return
+   * @return returns the box type
    */
   public BoxType getType() {
     return type;
@@ -279,7 +279,7 @@ public class BoxLayout implements Cloneable {
   /**
    * Sets the box type.
    * 
-   * @param type
+   * @param type the new type
    */
   public void setType(BoxType type) {
     this.type = type;
