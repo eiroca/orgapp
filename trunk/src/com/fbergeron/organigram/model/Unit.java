@@ -47,6 +47,11 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   /** The meta. */
   private final Map<String, String> meta = new HashMap<String, String>();
 
+  /**
+   * Instantiates a new unit.
+   * 
+   * @param owner the owner
+   */
   public Unit(Organigram owner) {
     setOrganigram(owner);
   }
@@ -126,7 +131,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   /**
    * Sets the parent.
    * 
-   * @param parent the new parent
+   * @param owner the new organigram
    */
   private void setOrganigram(final Organigram owner) {
     this.owner = owner;
@@ -278,8 +283,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   /**
    * Gets the box layout.
    * 
-   * @param organigram the organigram
-   * @param unit the u
+   * @param always the always
    * @return the box layout
    */
   public BoxLayout getBoxLayout(boolean always) {
@@ -290,6 +294,12 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
     return boxLayout;
   }
 
+  /**
+   * Find parent.
+   * 
+   * @param child the child
+   * @return the unit
+   */
   private Unit findParent(Unit child) {
     for (Unit c : children) {
       if (c == child) { return this; }
@@ -299,6 +309,11 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
     return null;
   }
 
+  /**
+   * Gets the parent.
+   * 
+   * @return the parent
+   */
   public Unit getParent() {
     Unit root = getOrganigram().getRoot();
     return root.findParent(this);

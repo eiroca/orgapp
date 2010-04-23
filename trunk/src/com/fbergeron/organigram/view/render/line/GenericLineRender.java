@@ -26,10 +26,23 @@ import com.fbergeron.organigram.view.UnitView;
  */
 public class GenericLineRender extends DirectLineRender {
 
+  /**
+   * Instantiates a new generic line render.
+   * 
+   * @param anchorParent the anchor parent
+   * @param anchorChild the anchor child
+   */
   public GenericLineRender(final Layout anchorParent, final Layout anchorChild) {
     super(anchorParent, anchorChild);
   }
 
+  /**
+   * Calc node.
+   * 
+   * @param anchor the anchor
+   * @param xx the xx
+   * @param yy the yy
+   */
   private void calcNode(final Layout anchor, final int[] xx, final int[] yy) {
     switch (anchor) {
       case LEFT:
@@ -51,8 +64,8 @@ public class GenericLineRender extends DirectLineRender {
   /**
    * Draw lines vert.
    * 
-   * @param box the box
    * @param graphics the graphics
+   * @param box the box
    * @param orgLay the org lay
    */
   @Override

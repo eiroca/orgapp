@@ -31,8 +31,9 @@ public class VerticalRender extends AbstractRender {
    * Instantiates a new compact vert render.
    * 
    * @param orgView the org view
-   * @param graphic the graphic
    * @param compact the compact
+   * @param flipX the flip x
+   * @param flipY the flip y
    */
   public VerticalRender(final OrganigramView orgView, final boolean compact, final boolean flipX, final boolean flipY) {
     super(orgView, compact, flipX, flipY);

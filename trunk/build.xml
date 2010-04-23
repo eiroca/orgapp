@@ -130,14 +130,17 @@
 
 	<target name="dist" depends="applet, app, convert, javadoc" description="Create distribution">
 		<echo>Convert application created.</echo>
-		<mkdir dir="${dist}" />
-		<mkdir dir="${dist}/${version}" />
 		<delete file="${dist}/app.jar" />
-		<delete file="${dist}/applet.jar" />
 		<delete file="${dist}/convert.jar" />
+		<delete file="${dist}/applet.jar" />
+		<mkdir dir="${dist}/${version}" />
+		<copy todir="${base}/server/php">
+			<fileset file="${build}/OrgApplet.jar" />
+		</copy>
 		<zip destfile="${dist}/${version}/OrgApp_src.zip">
 			<zipfileset dir="${base}/src" prefix="src" />
 			<zipfileset dir="${base}/data" prefix="data" />
+			<zipfileset dir="${base}/server" prefix="server" />
 			<zipfileset dir="${base}/doc" prefix="doc" />
 			<fileset file="${base}/build.xml" />
 			<fileset file="${base}/COPYING" />
@@ -145,13 +148,13 @@
 			<fileset file="${base}/README.txt" />
 			<fileset file="${base}/todo.txt" />
 			<fileset file="${base}/sample-build.properties" />
+			<fileset file="${build}/OrgApplet.jar" />
+			<fileset file="${build}/OrgApp.jar" />
+			<fileset file="${build}/Convert.jar" />
 		</zip>
 		<copy todir="${dist}/${version}">
 			<fileset file="${build}/OrgApplet.jar" />
-			<!-- <fileset file="${build}/OrgApp.jar" /> -->
-			<!-- <fileset file="${build}/Convert.jar" /> -->
 		</copy>
-
 	</target>
 
 </project>

@@ -33,20 +33,24 @@ import com.fbergeron.organigram.view.render.BoxRender;
  */
 public class ClassicBoxRender implements BoxRender {
 
+  /** The collapsed anchor. */
   private final Layout collapsedAnchor;
 
   /**
    * Instantiates a new classic box render.
+   * 
+   * @param collapsedAnchor the collapsed anchor
    */
   public ClassicBoxRender(final Layout collapsedAnchor) {
     this.collapsedAnchor = collapsedAnchor;
   }
 
   /**
-   * Draws the icon to rappresents that the node has unexpanded children
-   * @param graphic
-   * @param box
-   * @param boxLay
+   * Draws the icon to rappresents that the node has unexpanded children.
+   * 
+   * @param graphic the graphic
+   * @param box the box
+   * @param boxLay the box lay
    */
   private final void drawBoxExpand(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
     final Polygon p = new Polygon();
@@ -98,8 +102,8 @@ public class ClassicBoxRender implements BoxRender {
    * Draw box.
    * 
    * @param graphic the graphic
-   * @param boxLay the box lay
    * @param box the box
+   * @param boxLay the box lay
    */
   private final void drawBox(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
     graphic.setColor(boxLay.getBackgroundColor());
@@ -123,8 +127,8 @@ public class ClassicBoxRender implements BoxRender {
    * Draw text.
    * 
    * @param graphic the graphic
-   * @param boxLay the box lay
    * @param box the box
+   * @param boxLay the box lay
    */
   private final void drawText(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
     int xPos;

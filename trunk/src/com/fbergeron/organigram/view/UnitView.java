@@ -375,15 +375,16 @@ public class UnitView implements Iterable<UnitView> {
   }
 
   /**
-   * Node can expand?
+   * Node can expand?.
    * 
    * @return true, if yes
    */
   public boolean canExpand() {
     return (!layout.isExpanded() && (countChildren() > 0));
   }
+  
   /**
-   * Node can collapse?
+   * Node can collapse?.
    * 
    * @return true, if yes
    */
