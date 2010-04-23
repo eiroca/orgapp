@@ -18,7 +18,7 @@
 	<property name="properties" value="properties" />
 	<property name="src" value="src" />
 	<property name="img" value="img" />
-	<property name="build" value="html" />
+	<property name="html" value="html" />
 	<property name="version" value="0.4.0" />
 
 	<path id="classpath">
@@ -66,7 +66,7 @@
 		<proguard>
             -libraryjars "${java.home}\lib\rt.jar"
             -injars "${dist}/applet.jar"
-            -outjars "${build}/OrgApplet.jar"
+            -outjars "${dist}/OrgApplet.jar"
             -dontoptimize           
             -dontusemixedcaseclassnames
             -defaultpackage ''
@@ -91,7 +91,7 @@
 		<proguard>
             -libraryjars "${java.home}\lib\rt.jar"
             -injars "${dist}/app.jar"
-            -outjars "${build}/OrgApp.jar"
+            -outjars "${dist}/OrgApp.jar"
             -dontusemixedcaseclassnames
             -dontoptimize           
             -defaultpackage ''
@@ -107,7 +107,7 @@
 
 	<target name="convert_jar" depends="compile">
 		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/convert.jar" basedir="classes">
+		<jar destfile="${dist}/conv.jar" basedir="classes">
 			<manifest>
 				<attribute name="Main-Class" value="Convert" />
 			</manifest>
@@ -117,8 +117,8 @@
 	<target name="convert_shrink" depends="convert_jar" description="Obfuscate compiled classes">
 		<proguard>
             -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${dist}/convert.jar"
-            -outjars "${build}/Convert.jar"
+            -injars "${dist}/conv.jar"
+            -outjars "${dist}/Convert.jar"
             -dontusemixedcaseclassnames
             -dontoptimize           
             -defaultpackage ''
@@ -131,13 +131,16 @@
 	<target name="dist" depends="applet, app, convert, javadoc" description="Create distribution">
 		<echo>Convert application created.</echo>
 		<delete file="${dist}/app.jar" />
-		<delete file="${dist}/convert.jar" />
+		<delete file="${dist}/conv.jar" />
 		<delete file="${dist}/applet.jar" />
 		<mkdir dir="${dist}/${version}" />
 		<copy todir="${base}/server/php">
-			<fileset file="${build}/OrgApplet.jar" />
+			<fileset file="${dist}/OrgApplet.jar" />
 		</copy>
-		<zip destfile="${dist}/${version}/OrgApp_src.zip">
+		<copy todir="${html}">
+			<fileset file="${dist}/OrgApplet.jar" />
+		</copy>
+		<zip destfile="${dist}/${version}/orgapp-${version}-src.zip">
 			<zipfileset dir="${base}/src" prefix="src" />
 			<zipfileset dir="${base}/data" prefix="data" />
 			<zipfileset dir="${base}/server" prefix="server" />
@@ -148,13 +151,10 @@
 			<fileset file="${base}/README.txt" />
 			<fileset file="${base}/todo.txt" />
 			<fileset file="${base}/sample-build.properties" />
-			<fileset file="${build}/OrgApplet.jar" />
-			<fileset file="${build}/OrgApp.jar" />
-			<fileset file="${build}/Convert.jar" />
+			<fileset file="${dist}/OrgApplet.jar" />
+			<fileset file="${dist}/OrgApp.jar" />
+			<fileset file="${dist}/Convert.jar" />
 		</zip>
-		<copy todir="${dist}/${version}">
-			<fileset file="${build}/OrgApplet.jar" />
-		</copy>
 	</target>
 
 </project>
