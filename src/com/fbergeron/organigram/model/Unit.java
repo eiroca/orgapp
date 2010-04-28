@@ -52,7 +52,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * 
    * @param owner the owner
    */
-  public Unit(Organigram owner) {
+  public Unit(final Organigram owner) {
     setOrganigram(owner);
   }
 
@@ -286,7 +286,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @param always the always
    * @return the box layout
    */
-  public BoxLayout getBoxLayout(boolean always) {
+  public BoxLayout getBoxLayout(final boolean always) {
     if (boxLayout == null) {
       final BoxLayout obl = getOrganigram().getBoxLayout();
       boxLayout = new BoxLayout(obl);
@@ -300,10 +300,10 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @param child the child
    * @return the unit
    */
-  private Unit findParent(Unit child) {
-    for (Unit c : children) {
+  private Unit findParent(final Unit child) {
+    for (final Unit c : children) {
       if (c == child) { return this; }
-      Unit f = c.findParent(child);
+      final Unit f = c.findParent(child);
       if (f != null) { return f; }
     }
     return null;
@@ -315,7 +315,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @return the parent
    */
   public Unit getParent() {
-    Unit root = getOrganigram().getRoot();
+    final Unit root = getOrganigram().getRoot();
     return root.findParent(this);
   }
 

@@ -45,7 +45,7 @@ public class URLSetProcessor extends TAG {
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
     super.start(reader, attribs);
-    Organigram org = new Organigram();
+    final Organigram org = new Organigram();
     reader.setOrganigram(org);
     final Unit root = new Unit(org);
     reader.getOrganigram().setRoot(root);

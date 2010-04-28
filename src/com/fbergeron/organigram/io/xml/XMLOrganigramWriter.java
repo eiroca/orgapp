@@ -127,11 +127,11 @@ public class XMLOrganigramWriter implements OrganigramWriter {
         XMLUtil.UNIT.openClose(buf);
         compact = false;
       }
-//      XMLUtil.CHILDS.open(buf, false);
+      // XMLUtil.CHILDS.open(buf, false);
       for (final Unit u : unit) {
         writeUnit(buf, u, writeInfo);
       }
-//      XMLUtil.CHILDS.close(buf, false);
+      // XMLUtil.CHILDS.close(buf, false);
     }
     XMLUtil.UNIT.close(buf, compact);
     return true;

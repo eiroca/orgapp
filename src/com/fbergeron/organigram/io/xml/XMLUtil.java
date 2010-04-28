@@ -42,9 +42,6 @@ public final class XMLUtil {
   /** The Constant UNIT. */
   public static final TAG UNIT = new UnitProcessor();
 
-  /** The Constant CHILDS. */
-  // public static final TAG CHILDS = new ChildrenProcessor();
-
   /** The Constant INFO. */
   public static final TAG INFO = new InfoProcessor();
 
@@ -131,15 +128,6 @@ public final class XMLUtil {
 
   /** The Constant ATR_FONT_STYLE. */
   public static final String ATR_FONT_STYLE = "fontStyle";
-
-  /** The Constant VAL_CENTER. */
-  public static final String VAL_CENTER = "center";
-
-  /** The Constant VAL_LEFT. */
-  public static final String VAL_LEFT = "left";
-
-  /** The Constant VAL_RIGHT. */
-  public static final String VAL_RIGHT = "right";
 
   /** The Constant VAL_TRUE. */
   public static final String VAL_TRUE = "true";

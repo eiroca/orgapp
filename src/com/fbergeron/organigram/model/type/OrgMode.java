@@ -20,11 +20,11 @@ package com.fbergeron.organigram.model.type;
  * The Enum OrgMode.
  */
 public enum OrgMode {
-  
+
   /** The MAX. */
-  MAX, 
- /** The MIN. */
- MIN, 
- /** The GROW. */
- GROW
+  MAX,
+  /** The MIN. */
+  MIN,
+  /** The GROW. */
+  GROW
 }

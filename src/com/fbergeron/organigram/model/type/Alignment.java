@@ -20,11 +20,11 @@ package com.fbergeron.organigram.model.type;
  * The Enum Alignment.
  */
 public enum Alignment {
-  
+
   /** The LEFT. */
-  LEFT, 
- /** The CENTER. */
- CENTER, 
- /** The RIGHT. */
- RIGHT
+  LEFT,
+  /** The CENTER. */
+  CENTER,
+  /** The RIGHT. */
+  RIGHT
 }

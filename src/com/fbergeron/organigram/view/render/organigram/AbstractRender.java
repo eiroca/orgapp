@@ -62,7 +62,7 @@ abstract public class AbstractRender implements OrganigramRender {
 
   /** The flip x. */
   private final boolean flipX;
-  
+
   /** The flip y. */
   private final boolean flipY;
 
