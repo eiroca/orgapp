@@ -20,13 +20,13 @@ package com.fbergeron.organigram.model.type;
  * The Enum Layout.
  */
 public enum Layout {
-  
+
   /** The TOP. */
-  TOP, 
- /** The LEFT. */
- LEFT, 
- /** The BOTTOM. */
- BOTTOM, 
- /** The RIGHT. */
- RIGHT
+  TOP,
+  /** The LEFT. */
+  LEFT,
+  /** The BOTTOM. */
+  BOTTOM,
+  /** The RIGHT. */
+  RIGHT
 }

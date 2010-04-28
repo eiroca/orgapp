@@ -29,7 +29,7 @@ public class DirectLineRender extends AbstractLineRender {
 
   /** The anchor parent. */
   protected Layout anchorParent;
-  
+
   /** The anchor child. */
   protected Layout anchorChild;
 

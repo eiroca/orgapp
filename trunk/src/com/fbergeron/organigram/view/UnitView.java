@@ -34,7 +34,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /** The unit. */
   public final Unit unit;
-  
+
   /** The layout. */
   public final BoxLayout layout;
 
@@ -382,7 +382,7 @@ public class UnitView implements Iterable<UnitView> {
   public boolean canExpand() {
     return (!layout.isExpanded() && (countChildren() > 0));
   }
-  
+
   /**
    * Node can collapse?.
    * 

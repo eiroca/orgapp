@@ -281,7 +281,7 @@ public class BoxLayout implements Cloneable {
    * 
    * @param type the new type
    */
-  public void setType(BoxType type) {
+  public void setType(final BoxType type) {
     this.type = type;
   }
 

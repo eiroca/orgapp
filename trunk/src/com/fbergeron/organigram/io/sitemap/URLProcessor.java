@@ -58,7 +58,7 @@ public class URLProcessor extends TAG {
     super.end(reader);
     final Map<String, String> info = reader.getData();
     final String loc = info.get("loc");
-    Organigram org = reader.getOrganigram();
+    final Organigram org = reader.getOrganigram();
     Unit unit = org.findByID(loc, false);
     if (!loc.equals(unit.getID())) {
       final Unit newUnit = new Unit(org);
