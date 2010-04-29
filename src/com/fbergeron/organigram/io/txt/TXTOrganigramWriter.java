@@ -45,7 +45,7 @@ public class TXTOrganigramWriter implements OrganigramWriter {
     if (unit != null) {
       final String name = unit.getMeta("name");
       if (name != null) {
-        buf.append(TXTOrganigramWriter.writeStr(unit.getID()));
+        buf.append(TXTOrganigramWriter.writeStr(unit.getId()));
         buf.append('\t');
         buf.append(TXTOrganigramWriter.writeStr(unit.getMeta("date")));
         buf.append('\t');

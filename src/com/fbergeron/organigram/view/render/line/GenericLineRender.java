@@ -40,23 +40,23 @@ public class GenericLineRender extends DirectLineRender {
    * Calc node.
    * 
    * @param anchor the anchor
-   * @param xx the xx
-   * @param yy the yy
+   * @param xPos the xx
+   * @param yPos the yy
    */
-  private void calcNode(final Layout anchor, final int[] xx, final int[] yy) {
+  private void calcNode(final Layout anchor, final int[] xPos, final int[] yPos) {
     switch (anchor) {
       case LEFT:
       case RIGHT:
-        xx[1] = (xx[0] + xx[3]) / 2;
-        xx[2] = xx[1];
-        yy[1] = yy[0];
-        yy[2] = yy[3];
+        xPos[1] = (xPos[0] + xPos[3]) / 2;
+        xPos[2] = xPos[1];
+        yPos[1] = yPos[0];
+        yPos[2] = yPos[3];
         break;
       default: // TOP, BOTTOM
-        yy[1] = (yy[0] + yy[3]) / 2;
-        yy[2] = yy[1];
-        xx[1] = xx[0];
-        xx[2] = xx[3];
+        yPos[1] = (yPos[0] + yPos[3]) / 2;
+        yPos[2] = yPos[1];
+        xPos[1] = xPos[0];
+        xPos[2] = xPos[3];
         break;
     }
   }
@@ -71,13 +71,13 @@ public class GenericLineRender extends DirectLineRender {
   @Override
   public void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay) {
     graphics.setColor(orgLay.getLineColor());
-    final int[] xx = new int[4];
-    final int[] yy = new int[4];
-    setAnchorPos(box, anchorParent, 0, xx, yy);
+    final int[] xPos = new int[4];
+    final int[] yPos = new int[4];
+    setAnchorPos(box, anchorParent, 0, xPos, yPos);
     for (final UnitView child : box) {
-      setAnchorPos(child, anchorChild, 3, xx, yy);
-      calcNode(anchorParent, xx, yy);
-      graphics.drawPolyline(xx, yy, 4);
+      setAnchorPos(child, anchorChild, 3, xPos, yPos);
+      calcNode(anchorParent, xPos, yPos);
+      graphics.drawPolyline(xPos, yPos, 4);
     }
   }
 

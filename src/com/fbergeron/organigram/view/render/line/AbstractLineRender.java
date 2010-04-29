@@ -25,7 +25,16 @@ import com.fbergeron.organigram.view.render.LineRender;
 public abstract class AbstractLineRender implements LineRender {
 
   /** The organigram lay. */
-  protected OrganigramLayout orgLay;
+  protected OrganigramLayout organigramLayout;
+
+  /**
+   * Gets the organigram layout.
+   * 
+   * @return the organigram layout
+   */
+  public OrganigramLayout getOrganigramLayout() {
+    return organigramLayout;
+  }
 
   /**
    * Sets the organigram layout.
@@ -33,7 +42,7 @@ public abstract class AbstractLineRender implements LineRender {
    * @param orgLay the new organigram layout
    */
   public void setOrganigramLayout(final OrganigramLayout orgLay) {
-    this.orgLay = orgLay;
+    organigramLayout = orgLay;
   }
 
 }

@@ -57,11 +57,11 @@ public class BoxSpace {
    * Update packed.
    */
   final public void updatePacked() {
-    if ((small.width != full.width) || (small.height != full.height)) {
-      packed = true;
+    if ((small.width == full.width) && (small.height == full.height)) {
+      packed = false;
     }
     else {
-      packed = false;
+      packed = true;
     }
   }
 

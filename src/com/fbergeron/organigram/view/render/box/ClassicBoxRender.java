@@ -34,7 +34,7 @@ import com.fbergeron.organigram.view.render.BoxRender;
 public class ClassicBoxRender implements BoxRender {
 
   /** The collapsed anchor. */
-  private final Layout collapsedAnchor;
+  private Layout collapsedAnchor;
 
   /**
    * Instantiates a new classic box render.
@@ -43,59 +43,6 @@ public class ClassicBoxRender implements BoxRender {
    */
   public ClassicBoxRender(final Layout collapsedAnchor) {
     this.collapsedAnchor = collapsedAnchor;
-  }
-
-  /**
-   * Draws the icon to rappresents that the node has unexpanded children.
-   * 
-   * @param graphic the graphic
-   * @param box the box
-   * @param boxLay the box lay
-   */
-  private final void drawBoxExpand(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
-    final Polygon p = new Polygon();
-    final int cx;
-    final int cy;
-    final int sz;
-    switch (collapsedAnchor) {
-      case LEFT:
-        cx = box.boxRect.x;
-        cy = box.boxRect.y + box.boxRect.height / 2;
-        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getLeftMargin() / 2;
-        p.addPoint(cx - sz, cy);
-        p.addPoint(cx, cy - sz);
-        p.addPoint(cx, cy + sz);
-        p.addPoint(cx - sz, cy);
-        break;
-      case RIGHT:
-        cx = box.boxRect.x + box.boxRect.width;
-        cy = box.boxRect.y + box.boxRect.height / 2;
-        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
-        p.addPoint(cx + sz, cy);
-        p.addPoint(cx, cy - sz);
-        p.addPoint(cx, cy + sz);
-        p.addPoint(cx + sz, cy);
-        break;
-      case BOTTOM:
-        cx = box.boxRect.x + box.boxRect.width / 2;
-        cy = box.boxRect.y + box.boxRect.height;
-        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
-        p.addPoint(cx, cy + sz);
-        p.addPoint(cx - sz, cy);
-        p.addPoint(cx + sz, cy);
-        p.addPoint(cx, cy + sz);
-        break;
-      default:// TOP
-        cx = box.boxRect.x + box.boxRect.width / 2;
-        cy = box.boxRect.y;
-        sz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getTopMargin() / 2;
-        p.addPoint(cx, cy - sz);
-        p.addPoint(cx - sz, cy);
-        p.addPoint(cx + sz, cy);
-        p.addPoint(cx, cy - sz);
-        break;
-    }
-    graphic.fillPolygon(p);
   }
 
   /**
@@ -110,6 +57,8 @@ public class ClassicBoxRender implements BoxRender {
     graphic.fillRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
     graphic.setColor(boxLay.getFrameColor());
     switch (boxLay.getType()) {
+      case NONE:
+        break;
       case HIGHLIGHT:
         graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
         graphic.drawRect(box.boxRect.x + 1, box.boxRect.y + 1, box.boxRect.width - 2, box.boxRect.height - 2);
@@ -119,8 +68,61 @@ public class ClassicBoxRender implements BoxRender {
         break;
     }
     if (box.canExpand()) {
-      drawBoxExpand(graphic, box, boxLay);
+      drawBoxExpand(graphic, box);
     }
+  }
+
+  /**
+   * Draws the icon to rappresents that the node has unexpanded children.
+   * 
+   * @param graphic the graphic
+   * @param box the box
+   * @param boxLay the box lay
+   */
+  private final void drawBoxExpand(final Graphics graphic, final UnitView box) {
+    final Polygon pol = new Polygon();
+    final int xPos;
+    final int yPos;
+    final int siz;
+    switch (collapsedAnchor) {
+      case LEFT:
+        xPos = box.boxRect.x;
+        yPos = box.boxRect.y + box.boxRect.height / 2;
+        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getLeftMargin() / 2;
+        pol.addPoint(xPos - siz, yPos);
+        pol.addPoint(xPos, yPos - siz);
+        pol.addPoint(xPos, yPos + siz);
+        pol.addPoint(xPos - siz, yPos);
+        break;
+      case RIGHT:
+        xPos = box.boxRect.x + box.boxRect.width;
+        yPos = box.boxRect.y + box.boxRect.height / 2;
+        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
+        pol.addPoint(xPos + siz, yPos);
+        pol.addPoint(xPos, yPos - siz);
+        pol.addPoint(xPos, yPos + siz);
+        pol.addPoint(xPos + siz, yPos);
+        break;
+      case BOTTOM:
+        xPos = box.boxRect.x + box.boxRect.width / 2;
+        yPos = box.boxRect.y + box.boxRect.height;
+        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
+        pol.addPoint(xPos, yPos + siz);
+        pol.addPoint(xPos - siz, yPos);
+        pol.addPoint(xPos + siz, yPos);
+        pol.addPoint(xPos, yPos + siz);
+        break;
+      default:// TOP
+        xPos = box.boxRect.x + box.boxRect.width / 2;
+        yPos = box.boxRect.y;
+        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getTopMargin() / 2;
+        pol.addPoint(xPos, yPos - siz);
+        pol.addPoint(xPos - siz, yPos);
+        pol.addPoint(xPos + siz, yPos);
+        pol.addPoint(xPos, yPos - siz);
+        break;
+    }
+    graphic.fillPolygon(pol);
   }
 
   /**
@@ -132,10 +134,8 @@ public class ClassicBoxRender implements BoxRender {
    */
   private final void drawText(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
     int xPos;
-    int yPos;
-    yPos = box.boxRect.y + boxLay.getTopPadding();
+    int yPos = box.boxRect.y + boxLay.getTopPadding();
     final List<Line> lines = box.unit.getInfo();
-    FontMetrics fontMetr;
     for (final Line text : lines) {
       if (text.isVisible()) {
         if (text.getColor() == null) {
@@ -147,7 +147,7 @@ public class ClassicBoxRender implements BoxRender {
         if (text.getFont() != null) {
           graphic.setFont(text.getFont());
         }
-        fontMetr = graphic.getFontMetrics();
+        final FontMetrics fontMetr = graphic.getFontMetrics();
         final int textWidth = fontMetr.stringWidth(text.getText());
         if (boxLay.getTextAlignment() == Alignment.CENTER) {
           xPos = box.boxRect.x + (box.boxRect.width - textWidth) / 2;
@@ -164,6 +164,13 @@ public class ClassicBoxRender implements BoxRender {
     }
   }
 
+  /**
+   * @return the collapsedAnchor
+   */
+  public Layout getCollapsedAnchor() {
+    return collapsedAnchor;
+  }
+
   /*
    * (non-Javadoc)
    * @see
@@ -174,6 +181,13 @@ public class ClassicBoxRender implements BoxRender {
     final BoxLayout boxLay = box.getLayout();
     drawBox(graphic, box, boxLay);
     drawText(graphic, box, boxLay);
+  }
+
+  /**
+   * @param collapsedAnchor the collapsedAnchor to set
+   */
+  public void setCollapsedAnchor(final Layout collapsedAnchor) {
+    this.collapsedAnchor = collapsedAnchor;
   }
 
 }

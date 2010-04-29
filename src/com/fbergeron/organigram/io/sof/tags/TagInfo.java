@@ -15,26 +15,28 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.xml;
+package com.fbergeron.organigram.io.sof.tags;
 
 import java.awt.Font;
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
+import com.fbergeron.organigram.io.sof.XMLUtil;
 import com.fbergeron.organigram.model.Line;
 
 /**
  * The Class InfoProcessor.
  */
-public class InfoProcessor extends TAG {
+public class TagInfo extends TAG {
 
   /** The new line. */
-  Line newLine;
+  private Line newLine;
 
   /**
    * Instantiates a new info processor.
    */
-  public InfoProcessor() {
+  public TagInfo() {
     super("info");
   }
 
@@ -63,7 +65,21 @@ public class InfoProcessor extends TAG {
     final XMLOrganigramReader xor = (XMLOrganigramReader) reader;
     newLine.setText(buf.toString().trim());
     xor.newUnit.addInfo(newLine);
-    newLine = null;
+    setNewLine(null);
+  }
+
+  /**
+   * @return the newLine
+   */
+  public Line getNewLine() {
+    return newLine;
+  }
+
+  /**
+   * @param newLine the newLine to set
+   */
+  public void setNewLine(final Line newLine) {
+    this.newLine = newLine;
   }
 
 }

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.xml;
+package com.fbergeron.organigram.io.sof;
 
 import java.util.Stack;
 import com.fbergeron.organigram.io.TagProcessor;

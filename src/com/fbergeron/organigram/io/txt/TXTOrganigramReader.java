@@ -25,6 +25,7 @@ import java.util.StringTokenizer;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
+import com.fbergeron.organigram.util.Debug;
 
 /**
  * The Class TXTOrganigramReader.
@@ -32,7 +33,7 @@ import com.fbergeron.organigram.model.Unit;
 public class TXTOrganigramReader implements OrganigramReader {
 
   /** The organigram. */
-  Organigram organigram;
+  private Organigram organigram;
 
   /*
    * (non-Javadoc)
@@ -55,8 +56,8 @@ public class TXTOrganigramReader implements OrganigramReader {
    * 
    * @return the string
    */
-  public String get(final StringTokenizer tokenizer) {
-    return (tokenizer.hasMoreTokens() ? tokenizer.nextToken() : null);
+  public String get(final StringTokenizer tokenizer, final String def) {
+    return (tokenizer.hasMoreTokens() ? tokenizer.nextToken() : def);
   }
 
   /**
@@ -67,25 +68,18 @@ public class TXTOrganigramReader implements OrganigramReader {
    */
   public void parseLine(final Organigram organigram, final String line) {
     final StringTokenizer tokenizer = new StringTokenizer(line, "\t");
-    String unitID = get(tokenizer);
-    final String when = get(tokenizer);
-    final String name = get(tokenizer);
-    final String role = get(tokenizer);
-    final String department = get(tokenizer);
-    if (unitID == null) {
-      unitID = "";
-    }
-    if (name == null) {
-      System.err.println("Missing name " + line);
-      return;
-    }
+    final String unitID = get(tokenizer, "");
+    final String when = get(tokenizer, null);
+    final String name = get(tokenizer, "?");
+    final String role = get(tokenizer, null);
+    final String department = get(tokenizer, null);
     Unit unit = organigram.findByID(unitID, false);
-    if (!unitID.equals(unit.getID())) {
+    if (!unitID.equals(unit.getId())) {
       final Unit newUnit = new Unit(organigram);
       unit.addChild(newUnit);
       unit = newUnit;
     }
-    unit.setID(unitID);
+    unit.setId(unitID);
     unit.setMeta("date", when);
     unit.setMeta("name", name);
     unit.setMeta("role", role);
@@ -111,7 +105,7 @@ public class TXTOrganigramReader implements OrganigramReader {
       }
     }
     catch (final IOException e) {
-      e.printStackTrace();
+      Debug.error(e);
     }
   }
 

@@ -17,6 +17,8 @@
 package com.fbergeron.organigram.io.sitemap;
 
 import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.sitemap.tags.TagURL;
+import com.fbergeron.organigram.io.sitemap.tags.TagURLSet;
 
 /**
  * The Class SiteMapUtils.
@@ -24,10 +26,10 @@ import com.fbergeron.organigram.io.TAG;
 public final class SiteMapUtils {
 
   /** The Constant URLSET. */
-  public static final TAG URLSET = new URLSetProcessor();
+  public static final TAG URLSET = new TagURLSet();
 
   /** The Constant URL. */
-  public static final TAG URL = new URLProcessor();
+  public static final TAG URL = new TagURL();
 
   /** The Constant LOC. */
   public static final TAG LOC = new TAG("loc");

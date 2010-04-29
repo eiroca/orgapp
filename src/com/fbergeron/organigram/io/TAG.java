@@ -25,10 +25,10 @@ import org.xml.sax.Attributes;
 public class TAG implements TagProcessor {
 
   /** The name. */
-  private String tagName;
+  private String name;
 
   /** The buffer. */
-  protected StringBuffer buf;
+  protected transient StringBuffer buf;
 
   /**
    * Instantiates a new generic processor.
@@ -36,7 +36,7 @@ public class TAG implements TagProcessor {
    * @param name the name
    */
   public TAG(final String name) {
-    tagName = name;
+    this.name = name;
     TagFactory.register(this);
   }
 
@@ -44,7 +44,7 @@ public class TAG implements TagProcessor {
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#getName()
    */
   public String getName() {
-    return tagName;
+    return name;
   }
 
   /**
@@ -53,7 +53,7 @@ public class TAG implements TagProcessor {
    * @param name the new name
    */
   public void setName(final String name) {
-    tagName = name;
+    this.name = name;
   }
 
   /* (non-Javadoc)
@@ -67,9 +67,8 @@ public class TAG implements TagProcessor {
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#characters(com.fbergeron.organigram.io.OrganigramReader, char[], int, int)
    */
   public void characters(final OrganigramReader reader, final char[] chr, final int start, final int length) {
-    final String str = new String(chr, start, length);
     if (buf != null) {
-      buf.append(str);
+      buf.append(new String(chr, start, length));
     }
   }
 
@@ -80,7 +79,7 @@ public class TAG implements TagProcessor {
     if (buf != null) {
       final Map<String, String> info = reader.getData();
       final String val = buf.toString();
-      info.put(tagName, val.length() == 0 ? null : val);
+      info.put(name, val.length() == 0 ? null : val);
     }
   }
 
@@ -92,7 +91,7 @@ public class TAG implements TagProcessor {
    */
   public void open(final StringBuffer buf, final boolean open) {
     buf.append('<');
-    buf.append(tagName);
+    buf.append(name);
     if (!open) {
       buf.append('>');
     }
@@ -127,18 +126,16 @@ public class TAG implements TagProcessor {
    */
   public static void encode(final StringBuffer buf, final String str) {
     for (int i = 0; i < str.length(); i++) {
-      final char c = str.charAt(i);
-      if (c < 32) {
+      final char chr = str.charAt(i);
+      if (chr < 32) {
         buf.append(' ');
       }
       else {
-        switch (c) {
-          case '&':
-            buf.append("&amp;");
-            break;
-          default:
-            buf.append(c);
-            break;
+        if (chr == '&') {
+          buf.append("&amp;");
+        }
+        else {
+          buf.append(chr);
         }
       }
     }
@@ -175,7 +172,7 @@ public class TAG implements TagProcessor {
     }
     else {
       buf.append("</");
-      buf.append(tagName);
+      buf.append(name);
       buf.append('>');
     }
   }

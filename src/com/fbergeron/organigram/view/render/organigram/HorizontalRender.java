@@ -67,12 +67,12 @@ public class HorizontalRender extends AbstractRender {
       }
     }
     if (unit.hasChildren()) {
-      // Step 1 - layout childs
+      // Step 1 - layout children
       int xB = pN.x;
       for (final UnitView child : unit) {
         layoutBoxes(orgLay, child, unit, level + 1);
       }
-      // Step 2 - center childs with parent
+      // Step 2 - center children with parent
       int xN = pN.x;
       final int cB = pB.x + wB / 2;
       final int cN = (xN - xB) / 2 + xB;
@@ -89,7 +89,7 @@ public class HorizontalRender extends AbstractRender {
         xN += d;
       }
       else {
-        // Step 3 - center parent with childs
+        // Step 3 - center parent with children
         d = (xN - xB - wB);
         if (d > 0) {
           d = ((d + 1) / 2) + xB;
@@ -98,7 +98,7 @@ public class HorizontalRender extends AbstractRender {
           }
         }
         else if (xB > pB.x) {
-          // Adjust parent to be aligned with childs
+          // Adjust parent to be aligned with children
           pB.x = xB;
         }
       }

@@ -22,10 +22,10 @@ import java.util.Map;
 /**
  * A factory for creating Tag objects.
  */
-public class TagFactory {
+public final class TagFactory {
 
   /** The registry. */
-  static Map<String, TagProcessor> registry = new HashMap<String, TagProcessor>();
+  private static final Map<String, TagProcessor> REGISTRY = new HashMap<String, TagProcessor>();
 
   /**
    * Instantiates a new tag factory.
@@ -40,7 +40,7 @@ public class TagFactory {
    * @param processor the processor
    */
   public static void register(final TagProcessor processor) {
-    TagFactory.registry.put(processor.getName(), processor);
+    TagFactory.REGISTRY.put(processor.getName(), processor);
   }
 
   /**
@@ -51,7 +51,7 @@ public class TagFactory {
    * @return the processor
    */
   public static TagProcessor getProcessor(final String tagName) {
-    return TagFactory.registry.get(tagName);
+    return TagFactory.REGISTRY.get(tagName);
   }
 
 }

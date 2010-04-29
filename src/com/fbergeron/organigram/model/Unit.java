@@ -30,16 +30,16 @@ import java.util.Map;
 public class Unit implements Iterable<Unit>, MetaDataCollector {
 
   /** The unit ID. */
-  private String unitID;
+  private String id;
 
   /** The Owner. */
-  private Organigram owner;
+  private Organigram organigram;
 
   /** The children. */
-  private final List<Unit> children = new ArrayList<Unit>();
+  private List<Unit> children = new ArrayList<Unit>();
 
   /** The info. */
-  private final List<Line> info = new ArrayList<Line>();
+  private List<Line> info = new ArrayList<Line>();
 
   /** The box layout. */
   private BoxLayout boxLayout = null;
@@ -80,7 +80,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @return the parent
    */
   public Organigram getOrganigram() {
-    return owner;
+    return organigram;
   }
 
   /**
@@ -124,17 +124,23 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    */
   @Override
   public String toString() {
-    if (info.isEmpty()) { return "null"; }
-    return info.toString();
+    String res;
+    if (info.isEmpty()) {
+      res = "null";
+    }
+    else {
+      res = info.toString();
+    }
+    return res;
   }
 
   /**
    * Sets the parent.
    * 
-   * @param owner the new organigram
+   * @param organigram the new organigram
    */
-  private void setOrganigram(final Organigram owner) {
-    this.owner = owner;
+  private void setOrganigram(final Organigram organigram) {
+    this.organigram = organigram;
   }
 
   /*
@@ -175,17 +181,17 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * 
    * @return the iD
    */
-  public String getID() {
-    return unitID;
+  public String getId() {
+    return id;
   }
 
   /**
    * Sets the id.
    * 
-   * @param aID the new id
+   * @param id the new id
    */
-  public void setID(final String aID) {
-    unitID = aID;
+  public void setId(final String id) {
+    this.id = id;
   }
 
   /**
@@ -198,13 +204,13 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    */
   public Unit findByID(final String aID, final boolean exact) {
     Unit res = (exact ? null : this);
-    if (aID.equals(getID())) {
+    if (aID.equals(getId())) {
       res = this;
     }
     else if (hasChildren()) {
       String uId;
       for (final Unit unit : this) {
-        uId = unit.getID();
+        uId = unit.getId();
         if ((uId != null) && (aID.startsWith(uId))) {
           res = unit.findByID(aID, exact);
           break;
@@ -218,7 +224,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * Removes the id.
    */
   public void removeID() {
-    setID(null);
+    setId(null);
     for (final Unit u : this) {
       u.removeID();
     }
@@ -232,7 +238,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    */
   public void buildID(final String prefix, final int pos) {
     final String myId = prefix + Integer.toString(pos, Character.MAX_RADIX);
-    setID(myId);
+    setId(myId);
     int cnt = 0;
     for (final Unit u : this) {
       cnt++;
@@ -248,14 +254,11 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @param level the level
    */
   public void execute(final UnitTraversal action, final boolean nodeFirst, final int level) {
-    final boolean more = true;
     if (nodeFirst) {
       action.process(this, level);
     }
-    if (!more) { return; }
-    final int newLevel = level + 1;
     for (final Unit u : this) {
-      u.execute(action, nodeFirst, newLevel);
+      u.execute(action, nodeFirst, level + 1);
     }
     if (!nodeFirst) {
       action.process(this, level);
@@ -301,12 +304,19 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @return the unit
    */
   private Unit findParent(final Unit child) {
-    for (final Unit c : children) {
-      if (c == child) { return this; }
-      final Unit f = c.findParent(child);
-      if (f != null) { return f; }
+    Unit res = null;
+    for (final Unit cld : children) {
+      if (cld == child) {
+        res = this;
+        break;
+      }
+      final Unit fnd = cld.findParent(child);
+      if (fnd != null) {
+        res = fnd;
+        break;
+      }
     }
-    return null;
+    return res;
   }
 
   /**
@@ -317,6 +327,33 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   public Unit getParent() {
     final Unit root = getOrganigram().getRoot();
     return root.findParent(this);
+  }
+
+  /**
+   * Gets the children.
+   * 
+   * @return the children
+   */
+  public List<Unit> getChildren() {
+    return children;
+  }
+
+  /**
+   * Sets the children.
+   * 
+   * @param children the children to set
+   */
+  public void setChildren(final List<Unit> children) {
+    this.children = children;
+  }
+
+  /**
+   * Sets the info.
+   * 
+   * @param info the info to set
+   */
+  public void setInfo(final List<Line> info) {
+    this.info = info;
   }
 
 }

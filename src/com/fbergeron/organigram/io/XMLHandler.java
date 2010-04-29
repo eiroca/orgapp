@@ -28,6 +28,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import com.fbergeron.organigram.model.Organigram;
+import com.fbergeron.organigram.util.Debug;
 
 /**
  * The Class XMLHandler.
@@ -35,13 +36,13 @@ import com.fbergeron.organigram.model.Organigram;
 public class XMLHandler extends DefaultHandler implements OrganigramReader {
 
   /** The organigram. */
-  public Organigram organigram;
+  protected Organigram organigram;
 
   /** The data. */
-  public Map<String, String> data = new HashMap<String, String>();
+  protected transient Map<String, String> data = new HashMap<String, String>();
 
   /** The processors. */
-  public Stack<TagProcessor> procs = new Stack<TagProcessor>();
+  protected transient Stack<TagProcessor> procs = new Stack<TagProcessor>();
 
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#getOrganigram()
@@ -108,20 +109,20 @@ public class XMLHandler extends DefaultHandler implements OrganigramReader {
    * @see com.fbergeron.organigram.io.OrganigramReader#readOrganigram(java.net.URL)
    */
   public Organigram readOrganigram(final InputStream source) {
-    organigram = null;
+    setOrganigram(null);
     try {
       final SAXParserFactory parserFactory = SAXParserFactory.newInstance();
       final SAXParser parser = parserFactory.newSAXParser();
       parser.parse(source, this);
     }
     catch (final IOException e) {
-      e.printStackTrace();
+      Debug.error(e);
     }
     catch (final ParserConfigurationException e) {
-      e.printStackTrace();
+      Debug.error(e);
     }
     catch (final SAXException e) {
-      e.printStackTrace();
+      Debug.error(e);
     }
     return organigram;
   }

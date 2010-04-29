@@ -15,11 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.xml;
+package com.fbergeron.organigram.io.sof.tags;
 
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
+import com.fbergeron.organigram.io.sof.XMLUtil;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.OrganigramLayout;
@@ -27,12 +29,12 @@ import com.fbergeron.organigram.model.OrganigramLayout;
 /**
  * The Class OrganigramProcessor.
  */
-public class OrganigramProcessor extends TAG {
+public class TagOrganigram extends TAG {
 
   /**
    * Instantiates a new organigram processor.
    */
-  public OrganigramProcessor() {
+  public TagOrganigram() {
     super("organigram");
   }
 
@@ -48,11 +50,9 @@ public class OrganigramProcessor extends TAG {
     reader.setOrganigram(organigram);
     final BoxLayout boxLay = organigram.getBoxLayout();
     final OrganigramLayout orgLay = organigram.getOrganigramLayout();
-    String name;
-    String value;
     for (int i = 0; i < attribs.getLength(); i++) {
-      name = attribs.getQName(i);
-      value = attribs.getValue(i);
+      final String name = attribs.getQName(i);
+      final String value = attribs.getValue(i);
       if (name.equals(XMLUtil.ATR_ORG_MODE)) {
         orgLay.setMode(XMLUtil.readOrgMode(value, orgLay.getMode()));
       }

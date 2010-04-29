@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.xml;
+package com.fbergeron.organigram.io.sof;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,14 +34,14 @@ import com.fbergeron.organigram.model.Unit;
 public class XMLOrganigramWriter implements OrganigramWriter {
 
   /** The Constant order. */
-  private final static List<String> order = new ArrayList<String>();
+  private final static List<String> ORDER = new ArrayList<String>();
   static {
-    XMLOrganigramWriter.order.add("id");
-    XMLOrganigramWriter.order.add("firm");
-    XMLOrganigramWriter.order.add("name");
-    XMLOrganigramWriter.order.add("role");
-    XMLOrganigramWriter.order.add("department");
-    XMLOrganigramWriter.order.add("date");
+    XMLOrganigramWriter.ORDER.add("id");
+    XMLOrganigramWriter.ORDER.add("firm");
+    XMLOrganigramWriter.ORDER.add("name");
+    XMLOrganigramWriter.ORDER.add("role");
+    XMLOrganigramWriter.ORDER.add("department");
+    XMLOrganigramWriter.ORDER.add("date");
   }
 
   /**
@@ -53,7 +53,7 @@ public class XMLOrganigramWriter implements OrganigramWriter {
    */
   public static void writeMeta(final TAG tag, final StringBuffer buf, final Map<String, String> meta) {
     final HashSet<String> done = new HashSet<String>();
-    for (final String metaName : XMLOrganigramWriter.order) {
+    for (final String metaName : XMLOrganigramWriter.ORDER) {
       final String val = meta.get(metaName);
       if (val != null) {
         tag.writeAttribute(buf, metaName, meta.get(metaName), false);
@@ -76,21 +76,23 @@ public class XMLOrganigramWriter implements OrganigramWriter {
    * @return true, if successful
    */
   public boolean writeLines(final StringBuffer buf, final List<Line> lines) {
-    if (lines == null) { return false; }
-    if (lines.isEmpty()) { return false; }
-    for (final Line l : lines) {
-      XMLUtil.INFO.open(buf, true);
-      XMLUtil.writeString(XMLUtil.INFO, buf, XMLUtil.ATR_TYPE, l.getType());
-      XMLUtil.writeString(XMLUtil.INFO, buf, XMLUtil.ATR_LINK, l.getLink());
-      if (l.getColor() != null) {
-        XMLUtil.writeColor(XMLUtil.INFO, buf, XMLUtil.ATR_FONT_COLOR, null, l.getColor());
+    boolean res = false;
+    if ((lines != null) && (!lines.isEmpty())) {
+      res = true;
+      for (final Line l : lines) {
+        XMLUtil.INFO.open(buf, true);
+        XMLUtil.writeString(XMLUtil.INFO, buf, XMLUtil.ATR_TYPE, l.getType());
+        XMLUtil.writeString(XMLUtil.INFO, buf, XMLUtil.ATR_LINK, l.getLink());
+        if (l.getColor() != null) {
+          XMLUtil.writeColor(XMLUtil.INFO, buf, XMLUtil.ATR_FONT_COLOR, null, l.getColor());
+        }
+        XMLUtil.writeFont(XMLUtil.INFO, buf, XMLUtil.ATR_FONT_NAME, XMLUtil.ATR_FONT_SIZE, XMLUtil.ATR_FONT_STYLE, Line.LINE_FONT, l.getFont());
+        XMLUtil.INFO.openClose(buf);
+        XMLUtil.INFO.writeCData(buf, l.getText());
+        XMLUtil.INFO.close(buf, false);
       }
-      XMLUtil.writeFont(XMLUtil.INFO, buf, XMLUtil.ATR_FONT_NAME, XMLUtil.ATR_FONT_SIZE, XMLUtil.ATR_FONT_STYLE, Line.LINE_FONT, l.getFont());
-      XMLUtil.INFO.openClose(buf);
-      XMLUtil.INFO.writeCData(buf, l.getText());
-      XMLUtil.INFO.close(buf, false);
     }
-    return true;
+    return res;
   }
 
   /**
@@ -103,38 +105,42 @@ public class XMLOrganigramWriter implements OrganigramWriter {
    * @return true, if successful
    */
   public boolean writeUnit(final StringBuffer buf, final Unit unit, final boolean writeInfo) {
-    if (unit == null) { return false; }
-    XMLUtil.UNIT.open(buf, true);
-    XMLUtil.writeString(XMLUtil.UNIT, buf, XMLUtil.ATR_ID, unit.getID());
-    final BoxLayout boxLay = unit.getBoxLayout();
-    if (boxLay != null) {
-      XMLUtil.writeBoxLayoutAtr(XMLUtil.UNIT, buf, boxLay);
+    boolean res;
+    if (unit == null) {
+      res = false;
     }
-    XMLOrganigramWriter.writeMeta(XMLUtil.UNIT, buf, unit.getMeta());
-    boolean compact = true;
-    if (writeInfo) {
-      final List<Line> lines = unit.getInfo();
-      if (!lines.isEmpty()) {
+    else {
+      XMLUtil.UNIT.open(buf, true);
+      XMLUtil.writeString(XMLUtil.UNIT, buf, XMLUtil.ATR_ID, unit.getId());
+      final BoxLayout boxLay = unit.getBoxLayout();
+      if (boxLay != null) {
+        XMLUtil.writeBoxLayoutAtr(XMLUtil.UNIT, buf, boxLay);
+      }
+      XMLOrganigramWriter.writeMeta(XMLUtil.UNIT, buf, unit.getMeta());
+      boolean compact = true;
+      if (writeInfo) {
+        final List<Line> lines = unit.getInfo();
+        if (!lines.isEmpty()) {
+          if (compact) {
+            XMLUtil.UNIT.openClose(buf);
+            compact = false;
+          }
+          writeLines(buf, lines);
+        }
+      }
+      if (unit.hasChildren()) {
         if (compact) {
           XMLUtil.UNIT.openClose(buf);
           compact = false;
         }
-        writeLines(buf, lines);
+        for (final Unit u : unit) {
+          writeUnit(buf, u, writeInfo);
+        }
       }
+      XMLUtil.UNIT.close(buf, compact);
+      res = true;
     }
-    if (unit.hasChildren()) {
-      if (compact) {
-        XMLUtil.UNIT.openClose(buf);
-        compact = false;
-      }
-      // XMLUtil.CHILDS.open(buf, false);
-      for (final Unit u : unit) {
-        writeUnit(buf, u, writeInfo);
-      }
-      // XMLUtil.CHILDS.close(buf, false);
-    }
-    XMLUtil.UNIT.close(buf, compact);
-    return true;
+    return res;
   }
 
   /*
