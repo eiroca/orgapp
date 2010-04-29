@@ -30,6 +30,42 @@ public class DirectLineRender extends AbstractLineRender {
   /** The anchor parent. */
   protected Layout anchorParent;
 
+  /**
+   * Gets the anchor parent.
+   * 
+   * @return the anchor parent
+   */
+  public Layout getAnchorParent() {
+    return anchorParent;
+  }
+
+  /**
+   * Sets the anchor parent.
+   * 
+   * @param anchorParent the new anchor parent
+   */
+  public void setAnchorParent(final Layout anchorParent) {
+    this.anchorParent = anchorParent;
+  }
+
+  /**
+   * Gets the anchor child.
+   * 
+   * @return the anchor child
+   */
+  public Layout getAnchorChild() {
+    return anchorChild;
+  }
+
+  /**
+   * Sets the anchor child.
+   * 
+   * @param anchorChild the new anchor child
+   */
+  public void setAnchorChild(final Layout anchorChild) {
+    this.anchorChild = anchorChild;
+  }
+
   /** The anchor child. */
   protected Layout anchorChild;
 
@@ -40,6 +76,7 @@ public class DirectLineRender extends AbstractLineRender {
    * @param anchorChild the anchor child
    */
   public DirectLineRender(final Layout anchorParent, final Layout anchorChild) {
+    super();
     this.anchorParent = anchorParent;
     this.anchorChild = anchorChild;
   }
@@ -50,27 +87,27 @@ public class DirectLineRender extends AbstractLineRender {
    * @param box the box
    * @param anchor the anchor
    * @param idx the idx
-   * @param xx the xx
-   * @param yy the yy
+   * @param xPos the xx
+   * @param yPos the yy
    */
-  final protected void setAnchorPos(final UnitView box, final Layout anchor, final int idx, final int[] xx, final int[] yy) {
+  final protected void setAnchorPos(final UnitView box, final Layout anchor, final int idx, final int[] xPos, final int[] yPos) {
     final Point pos = box.getLocation();
     switch (anchor) {
       case LEFT:
-        xx[idx] = pos.x + box.getWidth() + 1;
-        yy[idx] = pos.y + box.getHeight() / 2;
+        xPos[idx] = pos.x + box.getWidth() + 1;
+        yPos[idx] = pos.y + box.getHeight() / 2;
         break;
       case RIGHT:
-        xx[idx] = pos.x - 1;
-        yy[idx] = pos.y + box.getHeight() / 2;
+        xPos[idx] = pos.x - 1;
+        yPos[idx] = pos.y + box.getHeight() / 2;
         break;
       case BOTTOM:
-        xx[idx] = pos.x + box.getWidth() / 2;
-        yy[idx] = pos.y + box.getHeight() + 1;
+        xPos[idx] = pos.x + box.getWidth() / 2;
+        yPos[idx] = pos.y + box.getHeight() + 1;
         break;
       default: // TOP
-        xx[idx] = pos.x + box.getWidth() / 2;
-        yy[idx] = pos.y - 1;
+        xPos[idx] = pos.x + box.getWidth() / 2;
+        yPos[idx] = pos.y - 1;
         break;
     }
   }
@@ -84,12 +121,12 @@ public class DirectLineRender extends AbstractLineRender {
    */
   public void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay) {
     graphics.setColor(orgLay.getLineColor());
-    final int[] xx = new int[2];
-    final int[] yy = new int[2];
-    setAnchorPos(box, anchorParent, 0, xx, yy);
+    final int[] xPos = new int[2];
+    final int[] yPos = new int[2];
+    setAnchorPos(box, anchorParent, 0, xPos, yPos);
     for (final UnitView child : box) {
-      setAnchorPos(child, anchorChild, 1, xx, yy);
-      graphics.drawPolyline(xx, yy, 2);
+      setAnchorPos(child, anchorChild, 1, xPos, yPos);
+      graphics.drawPolyline(xPos, yPos, 2);
     }
   }
 

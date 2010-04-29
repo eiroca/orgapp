@@ -25,10 +25,10 @@ import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.OrganigramWriter;
 import com.fbergeron.organigram.io.sitemap.SiteMapReader;
 import com.fbergeron.organigram.io.sitemap.SiteMapWriter;
+import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
+import com.fbergeron.organigram.io.sof.XMLOrganigramWriter;
 import com.fbergeron.organigram.io.txt.TXTOrganigramReader;
 import com.fbergeron.organigram.io.txt.TXTOrganigramWriter;
-import com.fbergeron.organigram.io.xml.XMLOrganigramReader;
-import com.fbergeron.organigram.io.xml.XMLOrganigramWriter;
 import com.fbergeron.organigram.model.Organigram;
 
 /**
@@ -81,12 +81,15 @@ public class OrgUtils {
    */
   static public int getType(final URL sourceUrl) {
     final String path = sourceUrl.toExternalForm();
-    int type = 0;
+    int type;
     if (path.endsWith(".txt")) {
       type = 1;
     }
     else if (path.endsWith("sitemap.xml")) {
       type = 2;
+    }
+    else {
+      type = 0;
     }
     return type;
   }
@@ -108,7 +111,7 @@ public class OrgUtils {
         org = OrgUtils.readOrganigram(source, type);
       }
       catch (final IOException e) {
-        //
+        Debug.ignore(e);
       }
     }
     return org;
@@ -122,8 +125,7 @@ public class OrgUtils {
    * @return the organigram
    */
   static public Organigram readOrganigram(final InputStream source, final int type) {
-    Organigram org = null;
-    OrganigramReader handler = null;
+    OrganigramReader handler;
     switch (type) {
       case 1:
         handler = new TXTOrganigramReader();
@@ -135,8 +137,7 @@ public class OrgUtils {
         handler = new XMLOrganigramReader();
         break;
     }
-    org = handler.readOrganigram(source);
-    return org;
+    return handler.readOrganigram(source);
   }
 
   /**
@@ -148,15 +149,17 @@ public class OrgUtils {
    * @return the uRL
    */
   public static URL findInDirectory(final String path, final String filename) {
+    URL res = null;
     final File file = new File(path, filename);
     if (file.exists() && !file.isDirectory()) {
       try {
-        return file.toURI().toURL();
+        res = file.toURI().toURL();
       }
       catch (final MalformedURLException e) {
+        Debug.ignore(e);
       }
     }
-    return null;
+    return res;
   }
 
   /**
@@ -172,9 +175,11 @@ public class OrgUtils {
     final String[] paths = classpath.split(File.pathSeparator);
     for (final String path : paths) {
       res = OrgUtils.findInDirectory(path, filename);
-      if (res != null) { return res; }
+      if (res != null) {
+        break;
+      }
     }
-    return null;
+    return res;
   }
 
   /**
@@ -184,12 +189,9 @@ public class OrgUtils {
    * 
    * @return the uRL
    */
-  public static URL findInResource(String name) {
-    if (!name.startsWith("/")) {
-      name = "/" + name;
-    }
-    final URL res = OrgUtils.class.getResource(name);
-    return res;
+  public static URL findInResource(final String name) {
+    final String path = (name.charAt(0) == '/') ? name : "/" + name;
+    return OrgUtils.class.getResource(path);
   }
 
   /**
@@ -200,8 +202,7 @@ public class OrgUtils {
    * @return the uRL
    */
   static public URL find(final String name) {
-    URL res = null;
-    res = OrgUtils.findInClasspath(name);
+    URL res = OrgUtils.findInClasspath(name);
     if (res != null) {
       res = OrgUtils.findInResource(name);
     }
@@ -217,20 +218,39 @@ public class OrgUtils {
    * @return the uRL
    */
   static public URL buildURL(final URL documentBase, final String dataSource) {
-    URL sourceUrl = null;
+    URL res = null;
     if (dataSource != null) {
       try {
-        if (documentBase != null) {
-          sourceUrl = new URL(documentBase, dataSource);
+        if (documentBase == null) {
+          res = new URL(dataSource);
         }
         else {
-          sourceUrl = new URL(dataSource);
+          res = new URL(documentBase, dataSource);
         }
       }
-      catch (final MalformedURLException malformedUrlException) {
+      catch (final MalformedURLException e) {
+        Debug.ignore(e);
       }
     }
-    return sourceUrl;
+    return res;
+  }
+
+  /**
+   * Val.
+   * 
+   * @param val the val
+   * @param def the def
+   * @return the int
+   */
+  static public int val(final String val, final int def) {
+    int res;
+    try {
+      res = Integer.parseInt(val);
+    }
+    catch (final NumberFormatException err) {
+      res = def;
+    }
+    return res;
   }
 
 }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.sitemap;
+package com.fbergeron.organigram.io.sitemap.tags;
 
 import java.util.Map;
 import org.xml.sax.Attributes;
@@ -26,12 +26,12 @@ import com.fbergeron.organigram.model.Unit;
 /**
  * The Class URLProcessor.
  */
-public class URLProcessor extends TAG {
+public class TagURL extends TAG {
 
   /**
    * Instantiates a new uRL processor.
    */
-  public URLProcessor() {
+  public TagURL() {
     super("url");
   }
 
@@ -60,12 +60,12 @@ public class URLProcessor extends TAG {
     final String loc = info.get("loc");
     final Organigram org = reader.getOrganigram();
     Unit unit = org.findByID(loc, false);
-    if (!loc.equals(unit.getID())) {
+    if (!loc.equals(unit.getId())) {
       final Unit newUnit = new Unit(org);
       unit.addChild(newUnit);
       unit = newUnit;
     }
-    unit.setID(loc);
+    unit.setId(loc);
     unit.setMeta("title", info.get("title"));
     unit.setMeta("lastmod", info.get("lastmod"));
     unit.setMeta("changefreq", info.get("changefreq"));

@@ -28,7 +28,7 @@ import com.fbergeron.organigram.model.UnitTraversal;
 public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
 
   /** The buffer. */
-  StringBuffer buf;
+  private StringBuffer buf;
 
   /*
    * (non-Javadoc)

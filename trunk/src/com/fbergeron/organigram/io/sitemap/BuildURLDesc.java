@@ -27,7 +27,7 @@ import com.fbergeron.organigram.model.UnitTraversal;
 public class BuildURLDesc implements UnitTraversal {
 
   /** The full. */
-  boolean full;
+  private boolean full;
 
   /**
    * Instantiates a new builds the url description.
@@ -56,19 +56,38 @@ public class BuildURLDesc implements UnitTraversal {
    * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
    */
   public void process(final Unit unit, final int level) {
-    final String loc = unit.getMeta("link");
     final String title = unit.getMeta("title");
-    if (title != null) {
+    if (title == null) {
+      final String loc = unit.getMeta("link");
+      if (loc != null) {
+        unit.addInfo(new Line(loc, Font.BOLD, 12));
+      }
+    }
+    else {
       unit.addInfo(new Line(title, Font.BOLD, 12));
     }
-    else if (loc != null) {
-      unit.addInfo(new Line(loc, Font.BOLD, 12));
-    }
-    if (full) {
+    if (isFull()) {
       add(unit, "Last Mod : ", "lastmod");
       add(unit, "Frequency: ", "changefreq");
       add(unit, "Priority : ", "priority");
     }
   }
 
+  /**
+   * Checks if is full.
+   * 
+   * @return true, if is full
+   */
+  public boolean isFull() {
+    return full;
+  }
+
+  /**
+   * Sets the full.
+   * 
+   * @param full the new full
+   */
+  public void setFull(final boolean full) {
+    this.full = full;
+  }
 }

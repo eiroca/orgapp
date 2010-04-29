@@ -125,7 +125,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * 
    * @param graphics the graphics
    */
-  public synchronized void paint(final Graphics graphics) {
+  public void paint(final Graphics graphics) {
     if (!validLayout) {
       layoutBoxes(graphics);
     }

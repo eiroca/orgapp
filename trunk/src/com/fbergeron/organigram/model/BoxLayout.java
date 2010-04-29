@@ -86,6 +86,7 @@ public class BoxLayout implements Cloneable {
    * Instantiates a new box layout.
    */
   public BoxLayout() {
+    //
   }
 
   /**

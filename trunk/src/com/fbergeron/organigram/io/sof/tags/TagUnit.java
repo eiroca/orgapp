@@ -16,23 +16,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.xml;
+package com.fbergeron.organigram.io.sof.tags;
 
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
+import com.fbergeron.organigram.io.sof.XMLUtil;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
 
 /**
  * The Class UnitProcessor.
  */
-public class UnitProcessor extends TAG {
+public class TagUnit extends TAG {
 
   /**
    * Instantiates a new unit processor.
    */
-  public UnitProcessor() {
+  public TagUnit() {
     super("unit");
   }
 
@@ -61,7 +63,7 @@ public class UnitProcessor extends TAG {
       name = attribs.getQName(i);
       value = attribs.getValue(i);
       if (name.equals(XMLUtil.ATR_ID)) {
-        xor.newUnit.setID(value);
+        xor.newUnit.setId(value);
       }
       else if (XMLUtil.isBoxLayoutAtr(name, value)) {
         XMLUtil.readBoxLayoutAtr(name, value, xor.newUnit.getBoxLayout(true));

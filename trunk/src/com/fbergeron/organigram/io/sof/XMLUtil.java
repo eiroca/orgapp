@@ -16,20 +16,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.xml;
+package com.fbergeron.organigram.io.sof;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.sof.tags.TagInfo;
+import com.fbergeron.organigram.io.sof.tags.TagOrganigram;
+import com.fbergeron.organigram.io.sof.tags.TagUnit;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.type.Alignment;
 import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.model.type.LineMode;
 import com.fbergeron.organigram.model.type.OrgMode;
+import com.fbergeron.organigram.util.Debug;
+import com.fbergeron.organigram.util.OrgUtils;
 
 /**
  * The Class XMLUtil.
@@ -37,13 +44,13 @@ import com.fbergeron.organigram.model.type.OrgMode;
 public final class XMLUtil {
 
   /** The Constant ORGANIGRAM. */
-  public static final TAG ORGANIGRAM = new OrganigramProcessor();
+  public static final TAG ORGANIGRAM = new TagOrganigram();
 
   /** The Constant UNIT. */
-  public static final TAG UNIT = new UnitProcessor();
+  public static final TAG UNIT = new TagUnit();
 
   /** The Constant INFO. */
-  public static final TAG INFO = new InfoProcessor();
+  public static final TAG INFO = new TagInfo();
 
   /** The Constant ATR_ISTOOLTIPENABLED. */
   public static final String ATR_TOOLTIPENABLED = "isToolTipEnabled";
@@ -142,86 +149,86 @@ public final class XMLUtil {
   public static final String VAL_ITALIC = "italic";
 
   /** The Constant boxLayoutAttrs. */
-  private static final HashSet<String> boxLayoutAttrs = new HashSet<String>();
+  private static final Set<String> BOXLAYOUTATTRS = new HashSet<String>();
 
   /** The Constant colors. */
-  private static final HashMap<String, String> colors = new HashMap<String, String>();
+  private static final Map<String, String> COLORS = new HashMap<String, String>();
 
   /** The Constant layouts. */
-  private static final HashMap<String, Layout> layouts = new HashMap<String, Layout>();
+  private static final Map<String, Layout> LAYOUTS = new HashMap<String, Layout>();
 
   /** The Constant orgModes. */
-  private static final HashMap<String, OrgMode> orgModes = new HashMap<String, OrgMode>();
+  private static final Map<String, OrgMode> ORGMODES = new HashMap<String, OrgMode>();
 
   /** The Constant lineModes. */
-  private static final HashMap<String, LineMode> lineModes = new HashMap<String, LineMode>();
+  private static final Map<String, LineMode> LINEMODES = new HashMap<String, LineMode>();
 
   /** The Constant bools. */
-  private static final HashMap<String, Boolean> bools = new HashMap<String, Boolean>();
+  private static final Map<String, Boolean> BOOLS = new HashMap<String, Boolean>();
 
   /** The Constant alignments. */
-  private static final HashMap<String, Alignment> alignments = new HashMap<String, Alignment>();
+  private static final Map<String, Alignment> ALIGNMENTS = new HashMap<String, Alignment>();
 
   /**
    * Adds the enum.
    * 
    * @param set the set
-   * @param v the v
+   * @param vals the values
    */
   @SuppressWarnings("unchecked")
-  private static void addEnum(final HashMap set, final Enum v) {
-    final String name = v.name().toLowerCase();
-    set.put(name, v);
-    set.put(name.substring(0, 1), v);
-    set.put(Integer.toString(v.ordinal()), v);
+  private static void addEnum(final Map set, final Enum vals) {
+    final String name = vals.name().toLowerCase();
+    set.put(name, vals);
+    set.put(name.substring(0, 1), vals);
+    set.put(Integer.toString(vals.ordinal()), vals);
   }
 
   static {
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_RIGHT);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_LEFT);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_TOP);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_PADDING_BOTTOM);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_COLOR_FRAME);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_COLOR_BACKGROUND);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_COLOR_FOREGROUND);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_TEXT_ALIGMENT);
-    XMLUtil.boxLayoutAttrs.add(XMLUtil.ATR_BOX_EXPENDED);
-    XMLUtil.colors.put("aqua", "#00ffff");
-    XMLUtil.colors.put("cyan", "#00ffff");
-    XMLUtil.colors.put("gray", "#808080");
-    XMLUtil.colors.put("navy", "#000080");
-    XMLUtil.colors.put("silver", "#c0c0c0");
-    XMLUtil.colors.put("black", "#000000");
-    XMLUtil.colors.put("green", "#008000");
-    XMLUtil.colors.put("olive", "#808000");
-    XMLUtil.colors.put("teal", "#008080");
-    XMLUtil.colors.put("blue", "#0000ff");
-    XMLUtil.colors.put("lime", "#00ff00");
-    XMLUtil.colors.put("purple", "#800080");
-    XMLUtil.colors.put("white", "#ffffff");
-    XMLUtil.colors.put("fuchsia", "#ff00ff");
-    XMLUtil.colors.put("magenta", "#ff00ff");
-    XMLUtil.colors.put("maroon", "#800000");
-    XMLUtil.colors.put("red", "#ff0000");
-    XMLUtil.colors.put("yellow", "#ffff00");
-    XMLUtil.bools.put("0", Boolean.FALSE);
-    XMLUtil.bools.put("f", Boolean.FALSE);
-    XMLUtil.bools.put("false", Boolean.FALSE);
-    XMLUtil.bools.put("1", Boolean.TRUE);
-    XMLUtil.bools.put("-1", Boolean.TRUE);
-    XMLUtil.bools.put("t", Boolean.TRUE);
-    XMLUtil.bools.put("true", Boolean.TRUE);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_RIGHT);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_LEFT);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_TOP);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_BOTTOM);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_COLOR_FRAME);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_COLOR_BACKGROUND);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_COLOR_FOREGROUND);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_TEXT_ALIGMENT);
+    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_EXPENDED);
+    XMLUtil.COLORS.put("aqua", "#00ffff");
+    XMLUtil.COLORS.put("cyan", "#00ffff");
+    XMLUtil.COLORS.put("gray", "#808080");
+    XMLUtil.COLORS.put("navy", "#000080");
+    XMLUtil.COLORS.put("silver", "#c0c0c0");
+    XMLUtil.COLORS.put("black", "#000000");
+    XMLUtil.COLORS.put("green", "#008000");
+    XMLUtil.COLORS.put("olive", "#808000");
+    XMLUtil.COLORS.put("teal", "#008080");
+    XMLUtil.COLORS.put("blue", "#0000ff");
+    XMLUtil.COLORS.put("lime", "#00ff00");
+    XMLUtil.COLORS.put("purple", "#800080");
+    XMLUtil.COLORS.put("white", "#ffffff");
+    XMLUtil.COLORS.put("fuchsia", "#ff00ff");
+    XMLUtil.COLORS.put("magenta", "#ff00ff");
+    XMLUtil.COLORS.put("maroon", "#800000");
+    XMLUtil.COLORS.put("red", "#ff0000");
+    XMLUtil.COLORS.put("yellow", "#ffff00");
+    XMLUtil.BOOLS.put("0", Boolean.FALSE);
+    XMLUtil.BOOLS.put("f", Boolean.FALSE);
+    XMLUtil.BOOLS.put("false", Boolean.FALSE);
+    XMLUtil.BOOLS.put("1", Boolean.TRUE);
+    XMLUtil.BOOLS.put("-1", Boolean.TRUE);
+    XMLUtil.BOOLS.put("t", Boolean.TRUE);
+    XMLUtil.BOOLS.put("true", Boolean.TRUE);
     for (final Layout x : Layout.values()) {
-      XMLUtil.addEnum(XMLUtil.layouts, x);
+      XMLUtil.addEnum(XMLUtil.LAYOUTS, x);
     }
     for (final OrgMode x : OrgMode.values()) {
-      XMLUtil.addEnum(XMLUtil.orgModes, x);
+      XMLUtil.addEnum(XMLUtil.ORGMODES, x);
     }
     for (final LineMode x : LineMode.values()) {
-      XMLUtil.addEnum(XMLUtil.lineModes, x);
+      XMLUtil.addEnum(XMLUtil.LINEMODES, x);
     }
     for (final Alignment x : Alignment.values()) {
-      XMLUtil.addEnum(XMLUtil.alignments, x);
+      XMLUtil.addEnum(XMLUtil.ALIGNMENTS, x);
     }
   }
 
@@ -271,52 +278,56 @@ public final class XMLUtil {
    * @throws ParseException the parse exception
    */
   public static Color parseColor(String strColor) throws ParseException {
-    int rd = 0;
-    int gr = 0;
-    int bl = 0;
-    if (strColor != null) {
-      try {
-        strColor = strColor.trim().toLowerCase();
-        if (XMLUtil.colors.containsKey(strColor)) {
-          strColor = XMLUtil.colors.get(strColor);
+    int cRd;
+    int cGr;
+    int cBl;
+    if (strColor == null) {
+      cRd = 0;
+      cGr = 0;
+      cBl = 0;
+    }
+    else {
+      strColor = strColor.trim().toLowerCase();
+      if (XMLUtil.COLORS.containsKey(strColor)) {
+        strColor = XMLUtil.COLORS.get(strColor);
+      }
+      if (strColor.charAt(0) == '#') {
+        if (strColor.length() == 4) {
+          final StringBuffer buf = new StringBuffer();
+          buf.append('#').append(strColor.charAt(1)).append(strColor.charAt(1)).append(strColor.charAt(2)).append(strColor.charAt(2)).append(strColor.charAt(3)).append(strColor.charAt(3));
+          strColor = buf.toString();
         }
-        if (strColor.startsWith("#")) {
-          if (strColor.length() == 4) {
-            final StringBuffer sb = new StringBuffer();
-            sb.append('#').append(strColor.charAt(1)).append(strColor.charAt(1)).append(strColor.charAt(2)).append(strColor.charAt(2)).append(strColor.charAt(3)).append(strColor.charAt(3));
-            strColor = sb.toString();
-          }
-          if (strColor.length() == 7) {
-            rd = Integer.parseInt(strColor.substring(1, 3), 16);
-            gr = Integer.parseInt(strColor.substring(3, 5), 16);
-            bl = Integer.parseInt(strColor.substring(5, 7), 16);
-          }
-          else {
-            throw (new ParseException(strColor + " has an invalid length.", 0));
-          }
+        if (strColor.length() == 7) {
+          cRd = Integer.parseInt(strColor.substring(1, 3), 16);
+          cGr = Integer.parseInt(strColor.substring(3, 5), 16);
+          cBl = Integer.parseInt(strColor.substring(5, 7), 16);
         }
         else {
-          if (strColor.startsWith("rgb")) {
-            int endIndex = strColor.length();
-            if (strColor.endsWith(")")) {
-              endIndex--;
-            }
-            strColor = strColor.substring(4, endIndex);
-          }
-          final int indexOfFirstComma = strColor.indexOf(',');
-          final int indexOfSecondComma = strColor.indexOf(',', indexOfFirstComma + 1);
-          if (indexOfFirstComma == -1) { throw (new ParseException("First comma not found.", 0)); }
-          if (indexOfSecondComma == -1) { throw (new ParseException("Second comma not found.", indexOfFirstComma)); }
-          rd = Integer.parseInt(strColor.substring(0, indexOfFirstComma));
-          gr = Integer.parseInt(strColor.substring(indexOfFirstComma + 1, indexOfSecondComma));
-          bl = Integer.parseInt(strColor.substring(indexOfSecondComma + 1));
+          throw new ParseException(strColor + " has an invalid length.", 0);
         }
       }
-      catch (final NumberFormatException numberFormatException) {
-        throw (new ParseException(strColor + " is an invalid color", 0));
+      else {
+        if (strColor.startsWith("rgb")) {
+          int endIndex;
+          if (strColor.endsWith(")")) {
+            endIndex = strColor.length() - 1;
+          }
+          else {
+            endIndex = strColor.length();
+          }
+          strColor = strColor.substring(4, endIndex);
+        }
+        final int indexOfFirstComma = strColor.indexOf(',');
+        if (indexOfFirstComma == -1) { throw new ParseException("First comma not found.", 0); }
+        final int indexOfSecondComma = strColor.indexOf(',', indexOfFirstComma + 1);
+        if (indexOfSecondComma == -1) { throw new ParseException("Second comma not found.", indexOfFirstComma); }
+        cRd = OrgUtils.val(strColor.substring(0, indexOfFirstComma), -1);
+        cGr = OrgUtils.val(strColor.substring(indexOfFirstComma + 1, indexOfSecondComma), -1);
+        cBl = OrgUtils.val(strColor.substring(indexOfSecondComma + 1), -1);
+        if ((cRd == -1) || (cGr == -1) || (cBl == -1)) { throw new ParseException(strColor + " has an invalid definition.", 0); }
       }
     }
-    return new Color(rd, gr, bl);
+    return new Color(cRd, cGr, cBl);
   }
 
   /**
@@ -334,7 +345,7 @@ public final class XMLUtil {
         res = XMLUtil.parseColor(val);
       }
       catch (final ParseException e) {
-        System.err.println(e.toString());
+        Debug.error(e.toString());
       }
     }
     return res;
@@ -354,7 +365,7 @@ public final class XMLUtil {
         res = Integer.parseInt(val);
       }
       catch (final NumberFormatException e) {
-        System.err.println(e.toString());
+        Debug.error(e.toString());
       }
     }
     return res;
@@ -370,9 +381,9 @@ public final class XMLUtil {
   public static Layout readLayout(final String val, final Layout def) {
     Layout res = null;
     if (val != null) {
-      res = XMLUtil.layouts.get(val.trim().toLowerCase());
+      res = XMLUtil.LAYOUTS.get(val.trim().toLowerCase());
     }
-    return (res != null) ? res : def;
+    return (res == null) ? def : res;
   }
 
   /**
@@ -385,9 +396,9 @@ public final class XMLUtil {
   public static OrgMode readOrgMode(final String val, final OrgMode def) {
     OrgMode res = null;
     if (val != null) {
-      res = XMLUtil.orgModes.get(val.trim().toLowerCase());
+      res = XMLUtil.ORGMODES.get(val.trim().toLowerCase());
     }
-    return (res != null) ? res : def;
+    return (res == null) ? def : res;
   }
 
   /**
@@ -400,9 +411,9 @@ public final class XMLUtil {
   public static LineMode readLineMode(final String val, final LineMode def) {
     LineMode res = null;
     if (val != null) {
-      res = XMLUtil.lineModes.get(val.trim().toLowerCase());
+      res = XMLUtil.LINEMODES.get(val.trim().toLowerCase());
     }
-    return (res != null) ? res : def;
+    return (res == null) ? def : res;
   }
 
   /**
@@ -416,9 +427,9 @@ public final class XMLUtil {
   public static Alignment readAligment(final String val, final Alignment def) {
     Alignment res = null;
     if (val != null) {
-      res = XMLUtil.alignments.get(val.trim().toLowerCase());
+      res = XMLUtil.ALIGNMENTS.get(val.trim().toLowerCase());
     }
-    return (res != null) ? res : def;
+    return (res == null) ? def : res;
   }
 
   /**
@@ -432,9 +443,9 @@ public final class XMLUtil {
   public static boolean readBoolean(final String val, final boolean def) {
     boolean res = def;
     if (val != null) {
-      final Boolean x = XMLUtil.bools.get(val.trim().toLowerCase());
-      if (x != null) {
-        res = x;
+      final Boolean bVal = XMLUtil.BOOLS.get(val.trim().toLowerCase());
+      if (bVal != null) {
+        res = bVal;
       }
     }
     return res;
@@ -509,7 +520,7 @@ public final class XMLUtil {
    */
   @SuppressWarnings("unchecked")
   public static void writeEnum(final TAG tag, final StringBuffer buf, final String atr, final Enum defVal, final Enum val) {
-    if (val != defVal) {
+    if (!val.equals(defVal)) {
       tag.writeAttribute(buf, atr, val.toString().toLowerCase(), false);
     }
   }
@@ -595,8 +606,7 @@ public final class XMLUtil {
    * @return true, if is box layout atr
    */
   public static boolean isBoxLayoutAtr(final String name, final String value) {
-    final boolean res = XMLUtil.boxLayoutAttrs.contains(name);
-    return res;
+    return XMLUtil.BOXLAYOUTATTRS.contains(name);
   }
 
   /**

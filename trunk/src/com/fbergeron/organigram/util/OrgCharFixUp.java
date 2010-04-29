@@ -51,10 +51,8 @@ public class OrgCharFixUp implements UnitTraversal {
       }
     }
     final String role = unit.getMeta("role");
-    if (role != null) {
-      if (role.startsWith("H")) {
-        unit.getBoxLayout(true).setType(BoxType.HIGHLIGHT);
-      }
+    if ((role != null) && (role.charAt(0) == 'H')) {
+      unit.getBoxLayout(true).setType(BoxType.HIGHLIGHT);
     }
   }
 

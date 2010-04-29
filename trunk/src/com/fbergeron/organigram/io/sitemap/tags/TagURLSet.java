@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.sitemap;
+package com.fbergeron.organigram.io.sitemap.tags;
 
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
@@ -27,12 +27,12 @@ import com.fbergeron.organigram.model.type.OrgMode;
 /**
  * The Class URLSetProcessor.
  */
-public class URLSetProcessor extends TAG {
+public class TagURLSet extends TAG {
 
   /**
    * Instantiates a new uRL set processor.
    */
-  public URLSetProcessor() {
+  public TagURLSet() {
     super("urlset");
   }
 

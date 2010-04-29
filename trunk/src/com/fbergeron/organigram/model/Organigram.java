@@ -26,10 +26,10 @@ import java.util.Map;
 public class Organigram implements MetaDataCollector {
 
   /** The box layout. */
-  private final BoxLayout boxLayout = new BoxLayout();
+  private BoxLayout boxLayout = new BoxLayout();
 
   /** The org layout. */
-  private final OrganigramLayout orgLayout = new OrganigramLayout();
+  private OrganigramLayout organigramLayout = new OrganigramLayout();
 
   /** The root. */
   private Unit root;
@@ -55,7 +55,7 @@ public class Organigram implements MetaDataCollector {
    * @return the organigram layout
    */
   public OrganigramLayout getOrganigramLayout() {
-    return orgLayout;
+    return organigramLayout;
   }
 
   /*
@@ -139,6 +139,20 @@ public class Organigram implements MetaDataCollector {
    */
   public void execute(final UnitTraversal action, final boolean nodeFirst) {
     root.execute(action, nodeFirst, 0);
+  }
+
+  /**
+   * @param boxLayout the boxLayout to set
+   */
+  public void setBoxLayout(final BoxLayout boxLayout) {
+    this.boxLayout = boxLayout;
+  }
+
+  /**
+   * @param organigramLayout the organigramLayout to set
+   */
+  public void setOrganigramLayout(final OrganigramLayout organigramLayout) {
+    this.organigramLayout = organigramLayout;
   }
 
 }

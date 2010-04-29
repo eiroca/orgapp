@@ -16,41 +16,26 @@
  */
 package com.fbergeron.organigram.util;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
 /**
- * The Class Messages.
+ * The Class Debug.
  */
-public final class Messages {
-
-  /** The Constant BUNDLE_NAME. */
-  private static final String BUNDLE_NAME = "com.fbergeron.organigram.messages"; //$NON-NLS-1$
-
-  /** The Constant RESOURCE_BUNDLE. */
-  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(Messages.BUNDLE_NAME);
+public class Debug {
 
   /**
-   * Instantiates a new messages.
+   * Ignore.
+   * 
+   * @param err the err
    */
-  private Messages() {
+  public static void ignore(final Throwable e) {
+    //
   }
 
-  /**
-   * Gets the string.
-   * 
-   * @param key the key
-   * 
-   * @return the string
-   */
-  public static String getString(final String key) {
-    String res;
-    try {
-      res = Messages.RESOURCE_BUNDLE.getString(key);
-    }
-    catch (final MissingResourceException e) {
-      res = '!' + key + '!';
-    }
-    return res;
+  public static void error(final Throwable e) {
+    e.printStackTrace();
   }
+
+  public static void error(final String msg) {
+    System.err.println(msg);
+  }
+
 }

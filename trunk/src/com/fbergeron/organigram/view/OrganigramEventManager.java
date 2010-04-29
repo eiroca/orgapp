@@ -31,6 +31,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
+import com.fbergeron.organigram.util.Debug;
 import com.fbergeron.organigram.util.Messages;
 
 /**
@@ -39,7 +40,7 @@ import com.fbergeron.organigram.util.Messages;
 public class OrganigramEventManager extends MouseAdapter implements MouseMotionListener {
 
   /** The organigram. */
-  private final OrganigramView organigram;
+  private OrganigramView organigram;
 
   /** The current link. */
   private String currentLink;
@@ -72,7 +73,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
           showPage(currentLink, currentTarget);
         }
         catch (final MalformedURLException e) {
-          e.printStackTrace();
+          Debug.error(e);
         }
       }
     }
@@ -82,7 +83,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
       if (unitView != null) {
         final BoxLayout layout = unitView.getLayout();
         layout.setExpanded(!layout.isExpanded());
-        organigram.orgRender.invalidate();
+        organigram.getOrganigramRender().invalidate();
         organigram.repaint();
       }
     }
@@ -129,8 +130,8 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
   public void mouseMoved(final MouseEvent event) {
     final Point where = event.getPoint();
     final UnitView unitView = contains(organigram.getRootUnitView(), where);
+    setCurrentLink(null);
     String tipText = null;
-    currentLink = null;
     if (unitView != null) {
       if (unitView.canExpand()) {
         tipText = Messages.getString("RightClick1"); //$NON-NLS-1$
@@ -144,11 +145,11 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
         currentLink = link;
         tipText = MessageFormat.format(Messages.getString("GoToLink"), currentLink); //$NON-NLS-1$
         final String linkTarget = unit.getMeta("target"); //$NON-NLS-1$
-        if (linkTarget != null) {
-          currentTarget = linkTarget;
+        if (linkTarget == null) {
+          currentTarget = baseTarget;
         }
         else {
-          currentTarget = baseTarget;
+          currentTarget = linkTarget;
         }
       }
     }
@@ -219,6 +220,60 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
    */
   public void setBaseTarget(final String baseTarget) {
     this.baseTarget = baseTarget;
+  }
+
+  /**
+   * Gets the organigram.
+   * 
+   * @return the organigram
+   */
+  public OrganigramView getOrganigram() {
+    return organigram;
+  }
+
+  /**
+   * Sets the organigram.
+   * 
+   * @param organigram the organigram to set
+   */
+  public void setOrganigram(final OrganigramView organigram) {
+    this.organigram = organigram;
+  }
+
+  /**
+   * Gets the current link.
+   * 
+   * @return the currentLink
+   */
+  public String getCurrentLink() {
+    return currentLink;
+  }
+
+  /**
+   * Sets the current link.
+   * 
+   * @param currentLink the currentLink to set
+   */
+  public void setCurrentLink(final String currentLink) {
+    this.currentLink = currentLink;
+  }
+
+  /**
+   * Gets the current target.
+   * 
+   * @return the currentTarget
+   */
+  public String getCurrentTarget() {
+    return currentTarget;
+  }
+
+  /**
+   * Sets the current target.
+   * 
+   * @param currentTarget the currentTarget to set
+   */
+  public void setCurrentTarget(final String currentTarget) {
+    this.currentTarget = currentTarget;
   }
 
 }

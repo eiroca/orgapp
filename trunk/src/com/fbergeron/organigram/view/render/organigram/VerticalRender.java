@@ -67,12 +67,12 @@ public class VerticalRender extends AbstractRender {
       }
     }
     if (unit.hasChildren()) {
-      // Step 1 - layout childs
+      // Step 1 - layout children
       int yB = pN.y;
       for (final UnitView child : unit) {
         layoutBoxes(orgLay, child, unit, level + 1);
       }
-      // Step 2 - center childs with parent
+      // Step 2 - center children with parent
       int yN = pN.y;
       final int cB = pB.y + hB / 2;
       final int cN = (yN - yB) / 2 + yB;
@@ -89,7 +89,7 @@ public class VerticalRender extends AbstractRender {
         yN += d;
       }
       else {
-        // Step 3 - center parent with childs
+        // Step 3 - center parent with children
         d = (yN - yB - hB);
         if (d > 0) {
           d = ((d + 1) / 2) + yB;
@@ -98,7 +98,7 @@ public class VerticalRender extends AbstractRender {
           }
         }
         else if (yB > pB.y) {
-          // Adjust parent to be aligned with childs
+          // Adjust parent to be aligned with children
           pB.y = yB;
         }
       }
