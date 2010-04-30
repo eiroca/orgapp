@@ -21,8 +21,8 @@ import java.awt.Font;
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.TAG;
-import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
-import com.fbergeron.organigram.io.sof.XMLUtil;
+import com.fbergeron.organigram.io.sof.SOFReader;
+import com.fbergeron.organigram.io.sof.SOFXML;
 import com.fbergeron.organigram.model.Line;
 
 /**
@@ -46,15 +46,15 @@ public class TagInfo extends TAG {
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
     super.start(reader, attribs);
-    final String type = attribs.getValue(XMLUtil.ATR_TYPE);
-    final String realFontName = attribs.getValue(XMLUtil.ATR_FONT_NAME);
-    final int realFontSize = XMLUtil.readInt(attribs.getValue(XMLUtil.ATR_FONT_SIZE), 12);
-    final int realFontStyle = XMLUtil.readFontStyle(attribs.getValue(XMLUtil.ATR_FONT_STYLE), Font.PLAIN);
+    final String type = attribs.getValue(SOFXML.ATR_TYPE);
+    final String realFontName = attribs.getValue(SOFXML.ATR_FONT_NAME);
+    final int realFontSize = SOFXML.readInt(attribs.getValue(SOFXML.ATR_FONT_SIZE), 12);
+    final int realFontStyle = SOFXML.readFontStyle(attribs.getValue(SOFXML.ATR_FONT_STYLE), Font.PLAIN);
     newLine = new Line();
     newLine.setType(type);
-    newLine.setColor(XMLUtil.readColor(attribs.getValue(XMLUtil.ATR_FONT_COLOR), newLine.getColor()));
+    newLine.setColor(SOFXML.readColor(attribs.getValue(SOFXML.ATR_FONT_COLOR), newLine.getColor()));
     newLine.setFont(new Font(realFontName, realFontStyle, realFontSize));
-    newLine.setLink(attribs.getValue(XMLUtil.ATR_LINK));
+    newLine.setLink(attribs.getValue(SOFXML.ATR_LINK));
   }
 
   /* (non-Javadoc)
@@ -62,7 +62,7 @@ public class TagInfo extends TAG {
    */
   @Override
   public void end(final OrganigramReader reader) {
-    final XMLOrganigramReader xor = (XMLOrganigramReader) reader;
+    final SOFReader xor = (SOFReader) reader;
     newLine.setText(buf.toString().trim());
     xor.newUnit.addInfo(newLine);
     setNewLine(null);

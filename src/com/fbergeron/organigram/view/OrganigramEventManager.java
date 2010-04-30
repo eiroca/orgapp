@@ -32,7 +32,7 @@ import java.text.MessageFormat;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Unit;
 import com.fbergeron.organigram.util.Debug;
-import com.fbergeron.organigram.util.Messages;
+import com.fbergeron.organigram.util.Resources;
 
 /**
  * LinkManager handles the user interaction.
@@ -50,6 +50,8 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
 
   /** The base target. */
   private String baseTarget = null;
+
+  private final Resources messages = Resources.getInstance();
 
   /**
    * The Constructor.
@@ -134,16 +136,16 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
     String tipText = null;
     if (unitView != null) {
       if (unitView.canExpand()) {
-        tipText = Messages.getString("RightClick1"); //$NON-NLS-1$
+        tipText = messages.getString("RightClick1"); //$NON-NLS-1$
       }
       else if (unitView.canCollapse()) {
-        tipText = Messages.getString("RightClick2"); //$NON-NLS-1$
+        tipText = messages.getString("RightClick2"); //$NON-NLS-1$
       }
       final Unit unit = unitView.getUnit();
       final String link = unit.getMeta("link"); //$NON-NLS-1$
       if (link != null) {
         currentLink = link;
-        tipText = MessageFormat.format(Messages.getString("GoToLink"), currentLink); //$NON-NLS-1$
+        tipText = MessageFormat.format(messages.getString("GoToLink"), currentLink); //$NON-NLS-1$
         final String linkTarget = unit.getMeta("target"); //$NON-NLS-1$
         if (linkTarget == null) {
           currentTarget = baseTarget;

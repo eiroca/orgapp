@@ -23,27 +23,49 @@ import com.fbergeron.organigram.io.sitemap.tags.TagURLSet;
 /**
  * The Class SiteMapUtils.
  */
-public final class SiteMapUtils {
+public final class SiteMapXML {
 
   /** The Constant URLSET. */
-  public static final TAG URLSET = new TagURLSet();
+  public final transient TAG URLSET = new TagURLSet();
 
   /** The Constant URL. */
-  public static final TAG URL = new TagURL();
+  public final transient TAG URL = new TagURL();
 
   /** The Constant LOC. */
-  public static final TAG LOC = new TAG("loc");
+  public final transient TAG LOC = new TAG("loc");
 
   /** The Constant LASTMOD. */
-  public static final TAG LASTMOD = new TAG("lastmod");
+  public final transient TAG LASTMOD = new TAG("lastmod");
 
   /** The Constant CHANGEFREQ. */
-  public static final TAG CHANGEFREQ = new TAG("changefreq");
+  public final transient TAG CHANGEFREQ = new TAG("changefreq");
 
   /** The Constant PRIORITY. */
-  public static final TAG PRIORITY = new TAG("priority");
+  public final transient TAG PRIORITY = new TAG("priority");
 
   /** The Constant TITLE (extended tag). */
-  public static final TAG TITLE = new TAG("title");
+  public final transient TAG TITLE = new TAG("title");
+
+  /** The instance. */
+  private static SiteMapXML instance;
+
+  /**
+   * Gets the single instance of SiteMapXML.
+   * 
+   * @return single instance of SiteMapXML
+   */
+  public static synchronized SiteMapXML getInstance() {
+    if (SiteMapXML.instance == null) {
+      SiteMapXML.instance = new SiteMapXML();
+    }
+    return SiteMapXML.instance;
+  }
+
+  /**
+   * Instantiates a new site map xml.
+   */
+  private SiteMapXML() {
+    super();
+  }
 
 }

@@ -22,18 +22,34 @@ import java.util.ResourceBundle;
 /**
  * The Class Messages.
  */
-public final class Messages {
+public final class Resources {
 
   /** The Constant BUNDLE_NAME. */
   private static final String BUNDLE_NAME = "com.fbergeron.organigram.messages"; //$NON-NLS-1$
 
   /** The Constant RESOURCE_BUNDLE. */
-  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(Messages.BUNDLE_NAME);
+  private final ResourceBundle resources;
+
+  /** The instance. */
+  private static Resources instance;
+
+  /**
+   * Gets the single instance of Messages.
+   * 
+   * @return single instance of Messages
+   */
+  public static synchronized Resources getInstance() {
+    if (Resources.instance == null) {
+      Resources.instance = new Resources();
+    }
+    return Resources.instance;
+  }
 
   /**
    * Instantiates a new messages.
    */
-  private Messages() {
+  private Resources() {
+    resources = ResourceBundle.getBundle(Resources.BUNDLE_NAME);
   }
 
   /**
@@ -43,14 +59,15 @@ public final class Messages {
    * 
    * @return the string
    */
-  public static String getString(final String key) {
+  public String getString(final String key) {
     String res;
     try {
-      res = Messages.RESOURCE_BUNDLE.getString(key);
+      res = resources.getString(key);
     }
     catch (final MissingResourceException e) {
       res = '!' + key + '!';
     }
     return res;
   }
+
 }

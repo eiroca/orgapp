@@ -30,6 +30,9 @@
 		<javac srcdir="${src}" destdir="${classes}" source="${build.compiler.source}" target="${build.compiler.target}" debug="${build.compiler.debug}" nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}">
 			<classpath refid="classpath" />
 		</javac>
+		<copy todir="${classes}/com/fbergeron/organigram/">
+			<fileset file="${src}/com/fbergeron/organigram/*.properties" />
+		</copy>
 	</target>
 
 	<target name="javadoc" depends="compile">
@@ -64,14 +67,13 @@
 
 	<target name="applet_shrink" depends="applet_jar" description="Obfuscate compiled classes">
 		<proguard>
-            -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${dist}/applet.jar"
-            -outjars "${dist}/OrgApplet.jar"
-            -dontoptimize           
-            -dontusemixedcaseclassnames
-            -defaultpackage ''
-            -keep public class OrganigramApplet
-        </proguard>
+      -libraryjars "${java.home}\lib\rt.jar"
+      -injars "${dist}/applet.jar"
+      -outjars "${dist}/OrgApplet.jar"
+      -dontusemixedcaseclassnames
+      -defaultpackage ''
+      -keep public class OrganigramApplet
+    </proguard>
 	</target>
 
 	<target name="app" depends="app_shrink" description="Create application">
@@ -89,16 +91,15 @@
 
 	<target name="app_shrink" depends="app_jar" description="Obfuscate compiled classes">
 		<proguard>
-            -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${dist}/app.jar"
-            -outjars "${dist}/OrgApp.jar"
-            -dontusemixedcaseclassnames
-            -dontoptimize           
-            -defaultpackage ''
-            -keep public class OrganigramApp {
-                public static void main(java.lang.String[]);
-            }
-        </proguard>
+      -libraryjars "${java.home}\lib\rt.jar"
+      -injars "${dist}/app.jar"
+      -outjars "${dist}/OrgApp.jar"
+      -dontusemixedcaseclassnames
+      -defaultpackage ''
+      -keep public class OrganigramApp {
+        public static void main(java.lang.String[]);
+      }
+    </proguard>
 	</target>
 
 	<target name="convert" depends="convert_shrink" description="Create convert application">
@@ -116,16 +117,15 @@
 
 	<target name="convert_shrink" depends="convert_jar" description="Obfuscate compiled classes">
 		<proguard>
-            -libraryjars "${java.home}\lib\rt.jar"
-            -injars "${dist}/conv.jar"
-            -outjars "${dist}/Convert.jar"
-            -dontusemixedcaseclassnames
-            -dontoptimize           
-            -defaultpackage ''
-            -keep public class Convert {
-                public static void main(java.lang.String[]);
-            }
-        </proguard>
+      -libraryjars "${java.home}\lib\rt.jar"
+      -injars "${dist}/conv.jar"
+      -outjars "${dist}/Convert.jar"
+      -dontusemixedcaseclassnames
+      -defaultpackage ''
+      -keep public class Convert {
+        public static void main(java.lang.String[]);
+      }
+    </proguard>
 	</target>
 
 	<target name="dist" depends="applet, app, convert, javadoc" description="Create distribution">

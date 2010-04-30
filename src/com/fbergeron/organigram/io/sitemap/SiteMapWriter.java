@@ -30,6 +30,9 @@ public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
   /** The buffer. */
   private StringBuffer buf;
 
+  /** The sitemap. */
+  private final static SiteMapXML SITEMAP = SiteMapXML.getInstance();
+
   /*
    * (non-Javadoc)
    *
@@ -39,10 +42,10 @@ public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
     buf = new StringBuffer(1024);
     buf.append("<?xml version=\"1.0\"?>");
-    SiteMapUtils.URLSET.open(buf, true);
-    SiteMapUtils.URLSET.writeAttribute(buf, "xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9", true);
+    SiteMapWriter.SITEMAP.URLSET.open(buf, true);
+    SiteMapWriter.SITEMAP.URLSET.writeAttribute(buf, "xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9", true);
     organigram.execute(this, true);
-    SiteMapUtils.URLSET.close(buf, false);
+    SiteMapWriter.SITEMAP.URLSET.close(buf, false);
     return buf.toString();
   }
 
@@ -78,12 +81,12 @@ public class SiteMapWriter implements OrganigramWriter, UnitTraversal {
   public void process(final Unit unit, final int level) {
     final String link = unit.getMeta("link");
     if (link != null) {
-      SiteMapUtils.URL.open(buf, false);
-      write(unit, SiteMapUtils.LOC, "link");
-      write(unit, SiteMapUtils.LASTMOD);
-      write(unit, SiteMapUtils.CHANGEFREQ);
-      write(unit, SiteMapUtils.PRIORITY);
-      SiteMapUtils.URL.close(buf, false);
+      SiteMapWriter.SITEMAP.URL.open(buf, false);
+      write(unit, SiteMapWriter.SITEMAP.LOC, "link");
+      write(unit, SiteMapWriter.SITEMAP.LASTMOD);
+      write(unit, SiteMapWriter.SITEMAP.CHANGEFREQ);
+      write(unit, SiteMapWriter.SITEMAP.PRIORITY);
+      SiteMapWriter.SITEMAP.URL.close(buf, false);
     }
   }
 

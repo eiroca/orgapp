@@ -25,8 +25,8 @@ import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.OrganigramWriter;
 import com.fbergeron.organigram.io.sitemap.SiteMapReader;
 import com.fbergeron.organigram.io.sitemap.SiteMapWriter;
-import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
-import com.fbergeron.organigram.io.sof.XMLOrganigramWriter;
+import com.fbergeron.organigram.io.sof.SOFReader;
+import com.fbergeron.organigram.io.sof.SOFWriter;
 import com.fbergeron.organigram.io.txt.TXTOrganigramReader;
 import com.fbergeron.organigram.io.txt.TXTOrganigramWriter;
 import com.fbergeron.organigram.model.Organigram;
@@ -55,7 +55,7 @@ public class OrgUtils {
         writer = new SiteMapWriter();
         break;
       default:
-        writer = new XMLOrganigramWriter();
+        writer = new SOFWriter();
         break;
     }
     return writer.writeOrganigram(org, compact);
@@ -134,7 +134,7 @@ public class OrgUtils {
         handler = new SiteMapReader();
         break;
       default:
-        handler = new XMLOrganigramReader();
+        handler = new SOFReader();
         break;
     }
     return handler.readOrganigram(source);
@@ -202,8 +202,12 @@ public class OrgUtils {
    * @return the uRL
    */
   static public URL find(final String name) {
-    URL res = OrgUtils.findInClasspath(name);
-    if (res != null) {
+    URL res;
+    res = OrgUtils.findInDirectory(".", name);
+    if (res == null) {
+      res = OrgUtils.findInClasspath(name);
+    }
+    if (res == null) {
       res = OrgUtils.findInResource(name);
     }
     return res;

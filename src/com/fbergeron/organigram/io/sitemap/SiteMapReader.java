@@ -16,7 +16,6 @@
  */
 package com.fbergeron.organigram.io.sitemap;
 
-import com.fbergeron.organigram.io.TagProcessor;
 import com.fbergeron.organigram.io.XMLHandler;
 
 /**
@@ -24,7 +23,7 @@ import com.fbergeron.organigram.io.XMLHandler;
  */
 public class SiteMapReader extends XMLHandler {
 
-  /** Only to initialize SiteMapUtils. */
-  public final TagProcessor tag = SiteMapUtils.URLSET;
+  /** The sitemap. */
+  public final static SiteMapXML SITEMAP = SiteMapXML.getInstance();
 
 }

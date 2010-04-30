@@ -20,8 +20,8 @@ package com.fbergeron.organigram.io.sof.tags;
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.TAG;
-import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
-import com.fbergeron.organigram.io.sof.XMLUtil;
+import com.fbergeron.organigram.io.sof.SOFReader;
+import com.fbergeron.organigram.io.sof.SOFXML;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.OrganigramLayout;
@@ -53,41 +53,41 @@ public class TagOrganigram extends TAG {
     for (int i = 0; i < attribs.getLength(); i++) {
       final String name = attribs.getQName(i);
       final String value = attribs.getValue(i);
-      if (name.equals(XMLUtil.ATR_ORG_MODE)) {
-        orgLay.setMode(XMLUtil.readOrgMode(value, orgLay.getMode()));
+      if (name.equals(SOFXML.ATR_ORG_MODE)) {
+        orgLay.setMode(SOFXML.readOrgMode(value, orgLay.getMode()));
       }
-      else if (name.equals(XMLUtil.ATR_ORG_LAYOUT)) {
-        orgLay.setLayout(XMLUtil.readLayout(value, orgLay.getLayout()));
+      else if (name.equals(SOFXML.ATR_ORG_LAYOUT)) {
+        orgLay.setLayout(SOFXML.readLayout(value, orgLay.getLayout()));
       }
-      else if (name.equals(XMLUtil.ATR_ORG_COMPACT)) {
-        orgLay.setCompact(XMLUtil.readBoolean(value, orgLay.isCompact()));
+      else if (name.equals(SOFXML.ATR_ORG_COMPACT)) {
+        orgLay.setCompact(SOFXML.readBoolean(value, orgLay.isCompact()));
       }
-      else if (name.equals(XMLUtil.ATR_BACKGROUNDCOLOR)) {
-        orgLay.setBackgroundColor(XMLUtil.readColor(value, orgLay.getBackgroundColor()));
+      else if (name.equals(SOFXML.ATR_BACKGROUNDCOLOR)) {
+        orgLay.setBackgroundColor(SOFXML.readColor(value, orgLay.getBackgroundColor()));
       }
-      else if (name.equals(XMLUtil.ATR_LINECOLOR)) {
-        orgLay.setLineColor(XMLUtil.readColor(value, orgLay.getLineColor()));
+      else if (name.equals(SOFXML.ATR_LINECOLOR)) {
+        orgLay.setLineColor(SOFXML.readColor(value, orgLay.getLineColor()));
       }
-      else if (name.equals(XMLUtil.ATR_LINEMODE)) {
-        orgLay.setLineMode(XMLUtil.readLineMode(value, orgLay.getLineMode()));
+      else if (name.equals(SOFXML.ATR_LINEMODE)) {
+        orgLay.setLineMode(SOFXML.readLineMode(value, orgLay.getLineMode()));
       }
-      else if (name.equals(XMLUtil.ATR_MARGIN_RIGHT)) {
-        orgLay.setRightMargin(XMLUtil.readInt(value, orgLay.getRightMargin()));
+      else if (name.equals(SOFXML.ATR_MARGIN_RIGHT)) {
+        orgLay.setRightMargin(SOFXML.readInt(value, orgLay.getRightMargin()));
       }
-      else if (name.equals(XMLUtil.ATR_MARGIN_LEFT)) {
-        orgLay.setLeftMargin(XMLUtil.readInt(value, orgLay.getLeftMargin()));
+      else if (name.equals(SOFXML.ATR_MARGIN_LEFT)) {
+        orgLay.setLeftMargin(SOFXML.readInt(value, orgLay.getLeftMargin()));
       }
-      else if (name.equals(XMLUtil.ATR_MARGIN_TOP)) {
-        orgLay.setTopMargin(XMLUtil.readInt(value, orgLay.getTopMargin()));
+      else if (name.equals(SOFXML.ATR_MARGIN_TOP)) {
+        orgLay.setTopMargin(SOFXML.readInt(value, orgLay.getTopMargin()));
       }
-      else if (name.equals(XMLUtil.ATR_MARGIN_BOTTOM)) {
-        orgLay.setBottomMargin(XMLUtil.readInt(value, orgLay.getBottomMargin()));
+      else if (name.equals(SOFXML.ATR_MARGIN_BOTTOM)) {
+        orgLay.setBottomMargin(SOFXML.readInt(value, orgLay.getBottomMargin()));
       }
-      else if (name.equals(XMLUtil.ATR_TOOLTIPENABLED)) {
-        orgLay.setToolTipEnabled(XMLUtil.readBoolean(value, orgLay.isToolTipEnabled()));
+      else if (name.equals(SOFXML.ATR_TOOLTIPENABLED)) {
+        orgLay.setToolTipEnabled(SOFXML.readBoolean(value, orgLay.isToolTipEnabled()));
       }
-      else if (XMLUtil.isBoxLayoutAtr(name, value)) {
-        XMLUtil.readBoxLayoutAtr(name, value, boxLay);
+      else if (SOFXML.isBoxLayoutAtr(name, value)) {
+        SOFXML.readBoxLayoutAtr(name, value, boxLay);
       }
       else {
         organigram.setMeta(name, value);
@@ -100,7 +100,7 @@ public class TagOrganigram extends TAG {
    */
   @Override
   public void end(final OrganigramReader reader) {
-    final XMLOrganigramReader xor = (XMLOrganigramReader) reader;
+    final SOFReader xor = (SOFReader) reader;
     reader.getOrganigram().setRoot(xor.rootUnit);
   }
 
