@@ -31,17 +31,19 @@ import com.fbergeron.organigram.model.Unit;
 /**
  * The Class XMLOrganigramWriter.
  */
-public class XMLOrganigramWriter implements OrganigramWriter {
+public class SOFWriter implements OrganigramWriter {
+
+  private final static SOFXML SOF = SOFXML.getInstance();
 
   /** The Constant order. */
   private final static List<String> ORDER = new ArrayList<String>();
   static {
-    XMLOrganigramWriter.ORDER.add("id");
-    XMLOrganigramWriter.ORDER.add("firm");
-    XMLOrganigramWriter.ORDER.add("name");
-    XMLOrganigramWriter.ORDER.add("role");
-    XMLOrganigramWriter.ORDER.add("department");
-    XMLOrganigramWriter.ORDER.add("date");
+    SOFWriter.ORDER.add("id");
+    SOFWriter.ORDER.add("firm");
+    SOFWriter.ORDER.add("name");
+    SOFWriter.ORDER.add("role");
+    SOFWriter.ORDER.add("department");
+    SOFWriter.ORDER.add("date");
   }
 
   /**
@@ -53,7 +55,7 @@ public class XMLOrganigramWriter implements OrganigramWriter {
    */
   public static void writeMeta(final TAG tag, final StringBuffer buf, final Map<String, String> meta) {
     final HashSet<String> done = new HashSet<String>();
-    for (final String metaName : XMLOrganigramWriter.ORDER) {
+    for (final String metaName : SOFWriter.ORDER) {
       final String val = meta.get(metaName);
       if (val != null) {
         tag.writeAttribute(buf, metaName, meta.get(metaName), false);
@@ -80,16 +82,16 @@ public class XMLOrganigramWriter implements OrganigramWriter {
     if ((lines != null) && (!lines.isEmpty())) {
       res = true;
       for (final Line l : lines) {
-        XMLUtil.INFO.open(buf, true);
-        XMLUtil.writeString(XMLUtil.INFO, buf, XMLUtil.ATR_TYPE, l.getType());
-        XMLUtil.writeString(XMLUtil.INFO, buf, XMLUtil.ATR_LINK, l.getLink());
+        SOFWriter.SOF.INFO.open(buf, true);
+        SOFXML.writeString(SOFWriter.SOF.INFO, buf, SOFXML.ATR_TYPE, l.getType());
+        SOFXML.writeString(SOFWriter.SOF.INFO, buf, SOFXML.ATR_LINK, l.getLink());
         if (l.getColor() != null) {
-          XMLUtil.writeColor(XMLUtil.INFO, buf, XMLUtil.ATR_FONT_COLOR, null, l.getColor());
+          SOFXML.writeColor(SOFWriter.SOF.INFO, buf, SOFXML.ATR_FONT_COLOR, null, l.getColor());
         }
-        XMLUtil.writeFont(XMLUtil.INFO, buf, XMLUtil.ATR_FONT_NAME, XMLUtil.ATR_FONT_SIZE, XMLUtil.ATR_FONT_STYLE, Line.LINE_FONT, l.getFont());
-        XMLUtil.INFO.openClose(buf);
-        XMLUtil.INFO.writeCData(buf, l.getText());
-        XMLUtil.INFO.close(buf, false);
+        SOFXML.writeFont(SOFWriter.SOF.INFO, buf, SOFXML.ATR_FONT_NAME, SOFXML.ATR_FONT_SIZE, SOFXML.ATR_FONT_STYLE, Line.LINE_FONT, l.getFont());
+        SOFWriter.SOF.INFO.openClose(buf);
+        SOFWriter.SOF.INFO.writeCData(buf, l.getText());
+        SOFWriter.SOF.INFO.close(buf, false);
       }
     }
     return res;
@@ -110,19 +112,19 @@ public class XMLOrganigramWriter implements OrganigramWriter {
       res = false;
     }
     else {
-      XMLUtil.UNIT.open(buf, true);
-      XMLUtil.writeString(XMLUtil.UNIT, buf, XMLUtil.ATR_ID, unit.getId());
+      SOFWriter.SOF.UNIT.open(buf, true);
+      SOFXML.writeString(SOFWriter.SOF.UNIT, buf, SOFXML.ATR_ID, unit.getId());
       final BoxLayout boxLay = unit.getBoxLayout();
       if (boxLay != null) {
-        XMLUtil.writeBoxLayoutAtr(XMLUtil.UNIT, buf, boxLay);
+        SOFXML.writeBoxLayoutAtr(SOFWriter.SOF.UNIT, buf, boxLay);
       }
-      XMLOrganigramWriter.writeMeta(XMLUtil.UNIT, buf, unit.getMeta());
+      SOFWriter.writeMeta(SOFWriter.SOF.UNIT, buf, unit.getMeta());
       boolean compact = true;
       if (writeInfo) {
         final List<Line> lines = unit.getInfo();
         if (!lines.isEmpty()) {
           if (compact) {
-            XMLUtil.UNIT.openClose(buf);
+            SOFWriter.SOF.UNIT.openClose(buf);
             compact = false;
           }
           writeLines(buf, lines);
@@ -130,14 +132,14 @@ public class XMLOrganigramWriter implements OrganigramWriter {
       }
       if (unit.hasChildren()) {
         if (compact) {
-          XMLUtil.UNIT.openClose(buf);
+          SOFWriter.SOF.UNIT.openClose(buf);
           compact = false;
         }
         for (final Unit u : unit) {
           writeUnit(buf, u, writeInfo);
         }
       }
-      XMLUtil.UNIT.close(buf, compact);
+      SOFWriter.SOF.UNIT.close(buf, compact);
       res = true;
     }
     return res;
@@ -152,24 +154,24 @@ public class XMLOrganigramWriter implements OrganigramWriter {
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
     final StringBuffer buf = new StringBuffer(1024);
     buf.append("<?xml version=\"1.0\"?>");
-    XMLUtil.ORGANIGRAM.open(buf, true);
+    SOFWriter.SOF.ORGANIGRAM.open(buf, true);
     final OrganigramLayout orgLay = organigram.getOrganigramLayout();
-    XMLUtil.writeEnum(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_LAYOUT, OrganigramLayout.DEF_LAYOUT, orgLay.getLayout());
-    XMLUtil.writeEnum(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_MODE, OrganigramLayout.DEF_ORGMODE, orgLay.getMode());
-    XMLUtil.writeBoolean(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_ORG_COMPACT, OrganigramLayout.DEF_COMPACT, orgLay.isCompact());
-    XMLUtil.writeColor(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_BACKGROUNDCOLOR, OrganigramLayout.COLOR_BACKGROUND, orgLay.getBackgroundColor());
-    XMLUtil.writeColor(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_LINECOLOR, OrganigramLayout.DEF_LINECOLOR, orgLay.getLineColor());
-    XMLUtil.writeEnum(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_LINEMODE, OrganigramLayout.DEF_LINEMODE, orgLay.getLineMode());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_TOP, OrganigramLayout.DEF_MARGINTOP, orgLay.getTopMargin());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_LEFT, OrganigramLayout.DEF_MARGINLEFT, orgLay.getLeftMargin());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_RIGHT, OrganigramLayout.DEF_MARGINRIGHT, orgLay.getRightMargin());
-    XMLUtil.writeInt(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_MARGIN_BOTTOM, OrganigramLayout.DEF_MARGINBOTTOM, orgLay.getBottomMargin());
-    XMLUtil.writeBoolean(XMLUtil.ORGANIGRAM, buf, XMLUtil.ATR_TOOLTIPENABLED, OrganigramLayout.DEF_TOOLTIP, orgLay.isToolTipEnabled());
-    XMLUtil.writeBoxLayoutAtr(XMLUtil.ORGANIGRAM, buf, organigram.getBoxLayout());
-    XMLOrganigramWriter.writeMeta(XMLUtil.ORGANIGRAM, buf, organigram.getMeta());
-    XMLUtil.ORGANIGRAM.openClose(buf);
+    SOFXML.writeEnum(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_ORG_LAYOUT, OrganigramLayout.DEF_LAYOUT, orgLay.getLayout());
+    SOFXML.writeEnum(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_ORG_MODE, OrganigramLayout.DEF_ORGMODE, orgLay.getMode());
+    SOFXML.writeBoolean(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_ORG_COMPACT, OrganigramLayout.DEF_COMPACT, orgLay.isCompact());
+    SOFXML.writeColor(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_BACKGROUNDCOLOR, OrganigramLayout.COLOR_BACKGROUND, orgLay.getBackgroundColor());
+    SOFXML.writeColor(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_LINECOLOR, OrganigramLayout.DEF_LINECOLOR, orgLay.getLineColor());
+    SOFXML.writeEnum(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_LINEMODE, OrganigramLayout.DEF_LINEMODE, orgLay.getLineMode());
+    SOFXML.writeInt(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_MARGIN_TOP, OrganigramLayout.DEF_MARGINTOP, orgLay.getTopMargin());
+    SOFXML.writeInt(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_MARGIN_LEFT, OrganigramLayout.DEF_MARGINLEFT, orgLay.getLeftMargin());
+    SOFXML.writeInt(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_MARGIN_RIGHT, OrganigramLayout.DEF_MARGINRIGHT, orgLay.getRightMargin());
+    SOFXML.writeInt(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_MARGIN_BOTTOM, OrganigramLayout.DEF_MARGINBOTTOM, orgLay.getBottomMargin());
+    SOFXML.writeBoolean(SOFWriter.SOF.ORGANIGRAM, buf, SOFXML.ATR_TOOLTIPENABLED, OrganigramLayout.DEF_TOOLTIP, orgLay.isToolTipEnabled());
+    SOFXML.writeBoxLayoutAtr(SOFWriter.SOF.ORGANIGRAM, buf, organigram.getBoxLayout());
+    SOFWriter.writeMeta(SOFWriter.SOF.ORGANIGRAM, buf, organigram.getMeta());
+    SOFWriter.SOF.ORGANIGRAM.openClose(buf);
     writeUnit(buf, organigram.getRoot(), !compact);
-    XMLUtil.ORGANIGRAM.close(buf, false);
+    SOFWriter.SOF.ORGANIGRAM.close(buf, false);
     return buf.toString();
   }
 

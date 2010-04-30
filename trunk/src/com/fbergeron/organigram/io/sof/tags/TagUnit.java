@@ -21,8 +21,8 @@ package com.fbergeron.organigram.io.sof.tags;
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.TAG;
-import com.fbergeron.organigram.io.sof.XMLOrganigramReader;
-import com.fbergeron.organigram.io.sof.XMLUtil;
+import com.fbergeron.organigram.io.sof.SOFReader;
+import com.fbergeron.organigram.io.sof.SOFXML;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
 
@@ -46,7 +46,7 @@ public class TagUnit extends TAG {
    */
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
-    final XMLOrganigramReader xor = (XMLOrganigramReader) reader;
+    final SOFReader xor = (SOFReader) reader;
     final Organigram organigram = xor.getOrganigram();
     xor.newUnit = new Unit(organigram);
     if (xor.rootUnit == null) {
@@ -62,11 +62,11 @@ public class TagUnit extends TAG {
     for (int i = 0; i < attribs.getLength(); i++) {
       name = attribs.getQName(i);
       value = attribs.getValue(i);
-      if (name.equals(XMLUtil.ATR_ID)) {
+      if (name.equals(SOFXML.ATR_ID)) {
         xor.newUnit.setId(value);
       }
-      else if (XMLUtil.isBoxLayoutAtr(name, value)) {
-        XMLUtil.readBoxLayoutAtr(name, value, xor.newUnit.getBoxLayout(true));
+      else if (SOFXML.isBoxLayoutAtr(name, value)) {
+        SOFXML.readBoxLayoutAtr(name, value, xor.newUnit.getBoxLayout(true));
       }
       else {
         xor.newUnit.setMeta(name, value);
@@ -79,7 +79,7 @@ public class TagUnit extends TAG {
    */
   @Override
   public void end(final OrganigramReader reader) {
-    final XMLOrganigramReader xor = (XMLOrganigramReader) reader;
+    final SOFReader xor = (SOFReader) reader;
     xor.newUnit = xor.parentUnits.pop();
   }
 

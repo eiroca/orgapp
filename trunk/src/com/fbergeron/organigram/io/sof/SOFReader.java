@@ -18,7 +18,6 @@
 package com.fbergeron.organigram.io.sof;
 
 import java.util.Stack;
-import com.fbergeron.organigram.io.TagProcessor;
 import com.fbergeron.organigram.io.XMLHandler;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.Unit;
@@ -26,11 +25,11 @@ import com.fbergeron.organigram.model.Unit;
 /**
  * The Class XMLOrganigramReader.
  */
-public class XMLOrganigramReader extends XMLHandler {
+public class SOFReader extends XMLHandler {
 
   // Only to initialize XMLUtil
   /** The tag. */
-  public final TagProcessor tag = XMLUtil.ORGANIGRAM;
+  public final static SOFXML SOF = SOFXML.getInstance();
 
   /** The parent units. */
   public final Stack<Unit> parentUnits = new Stack<Unit>();

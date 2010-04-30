@@ -24,16 +24,26 @@ public class Debug {
   /**
    * Ignore.
    * 
-   * @param err the err
+   * @param e the e
    */
   public static void ignore(final Throwable e) {
     //
   }
 
+  /**
+   * Error.
+   * 
+   * @param e the e
+   */
   public static void error(final Throwable e) {
     e.printStackTrace();
   }
 
+  /**
+   * Error.
+   * 
+   * @param msg the msg
+   */
   public static void error(final String msg) {
     System.err.println(msg);
   }

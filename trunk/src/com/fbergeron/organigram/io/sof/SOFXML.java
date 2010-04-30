@@ -41,16 +41,16 @@ import com.fbergeron.organigram.util.OrgUtils;
 /**
  * The Class XMLUtil.
  */
-public final class XMLUtil {
+public final class SOFXML {
 
   /** The Constant ORGANIGRAM. */
-  public static final TAG ORGANIGRAM = new TagOrganigram();
+  public final transient TAG ORGANIGRAM = new TagOrganigram();
 
   /** The Constant UNIT. */
-  public static final TAG UNIT = new TagUnit();
+  public final transient TAG UNIT = new TagUnit();
 
   /** The Constant INFO. */
-  public static final TAG INFO = new TagInfo();
+  public final transient TAG INFO = new TagInfo();
 
   /** The Constant ATR_ISTOOLTIPENABLED. */
   public static final String ATR_TOOLTIPENABLED = "isToolTipEnabled";
@@ -169,6 +169,9 @@ public final class XMLUtil {
   /** The Constant alignments. */
   private static final Map<String, Alignment> ALIGNMENTS = new HashMap<String, Alignment>();
 
+  /** The instance. */
+  private static SOFXML instance;
+
   /**
    * Adds the enum.
    * 
@@ -184,58 +187,70 @@ public final class XMLUtil {
   }
 
   static {
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_RIGHT);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_LEFT);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_TOP);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_PADDING_BOTTOM);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_COLOR_FRAME);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_COLOR_BACKGROUND);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_COLOR_FOREGROUND);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_TEXT_ALIGMENT);
-    XMLUtil.BOXLAYOUTATTRS.add(XMLUtil.ATR_BOX_EXPENDED);
-    XMLUtil.COLORS.put("aqua", "#00ffff");
-    XMLUtil.COLORS.put("cyan", "#00ffff");
-    XMLUtil.COLORS.put("gray", "#808080");
-    XMLUtil.COLORS.put("navy", "#000080");
-    XMLUtil.COLORS.put("silver", "#c0c0c0");
-    XMLUtil.COLORS.put("black", "#000000");
-    XMLUtil.COLORS.put("green", "#008000");
-    XMLUtil.COLORS.put("olive", "#808000");
-    XMLUtil.COLORS.put("teal", "#008080");
-    XMLUtil.COLORS.put("blue", "#0000ff");
-    XMLUtil.COLORS.put("lime", "#00ff00");
-    XMLUtil.COLORS.put("purple", "#800080");
-    XMLUtil.COLORS.put("white", "#ffffff");
-    XMLUtil.COLORS.put("fuchsia", "#ff00ff");
-    XMLUtil.COLORS.put("magenta", "#ff00ff");
-    XMLUtil.COLORS.put("maroon", "#800000");
-    XMLUtil.COLORS.put("red", "#ff0000");
-    XMLUtil.COLORS.put("yellow", "#ffff00");
-    XMLUtil.BOOLS.put("0", Boolean.FALSE);
-    XMLUtil.BOOLS.put("f", Boolean.FALSE);
-    XMLUtil.BOOLS.put("false", Boolean.FALSE);
-    XMLUtil.BOOLS.put("1", Boolean.TRUE);
-    XMLUtil.BOOLS.put("-1", Boolean.TRUE);
-    XMLUtil.BOOLS.put("t", Boolean.TRUE);
-    XMLUtil.BOOLS.put("true", Boolean.TRUE);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_PADDING_RIGHT);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_PADDING_LEFT);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_PADDING_TOP);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_PADDING_BOTTOM);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_COLOR_FRAME);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_COLOR_BACKGROUND);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_COLOR_FOREGROUND);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_TEXT_ALIGMENT);
+    SOFXML.BOXLAYOUTATTRS.add(SOFXML.ATR_BOX_EXPENDED);
+    SOFXML.COLORS.put("aqua", "#00ffff");
+    SOFXML.COLORS.put("cyan", "#00ffff");
+    SOFXML.COLORS.put("gray", "#808080");
+    SOFXML.COLORS.put("navy", "#000080");
+    SOFXML.COLORS.put("silver", "#c0c0c0");
+    SOFXML.COLORS.put("black", "#000000");
+    SOFXML.COLORS.put("green", "#008000");
+    SOFXML.COLORS.put("olive", "#808000");
+    SOFXML.COLORS.put("teal", "#008080");
+    SOFXML.COLORS.put("blue", "#0000ff");
+    SOFXML.COLORS.put("lime", "#00ff00");
+    SOFXML.COLORS.put("purple", "#800080");
+    SOFXML.COLORS.put("white", "#ffffff");
+    SOFXML.COLORS.put("fuchsia", "#ff00ff");
+    SOFXML.COLORS.put("magenta", "#ff00ff");
+    SOFXML.COLORS.put("maroon", "#800000");
+    SOFXML.COLORS.put("red", "#ff0000");
+    SOFXML.COLORS.put("yellow", "#ffff00");
+    SOFXML.BOOLS.put("0", Boolean.FALSE);
+    SOFXML.BOOLS.put("f", Boolean.FALSE);
+    SOFXML.BOOLS.put("false", Boolean.FALSE);
+    SOFXML.BOOLS.put("1", Boolean.TRUE);
+    SOFXML.BOOLS.put("-1", Boolean.TRUE);
+    SOFXML.BOOLS.put("t", Boolean.TRUE);
+    SOFXML.BOOLS.put("true", Boolean.TRUE);
     for (final Layout x : Layout.values()) {
-      XMLUtil.addEnum(XMLUtil.LAYOUTS, x);
+      SOFXML.addEnum(SOFXML.LAYOUTS, x);
     }
     for (final OrgMode x : OrgMode.values()) {
-      XMLUtil.addEnum(XMLUtil.ORGMODES, x);
+      SOFXML.addEnum(SOFXML.ORGMODES, x);
     }
     for (final LineMode x : LineMode.values()) {
-      XMLUtil.addEnum(XMLUtil.LINEMODES, x);
+      SOFXML.addEnum(SOFXML.LINEMODES, x);
     }
     for (final Alignment x : Alignment.values()) {
-      XMLUtil.addEnum(XMLUtil.ALIGNMENTS, x);
+      SOFXML.addEnum(SOFXML.ALIGNMENTS, x);
     }
+  }
+
+  /**
+   * Gets the single instance of SiteMapXML.
+   * 
+   * @return single instance of SiteMapXML
+   */
+  public static synchronized SOFXML getInstance() {
+    if (SOFXML.instance == null) {
+      SOFXML.instance = new SOFXML();
+    }
+    return SOFXML.instance;
   }
 
   /**
    * Instantiates a new XML utility.
    */
-  private XMLUtil() {
+  private SOFXML() {
     super();
   }
 
@@ -262,9 +277,9 @@ public final class XMLUtil {
   public static String writeColor(final Color col) {
     final StringBuffer buf = new StringBuffer();
     buf.append('#');
-    XMLUtil.writeHH(buf, col.getRed());
-    XMLUtil.writeHH(buf, col.getGreen());
-    XMLUtil.writeHH(buf, col.getBlue());
+    SOFXML.writeHH(buf, col.getRed());
+    SOFXML.writeHH(buf, col.getGreen());
+    SOFXML.writeHH(buf, col.getBlue());
     return buf.toString();
   }
 
@@ -288,8 +303,8 @@ public final class XMLUtil {
     }
     else {
       strColor = strColor.trim().toLowerCase();
-      if (XMLUtil.COLORS.containsKey(strColor)) {
-        strColor = XMLUtil.COLORS.get(strColor);
+      if (SOFXML.COLORS.containsKey(strColor)) {
+        strColor = SOFXML.COLORS.get(strColor);
       }
       if (strColor.charAt(0) == '#') {
         if (strColor.length() == 4) {
@@ -342,7 +357,7 @@ public final class XMLUtil {
     Color res = def;
     if (val != null) {
       try {
-        res = XMLUtil.parseColor(val);
+        res = SOFXML.parseColor(val);
       }
       catch (final ParseException e) {
         Debug.error(e.toString());
@@ -381,7 +396,7 @@ public final class XMLUtil {
   public static Layout readLayout(final String val, final Layout def) {
     Layout res = null;
     if (val != null) {
-      res = XMLUtil.LAYOUTS.get(val.trim().toLowerCase());
+      res = SOFXML.LAYOUTS.get(val.trim().toLowerCase());
     }
     return (res == null) ? def : res;
   }
@@ -396,7 +411,7 @@ public final class XMLUtil {
   public static OrgMode readOrgMode(final String val, final OrgMode def) {
     OrgMode res = null;
     if (val != null) {
-      res = XMLUtil.ORGMODES.get(val.trim().toLowerCase());
+      res = SOFXML.ORGMODES.get(val.trim().toLowerCase());
     }
     return (res == null) ? def : res;
   }
@@ -411,7 +426,7 @@ public final class XMLUtil {
   public static LineMode readLineMode(final String val, final LineMode def) {
     LineMode res = null;
     if (val != null) {
-      res = XMLUtil.LINEMODES.get(val.trim().toLowerCase());
+      res = SOFXML.LINEMODES.get(val.trim().toLowerCase());
     }
     return (res == null) ? def : res;
   }
@@ -427,7 +442,7 @@ public final class XMLUtil {
   public static Alignment readAligment(final String val, final Alignment def) {
     Alignment res = null;
     if (val != null) {
-      res = XMLUtil.ALIGNMENTS.get(val.trim().toLowerCase());
+      res = SOFXML.ALIGNMENTS.get(val.trim().toLowerCase());
     }
     return (res == null) ? def : res;
   }
@@ -443,7 +458,7 @@ public final class XMLUtil {
   public static boolean readBoolean(final String val, final boolean def) {
     boolean res = def;
     if (val != null) {
-      final Boolean bVal = XMLUtil.BOOLS.get(val.trim().toLowerCase());
+      final Boolean bVal = SOFXML.BOOLS.get(val.trim().toLowerCase());
       if (bVal != null) {
         res = bVal;
       }
@@ -467,10 +482,10 @@ public final class XMLUtil {
       String styleAtr;
       while (styleStr.hasMoreTokens()) {
         styleAtr = styleStr.nextToken();
-        if (XMLUtil.VAL_BOLD.equalsIgnoreCase(styleAtr)) {
+        if (SOFXML.VAL_BOLD.equalsIgnoreCase(styleAtr)) {
           style |= Font.BOLD;
         }
-        else if (XMLUtil.VAL_ITALIC.equalsIgnoreCase(styleAtr)) {
+        else if (SOFXML.VAL_ITALIC.equalsIgnoreCase(styleAtr)) {
           style |= Font.ITALIC;
         }
       }
@@ -490,7 +505,7 @@ public final class XMLUtil {
    */
   public static void writeColor(final TAG tag, final StringBuffer buf, final String atr, final Color defVal, final Color val) {
     if (!val.equals(defVal)) {
-      tag.writeAttribute(buf, atr, XMLUtil.writeColor(val), false);
+      tag.writeAttribute(buf, atr, SOFXML.writeColor(val), false);
     }
   }
 
@@ -550,14 +565,14 @@ public final class XMLUtil {
       boolean first = true;
       final StringBuffer styleBuf = new StringBuffer();
       if ((style & Font.ITALIC) == Font.ITALIC) {
-        styleBuf.append(XMLUtil.VAL_ITALIC);
+        styleBuf.append(SOFXML.VAL_ITALIC);
         first = false;
       }
       if ((style & Font.BOLD) == Font.BOLD) {
         if (!first) {
           styleBuf.append('+');
         }
-        styleBuf.append(XMLUtil.VAL_BOLD);
+        styleBuf.append(SOFXML.VAL_BOLD);
       }
       tag.writeAttribute(buf, atrName3, styleBuf.toString(), false);
     }
@@ -575,10 +590,10 @@ public final class XMLUtil {
   public static void writeBoolean(final TAG tag, final StringBuffer buf, final String atr, final boolean defVal, final boolean val) {
     if (val != defVal) {
       if (val) {
-        tag.writeAttribute(buf, atr, XMLUtil.VAL_TRUE, false);
+        tag.writeAttribute(buf, atr, SOFXML.VAL_TRUE, false);
       }
       else {
-        tag.writeAttribute(buf, atr, XMLUtil.VAL_FALSE, false);
+        tag.writeAttribute(buf, atr, SOFXML.VAL_FALSE, false);
       }
     }
   }
@@ -606,7 +621,7 @@ public final class XMLUtil {
    * @return true, if is box layout atr
    */
   public static boolean isBoxLayoutAtr(final String name, final String value) {
-    return XMLUtil.BOXLAYOUTATTRS.contains(name);
+    return SOFXML.BOXLAYOUTATTRS.contains(name);
   }
 
   /**
@@ -617,32 +632,32 @@ public final class XMLUtil {
    * @param boxLay the box lay
    */
   public static void readBoxLayoutAtr(final String name, final String value, final BoxLayout boxLay) {
-    if (name.equals(XMLUtil.ATR_BOX_PADDING_RIGHT)) {
-      boxLay.setRightPadding(XMLUtil.readInt(value, boxLay.getRightPadding()));
+    if (name.equals(SOFXML.ATR_BOX_PADDING_RIGHT)) {
+      boxLay.setRightPadding(SOFXML.readInt(value, boxLay.getRightPadding()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_PADDING_LEFT)) {
-      boxLay.setLeftPadding(XMLUtil.readInt(value, boxLay.getLeftPadding()));
+    else if (name.equals(SOFXML.ATR_BOX_PADDING_LEFT)) {
+      boxLay.setLeftPadding(SOFXML.readInt(value, boxLay.getLeftPadding()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_PADDING_TOP)) {
-      boxLay.setTopPadding(XMLUtil.readInt(value, boxLay.getTopPadding()));
+    else if (name.equals(SOFXML.ATR_BOX_PADDING_TOP)) {
+      boxLay.setTopPadding(SOFXML.readInt(value, boxLay.getTopPadding()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_PADDING_BOTTOM)) {
-      boxLay.setBottomPadding(XMLUtil.readInt(value, boxLay.getBottomPadding()));
+    else if (name.equals(SOFXML.ATR_BOX_PADDING_BOTTOM)) {
+      boxLay.setBottomPadding(SOFXML.readInt(value, boxLay.getBottomPadding()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_COLOR_FRAME)) {
-      boxLay.setFrameColor(XMLUtil.readColor(value, boxLay.getFrameColor()));
+    else if (name.equals(SOFXML.ATR_BOX_COLOR_FRAME)) {
+      boxLay.setFrameColor(SOFXML.readColor(value, boxLay.getFrameColor()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_COLOR_BACKGROUND)) {
-      boxLay.setBackgroundColor(XMLUtil.readColor(value, boxLay.getBackgroundColor()));
+    else if (name.equals(SOFXML.ATR_BOX_COLOR_BACKGROUND)) {
+      boxLay.setBackgroundColor(SOFXML.readColor(value, boxLay.getBackgroundColor()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_COLOR_FOREGROUND)) {
-      boxLay.setForegroundColor(XMLUtil.readColor(value, boxLay.getForegroundColor()));
+    else if (name.equals(SOFXML.ATR_BOX_COLOR_FOREGROUND)) {
+      boxLay.setForegroundColor(SOFXML.readColor(value, boxLay.getForegroundColor()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_TEXT_ALIGMENT)) {
-      boxLay.setTextAlignment(XMLUtil.readAligment(value, boxLay.getTextAlignment()));
+    else if (name.equals(SOFXML.ATR_BOX_TEXT_ALIGMENT)) {
+      boxLay.setTextAlignment(SOFXML.readAligment(value, boxLay.getTextAlignment()));
     }
-    else if (name.equals(XMLUtil.ATR_BOX_EXPENDED)) {
-      boxLay.setExpanded(XMLUtil.readBoolean(value, boxLay.isExpanded()));
+    else if (name.equals(SOFXML.ATR_BOX_EXPENDED)) {
+      boxLay.setExpanded(SOFXML.readBoolean(value, boxLay.isExpanded()));
     }
   }
 
@@ -654,14 +669,14 @@ public final class XMLUtil {
    * @param boxLay the box lay
    */
   public static void writeBoxLayoutAtr(final TAG tag, final StringBuffer buf, final BoxLayout boxLay) {
-    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_FRAME, BoxLayout.DEF_BOXFRAMECOLOR, boxLay.getFrameColor());
-    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_BACKGROUND, BoxLayout.DEF_BACKGROUNDCOLOR, boxLay.getBackgroundColor());
-    XMLUtil.writeColor(tag, buf, XMLUtil.ATR_BOX_COLOR_FOREGROUND, BoxLayout.DEF_FOREGROUNDCOLOR, boxLay.getForegroundColor());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_TOP, BoxLayout.DEF_PADDINGTOP, boxLay.getTopPadding());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_LEFT, BoxLayout.DEF_PADDINGLEFT, boxLay.getLeftPadding());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_RIGHT, BoxLayout.DEF_PADDINGRIGHT, boxLay.getRightPadding());
-    XMLUtil.writeInt(tag, buf, XMLUtil.ATR_BOX_PADDING_BOTTOM, BoxLayout.DEF_PADDINGBOTTOM, boxLay.getBottomPadding());
-    XMLUtil.writeEnum(tag, buf, XMLUtil.ATR_BOX_TEXT_ALIGMENT, BoxLayout.DEF_TEXTALIGN, boxLay.getTextAlignment());
+    SOFXML.writeColor(tag, buf, SOFXML.ATR_BOX_COLOR_FRAME, BoxLayout.DEF_BOXFRAMECOLOR, boxLay.getFrameColor());
+    SOFXML.writeColor(tag, buf, SOFXML.ATR_BOX_COLOR_BACKGROUND, BoxLayout.DEF_BACKGROUNDCOLOR, boxLay.getBackgroundColor());
+    SOFXML.writeColor(tag, buf, SOFXML.ATR_BOX_COLOR_FOREGROUND, BoxLayout.DEF_FOREGROUNDCOLOR, boxLay.getForegroundColor());
+    SOFXML.writeInt(tag, buf, SOFXML.ATR_BOX_PADDING_TOP, BoxLayout.DEF_PADDINGTOP, boxLay.getTopPadding());
+    SOFXML.writeInt(tag, buf, SOFXML.ATR_BOX_PADDING_LEFT, BoxLayout.DEF_PADDINGLEFT, boxLay.getLeftPadding());
+    SOFXML.writeInt(tag, buf, SOFXML.ATR_BOX_PADDING_RIGHT, BoxLayout.DEF_PADDINGRIGHT, boxLay.getRightPadding());
+    SOFXML.writeInt(tag, buf, SOFXML.ATR_BOX_PADDING_BOTTOM, BoxLayout.DEF_PADDINGBOTTOM, boxLay.getBottomPadding());
+    SOFXML.writeEnum(tag, buf, SOFXML.ATR_BOX_TEXT_ALIGMENT, BoxLayout.DEF_TEXTALIGN, boxLay.getTextAlignment());
   }
 
 }
