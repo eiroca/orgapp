@@ -14,44 +14,53 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io;
+package com.fbergeron.organigram.io.xml.attr;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.fbergeron.organigram.io.xml.Attr;
+import com.fbergeron.organigram.util.Debug;
 
 /**
- * A factory for creating Tag objects.
+ * The Class AttrInt.
  */
-public final class TagFactory {
-
-  /** The registry. */
-  private static final Map<String, TagProcessor> REGISTRY = new HashMap<String, TagProcessor>();
+public class AttrInt extends Attr<Integer> {
 
   /**
-   * Instantiates a new tag factory.
+   * Instantiates a new tag attr int.
+   * 
+   * @param name the name
    */
-  private TagFactory() {
-    super();
+  public AttrInt(final String name) {
+    super(name);
   }
 
   /**
-   * Register.
+   * Instantiates a new tag attr int.
    * 
-   * @param processor the processor
+   * @param name the name
+   * @param def the def
    */
-  public static void register(final TagProcessor processor) {
-    TagFactory.REGISTRY.put(processor.getName(), processor);
+  public AttrInt(final String name, final Integer def) {
+    super(name, def);
   }
 
   /**
-   * Gets the processor.
+   * Read integer.
    * 
-   * @param tagName the tag name
-   * 
-   * @return the processor
+   * @param val the value
+   * @return the integer
    */
-  public static TagProcessor getProcessor(final String tagName) {
-    return TagFactory.REGISTRY.get(tagName);
+  @Override
+  public Integer toVal(final String val) {
+    Integer res = def;
+    if (val != null) {
+      try {
+        res = Integer.valueOf(val);
+      }
+      catch (final NumberFormatException e) {
+        Debug.error(e.toString());
+      }
+    }
+    return res;
   }
 
 }

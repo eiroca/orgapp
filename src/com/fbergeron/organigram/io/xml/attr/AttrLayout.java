@@ -14,45 +14,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io;
+package com.fbergeron.organigram.io.xml.attr;
 
-import org.xml.sax.Attributes;
+import com.fbergeron.organigram.model.type.Layout;
+import com.fbergeron.organigram.util.Utils;
 
 /**
- * The Interface TagProcessor.
+ * The Class AttrLayout.
  */
-public interface TagProcessor {
+public class AttrLayout extends AttrEnum<Layout> {
 
   /**
-   * Gets the name.
+   * Instantiates a new tag attr layout.
    * 
-   * @return the name
+   * @param name the name
    */
-  String getName();
+  public AttrLayout(final String name) {
+    this(name, null);
+  }
 
   /**
-   * Start.
+   * Instantiates a new tag attr layout.
    * 
-   * @param reader the reader
-   * @param attribs the attributes
+   * @param name the name
+   * @param def the def
    */
-  void start(OrganigramReader reader, Attributes attribs);
-
-  /**
-   * Characters.
-   * 
-   * @param reader the reader
-   * @param chr the char
-   * @param start the start
-   * @param length the length
-   */
-  void characters(OrganigramReader reader, final char[] chr, final int start, final int length);
-
-  /**
-   * End.
-   * 
-   * @param reader the reader
-   */
-  void end(OrganigramReader reader);
+  public AttrLayout(final String name, final Layout def) {
+    super(name, def);
+    for (final Layout x : Layout.values()) {
+      Utils.addEnum(values, x);
+    }
+  }
 
 }

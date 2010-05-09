@@ -14,16 +14,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.sitemap;
+package com.fbergeron.organigram.io.xml.attr;
 
-import com.fbergeron.organigram.io.XMLHandler;
+import com.fbergeron.organigram.model.type.LineMode;
+import com.fbergeron.organigram.util.Utils;
 
 /**
- * The Class XMLOrganigramReader.
+ * The Class AttrLineMode.
  */
-public class SiteMapReader extends XMLHandler {
+public class AttrLineMode extends AttrEnum<LineMode> {
 
-  /** The sitemap. */
-  public final static SiteMapXML SITEMAP = SiteMapXML.getInstance();
+  /**
+   * Instantiates a new tag attr line mode.
+   * 
+   * @param name the name
+   */
+  public AttrLineMode(final String name) {
+    super(name, null);
+  }
+
+  /**
+   * Instantiates a new tag attr line mode.
+   * 
+   * @param name the name
+   * @param def the def
+   */
+  public AttrLineMode(final String name, final LineMode def) {
+    super(name, def);
+    for (final LineMode x : LineMode.values()) {
+      Utils.addEnum(values, x);
+    }
+  }
 
 }

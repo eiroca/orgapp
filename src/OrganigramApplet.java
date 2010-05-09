@@ -24,6 +24,7 @@ import javax.swing.JApplet;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgCharFixUp;
 import com.fbergeron.organigram.util.OrgUtils;
+import com.fbergeron.organigram.util.Utils;
 import com.fbergeron.organigram.view.OrganigramView;
 
 /**
@@ -44,7 +45,7 @@ public class OrganigramApplet extends JApplet {
     final String target = getParameter("Target");
     Organigram o;
     if (source != null) {
-      final URL xmlSourceUrl = OrgUtils.buildURL(getDocumentBase(), source);
+      final URL xmlSourceUrl = Utils.buildURL(getDocumentBase(), source);
       o = OrgUtils.readOrganigram(xmlSourceUrl);
     }
     else {

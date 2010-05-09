@@ -17,6 +17,7 @@
 package com.fbergeron.organigram.model;
 
 import java.awt.Color;
+import java.awt.Insets;
 import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.model.type.LineMode;
 import com.fbergeron.organigram.model.type.OrgMode;
@@ -26,68 +27,23 @@ import com.fbergeron.organigram.model.type.OrgMode;
  */
 public class OrganigramLayout {
 
-  /** The Constant ORGMODE. */
-  public static final OrgMode DEF_ORGMODE = OrgMode.MAX;
-
-  /** The Constant LAYOUT. */
   public static final Layout DEF_LAYOUT = Layout.TOP;
-
-  /** The Constant COMPACT. */
+  public static final OrgMode DEF_ORGMODE = OrgMode.MAX;
   public static final boolean DEF_COMPACT = Boolean.TRUE;
-
-  /** The Constant COLOR_BACKGROUND. */
-  public static final Color COLOR_BACKGROUND = Color.white;
-
-  /** The Constant COLOR_LINE. */
-  public static final Color DEF_LINECOLOR = Color.black;
-
-  /** The Constant DEF_LINEMODE. */
+  public static final Color DEF_BACKGROUND = Color.white;
   public static final LineMode DEF_LINEMODE = LineMode.CONNECTOR;
+  public static final Color DEF_LINECOLOR = Color.black;
+  public static final Insets DEF_MARGIN = new Insets(6, 6, 6, 6);
 
-  /** The Constant MARGIN_BOXRIGHT. */
-  public static final int DEF_MARGINRIGHT = 6;
-
-  /** The Constant MARGIN_BOXLEFT. */
-  public static final int DEF_MARGINLEFT = 6;
-
-  /** The Constant MARGIN_BOXTOP. */
-  public static final int DEF_MARGINTOP = 6;
-
-  /** The Constant MARGIN_BOXBOTTOM. */
-  public static final int DEF_MARGINBOTTOM = 6;
-
-  /** The Constant ISTOOLTIPENABLED. */
   public static final boolean DEF_TOOLTIP = true;
 
-  /** The mode. */
-  private OrgMode mode = OrganigramLayout.DEF_ORGMODE;
-
-  /** The layout. */
   private Layout layout = OrganigramLayout.DEF_LAYOUT;
-
-  /** The compact. */
+  private OrgMode mode = OrganigramLayout.DEF_ORGMODE;
   private boolean compact = OrganigramLayout.DEF_COMPACT;
-
-  /** The background color. */
-  private Color backgroundColor = OrganigramLayout.COLOR_BACKGROUND;
-
-  /** The line color. */
-  private Color lineColor = OrganigramLayout.DEF_LINECOLOR;
-
-  /** The line mode. */
+  private Color backgroundColor = OrganigramLayout.DEF_BACKGROUND;
   private LineMode lineMode = OrganigramLayout.DEF_LINEMODE;
-
-  /** The box right margin. */
-  private int rightMargin = OrganigramLayout.DEF_MARGINRIGHT;
-
-  /** The box left margin. */
-  private int leftMargin = OrganigramLayout.DEF_MARGINLEFT;
-
-  /** The box top margin. */
-  private int topMargin = OrganigramLayout.DEF_MARGINTOP;
-
-  /** The box bottom margin. */
-  private int bottomMargin = OrganigramLayout.DEF_MARGINBOTTOM;
+  private Color lineColor = OrganigramLayout.DEF_LINECOLOR;
+  private Insets margin = new Insets(OrganigramLayout.DEF_MARGIN.top, OrganigramLayout.DEF_MARGIN.left, OrganigramLayout.DEF_MARGIN.bottom, OrganigramLayout.DEF_MARGIN.right);
 
   /** The is tool tip enabled. */
   private boolean toolTipEnabled = OrganigramLayout.DEF_TOOLTIP;
@@ -187,8 +143,8 @@ public class OrganigramLayout {
    * 
    * @return the box right margin
    */
-  public int getRightMargin() {
-    return rightMargin;
+  public Insets getMargin() {
+    return margin;
   }
 
   /**
@@ -196,62 +152,8 @@ public class OrganigramLayout {
    * 
    * @param rightMargin the new box right margin
    */
-  public void setRightMargin(final int rightMargin) {
-    this.rightMargin = rightMargin;
-  }
-
-  /**
-   * Gets the box top margin.
-   * 
-   * @return the box top margin
-   */
-  public int getTopMargin() {
-    return topMargin;
-  }
-
-  /**
-   * Sets the box top margin.
-   * 
-   * @param topMargin the new box top margin
-   */
-  public void setTopMargin(final int topMargin) {
-    this.topMargin = topMargin;
-  }
-
-  /**
-   * Gets the box bottom margin.
-   * 
-   * @return the box bottom margin
-   */
-  public int getBottomMargin() {
-    return bottomMargin;
-  }
-
-  /**
-   * Sets the box bottom margin.
-   * 
-   * @param bottomMargin the new box bottom margin
-   */
-  public void setBottomMargin(final int bottomMargin) {
-    this.bottomMargin = bottomMargin;
-  }
-
-  /**
-   * Gets the box left margin.
-   * 
-   * @return the box left margin
-   */
-  public int getLeftMargin() {
-    return leftMargin;
-  }
-
-  /**
-   * Sets the box left margin.
-   * 
-   * @param leftMargin the new box left margin
-   */
-  public void setLeftMargin(final int leftMargin) {
-    this.leftMargin = leftMargin;
+  public void setMargin(final Insets margin) {
+    this.margin = margin;
   }
 
   /**

@@ -1,5 +1,4 @@
 /** LGPL > 3.0
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,32 +14,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io.sof;
+package com.fbergeron.organigram.io.xml.attr;
 
-import java.util.Stack;
-import com.fbergeron.organigram.io.XMLHandler;
-import com.fbergeron.organigram.model.Line;
-import com.fbergeron.organigram.model.Unit;
+import com.fbergeron.organigram.model.type.Alignment;
+import com.fbergeron.organigram.util.Utils;
 
 /**
- * The Class XMLOrganigramReader.
+ * The Class AttrAlignment.
  */
-public class SOFReader extends XMLHandler {
+public class AttrAlignment extends AttrEnum<Alignment> {
 
-  // Only to initialize XMLUtil
-  /** The tag. */
-  public final static SOFXML SOF = SOFXML.getInstance();
+  /**
+   * Instantiates a new tag attr alignment.
+   * 
+   * @param name the name
+   */
+  public AttrAlignment(final String name) {
+    super(name, null);
+  }
 
-  /** The parent units. */
-  public final Stack<Unit> parentUnits = new Stack<Unit>();
-
-  /** The root unit. */
-  public Unit rootUnit;
-
-  /** The new unit. */
-  public Unit newUnit;
-
-  /** The new line. */
-  public Line newLine;
+  /**
+   * Instantiates a new tag attr alignment.
+   * 
+   * @param name the name
+   * @param def the def
+   */
+  public AttrAlignment(final String name, final Alignment def) {
+    super(name, def);
+    for (final Alignment x : Alignment.values()) {
+      Utils.addEnum(values, x);
+    }
+  }
 
 }

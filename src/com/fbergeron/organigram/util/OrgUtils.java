@@ -16,17 +16,13 @@
  */
 package com.fbergeron.organigram.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.io.OrganigramWriter;
-import com.fbergeron.organigram.io.sitemap.SiteMapReader;
-import com.fbergeron.organigram.io.sitemap.SiteMapWriter;
-import com.fbergeron.organigram.io.sof.SOFReader;
-import com.fbergeron.organigram.io.sof.SOFWriter;
+import com.fbergeron.organigram.io.sitemap.SiteMapXML;
+import com.fbergeron.organigram.io.sof.SOFXML;
 import com.fbergeron.organigram.io.txt.TXTOrganigramReader;
 import com.fbergeron.organigram.io.txt.TXTOrganigramWriter;
 import com.fbergeron.organigram.model.Organigram;
@@ -52,10 +48,10 @@ public class OrgUtils {
         writer = new TXTOrganigramWriter();
         break;
       case 2:
-        writer = new SiteMapWriter();
+        writer = new SiteMapXML();
         break;
       default:
-        writer = new SOFWriter();
+        writer = new SOFXML();
         break;
     }
     return writer.writeOrganigram(org, compact);
@@ -131,130 +127,13 @@ public class OrgUtils {
         handler = new TXTOrganigramReader();
         break;
       case 2:
-        handler = new SiteMapReader();
+        handler = new SiteMapXML();
         break;
       default:
-        handler = new SOFReader();
+        handler = new SOFXML();
         break;
     }
     return handler.readOrganigram(source);
-  }
-
-  /**
-   * Find in directory.
-   * 
-   * @param path the path
-   * @param filename the filename
-   * 
-   * @return the uRL
-   */
-  public static URL findInDirectory(final String path, final String filename) {
-    URL res = null;
-    final File file = new File(path, filename);
-    if (file.exists() && !file.isDirectory()) {
-      try {
-        res = file.toURI().toURL();
-      }
-      catch (final MalformedURLException e) {
-        Debug.ignore(e);
-      }
-    }
-    return res;
-  }
-
-  /**
-   * Find in classpath.
-   * 
-   * @param filename the filename
-   * 
-   * @return the uRL
-   */
-  public static URL findInClasspath(final String filename) {
-    URL res = null;
-    final String classpath = System.getProperty("java.class.path");
-    final String[] paths = classpath.split(File.pathSeparator);
-    for (final String path : paths) {
-      res = OrgUtils.findInDirectory(path, filename);
-      if (res != null) {
-        break;
-      }
-    }
-    return res;
-  }
-
-  /**
-   * Find in resource.
-   * 
-   * @param name the name
-   * 
-   * @return the uRL
-   */
-  public static URL findInResource(final String name) {
-    final String path = (name.charAt(0) == '/') ? name : "/" + name;
-    return OrgUtils.class.getResource(path);
-  }
-
-  /**
-   * Find.
-   * 
-   * @param name the name
-   * 
-   * @return the uRL
-   */
-  static public URL find(final String name) {
-    URL res;
-    res = OrgUtils.findInDirectory(".", name);
-    if (res == null) {
-      res = OrgUtils.findInClasspath(name);
-    }
-    if (res == null) {
-      res = OrgUtils.findInResource(name);
-    }
-    return res;
-  }
-
-  /**
-   * Builds the url.
-   * 
-   * @param documentBase the document base
-   * @param dataSource the data source
-   * 
-   * @return the uRL
-   */
-  static public URL buildURL(final URL documentBase, final String dataSource) {
-    URL res = null;
-    if (dataSource != null) {
-      try {
-        if (documentBase == null) {
-          res = new URL(dataSource);
-        }
-        else {
-          res = new URL(documentBase, dataSource);
-        }
-      }
-      catch (final MalformedURLException e) {
-        Debug.ignore(e);
-      }
-    }
-    return res;
-  }
-
-  /**
-   * Val.
-   * 
-   * @param val the val
-   * @param def the def
-   * @return the int
-   */
-  static public int val(final String val, final int def) {
-    int res;
-    try {
-      res = Integer.parseInt(val);
-    }
-    catch (final NumberFormatException err) {
-      res = def;
-    }
-    return res;
   }
 
 }

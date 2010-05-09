@@ -20,22 +20,54 @@ package com.fbergeron.organigram.io.sof.tags;
 
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
-import com.fbergeron.organigram.io.TAG;
-import com.fbergeron.organigram.io.sof.SOFReader;
 import com.fbergeron.organigram.io.sof.SOFXML;
+import com.fbergeron.organigram.io.xml.Tag;
+import com.fbergeron.organigram.io.xml.attr.AttrAlignment;
+import com.fbergeron.organigram.io.xml.attr.AttrBoolean;
+import com.fbergeron.organigram.io.xml.attr.AttrBoxType;
+import com.fbergeron.organigram.io.xml.attr.AttrColor;
+import com.fbergeron.organigram.io.xml.attr.AttrInsets;
+import com.fbergeron.organigram.io.xml.attr.AttrStr;
+import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
 
 /**
  * The Class UnitProcessor.
  */
-public class TagUnit extends TAG {
+public class TagUnit extends Tag {
+
+  public static final String ATR_ID = "id";
+  public static final String ATR_TYPE = "type";
+  public static final String ATR_EXPENDED = "expanded";
+  public static final String ATR_TEXTALIGMENT = "textAlignment";
+  public static final String ATR_BACKGROUND = "backgroundColor";
+  public static final String ATR_FOREGROUND = "foregroundColor";
+  public static final String ATR_FRAMECOLOR = "frameColor";
+  public static final String ATR_PADDING = "padding";
+
+  public transient AttrStr aId = new AttrStr(TagUnit.ATR_ID, null);
+  public transient AttrBoxType aBoxType = new AttrBoxType(TagUnit.ATR_TYPE, null);
+  public transient AttrBoolean aBoxExpanded = new AttrBoolean(TagUnit.ATR_EXPENDED, null);
+  public transient AttrAlignment aBoxTextAlignment = new AttrAlignment(TagUnit.ATR_TEXTALIGMENT, null);
+  public transient AttrColor aBoxBackground = new AttrColor(TagUnit.ATR_BACKGROUND, null);
+  public transient AttrColor aBoxForeground = new AttrColor(TagUnit.ATR_FOREGROUND, null);
+  public transient AttrColor aBoxFrameColor = new AttrColor(TagUnit.ATR_FRAMECOLOR, null);
+  public transient AttrInsets aBoxPadding = new AttrInsets(TagUnit.ATR_PADDING, null);
 
   /**
    * Instantiates a new unit processor.
    */
   public TagUnit() {
     super("unit");
+    addAttribute(aId);
+    addAttribute(aBoxType);
+    addAttribute(aBoxExpanded);
+    addAttribute(aBoxTextAlignment);
+    addAttribute(aBoxBackground);
+    addAttribute(aBoxForeground);
+    addAttribute(aBoxFrameColor);
+    addAttribute(aBoxPadding);
   }
 
   /**
@@ -46,7 +78,7 @@ public class TagUnit extends TAG {
    */
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
-    final SOFReader xor = (SOFReader) reader;
+    final SOFXML xor = (SOFXML) reader;
     final Organigram organigram = xor.getOrganigram();
     xor.newUnit = new Unit(organigram);
     if (xor.rootUnit == null) {
@@ -57,18 +89,20 @@ public class TagUnit extends TAG {
       parentUnit.addChild(xor.newUnit);
     }
     xor.parentUnits.push(xor.newUnit);
-    String name;
-    String value;
+    parse(attribs);
+    final BoxLayout boxLay = xor.newUnit.getBoxLayout();
+    xor.newUnit.setId(aId.getLastVal());
+    boxLay.setType(aBoxType.getLastVal());
+    boxLay.setExpanded(aBoxExpanded.getLastVal());
+    boxLay.setTextAlignment(aBoxTextAlignment.getLastVal());
+    boxLay.setBackgroundColor(aBoxBackground.getLastVal());
+    boxLay.setForegroundColor(aBoxForeground.getLastVal());
+    boxLay.setFrameColor(aBoxFrameColor.getLastVal());
+    boxLay.setPadding(aBoxPadding.getLastVal());
     for (int i = 0; i < attribs.getLength(); i++) {
-      name = attribs.getQName(i);
-      value = attribs.getValue(i);
-      if (name.equals(SOFXML.ATR_ID)) {
-        xor.newUnit.setId(value);
-      }
-      else if (SOFXML.isBoxLayoutAtr(name, value)) {
-        SOFXML.readBoxLayoutAtr(name, value, xor.newUnit.getBoxLayout(true));
-      }
-      else {
+      final String name = attribs.getQName(i);
+      if (!isAttribute(name)) {
+        final String value = attribs.getValue(i);
         xor.newUnit.setMeta(name, value);
       }
     }
@@ -79,7 +113,7 @@ public class TagUnit extends TAG {
    */
   @Override
   public void end(final OrganigramReader reader) {
-    final SOFReader xor = (SOFReader) reader;
+    final SOFXML xor = (SOFXML) reader;
     xor.newUnit = xor.parentUnits.pop();
   }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<organigram mode="0" layout="1" compact="1" isToolTipEnabled="true" backgroundColor="200,150,150" lineColor="0,0,0" boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" boxFrameColor="0,0,0" boxBackgroundColor="80,12,178" boxForegroundColor="255,255,255" boxTextAlignment="center" firm="Test Tree">
+<organigram layout="left" firm="Test Tree">
  <unit name="A0">
   <unit name="A1">
    <unit name="A2" />

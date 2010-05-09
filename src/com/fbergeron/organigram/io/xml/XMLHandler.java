@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
-package com.fbergeron.organigram.io;
+package com.fbergeron.organigram.io.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +27,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import com.fbergeron.organigram.io.OrganigramReader;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.Debug;
 

@@ -17,6 +17,7 @@
 package com.fbergeron.organigram.view.render.organigram;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Point;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.view.OrganigramView;
@@ -54,58 +55,59 @@ public class HorizontalRender extends AbstractRender {
     // Set dimension of the box to the dimension of the box of this level
     final Dimension sizLevB = getBoxSize(level);
     unit.setSize(sizLevB);
-    final Point pB = getPoint(level, orgLay.getLeftMargin(), orgLay.getTopMargin());
-    final int wB = sizLevB.width + orgLay.getLeftMargin() + orgLay.getRightMargin();
-    final int h = orgLay.getTopMargin() + orgLay.getBottomMargin() + unit.getHeight();
-    final Point pN = getPoint(level + 1, orgLay.getLeftMargin(), pB.y + h);
+    final Insets margin = orgLay.getMargin();
+    final Point pntB = getPoint(level, margin.left, margin.top);
+    final int width = sizLevB.width + margin.left + margin.right;
+    final int height = margin.top + margin.bottom + unit.getHeight();
+    final Point pntN = getPoint(level + 1, margin.left, pntB.y + height);
     if (!compact) {
-      if (pB.x < pN.x) {
-        pB.x = pN.x;
+      if (pntB.x < pntN.x) {
+        pntB.x = pntN.x;
       }
-      if (pN.x < pB.x) {
-        pN.x = pB.x;
+      if (pntN.x < pntB.x) {
+        pntN.x = pntB.x;
       }
     }
     if (unit.hasChildren()) {
       // Step 1 - layout children
-      int xB = pN.x;
+      int xPosB = pntN.x;
       for (final UnitView child : unit) {
         layoutBoxes(orgLay, child, unit, level + 1);
       }
       // Step 2 - center children with parent
-      int xN = pN.x;
-      final int cB = pB.x + wB / 2;
-      final int cN = (xN - xB) / 2 + xB;
-      int d = 0;
-      if (cN < cB) {
-        d = cB - cN;
+      int xPosN = pntN.x;
+      final int centerB = pntB.x + width / 2;
+      final int centerN = (xPosN - xPosB) / 2 + xPosB;
+      int delta = 0;
+      if (centerN < centerB) {
+        delta = centerB - centerN;
       }
-      if (d > 0) {
+      if (delta > 0) {
         for (final UnitView child : unit) {
-          child.move(d, 0, true);
+          child.move(delta, 0, true);
         }
-        pN.x = pN.x + d;
-        xB += d;
-        xN += d;
+        pntN.x = pntN.x + delta;
+        xPosB += delta;
+        xPosN += delta;
       }
       else {
         // Step 3 - center parent with children
-        d = (xN - xB - wB);
-        if (d > 0) {
-          d = ((d + 1) / 2) + xB;
-          if (d > pB.x) {
-            pB.x = d;
+        delta = (xPosN - xPosB - width);
+        if (delta > 0) {
+          delta = ((delta + 1) / 2) + xPosB;
+          if (delta > pntB.x) {
+            pntB.x = delta;
           }
         }
-        else if (xB > pB.x) {
+        else if (xPosB > pntB.x) {
           // Adjust parent to be aligned with children
-          pB.x = xB;
+          pntB.x = xPosB;
         }
       }
     }
     // Update box position
-    unit.setLocation(pB);
-    pB.x = pB.x + wB;
+    unit.setLocation(pntB);
+    pntB.x = pntB.x + width;
   }
 
 }

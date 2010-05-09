@@ -48,7 +48,7 @@ public class BuildURLDesc implements UnitTraversal {
   private void add(final Unit unit, final String desc, final String what) {
     final String val = unit.getMeta(what);
     if (val != null) {
-      unit.addInfo(new Line(desc + val, Font.PLAIN, 10));
+      unit.addInfo(new Line(desc + val, Font.PLAIN, 10, null));
     }
   }
 
@@ -60,11 +60,11 @@ public class BuildURLDesc implements UnitTraversal {
     if (title == null) {
       final String loc = unit.getMeta("link");
       if (loc != null) {
-        unit.addInfo(new Line(loc, Font.BOLD, 12));
+        unit.addInfo(new Line(loc, Font.BOLD, 12, null));
       }
     }
     else {
-      unit.addInfo(new Line(title, Font.BOLD, 12));
+      unit.addInfo(new Line(title, Font.BOLD, 12, null));
     }
     if (isFull()) {
       add(unit, "Last Mod : ", "lastmod");

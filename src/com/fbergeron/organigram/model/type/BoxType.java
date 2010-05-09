@@ -8,11 +8,11 @@ package com.fbergeron.organigram.model.type;
  */
 public enum BoxType {
 
-  /** The NONE. */
-  NONE,
   /** The NORMAL. */
   NORMAL,
   /** The HIGHLIGHT. */
-  HIGHLIGHT
+  HIGHLIGHT,
+  /** The NONE. */
+  NONE
 
 }

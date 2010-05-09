@@ -1,23 +1,14 @@
 <?xml version="1.0"?>
-<organigram 
- layout="left" mode="grow" compact="true" 
- backgroundColor="silver" 
- lineColor="black" lineMode="connector" 
- boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" 
- boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" 
- boxFrameColor="#000" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" 
- boxTextAlignment="center" 
- isToolTipEnabled="true" 
- firm="Test Tree">
- <unit department="Org App" name="http://orgapp.sourceforge.net/" link="http://orgapp.sourceforge.net/" role="H">
-  <unit boxExpanded="true">
-   <info>com</info>
+<organigram layout="left" mode="grow" compact="true" backgroundColor="silver" lineMode="connector" lineColor="black" marginTop="10" marginLeft="10" marginBottom="10" marginRight="10" isToolTipEnabled="true" boxType="normal" boxExpanded="true" boxTextAlignment="center" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" boxFrameColor="#000" boxPaddingTop="6" boxPaddingRight="6" boxPaddingBottom="6" boxPaddingLeft="6" firm="Test Tree">
+ <unit type="none" expanded="true" textAlignment="center" backgroundColor="#808080" foregroundColor="rgb(255,255,255)" frameColor="#000" paddingTop="6" paddingRight="6" paddingBottom="6" paddingLeft="6" department="Org App" name="http://orgapp.sourceforge.net/" link="http://orgapp.sourceforge.net/" target="" role="H">
+  <unit expanded="true">
+   <info fontName="Arial" fontStyle="Bold+Italic" fontColor="black">com</info>
    <unit link="http://fbergeron.com">
     <info fontName="Arial" fontColor="50,255,50" fontStyle="Bold+Italic">fbergeron</info>
     <info fontName="Courier">My personal website</info>
    </unit>
   </unit>
-  <unit boxExpanded="false">
+  <unit expanded="false">
    <info>org</info>
    <unit id="de" link="http://debian.org">
     <info>debian</info>
@@ -34,7 +25,7 @@
    <unit id="fm" link="http://www.freshmeat.net/" target="_self">
     <info>Freshmeat</info>
    </unit>
-   <unit id="ei" boxBackgroundColor="white" boxForegroundColor="black" link="http://www.eiroca.net">
+   <unit id="ei" backgroundColor="white" foregroundColor="black" link="http://www.eiroca.net">
     <info>eIrOcA</info>
    </unit>
    <unit id="sf" link="http://sourceforge.net">

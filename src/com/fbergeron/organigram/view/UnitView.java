@@ -68,13 +68,7 @@ public class UnitView implements Iterable<UnitView> {
   public UnitView(final Unit unit, final OrganigramView organigramView) {
     this.unit = unit;
     this.organigramView = organigramView;
-    final BoxLayout boxLay = unit.getBoxLayout();
-    if (boxLay == null) {
-      layout = new BoxLayout(organigramView.getOrganigram().getBoxLayout());
-    }
-    else {
-      layout = boxLay;
-    }
+    layout = unit.getBoxLayout();
   }
 
   /**
@@ -93,7 +87,7 @@ public class UnitView implements Iterable<UnitView> {
    * @return true, if yes
    */
   public boolean canCollapse() {
-    return (layout.isExpanded() && (!children.isEmpty()));
+    return (layout.isExpanded(true) && (!children.isEmpty()));
   }
 
   /**
@@ -102,7 +96,7 @@ public class UnitView implements Iterable<UnitView> {
    * @return true, if yes
    */
   public boolean canExpand() {
-    return (!layout.isExpanded() && (!children.isEmpty()));
+    return (!layout.isExpanded(true) && (!children.isEmpty()));
   }
 
   /**
@@ -296,7 +290,7 @@ public class UnitView implements Iterable<UnitView> {
    * @return true, if successful
    */
   public boolean hasChildren() {
-    if (layout.isExpanded()) { return (!children.isEmpty()); }
+    if (layout.isExpanded(true)) { return (!children.isEmpty()); }
     return false;
   }
 

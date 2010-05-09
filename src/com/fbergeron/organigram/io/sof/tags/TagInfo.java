@@ -17,18 +17,26 @@
  */
 package com.fbergeron.organigram.io.sof.tags;
 
-import java.awt.Font;
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
-import com.fbergeron.organigram.io.TAG;
-import com.fbergeron.organigram.io.sof.SOFReader;
 import com.fbergeron.organigram.io.sof.SOFXML;
+import com.fbergeron.organigram.io.xml.Tag;
+import com.fbergeron.organigram.io.xml.attr.AttrFontInfo;
+import com.fbergeron.organigram.io.xml.attr.AttrStr;
 import com.fbergeron.organigram.model.Line;
 
 /**
  * The Class InfoProcessor.
  */
-public class TagInfo extends TAG {
+public class TagInfo extends Tag {
+
+  public static final String ATR_TYPE = "type";
+  public static final String ATR_LINK = "link";
+  public static final String ATR_FONT = "font";
+
+  public transient AttrStr aType = new AttrStr(TagInfo.ATR_TYPE, null);
+  public transient AttrStr aLink = new AttrStr(TagInfo.ATR_LINK, null);
+  public transient AttrFontInfo aFontInfo = new AttrFontInfo(TagInfo.ATR_FONT, null);
 
   /** The new line. */
   private Line newLine;
@@ -38,6 +46,38 @@ public class TagInfo extends TAG {
    */
   public TagInfo() {
     super("info");
+    addAttribute(aType);
+    addAttribute(aLink);
+    addAttribute(aFontInfo);
+  }
+
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.io.TAG#end(com.fbergeron.organigram.io.OrganigramReader)
+   */
+  @Override
+  public void end(final OrganigramReader reader) {
+    final SOFXML xor = (SOFXML) reader;
+    newLine.setText(buf.toString().trim());
+    xor.newUnit.addInfo(newLine);
+    setNewLine(null);
+  }
+
+  /**
+   * Gets the new line.
+   * 
+   * @return the newLine
+   */
+  public Line getNewLine() {
+    return newLine;
+  }
+
+  /**
+   * Sets the new line.
+   * 
+   * @param newLine the newLine to set
+   */
+  public void setNewLine(final Line newLine) {
+    this.newLine = newLine;
   }
 
   /* (non-Javadoc)
@@ -46,40 +86,12 @@ public class TagInfo extends TAG {
   @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
     super.start(reader, attribs);
-    final String type = attribs.getValue(SOFXML.ATR_TYPE);
-    final String realFontName = attribs.getValue(SOFXML.ATR_FONT_NAME);
-    final int realFontSize = SOFXML.readInt(attribs.getValue(SOFXML.ATR_FONT_SIZE), 12);
-    final int realFontStyle = SOFXML.readFontStyle(attribs.getValue(SOFXML.ATR_FONT_STYLE), Font.PLAIN);
+    parse(attribs);
     newLine = new Line();
-    newLine.setType(type);
-    newLine.setColor(SOFXML.readColor(attribs.getValue(SOFXML.ATR_FONT_COLOR), newLine.getColor()));
-    newLine.setFont(new Font(realFontName, realFontStyle, realFontSize));
-    newLine.setLink(attribs.getValue(SOFXML.ATR_LINK));
-  }
-
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.io.TAG#end(com.fbergeron.organigram.io.OrganigramReader)
-   */
-  @Override
-  public void end(final OrganigramReader reader) {
-    final SOFReader xor = (SOFReader) reader;
-    newLine.setText(buf.toString().trim());
-    xor.newUnit.addInfo(newLine);
-    setNewLine(null);
-  }
-
-  /**
-   * @return the newLine
-   */
-  public Line getNewLine() {
-    return newLine;
-  }
-
-  /**
-   * @param newLine the newLine to set
-   */
-  public void setNewLine(final Line newLine) {
-    this.newLine = newLine;
+    newLine.setType(aType.getLastVal());
+    newLine.setLink(aLink.getLastVal());
+    newLine.setColor(aFontInfo.getLastVal().color);
+    newLine.setFont(aFontInfo.getLastVal().font);
   }
 
 }

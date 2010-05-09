@@ -51,7 +51,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
   /** The base target. */
   private String baseTarget = null;
 
-  private final Resources messages = Resources.getInstance();
+  private transient final Resources messages = Resources.getInstance();
 
   /**
    * The Constructor.
@@ -84,7 +84,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
       final UnitView unitView = contains(organigram.getRootUnitView(), where);
       if (unitView != null) {
         final BoxLayout layout = unitView.getLayout();
-        layout.setExpanded(!layout.isExpanded());
+        layout.setExpanded(!layout.isExpanded(true));
         organigram.getOrganigramRender().invalidate();
         organigram.repaint();
       }
@@ -111,15 +111,22 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
    * @return the unit view
    */
   public UnitView contains(final UnitView box, final Point point) {
-    if (box == null) { return null; }
-    if (box.contains(point)) { return box; }
-    if (box.hasChildren()) {
-      for (final UnitView child : box) {
-        final UnitView unitView = contains(child, point);
-        if (unitView != null) { return unitView; }
+    UnitView res = null;
+    if (box != null) {
+      if (box.contains(point)) {
+        res = box;
+      }
+      else if (box.hasChildren()) {
+        for (final UnitView child : box) {
+          final UnitView unitView = contains(child, point);
+          if (unitView != null) {
+            res = unitView;
+            break;
+          }
+        }
       }
     }
-    return null;
+    return res;
   }
 
   // @Override
