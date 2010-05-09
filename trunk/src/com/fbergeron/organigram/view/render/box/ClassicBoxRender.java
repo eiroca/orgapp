@@ -18,6 +18,7 @@ package com.fbergeron.organigram.view.render.box;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Polygon;
 import java.util.List;
 import com.fbergeron.organigram.model.BoxLayout;
@@ -28,6 +29,7 @@ import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.UnitView;
 import com.fbergeron.organigram.view.render.BoxRender;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ClassicBoxRender.
  */
@@ -53,10 +55,10 @@ public class ClassicBoxRender implements BoxRender {
    * @param boxLay the box lay
    */
   private final void drawBox(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
-    graphic.setColor(boxLay.getBackgroundColor());
+    graphic.setColor(boxLay.getBackgroundColor(true));
     graphic.fillRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
-    graphic.setColor(boxLay.getFrameColor());
-    switch (boxLay.getType()) {
+    graphic.setColor(boxLay.getFrameColor(true));
+    switch (boxLay.getType(true)) {
       case NONE:
         break;
       case HIGHLIGHT:
@@ -73,53 +75,114 @@ public class ClassicBoxRender implements BoxRender {
   }
 
   /**
+   * Left arrow.
+   * 
+   * @param margin the margin
+   * @param box the box
+   * @return the polygon
+   */
+  private final Polygon leftArrow(final Insets margin, final UnitView box) {
+    final int xPos;
+    final int yPos;
+    final int siz;
+    final Polygon pol = new Polygon();
+    xPos = box.boxRect.x;
+    yPos = box.boxRect.y + box.boxRect.height / 2;
+    siz = margin.left / 2;
+    pol.addPoint(xPos - siz, yPos);
+    pol.addPoint(xPos, yPos - siz);
+    pol.addPoint(xPos, yPos + siz);
+    pol.addPoint(xPos - siz, yPos);
+    return pol;
+  }
+
+  /**
+   * Left right.
+   * 
+   * @param margin the margin
+   * @param box the box
+   * @return the polygon
+   */
+  private final Polygon leftRight(final Insets margin, final UnitView box) {
+    final int xPos;
+    final int yPos;
+    final int siz;
+    final Polygon pol = new Polygon();
+    xPos = box.boxRect.x + box.boxRect.width;
+    yPos = box.boxRect.y + box.boxRect.height / 2;
+    siz = margin.right / 2;
+    pol.addPoint(xPos + siz, yPos);
+    pol.addPoint(xPos, yPos - siz);
+    pol.addPoint(xPos, yPos + siz);
+    pol.addPoint(xPos + siz, yPos);
+    return pol;
+  }
+
+  /**
+   * Left top.
+   * 
+   * @param margin the margin
+   * @param box the box
+   * @return the polygon
+   */
+  private final Polygon leftTop(final Insets margin, final UnitView box) {
+    final int xPos;
+    final int yPos;
+    final int siz;
+    final Polygon pol = new Polygon();
+    xPos = box.boxRect.x + box.boxRect.width / 2;
+    yPos = box.boxRect.y;
+    siz = margin.top / 2;
+    pol.addPoint(xPos, yPos - siz);
+    pol.addPoint(xPos - siz, yPos);
+    pol.addPoint(xPos + siz, yPos);
+    pol.addPoint(xPos, yPos - siz);
+    return pol;
+  }
+
+  /**
+   * Left bottom.
+   * 
+   * @param margin the margin
+   * @param box the box
+   * @return the polygon
+   */
+  private final Polygon leftBottom(final Insets margin, final UnitView box) {
+    final int xPos;
+    final int yPos;
+    final int siz;
+    final Polygon pol = new Polygon();
+    xPos = box.boxRect.x + box.boxRect.width / 2;
+    yPos = box.boxRect.y + box.boxRect.height;
+    siz = margin.bottom / 2;
+    pol.addPoint(xPos, yPos + siz);
+    pol.addPoint(xPos - siz, yPos);
+    pol.addPoint(xPos + siz, yPos);
+    pol.addPoint(xPos, yPos + siz);
+    return pol;
+  }
+
+  /**
    * Draws the icon to rappresents that the node has unexpanded children.
    * 
    * @param graphic the graphic
    * @param box the box
-   * @param boxLay the box lay
    */
   private final void drawBoxExpand(final Graphics graphic, final UnitView box) {
-    final Polygon pol = new Polygon();
-    final int xPos;
-    final int yPos;
-    final int siz;
+    final Insets margin = box.getOrganigramView().getOrganigram().getOrganigramLayout().getMargin();
+    Polygon pol;
     switch (collapsedAnchor) {
       case LEFT:
-        xPos = box.boxRect.x;
-        yPos = box.boxRect.y + box.boxRect.height / 2;
-        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getLeftMargin() / 2;
-        pol.addPoint(xPos - siz, yPos);
-        pol.addPoint(xPos, yPos - siz);
-        pol.addPoint(xPos, yPos + siz);
-        pol.addPoint(xPos - siz, yPos);
+        pol = leftArrow(margin, box);
         break;
       case RIGHT:
-        xPos = box.boxRect.x + box.boxRect.width;
-        yPos = box.boxRect.y + box.boxRect.height / 2;
-        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getRightMargin() / 2;
-        pol.addPoint(xPos + siz, yPos);
-        pol.addPoint(xPos, yPos - siz);
-        pol.addPoint(xPos, yPos + siz);
-        pol.addPoint(xPos + siz, yPos);
+        pol = leftRight(margin, box);
         break;
       case BOTTOM:
-        xPos = box.boxRect.x + box.boxRect.width / 2;
-        yPos = box.boxRect.y + box.boxRect.height;
-        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getBottomMargin() / 2;
-        pol.addPoint(xPos, yPos + siz);
-        pol.addPoint(xPos - siz, yPos);
-        pol.addPoint(xPos + siz, yPos);
-        pol.addPoint(xPos, yPos + siz);
+        pol = leftBottom(margin, box);
         break;
       default:// TOP
-        xPos = box.boxRect.x + box.boxRect.width / 2;
-        yPos = box.boxRect.y;
-        siz = box.getOrganigramView().getOrganigram().getOrganigramLayout().getTopMargin() / 2;
-        pol.addPoint(xPos, yPos - siz);
-        pol.addPoint(xPos - siz, yPos);
-        pol.addPoint(xPos + siz, yPos);
-        pol.addPoint(xPos, yPos - siz);
+        pol = leftTop(margin, box);
         break;
     }
     graphic.fillPolygon(pol);
@@ -133,13 +196,14 @@ public class ClassicBoxRender implements BoxRender {
    * @param boxLay the box lay
    */
   private final void drawText(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
+    final Insets padding = boxLay.getPadding(true);
     int xPos;
-    int yPos = box.boxRect.y + boxLay.getTopPadding();
+    int yPos = box.boxRect.y + padding.top;
     final List<Line> lines = box.unit.getInfo();
     for (final Line text : lines) {
       if (text.isVisible()) {
         if (text.getColor() == null) {
-          graphic.setColor(boxLay.getForegroundColor());
+          graphic.setColor(boxLay.getForegroundColor(true));
         }
         else {
           graphic.setColor(text.getColor());
@@ -149,14 +213,14 @@ public class ClassicBoxRender implements BoxRender {
         }
         final FontMetrics fontMetr = graphic.getFontMetrics();
         final int textWidth = fontMetr.stringWidth(text.getText());
-        if (boxLay.getTextAlignment() == Alignment.CENTER) {
+        if (boxLay.getTextAlignment(true) == Alignment.CENTER) {
           xPos = box.boxRect.x + (box.boxRect.width - textWidth) / 2;
         }
-        else if (boxLay.getTextAlignment() == Alignment.RIGHT) {
-          xPos = box.boxRect.x + box.boxRect.width - textWidth - boxLay.getRightPadding();
+        else if (boxLay.getTextAlignment(true) == Alignment.RIGHT) {
+          xPos = box.boxRect.x + box.boxRect.width - textWidth - padding.right;
         }
         else {
-          xPos = box.boxRect.x + boxLay.getLeftPadding();
+          xPos = box.boxRect.x + padding.left;
         }
         graphic.drawString(text.getText(), xPos, yPos + fontMetr.getAscent() + fontMetr.getLeading());
         yPos += fontMetr.getHeight();
@@ -165,6 +229,8 @@ public class ClassicBoxRender implements BoxRender {
   }
 
   /**
+   * Gets the collapsed anchor.
+   * 
    * @return the collapsedAnchor
    */
   public Layout getCollapsedAnchor() {
@@ -184,6 +250,8 @@ public class ClassicBoxRender implements BoxRender {
   }
 
   /**
+   * Sets the collapsed anchor.
+   * 
    * @param collapsedAnchor the collapsedAnchor to set
    */
   public void setCollapsedAnchor(final Layout collapsedAnchor) {

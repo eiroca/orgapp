@@ -18,7 +18,7 @@ package com.fbergeron.organigram.io.sitemap.tags;
 
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
-import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.xml.Tag;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
 import com.fbergeron.organigram.model.type.Layout;
@@ -27,7 +27,7 @@ import com.fbergeron.organigram.model.type.OrgMode;
 /**
  * The Class URLSetProcessor.
  */
-public class TagURLSet extends TAG {
+public class TagURLSet extends Tag {
 
   /**
    * Instantiates a new uRL set processor.

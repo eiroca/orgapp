@@ -44,15 +44,15 @@ public class OrgCharFixUp implements UnitTraversal {
       final String dep = unit.getMeta("department");
       final String nam = unit.getMeta("name");
       if (dep != null) {
-        unit.addInfo(new Line(dep, Font.BOLD, 12));
+        unit.addInfo(new Line(dep, Font.BOLD, 12, null));
       }
       if (nam != null) {
-        unit.addInfo(new Line(nam, Font.ITALIC, 10));
+        unit.addInfo(new Line(nam, Font.ITALIC, 10, null));
       }
     }
     final String role = unit.getMeta("role");
     if ((role != null) && (role.charAt(0) == 'H')) {
-      unit.getBoxLayout(true).setType(BoxType.HIGHLIGHT);
+      unit.getBoxLayout().setType(BoxType.HIGHLIGHT);
     }
   }
 

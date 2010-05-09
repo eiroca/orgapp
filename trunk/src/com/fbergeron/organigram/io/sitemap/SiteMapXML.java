@@ -16,56 +16,101 @@
  */
 package com.fbergeron.organigram.io.sitemap;
 
-import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.OrganigramReader;
+import com.fbergeron.organigram.io.OrganigramWriter;
 import com.fbergeron.organigram.io.sitemap.tags.TagURL;
 import com.fbergeron.organigram.io.sitemap.tags.TagURLSet;
+import com.fbergeron.organigram.io.xml.Attr;
+import com.fbergeron.organigram.io.xml.Tag;
+import com.fbergeron.organigram.io.xml.XMLHandler;
+import com.fbergeron.organigram.model.Organigram;
+import com.fbergeron.organigram.model.Unit;
+import com.fbergeron.organigram.model.UnitTraversal;
 
 /**
  * The Class SiteMapUtils.
  */
-public final class SiteMapXML {
+public final class SiteMapXML extends XMLHandler implements OrganigramReader, OrganigramWriter, UnitTraversal {
 
   /** The Constant URLSET. */
-  public final transient TAG URLSET = new TagURLSet();
+  public final transient Tag tUrlSet = new TagURLSet();
 
   /** The Constant URL. */
-  public final transient TAG URL = new TagURL();
+  public final transient Tag tUrl = new TagURL();
 
   /** The Constant LOC. */
-  public final transient TAG LOC = new TAG("loc");
+  public final transient Tag tLoc = new Tag("loc");
 
   /** The Constant LASTMOD. */
-  public final transient TAG LASTMOD = new TAG("lastmod");
+  public final transient Tag tLastMod = new Tag("lastmod");
 
   /** The Constant CHANGEFREQ. */
-  public final transient TAG CHANGEFREQ = new TAG("changefreq");
+  public final transient Tag tChangeFreq = new Tag("changefreq");
 
   /** The Constant PRIORITY. */
-  public final transient TAG PRIORITY = new TAG("priority");
+  public final transient Tag tPriority = new Tag("priority");
 
   /** The Constant TITLE (extended tag). */
-  public final transient TAG TITLE = new TAG("title");
+  public final transient Tag tTitle = new Tag("title");
 
-  /** The instance. */
-  private static SiteMapXML instance;
+  /** The buffer. */
+  private transient StringBuffer buf;
 
-  /**
-   * Gets the single instance of SiteMapXML.
-   * 
-   * @return single instance of SiteMapXML
+  /*
+   * (non-Javadoc)
+   *
+   * @see com.fbergeron.organigram.io.OrganigramWriter#writeOrganigram(com.fbergeron.organigram.model.Organigram,
+   *      boolean)
    */
-  public static synchronized SiteMapXML getInstance() {
-    if (SiteMapXML.instance == null) {
-      SiteMapXML.instance = new SiteMapXML();
-    }
-    return SiteMapXML.instance;
+  public String writeOrganigram(final Organigram organigram, final boolean compact) {
+    buf = new StringBuffer(1024);
+    buf.append("<?xml version=\"1.0\"?>");
+    tUrlSet.open(buf, true);
+    Attr.writeAttribute(buf, "xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9", true);
+    organigram.execute(this, true);
+    tUrlSet.close(buf, false);
+    return buf.toString();
   }
 
   /**
-   * Instantiates a new site map xml.
+   * Write.
+   * 
+   * @param unit the unit
+   * @param processor the processor
+   * @param what the what
    */
-  private SiteMapXML() {
-    super();
+  public void write(final Unit unit, final Tag processor, final String what) {
+    final String val = unit.getMeta(what);
+    if (val != null) {
+      processor.open(buf, false);
+      processor.writeCData(buf, val);
+      processor.close(buf, false);
+    }
+  }
+
+  /**
+   * Write.
+   * 
+   * @param unit the unit
+   * @param processor the processor
+   */
+  public void write(final Unit unit, final Tag processor) {
+    write(unit, processor, processor.getName());
+  }
+
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
+   */
+  public void process(final Unit unit, final int level) {
+    final String link = unit.getMeta("link");
+    if (link != null) {
+      tUrl.open(buf, false);
+      write(unit, tLoc, "link");
+      write(unit, tLastMod);
+      write(unit, tChangeFreq);
+      write(unit, tPriority);
+      tUrl.close(buf, false);
+    }
   }
 
 }

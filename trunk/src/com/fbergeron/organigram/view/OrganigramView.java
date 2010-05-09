@@ -37,7 +37,6 @@ import com.fbergeron.organigram.view.render.line.GenericLineRender;
 import com.fbergeron.organigram.view.render.organigram.HorizontalRender;
 import com.fbergeron.organigram.view.render.organigram.VerticalRender;
 
-// TODO: Auto-generated Javadoc
 /**
  * OrganigramView handles the organigram layout disposition.
  */

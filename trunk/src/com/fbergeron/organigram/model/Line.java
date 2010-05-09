@@ -19,32 +19,23 @@ package com.fbergeron.organigram.model;
 
 import java.awt.Color;
 import java.awt.Font;
+import com.fbergeron.organigram.util.FontInfo;
 
 /**
  * The Line is a raw of information in a organigram's box.
  */
 public class Line {
 
-  /** The Constant LINE_FONT. */
-  public static final Font LINE_FONT = new Font(null, Font.PLAIN, 12);
-
-  /** The visible. */
-  private boolean visible = true;
-
-  /** The type. */
-  private String type;
-
-  /** The text. */
-  private String text;
-
+  /** The font. */
+  private FontInfo fontInfo = new FontInfo();
   /** The link. */
   private String link;
-
-  /** The color. */
-  private Color color = null;
-
-  /** The font. */
-  private Font font = Line.LINE_FONT;
+  /** The text. */
+  private String text;
+  /** The type. */
+  private String type;
+  /** The visible. */
+  private boolean visible = true;
 
   /**
    * Instantiates a new line.
@@ -60,9 +51,9 @@ public class Line {
    * @param fontStyle the font style
    * @param fontSize the font size
    */
-  public Line(final String text, final int fontStyle, final int fontSize) {
+  public Line(final String text, final int fontStyle, final int fontSize, final Color fontColor) {
     this.text = text;
-    font = new Font(null, fontStyle, fontSize);
+    fontInfo = new FontInfo(null, fontStyle, fontSize, fontColor);
   }
 
   /**
@@ -76,26 +67,25 @@ public class Line {
   public Line(final String text, final String link, final Font font, final Color color) {
     this.text = text;
     this.link = link;
-    this.color = color;
-    this.font = font;
+    fontInfo = new FontInfo(font, color);
   }
 
   /**
-   * Gets the text.
+   * Gets the color.
    * 
-   * @return the text
+   * @return the color
    */
-  public String getText() {
-    return text;
+  public Color getColor() {
+    return fontInfo.color;
   }
 
   /**
-   * Sets the text.
+   * Gets the font.
    * 
-   * @param text the new text
+   * @return the font
    */
-  public void setText(final String text) {
-    this.text = text;
+  public Font getFont() {
+    return fontInfo.font;
   }
 
   /**
@@ -108,48 +98,12 @@ public class Line {
   }
 
   /**
-   * Sets the link.
+   * Gets the text.
    * 
-   * @param link the new link
+   * @return the text
    */
-  public void setLink(final String link) {
-    this.link = link;
-  }
-
-  /**
-   * Gets the font.
-   * 
-   * @return the font
-   */
-  public Font getFont() {
-    return font;
-  }
-
-  /**
-   * Sets the font.
-   * 
-   * @param font the new font
-   */
-  public void setFont(final Font font) {
-    this.font = font;
-  }
-
-  /**
-   * Gets the color.
-   * 
-   * @return the color
-   */
-  public Color getColor() {
-    return color;
-  }
-
-  /**
-   * Sets the color.
-   * 
-   * @param color the new color
-   */
-  public void setColor(final Color color) {
-    this.color = color;
+  public String getText() {
+    return text;
   }
 
   /**
@@ -159,6 +113,51 @@ public class Line {
    */
   public String getType() {
     return type;
+  }
+
+  /**
+   * Checks if is visible.
+   * 
+   * @return true, if is visible
+   */
+  public boolean isVisible() {
+    return visible;
+  }
+
+  /**
+   * Sets the color.
+   * 
+   * @param color the new color
+   */
+  public void setColor(final Color color) {
+    fontInfo.color = color;
+  }
+
+  /**
+   * Sets the font.
+   * 
+   * @param font the new font
+   */
+  public void setFont(final Font font) {
+    fontInfo.font = font;
+  }
+
+  /**
+   * Sets the link.
+   * 
+   * @param link the new link
+   */
+  public void setLink(final String link) {
+    this.link = link;
+  }
+
+  /**
+   * Sets the text.
+   * 
+   * @param text the new text
+   */
+  public void setText(final String text) {
+    this.text = text;
   }
 
   /**
@@ -174,21 +173,26 @@ public class Line {
   }
 
   /**
-   * Checks if is visible.
-   * 
-   * @return true, if is visible
-   */
-  public boolean isVisible() {
-    return visible;
-  }
-
-  /**
    * Sets the visible.
    * 
    * @param visible the new visible
    */
   public void setVisible(final boolean visible) {
     this.visible = visible;
+  }
+
+  /**
+   * @return the fontInfo
+   */
+  public FontInfo getFontInfo() {
+    return fontInfo;
+  }
+
+  /**
+   * @param fontInfo the fontInfo to set
+   */
+  public void setFontInfo(final FontInfo fontInfo) {
+    this.fontInfo = fontInfo;
   }
 
 }

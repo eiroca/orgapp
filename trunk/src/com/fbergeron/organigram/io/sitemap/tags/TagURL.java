@@ -19,14 +19,14 @@ package com.fbergeron.organigram.io.sitemap.tags;
 import java.util.Map;
 import org.xml.sax.Attributes;
 import com.fbergeron.organigram.io.OrganigramReader;
-import com.fbergeron.organigram.io.TAG;
+import com.fbergeron.organigram.io.xml.Tag;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
 
 /**
  * The Class URLProcessor.
  */
-public class TagURL extends TAG {
+public class TagURL extends Tag {
 
   /**
    * Instantiates a new uRL processor.

@@ -21,10 +21,10 @@ package com.fbergeron.organigram.view.render.organigram;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.Unit;
@@ -40,10 +40,10 @@ import com.fbergeron.organigram.view.render.OrganigramRender;
 abstract public class AbstractRender implements OrganigramRender {
 
   /** The org view. */
-  protected OrganigramView orgView;
+  protected OrganigramView organigramView;
 
   /** The _box max size level. */
-  private final List<Dimension> boxMaxSizeLevel = new ArrayList<Dimension>();
+  private final transient List<Dimension> boxMaxSizeLevel = new ArrayList<Dimension>();
 
   /** The line render. */
   protected LineRender lineRender;
@@ -52,13 +52,13 @@ abstract public class AbstractRender implements OrganigramRender {
   protected BoxRender boxRender;
 
   /** The point level. */
-  private final List<Point> pointLevel = new ArrayList<Point>();
+  private final transient List<Point> pointLevel = new ArrayList<Point>();
 
   /** The compact. */
-  protected boolean compact;
+  protected transient boolean compact;
 
   /** The valid layout. */
-  protected boolean validLayout = false;
+  protected transient boolean validLayout = false;
 
   /** The flip x. */
   private final boolean flipX;
@@ -75,103 +75,11 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param flipY the flip y
    */
   public AbstractRender(final OrganigramView orgView, final boolean compact, final boolean flipX, final boolean flipY) {
-    this.orgView = orgView;
+    organigramView = orgView;
     this.compact = compact;
     this.flipX = flipX;
     this.flipY = flipY;
 
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * com.fbergeron.organigram.view.render.OrganigramRender#setLineRender(com
-   * .fbergeron.organigram.view.render.LineRender)
-   */
-  public void setLineRender(final LineRender lineRender) {
-    this.lineRender = lineRender;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see
-   * com.fbergeron.organigram.view.render.OrganigramRender#setBoxRender(com.
-   * fbergeron.organigram.view.render.BoxRender)
-   */
-  public void setBoxRender(final BoxRender boxRender) {
-    this.boxRender = boxRender;
-  }
-
-  /**
-   * Paint the organigram box.
-   * 
-   * @param box the box
-   * @param graphics the graphics
-   * @param orgLay the org lay
-   */
-  private void paintBox(final UnitView box, final Graphics graphics, final OrganigramLayout orgLay) {
-    boxRender.paint(graphics, box, orgLay);
-    if (box.hasChildren()) {
-      lineRender.paint(graphics, box, orgLay);
-      // Draw the children boxes.
-      for (final UnitView child : box) {
-        paintBox(child, graphics, orgLay);
-      }
-    }
-  }
-
-  /**
-   * Paint.
-   * 
-   * @param graphics the graphics
-   */
-  public void paint(final Graphics graphics) {
-    if (!validLayout) {
-      layoutBoxes(graphics);
-    }
-    final Dimension dim = orgView.getSize();
-    final OrganigramLayout orgLay = orgView.getOrganigram().getOrganigramLayout();
-    // Draw background.
-    graphics.setColor(orgLay.getBackgroundColor());
-    graphics.fillRect(0, 0, dim.width, dim.height);
-    if (orgView.root != null) {
-      paintBox(orgView.root, graphics, orgLay);
-    }
-  }
-
-  /**
-   * Layout boxes.
-   * 
-   * @param graphic the graphic
-   */
-  public void layoutBoxes(final Graphics graphic) {
-    final Dimension organigramMaxSize = new Dimension();
-    if (orgView.root == null) {
-      final OrganigramLayout orgLay = orgView.getOrganigram().getOrganigramLayout();
-      organigramMaxSize.setSize(orgLay.getLeftMargin() + orgLay.getRightMargin(), orgLay.getTopMargin() + orgLay.getBottomMargin());
-    }
-    else {
-      pointLevel.clear();
-      calcBoxMaximumSize(graphic);
-      final Dimension size = layoutBoxes();
-      organigramMaxSize.setSize(size);
-    }
-    orgView.setPreferredSize(organigramMaxSize);
-  }
-
-  /**
-   * Update max.
-   * 
-   * @param dim the dim
-   * @param max the max
-   */
-  private void updateMax(final Dimension dim, final Dimension max) {
-    if (dim.width > max.width) {
-      max.width = dim.width;
-    }
-    if (dim.height > max.height) {
-      max.height = dim.height;
-    }
   }
 
   /**
@@ -194,29 +102,10 @@ abstract public class AbstractRender implements OrganigramRender {
         }
       }
     }
-    final BoxLayout boxLay = box.getLayout();
-    size.width += boxLay.getLeftPadding() + boxLay.getRightPadding();
-    size.height += boxLay.getTopPadding() + boxLay.getBottomPadding();
+    final Insets padding = box.getLayout().getPadding(true);
+    size.width += padding.left + padding.right;
+    size.height += padding.top + padding.bottom;
     return size;
-  }
-
-  /**
-   * Calc box maximum size.
-   * 
-   * @param graphic the graphic
-   * @param box the box
-   * @param max the max
-   * @param level the level
-   */
-  private void calcBoxMaximumSize(final Graphics graphic, final UnitView box, final Dimension max, final int level) {
-    final Dimension boxMax = calcBoxMaximum(graphic, box);
-    final Dimension levSiz = getBoxSize(level);
-    updateMax(boxMax, max);
-    updateMax(boxMax, levSiz);
-    final int newLevel = level + 1;
-    for (final UnitView child : box) {
-      calcBoxMaximumSize(graphic, child, max, newLevel);
-    }
   }
 
   /**
@@ -227,8 +116,8 @@ abstract public class AbstractRender implements OrganigramRender {
   private void calcBoxMaximumSize(final Graphics graphic) {
     final Dimension boxMaxSize = new Dimension(0, 0);
     boxMaxSizeLevel.clear();
-    calcBoxMaximumSize(graphic, orgView.root, boxMaxSize, 0);
-    final OrganigramLayout orgLay = orgView.getOrganigram().getOrganigramLayout();
+    calcBoxMaximumSize(graphic, organigramView.root, boxMaxSize, 0);
+    final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
     Dimension mySiz = null;
     Dimension levSiz;
     for (int i = boxMaxSizeLevel.size() - 1; i >= 0; i--) {
@@ -253,12 +142,36 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
-   * Returns maximum levels.
+   * Calc box maximum size.
    * 
-   * @return the levels
+   * @param graphic the graphic
+   * @param box the box
+   * @param max the max
+   * @param level the level
    */
-  public int getLevels() {
-    return boxMaxSizeLevel.size();
+  private void calcBoxMaximumSize(final Graphics graphic, final UnitView box, final Dimension max, final int level) {
+    final Dimension boxMax = calcBoxMaximum(graphic, box);
+    final Dimension levSiz = getBoxSize(level);
+    updateMax(boxMax, max);
+    updateMax(boxMax, levSiz);
+    final int newLevel = level + 1;
+    for (final UnitView child : box) {
+      calcBoxMaximumSize(graphic, child, max, newLevel);
+    }
+  }
+
+  /**
+   * @return the boxMaxSizeLevel
+   */
+  public List<Dimension> getBoxMaxSizeLevel() {
+    return boxMaxSizeLevel;
+  }
+
+  /**
+   * @return the boxRender
+   */
+  public BoxRender getBoxRender() {
+    return boxRender;
   }
 
   /**
@@ -273,6 +186,29 @@ abstract public class AbstractRender implements OrganigramRender {
       boxMaxSizeLevel.add(new Dimension(0, 0));
     }
     return boxMaxSizeLevel.get(level);
+  }
+
+  /**
+   * Returns maximum levels.
+   * 
+   * @return the levels
+   */
+  public int getLevels() {
+    return boxMaxSizeLevel.size();
+  }
+
+  /**
+   * @return the lineRender
+   */
+  public LineRender getLineRender() {
+    return lineRender;
+  }
+
+  /**
+   * @return the organigramView
+   */
+  public OrganigramView getOrganigramView() {
+    return organigramView;
   }
 
   /**
@@ -291,6 +227,13 @@ abstract public class AbstractRender implements OrganigramRender {
     return pointLevel.get(level);
   }
 
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.view.render.OrganigramRender#invalidate()
+   */
+  public void invalidate() {
+    validLayout = false;
+  }
+
   /*
    * (non-Javadoc)
    * @see com.fbergeron.organigram.view.render.GenericRender#layoutBoxes()
@@ -302,8 +245,8 @@ abstract public class AbstractRender implements OrganigramRender {
    */
   public Dimension layoutBoxes() {
     final Dimension rect = new Dimension();
-    final UnitView unit = orgView.root;
-    final OrganigramLayout orgLay = orgView.getOrganigram().getOrganigramLayout();
+    final UnitView unit = organigramView.root;
+    final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
     layoutBoxes(orgLay, unit, null, 0);
     for (int i = 0; i < pointLevel.size(); i++) {
       final Point pos = getPoint(i, 0, 0);
@@ -326,6 +269,27 @@ abstract public class AbstractRender implements OrganigramRender {
   /**
    * Layout boxes.
    * 
+   * @param graphic the graphic
+   */
+  public void layoutBoxes(final Graphics graphic) {
+    final Dimension organigramMaxSize = new Dimension();
+    if (organigramView.root == null) {
+      final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
+      final Insets margin = orgLay.getMargin();
+      organigramMaxSize.setSize(margin.left + margin.right, margin.top + margin.bottom);
+    }
+    else {
+      pointLevel.clear();
+      calcBoxMaximumSize(graphic);
+      final Dimension size = layoutBoxes();
+      organigramMaxSize.setSize(size);
+    }
+    organigramView.setPreferredSize(organigramMaxSize);
+  }
+
+  /**
+   * Layout boxes.
+   * 
    * @param orgLay the org lay
    * @param unit the unit
    * @param parent the parent
@@ -335,11 +299,83 @@ abstract public class AbstractRender implements OrganigramRender {
     validLayout = true;
   }
 
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.view.render.OrganigramRender#invalidate()
+  /**
+   * Paint.
+   * 
+   * @param graphics the graphics
    */
-  public void invalidate() {
-    validLayout = false;
+  public void paint(final Graphics graphics) {
+    if (!validLayout) {
+      layoutBoxes(graphics);
+    }
+    final Dimension dim = organigramView.getSize();
+    final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
+    // Draw background.
+    graphics.setColor(orgLay.getBackgroundColor());
+    graphics.fillRect(0, 0, dim.width, dim.height);
+    if (organigramView.root != null) {
+      paintBox(organigramView.root, graphics, orgLay);
+    }
+  }
+
+  /**
+   * Paint the organigram box.
+   * 
+   * @param box the box
+   * @param graphics the graphics
+   * @param orgLay the org lay
+   */
+  private void paintBox(final UnitView box, final Graphics graphics, final OrganigramLayout orgLay) {
+    boxRender.paint(graphics, box, orgLay);
+    if (box.hasChildren()) {
+      lineRender.paint(graphics, box, orgLay);
+      // Draw the children boxes.
+      for (final UnitView child : box) {
+        paintBox(child, graphics, orgLay);
+      }
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * com.fbergeron.organigram.view.render.OrganigramRender#setBoxRender(com.
+   * fbergeron.organigram.view.render.BoxRender)
+   */
+  public void setBoxRender(final BoxRender boxRender) {
+    this.boxRender = boxRender;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * com.fbergeron.organigram.view.render.OrganigramRender#setLineRender(com
+   * .fbergeron.organigram.view.render.LineRender)
+   */
+  public void setLineRender(final LineRender lineRender) {
+    this.lineRender = lineRender;
+  }
+
+  /**
+   * @param organigramView the organigramView to set
+   */
+  public void setOrganigramView(final OrganigramView organigramView) {
+    this.organigramView = organigramView;
+  }
+
+  /**
+   * Update max.
+   * 
+   * @param dim the dim
+   * @param max the max
+   */
+  private void updateMax(final Dimension dim, final Dimension max) {
+    if (dim.width > max.width) {
+      max.width = dim.width;
+    }
+    if (dim.height > max.height) {
+      max.height = dim.height;
+    }
   }
 
 }

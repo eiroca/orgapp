@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
-<organigram mode="0" layout="0" compact="1" isToolTipEnabled="true" backgroundColor="238,232,247" lineColor="0,0,0" boxRightMargin="10" boxLeftMargin="10" boxTopMargin="10" boxBottomMargin="10" boxRightPadding="6" boxLeftPadding="6" boxTopPadding="6" boxBottomPadding="6" boxFrameColor="0,0,0" boxBackgroundColor="169,129,211" boxForegroundColor="255,255,255" boxTextAlignment="center" firm="Test Tree">
- <unit name="Doe, John" department="CEO" role="H">
+<organigram backgroundColor="#eee8f7" boxBackgroundColor="#a981d3" boxForegroundColor="#ffffff" firm="Test Tree">
+ <unit name="Doe, John" role="H" department="CEO">
   <unit>
    <info>com</info>
    <unit link="http://fbergeron.com">
-    <info fontName="Arial" fontColor="0,0,255" fontStyle="Bold+Italic">fbergeron</info>
-    <info fontName="Courier">My personal website</info>
+    <info fontColor="#0000ff">fbergeron</info>
+    <info>My personal website</info>
    </unit>
   </unit>
-  <unit id="net">
+  <unit>
    <info>net</info>
-   <unit id="ei" boxBackgroundColor="223,207,239" boxForegroundColor="0,0,0" link="http://www.eiroca.net" target="_self">
+   <unit backgroundColor="#dfcfef" foregroundColor="#000000" link="http://www.eiroca.net" target="_self">
     <info>eIrOcA</info>
    </unit>
-   <unit id="sf" link="http://sourceforge.net">
+   <unit link="http://sourceforge.net">
     <info>sourceforge</info>
     <unit link="http://kanasensei.sourceforge.net">
-     <info fontColor="0,0,255" fontStyle="bold">kanasensei</info>
+     <info fontColor="#0000ff">kanasensei</info>
     </unit>
     <unit link="http://javasol.sourceforge.net">
-     <info fontColor="0,0,255" fontStyle="ITALIC">javasol</info>
+     <info fontColor="#0000ff">javasol</info>
     </unit>
     <unit link="http://orgapp.sourceforge.net">
-     <info fontColor="51,255,204" fontStyle="Bold+Italic">orgapp</info>
+     <info fontColor="#33ffcc">orgapp</info>
     </unit>
    </unit>
   </unit>
