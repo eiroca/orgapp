@@ -87,7 +87,7 @@ public class UnitView implements Iterable<UnitView> {
    * @return true, if yes
    */
   public boolean canCollapse() {
-    return (layout.isExpanded(true) && (!children.isEmpty()));
+    return (layout.getExpanded(true) && (!children.isEmpty()));
   }
 
   /**
@@ -96,7 +96,7 @@ public class UnitView implements Iterable<UnitView> {
    * @return true, if yes
    */
   public boolean canExpand() {
-    return (!layout.isExpanded(true) && (!children.isEmpty()));
+    return (!layout.getExpanded(true) && (!children.isEmpty()));
   }
 
   /**
@@ -290,8 +290,7 @@ public class UnitView implements Iterable<UnitView> {
    * @return true, if successful
    */
   public boolean hasChildren() {
-    if (layout.isExpanded(true)) { return (!children.isEmpty()); }
-    return false;
+    return layout.getExpanded(true) ? !children.isEmpty() : false;
   }
 
   /**

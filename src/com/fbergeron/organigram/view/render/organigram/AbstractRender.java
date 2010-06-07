@@ -61,10 +61,10 @@ abstract public class AbstractRender implements OrganigramRender {
   protected transient boolean validLayout = false;
 
   /** The flip x. */
-  private final boolean flipX;
+  private transient final boolean flipX;
 
   /** The flip y. */
-  private final boolean flipY;
+  private transient final boolean flipY;
 
   /**
    * Instantiates a new new render.

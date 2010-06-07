@@ -158,11 +158,7 @@ public class OrganigramView extends JPanel {
    */
   @Override
   public String getToolTipText(final MouseEvent event) {
-    String res = null;
-    if (organigram.getOrganigramLayout().isToolTipEnabled()) {
-      res = super.getToolTipText(event);
-    }
-    return res;
+    return organigram.getOrganigramLayout().isToolTipEnabled() ? super.getToolTipText(event) : null;
   }
 
   /**

@@ -17,15 +17,15 @@
 package com.fbergeron.organigram.util;
 
 import java.awt.Font;
+import com.fbergeron.organigram.model.AbstractProcessor;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.Unit;
-import com.fbergeron.organigram.model.UnitTraversal;
 import com.fbergeron.organigram.model.type.BoxType;
 
 /**
  * The Class BuildInfo.
  */
-public class OrgCharFixUp implements UnitTraversal {
+public class OrgCharFixUp extends AbstractProcessor<Object> {
 
   /*
    * (non-Javadoc)
@@ -33,7 +33,8 @@ public class OrgCharFixUp implements UnitTraversal {
    * com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram
    * .model.Unit)
    */
-  public void process(final Unit unit, final int level) {
+  @Override
+  public void process(final Unit unit, final int level, final Object context) {
     int count = 0;
     for (final Line l : unit.getInfo()) {
       if (l.isVisible()) {

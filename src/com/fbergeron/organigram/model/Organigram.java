@@ -132,16 +132,6 @@ public class Organigram implements MetaDataCollector {
   }
 
   /**
-   * Execute.
-   * 
-   * @param action the action
-   * @param nodeFirst the node first
-   */
-  public void execute(final UnitTraversal action, final boolean nodeFirst) {
-    root.execute(action, nodeFirst, 0);
-  }
-
-  /**
    * @param boxLayout the boxLayout to set
    */
   public void setBoxLayout(final BoxLayout boxLayout) {

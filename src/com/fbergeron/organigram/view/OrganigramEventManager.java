@@ -84,7 +84,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
       final UnitView unitView = contains(organigram.getRootUnitView(), where);
       if (unitView != null) {
         final BoxLayout layout = unitView.getLayout();
-        layout.setExpanded(!layout.isExpanded(true));
+        layout.setExpanded(!layout.getExpanded(true));
         organigram.getOrganigramRender().invalidate();
         organigram.repaint();
       }

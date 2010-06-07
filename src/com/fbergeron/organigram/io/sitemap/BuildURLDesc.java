@@ -17,14 +17,14 @@
 package com.fbergeron.organigram.io.sitemap;
 
 import java.awt.Font;
+import com.fbergeron.organigram.model.AbstractProcessor;
 import com.fbergeron.organigram.model.Line;
 import com.fbergeron.organigram.model.Unit;
-import com.fbergeron.organigram.model.UnitTraversal;
 
 /**
  * The Class BuildInfo.
  */
-public class BuildURLDesc implements UnitTraversal {
+public class BuildURLDesc extends AbstractProcessor<Object> {
 
   /** The full. */
   private boolean full;
@@ -35,6 +35,7 @@ public class BuildURLDesc implements UnitTraversal {
    * @param full the full
    */
   public BuildURLDesc(final boolean full) {
+    super();
     this.full = full;
   }
 
@@ -55,7 +56,8 @@ public class BuildURLDesc implements UnitTraversal {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
    */
-  public void process(final Unit unit, final int level) {
+  @Override
+  public void process(final Unit unit, final int level, final Object context) {
     final String title = unit.getMeta("title");
     if (title == null) {
       final String loc = unit.getMeta("link");

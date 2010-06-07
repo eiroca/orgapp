@@ -11,7 +11,7 @@
   <unit>
    <info>net</info>
    <unit backgroundColor="#dfcfef" foregroundColor="#000000" link="http://www.eiroca.net" target="_self">
-    <info>eIrOcA</info>
+    <info fontStyle="Bold" >eIrOcA</info>
    </unit>
    <unit link="http://sourceforge.net">
     <info>sourceforge</info>
@@ -22,7 +22,7 @@
      <info fontColor="#0000ff">javasol</info>
     </unit>
     <unit link="http://orgapp.sourceforge.net">
-     <info fontColor="#33ffcc">orgapp</info>
+     <info fontStyle="bold+italic" fontColor="#33ffcc">orgapp</info>
     </unit>
    </unit>
   </unit>

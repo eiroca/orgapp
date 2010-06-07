@@ -78,9 +78,12 @@ public class VerticalRender extends AbstractRender {
       int yPosN = pntN.y;
       final int centerB = pntB.y + height / 2;
       final int centerN = (yPosN - yPosB) / 2 + yPosB;
-      int delta = 0;
+      int delta;
       if (centerN < centerB) {
         delta = centerB - centerN;
+      }
+      else {
+        delta = 0;
       }
       if (delta > 0) {
         for (final UnitView child : unit) {

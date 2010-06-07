@@ -189,10 +189,10 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   /**
    * Sets the id.
    * 
-   * @param id the new id
+   * @param aID the new id
    */
-  public void setId(final String id) {
-    this.id = id;
+  public void setId(final String aID) {
+    id = aID;
   }
 
   /**
@@ -244,25 +244,6 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
     for (final Unit u : this) {
       cnt++;
       u.buildID(myId + ".", cnt);
-    }
-  }
-
-  /**
-   * Execute.
-   * 
-   * @param action the action
-   * @param nodeFirst the node first
-   * @param level the level
-   */
-  public void execute(final UnitTraversal action, final boolean nodeFirst, final int level) {
-    if (nodeFirst) {
-      action.process(this, level);
-    }
-    for (final Unit u : this) {
-      u.execute(action, nodeFirst, level + 1);
-    }
-    if (!nodeFirst) {
-      action.process(this, level);
     }
   }
 
