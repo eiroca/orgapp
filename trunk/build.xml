@@ -19,7 +19,7 @@
 	<property name="src" value="src" />
 	<property name="img" value="img" />
 	<property name="html" value="html" />
-	<property name="version" value="0.4.0" />
+	<property name="version" value="0.5.0" />
 
 	<path id="classpath">
 		<pathelement location="${classes}" />
