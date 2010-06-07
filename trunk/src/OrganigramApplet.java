@@ -25,6 +25,7 @@ import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgCharFixUp;
 import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.util.Utils;
+import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
 import com.fbergeron.organigram.view.OrganigramView;
 
 /**
@@ -51,18 +52,31 @@ public class OrganigramApplet extends JApplet {
     else {
       final String data = getParameter("Data");
       final String dataType = getParameter("DataType");
-      int type = 0;
+      OrganigramFormat type = OrganigramFormat.SOF;
       if (dataType != null) {
+        int val;
         try {
-          type = Integer.parseInt(dataType);
+          val = Integer.parseInt(dataType);
         }
         catch (final NumberFormatException e) {//
+          val = 0;
+        }
+        switch (val) {
+          case 1:
+            type = OrganigramFormat.TXT;
+            break;
+          case 2:
+            type = OrganigramFormat.SITEMAP;
+            break;
+          default:
+            type = OrganigramFormat.SOF;
+            break;
         }
       }
       final ByteArrayInputStream src = new ByteArrayInputStream(data.getBytes());
       o = OrgUtils.readOrganigram(src, type);
     }
-    o.execute(new OrgCharFixUp(), true);
+    new OrgCharFixUp().execute(o, true, null);
     o.buidID();
     final OrganigramView view = new OrganigramView(o, target);
     final Container me = getContentPane();

@@ -82,13 +82,10 @@ public class ClassicBoxRender implements BoxRender {
    * @return the polygon
    */
   private final Polygon leftArrow(final Insets margin, final UnitView box) {
-    final int xPos;
-    final int yPos;
-    final int siz;
     final Polygon pol = new Polygon();
-    xPos = box.boxRect.x;
-    yPos = box.boxRect.y + box.boxRect.height / 2;
-    siz = margin.left / 2;
+    final int xPos = box.boxRect.x;
+    final int yPos = box.boxRect.y + box.boxRect.height / 2;
+    final int siz = margin.left / 2;
     pol.addPoint(xPos - siz, yPos);
     pol.addPoint(xPos, yPos - siz);
     pol.addPoint(xPos, yPos + siz);
@@ -104,13 +101,10 @@ public class ClassicBoxRender implements BoxRender {
    * @return the polygon
    */
   private final Polygon leftRight(final Insets margin, final UnitView box) {
-    final int xPos;
-    final int yPos;
-    final int siz;
     final Polygon pol = new Polygon();
-    xPos = box.boxRect.x + box.boxRect.width;
-    yPos = box.boxRect.y + box.boxRect.height / 2;
-    siz = margin.right / 2;
+    final int xPos = box.boxRect.x + box.boxRect.width;
+    final int yPos = box.boxRect.y + box.boxRect.height / 2;
+    final int siz = margin.right / 2;
     pol.addPoint(xPos + siz, yPos);
     pol.addPoint(xPos, yPos - siz);
     pol.addPoint(xPos, yPos + siz);
@@ -126,13 +120,10 @@ public class ClassicBoxRender implements BoxRender {
    * @return the polygon
    */
   private final Polygon leftTop(final Insets margin, final UnitView box) {
-    final int xPos;
-    final int yPos;
-    final int siz;
     final Polygon pol = new Polygon();
-    xPos = box.boxRect.x + box.boxRect.width / 2;
-    yPos = box.boxRect.y;
-    siz = margin.top / 2;
+    final int xPos = box.boxRect.x + box.boxRect.width / 2;
+    final int yPos = box.boxRect.y;
+    final int siz = margin.top / 2;
     pol.addPoint(xPos, yPos - siz);
     pol.addPoint(xPos - siz, yPos);
     pol.addPoint(xPos + siz, yPos);
@@ -148,13 +139,10 @@ public class ClassicBoxRender implements BoxRender {
    * @return the polygon
    */
   private final Polygon leftBottom(final Insets margin, final UnitView box) {
-    final int xPos;
-    final int yPos;
-    final int siz;
     final Polygon pol = new Polygon();
-    xPos = box.boxRect.x + box.boxRect.width / 2;
-    yPos = box.boxRect.y + box.boxRect.height;
-    siz = margin.bottom / 2;
+    final int xPos = box.boxRect.x + box.boxRect.width / 2;
+    final int yPos = box.boxRect.y + box.boxRect.height;
+    final int siz = margin.bottom / 2;
     pol.addPoint(xPos, yPos + siz);
     pol.addPoint(xPos - siz, yPos);
     pol.addPoint(xPos + siz, yPos);

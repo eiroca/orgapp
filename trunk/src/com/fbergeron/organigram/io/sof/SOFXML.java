@@ -114,7 +114,7 @@ public final class SOFXML extends XMLHandler implements OrganigramReader, Organi
       tUnit.aId.setLastVal(unit.getId());
       final BoxLayout boxLay = unit.getBoxLayout();
       tUnit.aBoxType.setLastVal(boxLay.getType(false));
-      tUnit.aBoxExpanded.setLastVal(boxLay.isExpanded(false));
+      tUnit.aBoxExpanded.setLastVal(boxLay.getExpanded(false));
       tUnit.aBoxTextAlignment.setLastVal(boxLay.getTextAlignment(false));
       tUnit.aBoxBackground.setLastVal(boxLay.getBackgroundColor(false));
       tUnit.aBoxForeground.setLastVal(boxLay.getForegroundColor(false));
@@ -169,7 +169,7 @@ public final class SOFXML extends XMLHandler implements OrganigramReader, Organi
     tOrganigram.aMargin.setLastVal(orgLay.getMargin());
     tOrganigram.aTooltip.setLastVal(orgLay.isToolTipEnabled());
     tOrganigram.aBoxType.setLastVal(boxLay.getType(false));
-    tOrganigram.aBoxExpanded.setLastVal(boxLay.isExpanded(false));
+    tOrganigram.aBoxExpanded.setLastVal(boxLay.getExpanded(false));
     tOrganigram.aBoxTextAlignment.setLastVal(boxLay.getTextAlignment(false));
     tOrganigram.aBoxBackground.setLastVal(boxLay.getBackgroundColor(false));
     tOrganigram.aBoxForeground.setLastVal(boxLay.getForegroundColor(false));

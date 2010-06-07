@@ -18,6 +18,7 @@ import java.net.URL;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.util.Utils;
+import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
 
 /**
  * The Class Convert.
@@ -37,11 +38,24 @@ public class Convert {
       System.exit(1);
     }
     final String inFile = args[0];
-    int type = 0;
+    OrganigramFormat type = OrganigramFormat.SOF;
+    int val;
     try {
-      type = Integer.valueOf(args[1]);
+      val = Integer.valueOf(args[1]);
     }
-    catch (final NumberFormatException e) {
+    catch (final NumberFormatException e) {//
+      val = 0;
+    }
+    switch (val) {
+      case 1:
+        type = OrganigramFormat.TXT;
+        break;
+      case 2:
+        type = OrganigramFormat.SITEMAP;
+        break;
+      default:
+        type = OrganigramFormat.SOF;
+        break;
     }
     final URL xmlSource = Utils.find(inFile);
     final Organigram org = OrgUtils.readOrganigram(xmlSource);

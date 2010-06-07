@@ -19,7 +19,36 @@ package com.fbergeron.organigram.model;
 /**
  * The Interface UnitTraversal.
  */
-public interface UnitTraversal {
+public abstract class AbstractProcessor<T> {
+
+  /**
+   * Execute.
+   * 
+   * @param action the action
+   * @param nodeFirst the node first
+   */
+  public void execute(final Organigram org, final boolean nodeFirst, final T context) {
+    execute(org.getRoot(), nodeFirst, 0, context);
+  }
+
+  /**
+   * Execute.
+   * 
+   * @param action the action
+   * @param nodeFirst the node first
+   * @param level the level
+   */
+  public void execute(final Unit unit, final boolean nodeFirst, final int level, final T context) {
+    if (nodeFirst) {
+      process(unit, level, context);
+    }
+    for (final Unit u : unit) {
+      execute(u, nodeFirst, level + 1, context);
+    }
+    if (!nodeFirst) {
+      process(unit, level, context);
+    }
+  }
 
   /**
    * Process.
@@ -27,6 +56,6 @@ public interface UnitTraversal {
    * @param unit the unit
    * @param level the level
    */
-  void process(Unit unit, int level);
+  abstract public void process(Unit unit, int level, T context);
 
 }

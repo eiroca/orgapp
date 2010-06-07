@@ -18,13 +18,19 @@ package com.fbergeron.organigram.model;
 
 import java.awt.Color;
 import java.awt.Insets;
+import java.io.Serializable;
 import com.fbergeron.organigram.model.type.Alignment;
 import com.fbergeron.organigram.model.type.BoxType;
 
 /**
  * The Layout definition of a Box.
  */
-public class BoxLayout implements Cloneable {
+public class BoxLayout implements Cloneable, Serializable {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -278860104094217354L;
 
   public static final Color DEF_BACKGROUND = Color.white;
   public static final Color DEF_BOXFRAME = Color.black;
@@ -152,10 +158,10 @@ public class BoxLayout implements Cloneable {
    * 
    * @return the expanded flag
    */
-  public Boolean isExpanded(final boolean inherit) {
+  public Boolean getExpanded(final boolean inherit) {
     Boolean res = expanded;
     if ((res == null) && inherit) {
-      res = (parent == null ? null : parent.isExpanded(inherit));
+      res = (parent == null ? null : parent.getExpanded(inherit));
     }
     return res;
   }

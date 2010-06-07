@@ -32,6 +32,10 @@ import com.fbergeron.organigram.model.Organigram;
  */
 public class OrgUtils {
 
+  public enum OrganigramFormat {
+    SOF, TXT, SITEMAP
+  }
+
   /**
    * Write organigram.
    * 
@@ -41,13 +45,13 @@ public class OrgUtils {
    * 
    * @return the string
    */
-  static public String writeOrganigram(final Organigram org, final int type, final boolean compact) {
+  static public String writeOrganigram(final Organigram org, final OrganigramFormat type, final boolean compact) {
     OrganigramWriter writer;
     switch (type) {
-      case 1:
+      case TXT:
         writer = new TXTOrganigramWriter();
         break;
-      case 2:
+      case SITEMAP:
         writer = new SiteMapXML();
         break;
       default:
@@ -75,17 +79,17 @@ public class OrgUtils {
    * 
    * @return the type
    */
-  static public int getType(final URL sourceUrl) {
+  static public OrganigramFormat getType(final URL sourceUrl) {
     final String path = sourceUrl.toExternalForm();
-    int type;
+    OrganigramFormat type;
     if (path.endsWith(".txt")) {
-      type = 1;
+      type = OrganigramFormat.TXT;
     }
     else if (path.endsWith("sitemap.xml")) {
-      type = 2;
+      type = OrganigramFormat.SITEMAP;
     }
     else {
-      type = 0;
+      type = OrganigramFormat.SOF;
     }
     return type;
   }
@@ -98,7 +102,7 @@ public class OrgUtils {
    * 
    * @return the organigram
    */
-  static public Organigram readOrganigram(final URL sourceUrl, final int type) {
+  static public Organigram readOrganigram(final URL sourceUrl, final OrganigramFormat type) {
     Organigram org = null;
     if (sourceUrl != null) {
       InputStream source;
@@ -120,13 +124,13 @@ public class OrgUtils {
    * @param type the type
    * @return the organigram
    */
-  static public Organigram readOrganigram(final InputStream source, final int type) {
+  static public Organigram readOrganigram(final InputStream source, final OrganigramFormat type) {
     OrganigramReader handler;
     switch (type) {
-      case 1:
+      case TXT:
         handler = new TXTOrganigramReader();
         break;
-      case 2:
+      case SITEMAP:
         handler = new SiteMapXML();
         break;
       default:

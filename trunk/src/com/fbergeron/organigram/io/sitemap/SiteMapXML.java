@@ -25,12 +25,11 @@ import com.fbergeron.organigram.io.xml.Tag;
 import com.fbergeron.organigram.io.xml.XMLHandler;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.Unit;
-import com.fbergeron.organigram.model.UnitTraversal;
 
 /**
  * The Class SiteMapUtils.
  */
-public final class SiteMapXML extends XMLHandler implements OrganigramReader, OrganigramWriter, UnitTraversal {
+public final class SiteMapXML extends XMLHandler implements OrganigramReader, OrganigramWriter {
 
   /** The Constant URLSET. */
   public final transient Tag tUrlSet = new TagURLSet();
@@ -53,9 +52,6 @@ public final class SiteMapXML extends XMLHandler implements OrganigramReader, Or
   /** The Constant TITLE (extended tag). */
   public final transient Tag tTitle = new Tag("title");
 
-  /** The buffer. */
-  private transient StringBuffer buf;
-
   /*
    * (non-Javadoc)
    *
@@ -63,13 +59,34 @@ public final class SiteMapXML extends XMLHandler implements OrganigramReader, Or
    *      boolean)
    */
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
+    StringBuffer buf;
     buf = new StringBuffer(1024);
     buf.append("<?xml version=\"1.0\"?>");
     tUrlSet.open(buf, true);
     Attr.writeAttribute(buf, "xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9", true);
-    organigram.execute(this, true);
+    write(buf, organigram.getRoot());
     tUrlSet.close(buf, false);
     return buf.toString();
+  }
+
+  /**
+   * Write a unit in SiteMap format
+   * @param buf
+   * @param unit
+   */
+  public void write(final StringBuffer buf, final Unit unit) {
+    final String link = unit.getMeta("link");
+    if (link != null) {
+      tUrl.open(buf, false);
+      write(buf, unit, tLoc, "link");
+      write(buf, unit, tLastMod);
+      write(buf, unit, tChangeFreq);
+      write(buf, unit, tPriority);
+      tUrl.close(buf, false);
+    }
+    for (final Unit u : unit) {
+      write(buf, u);
+    }
   }
 
   /**
@@ -79,7 +96,7 @@ public final class SiteMapXML extends XMLHandler implements OrganigramReader, Or
    * @param processor the processor
    * @param what the what
    */
-  public void write(final Unit unit, final Tag processor, final String what) {
+  public void write(final StringBuffer buf, final Unit unit, final Tag processor, final String what) {
     final String val = unit.getMeta(what);
     if (val != null) {
       processor.open(buf, false);
@@ -94,23 +111,8 @@ public final class SiteMapXML extends XMLHandler implements OrganigramReader, Or
    * @param unit the unit
    * @param processor the processor
    */
-  public void write(final Unit unit, final Tag processor) {
-    write(unit, processor, processor.getName());
-  }
-
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.model.UnitTraversal#process(com.fbergeron.organigram.model.Unit)
-   */
-  public void process(final Unit unit, final int level) {
-    final String link = unit.getMeta("link");
-    if (link != null) {
-      tUrl.open(buf, false);
-      write(unit, tLoc, "link");
-      write(unit, tLastMod);
-      write(unit, tChangeFreq);
-      write(unit, tPriority);
-      tUrl.close(buf, false);
-    }
+  public void write(final StringBuffer buf, final Unit unit, final Tag processor) {
+    write(buf, unit, processor, processor.getName());
   }
 
 }

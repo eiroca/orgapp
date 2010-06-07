@@ -78,9 +78,12 @@ public class HorizontalRender extends AbstractRender {
       int xPosN = pntN.x;
       final int centerB = pntB.x + width / 2;
       final int centerN = (xPosN - xPosB) / 2 + xPosB;
-      int delta = 0;
+      int delta;
       if (centerN < centerB) {
         delta = centerB - centerN;
+      }
+      else {
+        delta = 0;
       }
       if (delta > 0) {
         for (final UnitView child : unit) {

@@ -59,11 +59,37 @@ public class Tag implements TagProcessor {
   }
 
   /* (non-Javadoc)
+   * @see com.fbergeron.organigram.io.sitemap.TagProcessor#getName()
+   */
+  public String getName() {
+    return name;
+  }
+
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.io.sitemap.TagProcessor#start(com.fbergeron.organigram.io.OrganigramReader, org.xml.sax.Attributes)
+   */
+  public void start(final OrganigramReader reader, final Attributes attribs) {
+    buf = new StringBuffer(200);
+  }
+
+  /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#characters(com.fbergeron.organigram.io.OrganigramReader, char[], int, int)
    */
   public void characters(final OrganigramReader reader, final char[] chr, final int start, final int length) {
     if (buf != null) {
       buf.append(new String(chr, start, length));
+    }
+  }
+
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.io.sitemap.TagProcessor#end(com.fbergeron.organigram.io.OrganigramReader)
+   */
+  public void end(final OrganigramReader reader) {
+    if (buf != null) {
+      final Map<String, String> info = reader.getData();
+      final String val = buf.toString();
+      info.put(name, val.length() == 0 ? null : val);
+      buf = null;
     }
   }
 
@@ -82,24 +108,6 @@ public class Tag implements TagProcessor {
       buf.append(name);
       buf.append('>');
     }
-  }
-
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.io.sitemap.TagProcessor#end(com.fbergeron.organigram.io.OrganigramReader)
-   */
-  public void end(final OrganigramReader reader) {
-    if (buf != null) {
-      final Map<String, String> info = reader.getData();
-      final String val = buf.toString();
-      info.put(name, val.length() == 0 ? null : val);
-    }
-  }
-
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.io.sitemap.TagProcessor#getName()
-   */
-  public String getName() {
-    return name;
   }
 
   /**
@@ -132,13 +140,6 @@ public class Tag implements TagProcessor {
    */
   public void setName(final String name) {
     this.name = name;
-  }
-
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.io.sitemap.TagProcessor#start(com.fbergeron.organigram.io.OrganigramReader, org.xml.sax.Attributes)
-   */
-  public void start(final OrganigramReader reader, final Attributes attribs) {
-    buf = new StringBuffer(200);
   }
 
   /**

@@ -57,8 +57,11 @@ public class AttrStyle extends Attr<Integer> {
    */
   @Override
   public Integer toVal(final String val) {
-    final Integer res = def;
-    if (val != null) {
+    final Integer res;
+    if (val == null) {
+      res = def;
+    }
+    else {
       int style = Font.PLAIN;
       final StringTokenizer styleStr = new StringTokenizer(val, "+");
       String styleAtr;
@@ -71,6 +74,7 @@ public class AttrStyle extends Attr<Integer> {
           style |= Font.ITALIC;
         }
       }
+      res = style;
     }
     return res;
   }
@@ -80,15 +84,13 @@ public class AttrStyle extends Attr<Integer> {
    */
   @Override
   public String fromVal(final Integer val) {
-    boolean first = true;
     final int style = val.intValue();
     final StringBuffer styleBuf = new StringBuffer();
     if ((style & Font.ITALIC) == Font.ITALIC) {
       styleBuf.append(AttrStyle.VAL_ITALIC);
-      first = false;
     }
     if ((style & Font.BOLD) == Font.BOLD) {
-      if (!first) {
+      if (styleBuf.length() > 0) {
         styleBuf.append('+');
       }
       styleBuf.append(AttrStyle.VAL_BOLD);
