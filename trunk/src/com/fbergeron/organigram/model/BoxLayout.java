@@ -22,32 +22,58 @@ import java.io.Serializable;
 import com.fbergeron.organigram.model.type.Alignment;
 import com.fbergeron.organigram.model.type.BoxType;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Layout definition of a Box.
  */
 public class BoxLayout implements Cloneable, Serializable {
 
-  /**
-   * 
-   */
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -278860104094217354L;
 
+  /** The Constant DEF_BACKGROUND. */
   public static final Color DEF_BACKGROUND = Color.white;
+  
+  /** The Constant DEF_BOXFRAME. */
   public static final Color DEF_BOXFRAME = Color.black;
+  
+  /** The Constant DEF_BOXTYPE. */
   public static final BoxType DEF_BOXTYPE = BoxType.NORMAL;
+  
+  /** The Constant DEF_EXPANDED. */
   public static final Boolean DEF_EXPANDED = Boolean.TRUE;
+  
+  /** The Constant DEF_FOREGROUND. */
   public static final Color DEF_FOREGROUND = Color.black;
+  
+  /** The Constant DEF_PADDING. */
   public static final Insets DEF_PADDING = new Insets(4, 4, 4, 4);
+  
+  /** The Constant DEF_TEXTALIGN. */
   public static final Alignment DEF_TEXTALIGN = Alignment.CENTER;
 
+  /** The parent. */
   private BoxLayout parent = null;
 
+  /** The type. */
   private BoxType type = null;
+  
+  /** The expanded. */
   private Boolean expanded = null;
+  
+  /** The text alignment. */
   private Alignment textAlignment = null;
+  
+  /** The background color. */
   private Color backgroundColor = null;
+  
+  /** The foreground color. */
   private Color foregroundColor = null;
+  
+  /** The frame color. */
   private Color frameColor = null;
+  
+  /** The padding. */
   private Insets padding = null;
 
   /**
@@ -63,6 +89,11 @@ public class BoxLayout implements Cloneable, Serializable {
     padding = new Insets(BoxLayout.DEF_PADDING.top, BoxLayout.DEF_PADDING.left, BoxLayout.DEF_PADDING.bottom, BoxLayout.DEF_PADDING.right);
   }
 
+  /**
+   * Instantiates a new box layout.
+   * 
+   * @param parent the parent
+   */
   public BoxLayout(final BoxLayout parent) {
     this.parent = parent;
   }
@@ -70,10 +101,8 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Instantiates a new box layout.
    * 
-   * @param source the source
-   * 
-   *          public BoxLayout(final BoxLayout source, int y) { frameColor = source.frameColor; backgroundColor = source.backgroundColor; foregroundColor = source.foregroundColor; padding = (Insets)
-   *          source.padding.clone(); textAlignment = source.textAlignment; expanded = source.expanded; type = source.type; }
+   * @param inherit the inherit
+   * @return the background color
    */
 
   /**
@@ -92,6 +121,7 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Gets the box foreground color.
    * 
+   * @param inherit the inherit
    * @return the box foreground color
    */
   public Color getForegroundColor(final boolean inherit) {
@@ -105,6 +135,7 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Gets the box frame color.
    * 
+   * @param inherit the inherit
    * @return the box frame color
    */
   public Color getFrameColor(final boolean inherit) {
@@ -118,6 +149,7 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Gets the box top padding.
    * 
+   * @param inherit the inherit
    * @return the box top padding
    */
   public Insets getPadding(final boolean inherit) {
@@ -131,6 +163,7 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Gets the box text alignment.
    * 
+   * @param inherit the inherit
    * @return the box text alignment
    */
   public Alignment getTextAlignment(final boolean inherit) {
@@ -143,6 +176,8 @@ public class BoxLayout implements Cloneable, Serializable {
 
   /**
    * Returns the box type.
+   * 
+   * @param inherit the inherit
    * @return returns the box type
    */
   public BoxType getType(final boolean inherit) {
@@ -156,6 +191,7 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Get the expanded flag.
    * 
+   * @param inherit the inherit
    * @return the expanded flag
    */
   public Boolean getExpanded(final boolean inherit) {
@@ -205,7 +241,7 @@ public class BoxLayout implements Cloneable, Serializable {
   /**
    * Sets the box top padding.
    * 
-   * @param topPadding the new box top padding
+   * @param padding the new padding
    */
   public void setPadding(final Insets padding) {
     this.padding = padding;
@@ -230,6 +266,8 @@ public class BoxLayout implements Cloneable, Serializable {
   }
 
   /**
+   * Gets the parent.
+   * 
    * @return the parent
    */
   public BoxLayout getParent() {
@@ -237,6 +275,8 @@ public class BoxLayout implements Cloneable, Serializable {
   }
 
   /**
+   * Sets the parent.
+   * 
    * @param parent the parent to set
    */
   public void setParent(final BoxLayout parent) {

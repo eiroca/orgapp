@@ -29,7 +29,6 @@ import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.UnitView;
 import com.fbergeron.organigram.view.render.BoxRender;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClassicBoxRender.
  */
