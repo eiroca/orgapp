@@ -16,16 +16,20 @@
  */
 package com.fbergeron.organigram.model;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface UnitTraversal.
+ * 
+ * @param <T> the < t>
  */
 public abstract class AbstractProcessor<T> {
 
   /**
    * Execute.
    * 
-   * @param action the action
+   * @param org the org
    * @param nodeFirst the node first
+   * @param context the context
    */
   public void execute(final Organigram org, final boolean nodeFirst, final T context) {
     execute(org.getRoot(), nodeFirst, 0, context);
@@ -34,9 +38,10 @@ public abstract class AbstractProcessor<T> {
   /**
    * Execute.
    * 
-   * @param action the action
+   * @param unit the unit
    * @param nodeFirst the node first
    * @param level the level
+   * @param context the context
    */
   public void execute(final Unit unit, final boolean nodeFirst, final int level, final T context) {
     if (nodeFirst) {
@@ -55,6 +60,7 @@ public abstract class AbstractProcessor<T> {
    * 
    * @param unit the unit
    * @param level the level
+   * @param context the context
    */
   abstract public void process(Unit unit, int level, T context);
 
