@@ -27,22 +27,49 @@ import com.fbergeron.organigram.model.type.OrgMode;
  */
 public class OrganigramLayout {
 
+  /** The Constant DEF_LAYOUT. */
   public static final Layout DEF_LAYOUT = Layout.TOP;
+  
+  /** The Constant DEF_ORGMODE. */
   public static final OrgMode DEF_ORGMODE = OrgMode.MAX;
+  
+  /** The Constant DEF_COMPACT. */
   public static final boolean DEF_COMPACT = Boolean.TRUE;
+  
+  /** The Constant DEF_BACKGROUND. */
   public static final Color DEF_BACKGROUND = Color.white;
+  
+  /** The Constant DEF_LINEMODE. */
   public static final LineMode DEF_LINEMODE = LineMode.CONNECTOR;
+  
+  /** The Constant DEF_LINECOLOR. */
   public static final Color DEF_LINECOLOR = Color.black;
+  
+  /** The Constant DEF_MARGIN. */
   public static final Insets DEF_MARGIN = new Insets(6, 6, 6, 6);
 
+  /** The Constant DEF_TOOLTIP. */
   public static final boolean DEF_TOOLTIP = true;
 
+  /** The layout. */
   private Layout layout = OrganigramLayout.DEF_LAYOUT;
+  
+  /** The mode. */
   private OrgMode mode = OrganigramLayout.DEF_ORGMODE;
+  
+  /** The compact. */
   private boolean compact = OrganigramLayout.DEF_COMPACT;
+  
+  /** The background color. */
   private Color backgroundColor = OrganigramLayout.DEF_BACKGROUND;
+  
+  /** The line mode. */
   private LineMode lineMode = OrganigramLayout.DEF_LINEMODE;
+  
+  /** The line color. */
   private Color lineColor = OrganigramLayout.DEF_LINECOLOR;
+  
+  /** The margin. */
   private Insets margin = new Insets(OrganigramLayout.DEF_MARGIN.top, OrganigramLayout.DEF_MARGIN.left, OrganigramLayout.DEF_MARGIN.bottom, OrganigramLayout.DEF_MARGIN.right);
 
   /** The is tool tip enabled. */
@@ -150,7 +177,7 @@ public class OrganigramLayout {
   /**
    * Sets the box right margin.
    * 
-   * @param rightMargin the new box right margin
+   * @param margin the new margin
    */
   public void setMargin(final Insets margin) {
     this.margin = margin;
