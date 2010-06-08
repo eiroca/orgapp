@@ -61,18 +61,20 @@
 
 	<target name="applet_jar" depends="compile">
 		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/applet.jar" basedir="classes">
+		<jar destfile="${dist}/tmp_applet.jar" basedir="classes">
 		</jar>
 	</target>
 
 	<target name="applet_shrink" depends="applet_jar" description="Obfuscate compiled classes">
 		<proguard>
       -libraryjars "${java.home}\lib\rt.jar"
-      -injars "${dist}/applet.jar"
+      -injars "${dist}/tmp_applet.jar"
       -outjars "${dist}/OrgApplet.jar"
       -dontusemixedcaseclassnames
       -defaultpackage ''
       -keep public class OrganigramApplet
+			-optimizationpasses 3
+			-printmapping "${dist}/mapping.log"
     </proguard>
 	</target>
 
@@ -82,7 +84,7 @@
 
 	<target name="app_jar" depends="compile">
 		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/app.jar" basedir="classes">
+		<jar destfile="${dist}/tmp_app.jar" basedir="classes">
 			<manifest>
 				<attribute name="Main-Class" value="OrganigramApp" />
 			</manifest>
@@ -92,7 +94,7 @@
 	<target name="app_shrink" depends="app_jar" description="Obfuscate compiled classes">
 		<proguard>
       -libraryjars "${java.home}\lib\rt.jar"
-      -injars "${dist}/app.jar"
+      -injars "${dist}/tmp_app.jar"
       -outjars "${dist}/OrgApp.jar"
       -dontusemixedcaseclassnames
       -defaultpackage ''
@@ -108,7 +110,7 @@
 
 	<target name="convert_jar" depends="compile">
 		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/conv.jar" basedir="classes">
+		<jar destfile="${dist}/tmp_convert.jar" basedir="classes">
 			<manifest>
 				<attribute name="Main-Class" value="Convert" />
 			</manifest>
@@ -118,7 +120,7 @@
 	<target name="convert_shrink" depends="convert_jar" description="Obfuscate compiled classes">
 		<proguard>
       -libraryjars "${java.home}\lib\rt.jar"
-      -injars "${dist}/conv.jar"
+      -injars "${dist}/tmp_convert.jar"
       -outjars "${dist}/Convert.jar"
       -dontusemixedcaseclassnames
       -defaultpackage ''
@@ -130,9 +132,9 @@
 
 	<target name="dist" depends="applet, app, convert, javadoc" description="Create distribution">
 		<echo>Convert application created.</echo>
-		<delete file="${dist}/app.jar" />
-		<delete file="${dist}/conv.jar" />
-		<delete file="${dist}/applet.jar" />
+		<delete file="${dist}/tmp_app.jar" />
+		<delete file="${dist}/tmp_convert.jar" />
+		<delete file="${dist}/tmp_applet.jar" />
 		<mkdir dir="${dist}/${version}" />
 		<copy todir="${base}/server/php">
 			<fileset file="${dist}/OrgApplet.jar" />
