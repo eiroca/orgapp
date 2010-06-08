@@ -33,22 +33,22 @@ public class BoxLayout implements Cloneable, Serializable {
 
   /** The Constant DEF_BACKGROUND. */
   public static final Color DEF_BACKGROUND = Color.white;
-  
+
   /** The Constant DEF_BOXFRAME. */
   public static final Color DEF_BOXFRAME = Color.black;
-  
+
   /** The Constant DEF_BOXTYPE. */
   public static final BoxType DEF_BOXTYPE = BoxType.NORMAL;
-  
+
   /** The Constant DEF_EXPANDED. */
   public static final Boolean DEF_EXPANDED = Boolean.TRUE;
-  
+
   /** The Constant DEF_FOREGROUND. */
   public static final Color DEF_FOREGROUND = Color.black;
-  
+
   /** The Constant DEF_PADDING. */
   public static final Insets DEF_PADDING = new Insets(4, 4, 4, 4);
-  
+
   /** The Constant DEF_TEXTALIGN. */
   public static final Alignment DEF_TEXTALIGN = Alignment.CENTER;
 
@@ -57,22 +57,22 @@ public class BoxLayout implements Cloneable, Serializable {
 
   /** The type. */
   private BoxType type = null;
-  
+
   /** The expanded. */
   private Boolean expanded = null;
-  
+
   /** The text alignment. */
   private Alignment textAlignment = null;
-  
+
   /** The background color. */
   private Color backgroundColor = null;
-  
+
   /** The foreground color. */
   private Color foregroundColor = null;
-  
+
   /** The frame color. */
   private Color frameColor = null;
-  
+
   /** The padding. */
   private Insets padding = null;
 
