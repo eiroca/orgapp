@@ -74,7 +74,7 @@ public class OrganigramApp extends JFrame {
    */
   public OrganigramApp() {
     super();
-    final URL source = Utils.find(OrganigramApp.organigramFile);
+    final URL source = Utils.findResource(OrganigramApp.organigramFile);
     final Organigram org = OrgUtils.readOrganigram(source);
     if (org == null) {
       System.err.println("Invalid data: " + OrganigramApp.organigramFile);
