@@ -27,137 +27,18 @@ import java.util.Map;
 public class Utils {
 
   /**
-   * Encode.
+   * Adds the enum.
    * 
-   * @param buf the buffer
-   * @param str the string
+   * @param set the set
+   * @param val the value
    */
-  public static void encodeXMLchars(final StringBuffer buf, final String str) {
-    for (int i = 0; i < str.length(); i++) {
-      final char chr = str.charAt(i);
-      if (chr < 32) {
-        buf.append(' ');
-      }
-      else {
-        switch (chr) {
-          case '&':
-            buf.append("&amp;");
-            break;
-          case '<':
-            buf.append("&lt;");
-            break;
-          case '>':
-            buf.append("&gt;");
-            break;
-          default:
-            buf.append(chr);
-        }
-      }
-    }
-  }
-
-  /**
-   * Val.
-   * 
-   * @param val the val
-   * @param def the def
-   * @return the int
-   */
-  static public int val(final String val, final int def) {
-    int res;
-    try {
-      res = Integer.parseInt(val);
-    }
-    catch (final NumberFormatException err) {
-      res = def;
-    }
-    return res;
-  }
-
-  /**
-   * Write two digits Hex.
-   * 
-   * @param out the out
-   * @param val the val
-   */
-  public static void writeHH(final StringBuffer out, final int val) {
-    if (val < 16) {
-      out.append('0');
-    }
-    out.append(Integer.toString(val, 16));
-  }
-
-  /**
-   * Find in classpath.
-   * 
-   * @param filename the filename
-   * 
-   * @return the uRL
-   */
-  public static URL findInClasspath(final String filename) {
-    URL res = null;
-    final String classpath = System.getProperty("java.class.path");
-    final String[] paths = classpath.split(File.pathSeparator);
-    for (final String path : paths) {
-      res = Utils.findInDirectory(path, filename);
-      if (res != null) {
-        break;
-      }
-    }
-    return res;
-  }
-
-  /**
-   * Find in directory.
-   * 
-   * @param path the path
-   * @param filename the filename
-   * 
-   * @return the uRL
-   */
-  public static URL findInDirectory(final String path, final String filename) {
-    URL res = null;
-    final File file = new File(path, filename);
-    if (file.exists() && !file.isDirectory()) {
-      try {
-        res = file.toURI().toURL();
-      }
-      catch (final MalformedURLException e) {
-        Debug.ignore(e);
-      }
-    }
-    return res;
-  }
-
-  /**
-   * Find in resource.
-   * 
-   * @param name the name
-   * 
-   * @return the uRL
-   */
-  public static URL findInResource(final String name) {
-    final String path = (name.charAt(0) == '/') ? name : "/" + name;
-    return OrgUtils.class.getResource(path);
-  }
-
-  /**
-   * Find.
-   * 
-   * @param name the name
-   * 
-   * @return the uRL
-   */
-  static public URL find(final String name) {
-    URL res;
-    res = Utils.findInDirectory(".", name);
-    if (res == null) {
-      res = Utils.findInClasspath(name);
-    }
-    if (res == null) {
-      res = Utils.findInResource(name);
-    }
-    return res;
+  @SuppressWarnings("unchecked")
+  static public void addEnum(final Map set, final Enum val) {
+    if ((set == null) || (val == null)) { return; }
+    final String name = val.name().toLowerCase();
+    set.put(name, val);
+    set.put(name.substring(0, 1), val);
+    set.put(Integer.toString(val.ordinal()), val);
   }
 
   /**
@@ -187,17 +68,157 @@ public class Utils {
   }
 
   /**
-   * Adds the enum.
+   * Encode xm lchars.
    * 
-   * @param set the set
-   * @param vals the values
+   * @param buf the buf
+   * @param str the str
    */
-  @SuppressWarnings("unchecked")
-  public static void addEnum(final Map set, final Enum vals) {
-    final String name = vals.name().toLowerCase();
-    set.put(name, vals);
-    set.put(name.substring(0, 1), vals);
-    set.put(Integer.toString(vals.ordinal()), vals);
+  public static void encodeXMLchars(final StringBuffer buf, final String str) {
+    encodeXMLchars(buf, str, true);
+  }
+
+  /**
+   * Encode.
+   * 
+   * @param buf the buffer
+   * @param str the string
+   * @param removeNonASCII the remove non ASCII
+   */
+  static public void encodeXMLchars(final StringBuffer buf, final String str, boolean removeNonASCII) {
+    if ((buf == null) || (str == null)) { return; }
+    for (int i = 0; i < str.length(); i++) {
+      final char chr = str.charAt(i);
+      if ((removeNonASCII) && (chr < 32)) {
+        buf.append(' ');
+      }
+      else {
+        switch (chr) {
+          case '&':
+            buf.append("&amp;");
+            break;
+          case '<':
+            buf.append("&lt;");
+            break;
+          case '>':
+            buf.append("&gt;");
+            break;
+          case '"':
+            buf.append("&quot;");
+            break;
+          case '\'':
+            buf.append("&#39;");
+            break;
+          default:
+            buf.append(chr);
+        }
+      }
+    }
+  }
+
+  /**
+   * Find a resuurce in current directory, classpath or internal resources.
+   * 
+   * @param resName the name of the resource to be found
+   * 
+   * @return the URL of tyhe resource or null if not found
+   */
+  static public URL findResource(final String resName) {
+    URL res;
+    res = Utils.findInDirectory(".", resName);
+    if (res == null) {
+      res = Utils.findInClasspath(resName);
+    }
+    if (res == null) {
+      res = Utils.findInResource(resName);
+    }
+    return res;
+  }
+
+  /**
+   * Find in classpath.
+   * 
+   * @param filename the filename
+   * 
+   * @return the uRL
+   */
+  static public URL findInClasspath(final String filename) {
+    URL res = null;
+    final String classpath = System.getProperty("java.class.path");
+    final String[] paths = classpath.split(File.pathSeparator);
+    for (final String path : paths) {
+      res = Utils.findInDirectory(path, filename);
+      if (res != null) {
+        break;
+      }
+    }
+    return res;
+  }
+
+  /**
+   * Find in directory.
+   * 
+   * @param path the path
+   * @param filename the filename
+   * 
+   * @return the uRL
+   */
+  static public URL findInDirectory(final String path, final String filename) {
+    URL res = null;
+    final File file = new File(path, filename);
+    if (file.exists() && !file.isDirectory()) {
+      try {
+        res = file.toURI().toURL();
+      }
+      catch (final MalformedURLException e) {
+        Debug.ignore(e);
+      }
+    }
+    return res;
+  }
+
+  /**
+   * Find in resource.
+   * 
+   * @param name the name
+   * 
+   * @return the uRL
+   */
+  static public URL findInResource(final String name) {
+    final String path = (name.charAt(0) == '/') ? name : "/" + name;
+    return OrgUtils.class.getResource(path);
+  }
+
+  /**
+   * Val.
+   * 
+   * @param val the val
+   * @param def the def
+   * @return the int
+   */
+  static public int val(final String val, final int def) {
+    int res;
+    try {
+      res = Integer.parseInt(val);
+    }
+    catch (final NumberFormatException err) {
+      res = def;
+    }
+    return res;
+  }
+
+  /**
+   * Write two digits Hex.
+   * 
+   * @param out the out
+   * @param val the val
+   */
+  static public void writeHH(final StringBuffer out, final int val) {
+    if (out != null) {
+      if (val < 16) {
+        out.append('0');
+      }
+      out.append(Integer.toString(val, 16));
+    }
   }
 
 }

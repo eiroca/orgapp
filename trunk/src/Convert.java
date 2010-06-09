@@ -57,7 +57,7 @@ public class Convert {
         type = OrganigramFormat.SOF;
         break;
     }
-    final URL xmlSource = Utils.find(inFile);
+    final URL xmlSource = Utils.findResource(inFile);
     final Organigram org = OrgUtils.readOrganigram(xmlSource);
     System.out.println(OrgUtils.writeOrganigram(org, type, false));
   }

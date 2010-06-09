@@ -32,44 +32,11 @@ import com.fbergeron.organigram.model.Organigram;
  */
 public class OrgUtils {
 
+  /**
+   * The Enum OrganigramFormat.
+   */
   public enum OrganigramFormat {
     SOF, TXT, SITEMAP
-  }
-
-  /**
-   * Write organigram.
-   * 
-   * @param org the org
-   * @param type the type
-   * @param compact the compact
-   * 
-   * @return the string
-   */
-  static public String writeOrganigram(final Organigram org, final OrganigramFormat type, final boolean compact) {
-    OrganigramWriter writer;
-    switch (type) {
-      case TXT:
-        writer = new TXTOrganigramWriter();
-        break;
-      case SITEMAP:
-        writer = new SiteMapXML();
-        break;
-      default:
-        writer = new SOFXML();
-        break;
-    }
-    return writer.writeOrganigram(org, compact);
-  }
-
-  /**
-   * Read organigram.
-   * 
-   * @param sourceUrl the source url
-   * 
-   * @return the organigram
-   */
-  static public Organigram readOrganigram(final URL sourceUrl) {
-    return (sourceUrl == null ? null : OrgUtils.readOrganigram(sourceUrl, OrgUtils.getType(sourceUrl)));
   }
 
   /**
@@ -80,7 +47,7 @@ public class OrgUtils {
    * @return the type
    */
   static public OrganigramFormat getType(final URL sourceUrl) {
-    final String path = sourceUrl.toExternalForm();
+    final String path = sourceUrl.toExternalForm().toLowerCase();
     OrganigramFormat type;
     if (path.endsWith(".txt")) {
       type = OrganigramFormat.TXT;
@@ -92,6 +59,40 @@ public class OrgUtils {
       type = OrganigramFormat.SOF;
     }
     return type;
+  }
+
+  /**
+   * Read organigram.
+   * 
+   * @param source the source
+   * @param type the type
+   * @return the organigram
+   */
+  static public Organigram readOrganigram(final InputStream source, final OrganigramFormat type) {
+    OrganigramReader handler;
+    switch (type) {
+      case TXT:
+        handler = new TXTOrganigramReader();
+        break;
+      case SITEMAP:
+        handler = new SiteMapXML();
+        break;
+      default:
+        handler = new SOFXML();
+        break;
+    }
+    return handler.readOrganigram(source);
+  }
+
+  /**
+   * Read organigram.
+   * 
+   * @param sourceUrl the source url
+   * 
+   * @return the organigram
+   */
+  static public Organigram readOrganigram(final URL sourceUrl) {
+    return (sourceUrl == null ? null : OrgUtils.readOrganigram(sourceUrl, OrgUtils.getType(sourceUrl)));
   }
 
   /**
@@ -118,26 +119,28 @@ public class OrgUtils {
   }
 
   /**
-   * Read organigram.
+   * Write organigram.
    * 
-   * @param source the source
+   * @param org the org
    * @param type the type
-   * @return the organigram
+   * @param compact the compact
+   * 
+   * @return the string
    */
-  static public Organigram readOrganigram(final InputStream source, final OrganigramFormat type) {
-    OrganigramReader handler;
+  static public String writeOrganigram(final Organigram org, final OrganigramFormat type, final boolean compact) {
+    OrganigramWriter writer;
     switch (type) {
       case TXT:
-        handler = new TXTOrganigramReader();
+        writer = new TXTOrganigramWriter();
         break;
       case SITEMAP:
-        handler = new SiteMapXML();
+        writer = new SiteMapXML();
         break;
       default:
-        handler = new SOFXML();
+        writer = new SOFXML();
         break;
     }
-    return handler.readOrganigram(source);
+    return writer.writeOrganigram(org, compact);
   }
 
 }
