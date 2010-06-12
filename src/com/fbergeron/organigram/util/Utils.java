@@ -204,30 +204,30 @@ public class Utils {
    * @return the string
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  static public String readAsString(URL sourceURL) {
+  static public String readAsString(final URL sourceURL) {
     String res = null;
     if (sourceURL != null) {
       BufferedReader reader = null;
-      StringBuffer fileData = new StringBuffer(BUF_SIZE);
+      final StringBuffer fileData = new StringBuffer(Utils.BUF_SIZE);
       try {
         reader = new BufferedReader(new InputStreamReader(sourceURL.openStream()));
-        char[] buf = new char[BUF_SIZE];
+        final char[] buf = new char[Utils.BUF_SIZE];
         int numRead = 0;
         while ((numRead = reader.read(buf)) != -1) {
-          String readData = String.valueOf(buf, 0, numRead);
+          final String readData = String.valueOf(buf, 0, numRead);
           fileData.append(readData);
         }
         reader.close();
         res = fileData.toString();
       }
-      catch (IOException err) {
+      catch (final IOException err) {
         Debug.ignore(err);
         res = null;
         if (reader != null) {
           try {
             reader.close();
           }
-          catch (IOException e) {
+          catch (final IOException e) {
             Debug.ignore(e);
           }
         }

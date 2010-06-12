@@ -58,27 +58,49 @@ public class OrgUtilsTest extends TestCase {
     Assert.assertTrue(OrgUtils.readOrganigram(Utils.findResource("data/test003.in"), OrganigramFormat.TXT) != null);
   }
 
-  public void check(String base, OrganigramFormat type) throws Exception {
-    Organigram org = OrgUtils.readOrganigram(Utils.findResource("data/" + base + ".in"), type);
-    String actual1 = OrgUtils.writeOrganigram(org, OrganigramFormat.SOF, false).trim();
-    String actual2 = OrgUtils.writeOrganigram(org, OrganigramFormat.SITEMAP, false).trim();
-    String actual3 = OrgUtils.writeOrganigram(org, OrganigramFormat.TXT, false).trim();
-    String expected1 = Utils.readAsString(Utils.findResource("data/" + base + "a.out")).trim();
-    String expected2 = Utils.readAsString(Utils.findResource("data/" + base + "b.out")).trim();
-    String expected3 = Utils.readAsString(Utils.findResource("data/" + base + "c.out")).trim();
-    assertEquals(expected1, actual1);
-    assertEquals(expected2, actual2);
-    assertEquals(expected3, actual3);
+  /**
+   * Check.
+   * 
+   * @param base the base
+   * @param type the type
+   * @throws Exception the exception
+   */
+  public void check(final String base, final OrganigramFormat type) throws Exception {
+    final Organigram org = OrgUtils.readOrganigram(Utils.findResource("data/" + base + ".in"), type);
+    final String actual1 = OrgUtils.writeOrganigram(org, OrganigramFormat.SOF, false).trim();
+    final String actual2 = OrgUtils.writeOrganigram(org, OrganigramFormat.SITEMAP, false).trim();
+    final String actual3 = OrgUtils.writeOrganigram(org, OrganigramFormat.TXT, false).trim();
+    final String expected1 = Utils.readAsString(Utils.findResource("data/" + base + "a.out")).trim();
+    final String expected2 = Utils.readAsString(Utils.findResource("data/" + base + "b.out")).trim();
+    final String expected3 = Utils.readAsString(Utils.findResource("data/" + base + "c.out")).trim();
+    Assert.assertEquals(expected1, actual1);
+    Assert.assertEquals(expected2, actual2);
+    Assert.assertEquals(expected3, actual3);
   }
 
+  /**
+   * Test check sof.
+   * 
+   * @throws Exception the exception
+   */
   public void testCheckSOF() throws Exception {
     check("test001", OrganigramFormat.SOF);
   }
 
+  /**
+   * Test check site map.
+   * 
+   * @throws Exception the exception
+   */
   public void testCheckSiteMap() throws Exception {
     check("test002", OrganigramFormat.SITEMAP);
   }
 
+  /**
+   * Test check txt.
+   * 
+   * @throws Exception the exception
+   */
   public void testCheckTXT() throws Exception {
     check("test003", OrganigramFormat.TXT);
   }
