@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<organigram firm="Test Tree">
+ <unit name="Doe, John" role="H" department="CEO">
+  <unit>
+   <info>com</info>
+   <unit>
+    <info>com</info>
+   </unit>
+   <unit>
+    <info>org</info>
+   </unit>
+   <unit>
+    <info>net</info>
+   </unit>
+  </unit>
+  <unit>
+   <info>org</info>
+   <unit>
+    <info>com</info>
+   </unit>
+   <unit>
+    <info>org</info>
+   </unit>
+   <unit>
+    <info>net</info>
+   </unit>
+  </unit>
+  <unit>
+   <info>net</info>
+  </unit>
+ </unit>
+</organigram>

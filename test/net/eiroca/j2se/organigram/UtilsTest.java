@@ -24,6 +24,7 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 import com.fbergeron.organigram.util.Utils;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UtilsTest.
  */
@@ -70,7 +71,7 @@ public class UtilsTest extends TestCase {
   }
 
   /**
-   * Test encode XML
+   * Test encode XML.
    * 
    * @throws Exception the exception
    */
@@ -100,6 +101,17 @@ public class UtilsTest extends TestCase {
     Assert.assertTrue(res.toString().endsWith("Utils.txt"));
     res = Utils.findResource("AllTests.class");
     Assert.assertTrue(res != null);
+  }
+
+  public void testReadAsString() throws Exception {
+    StringBuffer buf = new StringBuffer();
+    for (int i = 0; i < 7000; i++) {
+      buf.append('0');
+    }
+    
+    Assert.assertTrue(Utils.readAsString(null) == null);
+    Assert.assertTrue(Utils.readAsString(Utils.findResource("dsfasdf")) == null);
+    Assert.assertEquals(buf.toString(), Utils.readAsString(Utils.findResource("data/Utils.txt")));
   }
 
   /**

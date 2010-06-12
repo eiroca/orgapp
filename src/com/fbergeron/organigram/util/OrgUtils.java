@@ -47,6 +47,7 @@ public class OrgUtils {
    * @return the type
    */
   static public OrganigramFormat getType(final URL sourceUrl) {
+    if (sourceUrl == null) { return null; }
     final String path = sourceUrl.toExternalForm().toLowerCase();
     OrganigramFormat type;
     if (path.endsWith(".txt")) {
@@ -109,7 +110,7 @@ public class OrgUtils {
       InputStream source;
       try {
         source = sourceUrl.openStream();
-        org = OrgUtils.readOrganigram(source, type);
+        org = OrgUtils.readOrganigram(source, type == null ? OrgUtils.getType(sourceUrl) : type);
       }
       catch (final IOException e) {
         Debug.ignore(e);
