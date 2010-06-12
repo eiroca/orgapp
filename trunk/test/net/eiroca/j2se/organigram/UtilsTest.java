@@ -104,11 +104,11 @@ public class UtilsTest extends TestCase {
   }
 
   public void testReadAsString() throws Exception {
-    StringBuffer buf = new StringBuffer();
+    final StringBuffer buf = new StringBuffer();
     for (int i = 0; i < 7000; i++) {
       buf.append('0');
     }
-    
+
     Assert.assertTrue(Utils.readAsString(null) == null);
     Assert.assertTrue(Utils.readAsString(Utils.findResource("dsfasdf")) == null);
     Assert.assertEquals(buf.toString(), Utils.readAsString(Utils.findResource("data/Utils.txt")));
