@@ -16,13 +16,20 @@
  */
 package com.fbergeron.organigram.util;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
 /**
  * The Class Utils.
+ */
+/**
+ * @author enrico
+ * 
  */
 public class Utils {
 
@@ -74,7 +81,7 @@ public class Utils {
    * @param str the str
    */
   public static void encodeXMLchars(final StringBuffer buf, final String str) {
-    encodeXMLchars(buf, str, true);
+    Utils.encodeXMLchars(buf, str, true);
   }
 
   /**
@@ -84,7 +91,7 @@ public class Utils {
    * @param str the string
    * @param removeNonASCII the remove non ASCII
    */
-  static public void encodeXMLchars(final StringBuffer buf, final String str, boolean removeNonASCII) {
+  static public void encodeXMLchars(final StringBuffer buf, final String str, final boolean removeNonASCII) {
     if ((buf == null) || (str == null)) { return; }
     for (int i = 0; i < str.length(); i++) {
       final char chr = str.charAt(i);
@@ -113,25 +120,6 @@ public class Utils {
         }
       }
     }
-  }
-
-  /**
-   * Find a resuurce in current directory, classpath or internal resources.
-   * 
-   * @param resName the name of the resource to be found
-   * 
-   * @return the URL of tyhe resource or null if not found
-   */
-  static public URL findResource(final String resName) {
-    URL res;
-    res = Utils.findInDirectory(".", resName);
-    if (res == null) {
-      res = Utils.findInClasspath(resName);
-    }
-    if (res == null) {
-      res = Utils.findInResource(resName);
-    }
-    return res;
   }
 
   /**
@@ -186,6 +174,66 @@ public class Utils {
   static public URL findInResource(final String name) {
     final String path = (name.charAt(0) == '/') ? name : "/" + name;
     return OrgUtils.class.getResource(path);
+  }
+
+  /**
+   * Find a resuurce in current directory, classpath or internal resources.
+   * 
+   * @param resName the name of the resource to be found
+   * 
+   * @return the URL of tyhe resource or null if not found
+   */
+  static public URL findResource(final String resName) {
+    URL res;
+    res = Utils.findInDirectory(".", resName);
+    if (res == null) {
+      res = Utils.findInClasspath(resName);
+    }
+    if (res == null) {
+      res = Utils.findInResource(resName);
+    }
+    return res;
+  }
+
+  private static final int BUF_SIZE = 4 * 1024;
+
+  /**
+   * Read as string form a URL
+   * 
+   * @param sourceURL the source url
+   * @return the string
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
+  static public String readAsString(URL sourceURL) {
+    String res = null;
+    if (sourceURL != null) {
+      BufferedReader reader = null;
+      StringBuffer fileData = new StringBuffer(BUF_SIZE);
+      try {
+        reader = new BufferedReader(new InputStreamReader(sourceURL.openStream()));
+        char[] buf = new char[BUF_SIZE];
+        int numRead = 0;
+        while ((numRead = reader.read(buf)) != -1) {
+          String readData = String.valueOf(buf, 0, numRead);
+          fileData.append(readData);
+        }
+        reader.close();
+        res = fileData.toString();
+      }
+      catch (IOException err) {
+        Debug.ignore(err);
+        res = null;
+        if (reader != null) {
+          try {
+            reader.close();
+          }
+          catch (IOException e) {
+            Debug.ignore(e);
+          }
+        }
+      }
+    }
+    return res;
   }
 
   /**

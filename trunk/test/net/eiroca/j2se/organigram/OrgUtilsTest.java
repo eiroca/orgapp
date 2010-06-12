@@ -20,7 +20,9 @@ package net.eiroca.j2se.organigram;
 import java.net.URL;
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgUtils;
+import com.fbergeron.organigram.util.Utils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
 
 /**
@@ -34,11 +36,51 @@ public class OrgUtilsTest extends TestCase {
    * @throws Exception the exception
    */
   public void testAutodetectType() throws Exception {
+    Assert.assertTrue(OrgUtils.getType(null) == null);
     Assert.assertTrue(OrgUtils.getType(new URL("http://server/mydata.SoF")) == OrganigramFormat.SOF);
     Assert.assertTrue(OrgUtils.getType(new URL("http://server/mydata.SOF")) == OrganigramFormat.SOF);
     Assert.assertTrue(OrgUtils.getType(new URL("file://sitemap.xml")) == OrganigramFormat.SITEMAP);
     Assert.assertTrue(OrgUtils.getType(new URL("file:mydata.txt")) == OrganigramFormat.TXT);
     Assert.assertTrue(OrgUtils.getType(new URL("file:àààà.tXt")) == OrganigramFormat.TXT);
+  }
+
+  /**
+   * Test load organigram.
+   * 
+   * @throws Exception the exception
+   */
+  public void testLoadOrganigram() throws Exception {
+    Assert.assertTrue(OrgUtils.readOrganigram((URL) null, (OrganigramFormat) null) == null);
+    Assert.assertTrue(OrgUtils.readOrganigram((URL) null, OrganigramFormat.SOF) == null);
+    Assert.assertTrue(OrgUtils.readOrganigram(Utils.findResource("data/test001.in"), null) != null);
+    Assert.assertTrue(OrgUtils.readOrganigram(Utils.findResource("data/test001.in"), OrganigramFormat.SOF) != null);
+    Assert.assertTrue(OrgUtils.readOrganigram(Utils.findResource("data/test002.in"), OrganigramFormat.SITEMAP) != null);
+    Assert.assertTrue(OrgUtils.readOrganigram(Utils.findResource("data/test003.in"), OrganigramFormat.TXT) != null);
+  }
+
+  public void check(String base, OrganigramFormat type) throws Exception {
+    Organigram org = OrgUtils.readOrganigram(Utils.findResource("data/" + base + ".in"), type);
+    String actual1 = OrgUtils.writeOrganigram(org, OrganigramFormat.SOF, false).trim();
+    String actual2 = OrgUtils.writeOrganigram(org, OrganigramFormat.SITEMAP, false).trim();
+    String actual3 = OrgUtils.writeOrganigram(org, OrganigramFormat.TXT, false).trim();
+    String expected1 = Utils.readAsString(Utils.findResource("data/" + base + "a.out")).trim();
+    String expected2 = Utils.readAsString(Utils.findResource("data/" + base + "b.out")).trim();
+    String expected3 = Utils.readAsString(Utils.findResource("data/" + base + "c.out")).trim();
+    assertEquals(expected1, actual1);
+    assertEquals(expected2, actual2);
+    assertEquals(expected3, actual3);
+  }
+
+  public void testCheckSOF() throws Exception {
+    check("test001", OrganigramFormat.SOF);
+  }
+
+  public void testCheckSiteMap() throws Exception {
+    check("test002", OrganigramFormat.SITEMAP);
+  }
+
+  public void testCheckTXT() throws Exception {
+    check("test003", OrganigramFormat.TXT);
   }
 
 }
