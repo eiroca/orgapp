@@ -17,14 +17,13 @@
 package com.fbergeron.organigram.model.type;
 
 /**
- * The Enum OrgMode.
+ * The Enum BoxMode
  */
-public enum OrgMode {
+public enum BoxMode {
 
-  /** The MAX. */
-  MAX,
-  /** The MIN. */
-  MIN,
-  /** The GROW. */
-  GROW
+  /** BOX */
+  BOX,
+  /** ROUND */
+  ROUND
+
 }
