@@ -18,6 +18,7 @@ package com.fbergeron.organigram.view.render.box;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Polygon;
 import java.util.List;
@@ -230,7 +231,7 @@ public class ClassicBoxRender implements BoxRender {
    * com.fbergeron.organigram.view.render.BoxRender#paint(java.awt.Graphics,
    * com.fbergeron.organigram.view.UnitView)
    */
-  public void paint(final Graphics graphic, final UnitView box, final OrganigramLayout orgLay) {
+  public void paint(final Graphics2D graphic, final UnitView box, final OrganigramLayout orgLay) {
     final BoxLayout boxLay = box.getLayout();
     drawBox(graphic, box, boxLay);
     drawText(graphic, box, boxLay);

@@ -16,7 +16,7 @@
  */
 package com.fbergeron.organigram.view.render;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * The Interface OrganigramRender.
@@ -42,7 +42,7 @@ public interface OrganigramRender {
    * 
    * @param graphics the graphics
    */
-  void paint(final Graphics graphics);
+  void paint(final Graphics2D graphics);
 
   /**
    * Invalidate.

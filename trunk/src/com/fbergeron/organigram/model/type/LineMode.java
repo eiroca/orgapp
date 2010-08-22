@@ -17,12 +17,14 @@
 package com.fbergeron.organigram.model.type;
 
 /**
- * The Enum LineMode.
+ * The Enum LineMode
  */
 public enum LineMode {
 
-  /** The LINE. */
+  /** LINE. */
   LINE,
-  /** The CONNECTOR. */
-  CONNECTOR
+  /** CONNECTOR. */
+  CONNECTOR,
+  /** CURVED **/
+  CURVED
 }

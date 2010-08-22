@@ -16,7 +16,7 @@
  */
 package com.fbergeron.organigram.view.render;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.view.UnitView;
 
@@ -32,6 +32,6 @@ public interface LineRender {
    * @param box the box
    * @param orgLay the org lay
    */
-  void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay);
+  void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay);
 
 }

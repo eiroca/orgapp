@@ -17,6 +17,7 @@
 package com.fbergeron.organigram.view.render.line;
 
 import com.fbergeron.organigram.model.OrganigramLayout;
+import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.render.LineRender;
 
 /**
@@ -26,6 +27,18 @@ public abstract class AbstractLineRender implements LineRender {
 
   /** The organigram lay. */
   protected OrganigramLayout organigramLayout;
+
+  /** The anchor parent. */
+  protected Layout anchorParent;
+
+  /** The anchor child. */
+  protected Layout anchorChild;
+
+  public AbstractLineRender(final Layout anchorParent, final Layout anchorChild) {
+    super();
+    this.anchorParent = anchorParent;
+    this.anchorChild = anchorChild;
+  }
 
   /**
    * Gets the organigram layout.
@@ -43,6 +56,42 @@ public abstract class AbstractLineRender implements LineRender {
    */
   public void setOrganigramLayout(final OrganigramLayout orgLay) {
     organigramLayout = orgLay;
+  }
+
+  /**
+   * Gets the anchor parent.
+   * 
+   * @return the anchor parent
+   */
+  public Layout getAnchorParent() {
+    return anchorParent;
+  }
+
+  /**
+   * Sets the anchor parent.
+   * 
+   * @param anchorParent the new anchor parent
+   */
+  public void setAnchorParent(final Layout anchorParent) {
+    this.anchorParent = anchorParent;
+  }
+
+  /**
+   * Gets the anchor child.
+   * 
+   * @return the anchor child
+   */
+  public Layout getAnchorChild() {
+    return anchorChild;
+  }
+
+  /**
+   * Sets the anchor child.
+   * 
+   * @param anchorChild the new anchor child
+   */
+  public void setAnchorChild(final Layout anchorChild) {
+    this.anchorChild = anchorChild;
   }
 
 }

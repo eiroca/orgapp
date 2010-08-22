@@ -16,7 +16,7 @@
  */
 package com.fbergeron.organigram.view.render.line;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.UnitView;
@@ -43,7 +43,7 @@ public class GenericLineRender extends DirectLineRender {
    * @param xPos the xx
    * @param yPos the yy
    */
-  private void calcNode(final Layout anchor, final int[] xPos, final int[] yPos) {
+  final protected void calcNode(final Layout anchor, final int[] xPos, final int[] yPos) {
     switch (anchor) {
       case LEFT:
       case RIGHT:
@@ -69,7 +69,7 @@ public class GenericLineRender extends DirectLineRender {
    * @param orgLay the org lay
    */
   @Override
-  public void paint(final Graphics graphics, final UnitView box, final OrganigramLayout orgLay) {
+  public void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay) {
     graphics.setColor(orgLay.getLineColor());
     final int[] xPos = new int[4];
     final int[] yPos = new int[4];
