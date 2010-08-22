@@ -11,6 +11,7 @@
    <xs:attribute name="mode" use="optional" type="OrgMode" />
    <xs:attribute name="compact" use="optional" type="xs:boolean" />
    <xs:attribute name="backgroundColor" use="optional" type="Color" />
+   <xs:attribute name="boxMode" use="optional" type="BoxMode" />
    <xs:attribute name="lineMode" use="optional" type="LineMode" />
    <xs:attribute name="lineColor" use="optional" type="Color" />
    <xs:attribute name="marginTop" use="optional" type="xs:integer" />
@@ -19,7 +20,7 @@
    <xs:attribute name="marginRight" use="optional" type="xs:integer" />
    <xs:attribute name="isToolTipEnabled" use="optional" type="xs:boolean" />
    <!--  -->
-   <xs:attribute name="boxBoxType" use="optional" type="BoxType" />
+   <xs:attribute name="boxType" use="optional" type="BoxType" />
    <xs:attribute name="boxExpended" use="optional" type="xs:boolean" />
    <xs:attribute name="boxTextAlignment" use="optional" type="Alignment" />
    <xs:attribute name="boxBackgroundColor" use="optional" type="Color" />
@@ -40,7 +41,7 @@
   <xs:attribute name="id" use="optional" type="xs:string" />
   <xs:attribute name="link" use="optional" type="xs:anyURI" />
   <xs:attribute name="target" use="optional" type="xs:string" />
-  <xs:attribute name="boxType" use="optional" type="BoxType" />
+  <xs:attribute name="type" use="optional" type="BoxType" />
   <xs:attribute name="expended" use="optional" type="xs:boolean" />
   <xs:attribute name="backgroundColor" use="optional" type="Color" />
   <xs:attribute name="foregroundColor" use="optional" type="Color" />
@@ -69,6 +70,7 @@
   <xs:restriction base="xs:string">
    <xs:enumeration value="line"></xs:enumeration>
    <xs:enumeration value="connector"></xs:enumeration>
+   <xs:enumeration value="curved"></xs:enumeration>
   </xs:restriction>
  </xs:simpleType>
  <xs:simpleType name="OrgMode">
@@ -96,6 +98,12 @@
    <xs:enumeration value="bold"></xs:enumeration>
    <xs:enumeration value="bold+italic"></xs:enumeration>
    <xs:enumeration value="italic+bold"></xs:enumeration>
+  </xs:restriction>
+ </xs:simpleType>
+ <xs:simpleType name="BoxMode">
+  <xs:restriction base="xs:string">
+   <xs:enumeration value="box"></xs:enumeration>
+   <xs:enumeration value="round"></xs:enumeration>
   </xs:restriction>
  </xs:simpleType>
  <xs:simpleType name="BoxType">

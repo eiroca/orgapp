@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<organigram layout="left" mode="grow" compact="true" backgroundColor="silver" lineMode="connector" lineColor="black" marginTop="10" marginLeft="10" marginBottom="10" marginRight="10" isToolTipEnabled="true" boxType="normal" boxExpanded="true" boxTextAlignment="center" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" boxFrameColor="#000" boxPaddingTop="6" boxPaddingRight="6" boxPaddingBottom="6" boxPaddingLeft="6" firm="Test Tree">
+<organigram layout="left" mode="grow" compact="false" backgroundColor="silver" boxMode="box" lineMode="connector" lineColor="black" marginTop="12" marginLeft="12" marginBottom="12" marginRight="12" isToolTipEnabled="true" boxType="normal" boxExpanded="true" boxTextAlignment="center" boxBackgroundColor="#808080" boxForegroundColor="rgb(255,255,255)" boxFrameColor="#000" boxPaddingTop="6" boxPaddingRight="6" boxPaddingBottom="6" boxPaddingLeft="6" firm="Test Tree">
  <unit type="none" expanded="true" textAlignment="center" backgroundColor="#808080" foregroundColor="rgb(255,255,255)" frameColor="#000" paddingTop="6" paddingRight="6" paddingBottom="6" paddingLeft="6" department="Org App" name="http://orgapp.sourceforge.net/" link="http://orgapp.sourceforge.net/" target="" role="H">
   <unit expanded="true">
    <info fontName="Arial" fontStyle="Bold+Italic" fontColor="black">com</info>

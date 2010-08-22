@@ -16,7 +16,6 @@
  */
 package com.fbergeron.organigram.model;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface UnitTraversal.
  * 

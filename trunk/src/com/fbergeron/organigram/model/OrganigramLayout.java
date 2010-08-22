@@ -1,5 +1,5 @@
-/**
- * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/** LGPL > 3.0 
+ * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,7 @@ package com.fbergeron.organigram.model;
 
 import java.awt.Color;
 import java.awt.Insets;
+import com.fbergeron.organigram.model.type.BoxMode;
 import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.model.type.LineMode;
 import com.fbergeron.organigram.model.type.OrgMode;
@@ -38,6 +39,9 @@ public class OrganigramLayout {
 
   /** The Constant DEF_BACKGROUND. */
   public static final Color DEF_BACKGROUND = Color.white;
+
+  /** The Constant DEF_BOXMODE. */
+  public static final BoxMode DEF_BOXMODE = BoxMode.BOX;
 
   /** The Constant DEF_LINEMODE. */
   public static final LineMode DEF_LINEMODE = LineMode.CONNECTOR;
@@ -62,6 +66,9 @@ public class OrganigramLayout {
 
   /** The background color. */
   private Color backgroundColor = OrganigramLayout.DEF_BACKGROUND;
+
+  /** The box mode. */
+  private BoxMode boxMode = OrganigramLayout.DEF_BOXMODE;
 
   /** The line mode. */
   private LineMode lineMode = OrganigramLayout.DEF_LINEMODE;
@@ -109,6 +116,24 @@ public class OrganigramLayout {
    */
   public void setCompact(final boolean compact) {
     this.compact = compact;
+  }
+
+  /**
+   * Gets the box mode.
+   * 
+   * @return the box mode
+   */
+  public BoxMode getBoxMode() {
+    return boxMode;
+  }
+
+  /**
+   * Sets the box mode.
+   * 
+   * @param boxMode the new box mode
+   */
+  public void setBoxMode(final BoxMode boxMode) {
+    this.boxMode = boxMode;
   }
 
   /**

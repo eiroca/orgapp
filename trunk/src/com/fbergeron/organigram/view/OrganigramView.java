@@ -1,7 +1,6 @@
-/**
- * LGPL > 3.0 Copyright (C) 2005 Frédéric Bergeron
- * (fbergeron@users.sourceforge.net) Copyright (C) 2006-2010 eIrOcA (eNrIcO
- * Croce & sImOnA Burzio)
+/** LGPL > 3.0
+ * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
+ * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,10 +27,12 @@ import javax.swing.JScrollPane;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.Unit;
+import com.fbergeron.organigram.model.type.BoxMode;
 import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.render.LineRender;
 import com.fbergeron.organigram.view.render.OrganigramRender;
 import com.fbergeron.organigram.view.render.box.ClassicBoxRender;
+import com.fbergeron.organigram.view.render.box.RoundBoxRender;
 import com.fbergeron.organigram.view.render.line.BezierLineRender;
 import com.fbergeron.organigram.view.render.line.DirectLineRender;
 import com.fbergeron.organigram.view.render.line.GenericLineRender;
@@ -235,11 +236,16 @@ public class OrganigramView extends JPanel {
         default:
           lineRender = new DirectLineRender(anchorParent, anchorChild);
       }
-      boxRender = new ClassicBoxRender(anchorCollapsed);
+      if (orgLay.getBoxMode() == BoxMode.BOX) {
+        boxRender = new ClassicBoxRender(anchorCollapsed);
+      }
+      else {
+        boxRender = new RoundBoxRender(anchorCollapsed);
+      }
       organigramRender.setLineRender(lineRender);
       organigramRender.setBoxRender(boxRender);
     }
-    organigramRender.paint((Graphics2D)graphics);
+    organigramRender.paint((Graphics2D) graphics);
   }
 
   /**

@@ -1,5 +1,5 @@
-/**
- * LGPL > 3.0 Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
+/** LGPL > 3.0
+ * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  * 
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,14 @@
  */
 package com.fbergeron.organigram.view.render.box;
 
+import java.awt.BasicStroke;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Polygon;
+import java.awt.Stroke;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 import com.fbergeron.organigram.model.BoxLayout;
 import com.fbergeron.organigram.model.Line;
@@ -54,23 +57,25 @@ public class ClassicBoxRender implements BoxRender {
    * @param box the box
    * @param boxLay the box lay
    */
-  private final void drawBox(final Graphics graphic, final UnitView box, final BoxLayout boxLay) {
+  public void drawBox(final Graphics2D graphic, final UnitView box, final BoxLayout boxLay) {
+    Rectangle2D rect = new Rectangle2D.Double();
+    rect.setRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
     graphic.setColor(boxLay.getBackgroundColor(true));
-    graphic.fillRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
+    graphic.fill(rect);
     graphic.setColor(boxLay.getFrameColor(true));
     switch (boxLay.getType(true)) {
       case NONE:
         break;
       case HIGHLIGHT:
-        graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
-        graphic.drawRect(box.boxRect.x + 1, box.boxRect.y + 1, box.boxRect.width - 2, box.boxRect.height - 2);
+        Stroke oldStroke = graphic.getStroke();
+        BasicStroke stroke = new BasicStroke(2);
+        graphic.setStroke(stroke);
+        graphic.draw(rect);
+        graphic.setStroke(oldStroke);
         break;
       default:
-        graphic.drawRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
+        graphic.draw(rect);
         break;
-    }
-    if (box.canExpand()) {
-      drawBoxExpand(graphic, box);
     }
   }
 
@@ -234,6 +239,9 @@ public class ClassicBoxRender implements BoxRender {
   public void paint(final Graphics2D graphic, final UnitView box, final OrganigramLayout orgLay) {
     final BoxLayout boxLay = box.getLayout();
     drawBox(graphic, box, boxLay);
+    if (box.canExpand()) {
+      drawBoxExpand(graphic, box);
+    }
     drawText(graphic, box, boxLay);
   }
 

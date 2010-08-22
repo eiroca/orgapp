@@ -23,6 +23,7 @@ import com.fbergeron.organigram.io.sof.SOFXML;
 import com.fbergeron.organigram.io.xml.Tag;
 import com.fbergeron.organigram.io.xml.attr.AttrAlignment;
 import com.fbergeron.organigram.io.xml.attr.AttrBoolean;
+import com.fbergeron.organigram.io.xml.attr.AttrBoxMode;
 import com.fbergeron.organigram.io.xml.attr.AttrBoxType;
 import com.fbergeron.organigram.io.xml.attr.AttrColor;
 import com.fbergeron.organigram.io.xml.attr.AttrInsets;
@@ -42,6 +43,7 @@ public class TagOrganigram extends Tag {
   public static final String ATR_ORGMODE = "mode";
   public static final String ATR_COMPACT = "compact";
   public static final String ATR_BACKGROUND = "backgroundColor";
+  public static final String ATR_BOXMODE = "boxMode";
   public static final String ATR_LINEMODE = "lineMode";
   public static final String ATR_LINECOLOR = "lineColor";
   public static final String ATR_MARGIN = "margin";
@@ -59,6 +61,7 @@ public class TagOrganigram extends Tag {
   public transient AttrOrgMode aOrgMode = new AttrOrgMode(TagOrganigram.ATR_ORGMODE, OrganigramLayout.DEF_ORGMODE);
   public transient AttrBoolean aCompact = new AttrBoolean(TagOrganigram.ATR_COMPACT, OrganigramLayout.DEF_COMPACT);
   public transient AttrColor aBackground = new AttrColor(TagOrganigram.ATR_BACKGROUND, OrganigramLayout.DEF_BACKGROUND);
+  public transient AttrBoxMode aBoxMode = new AttrBoxMode(TagOrganigram.ATR_BOXMODE, OrganigramLayout.DEF_BOXMODE);
   public transient AttrLineMode aLineMode = new AttrLineMode(TagOrganigram.ATR_LINEMODE, OrganigramLayout.DEF_LINEMODE);
   public transient AttrColor aLineColor = new AttrColor(TagOrganigram.ATR_LINECOLOR, OrganigramLayout.DEF_LINECOLOR);
   public transient AttrInsets aMargin = new AttrInsets(TagOrganigram.ATR_MARGIN, OrganigramLayout.DEF_MARGIN);
@@ -81,6 +84,7 @@ public class TagOrganigram extends Tag {
     addAttribute(aOrgMode);
     addAttribute(aCompact);
     addAttribute(aBackground);
+    addAttribute(aBoxMode);
     addAttribute(aLineMode);
     addAttribute(aLineColor);
     addAttribute(aMargin);
@@ -125,6 +129,7 @@ public class TagOrganigram extends Tag {
     orgLay.setMode(aOrgMode.getLastVal());
     orgLay.setCompact(aCompact.getLastVal());
     orgLay.setBackgroundColor(aBackground.getLastVal());
+    orgLay.setBoxMode(aBoxMode.getLastVal());
     orgLay.setLineMode(aLineMode.getLastVal());
     orgLay.setLineColor(aLineColor.getLastVal());
     orgLay.setMargin(aMargin.getLastVal());
