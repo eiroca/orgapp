@@ -21,6 +21,7 @@ package com.fbergeron.organigram.view.render.organigram;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -304,7 +305,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * 
    * @param graphics the graphics
    */
-  public void paint(final Graphics graphics) {
+  public void paint(final Graphics2D graphics) {
     if (!validLayout) {
       layoutBoxes(graphics);
     }
@@ -325,7 +326,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param graphics the graphics
    * @param orgLay the org lay
    */
-  private void paintBox(final UnitView box, final Graphics graphics, final OrganigramLayout orgLay) {
+  private void paintBox(final UnitView box, final Graphics2D graphics, final OrganigramLayout orgLay) {
     boxRender.paint(graphics, box, orgLay);
     if (box.hasChildren()) {
       lineRender.paint(graphics, box, orgLay);

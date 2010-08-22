@@ -21,6 +21,7 @@ package com.fbergeron.organigram.view;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,10 +29,10 @@ import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.Unit;
 import com.fbergeron.organigram.model.type.Layout;
-import com.fbergeron.organigram.model.type.LineMode;
 import com.fbergeron.organigram.view.render.LineRender;
 import com.fbergeron.organigram.view.render.OrganigramRender;
 import com.fbergeron.organigram.view.render.box.ClassicBoxRender;
+import com.fbergeron.organigram.view.render.line.BezierLineRender;
 import com.fbergeron.organigram.view.render.line.DirectLineRender;
 import com.fbergeron.organigram.view.render.line.GenericLineRender;
 import com.fbergeron.organigram.view.render.organigram.HorizontalRender;
@@ -224,17 +225,21 @@ public class OrganigramView extends JPanel {
           organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, false);
           break;
       }
-      if (orgLay.getLineMode() == LineMode.CONNECTOR) {
-        lineRender = new GenericLineRender(anchorParent, anchorChild);
-      }
-      else {
-        lineRender = new DirectLineRender(anchorParent, anchorChild);
+      switch (orgLay.getLineMode()) {
+        case CURVED:
+          lineRender = new BezierLineRender(anchorParent, anchorChild);
+          break;
+        case CONNECTOR:
+          lineRender = new GenericLineRender(anchorParent, anchorChild);
+          break;
+        default:
+          lineRender = new DirectLineRender(anchorParent, anchorChild);
       }
       boxRender = new ClassicBoxRender(anchorCollapsed);
       organigramRender.setLineRender(lineRender);
       organigramRender.setBoxRender(boxRender);
     }
-    organigramRender.paint(graphics);
+    organigramRender.paint((Graphics2D)graphics);
   }
 
   /**

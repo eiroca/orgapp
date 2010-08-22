@@ -17,7 +17,7 @@
 package com.fbergeron.organigram.view.render.line;
 
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.geom.CubicCurve2D;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.type.Layout;
 import com.fbergeron.organigram.view.UnitView;
@@ -25,64 +25,36 @@ import com.fbergeron.organigram.view.UnitView;
 /**
  * The Class VertLineRender.
  */
-public class DirectLineRender extends AbstractLineRender {
+public class BezierLineRender extends GenericLineRender {
 
   /**
-   * Instantiates a new direct line render.
+   * Instantiates a new Bezier line render.
    * 
    * @param anchorParent the anchor parent
    * @param anchorChild the anchor child
    */
-  public DirectLineRender(final Layout anchorParent, final Layout anchorChild) {
+  public BezierLineRender(final Layout anchorParent, final Layout anchorChild) {
     super(anchorParent, anchorChild);
   }
 
   /**
-   * Sets the anchor pos.
-   * 
-   * @param box the box
-   * @param anchor the anchor
-   * @param idx the idx
-   * @param xPos the xx
-   * @param yPos the yy
-   */
-  final protected void setAnchorPos(final UnitView box, final Layout anchor, final int idx, final int[] xPos, final int[] yPos) {
-    final Point pos = box.getLocation();
-    switch (anchor) {
-      case LEFT:
-        xPos[idx] = pos.x + box.getWidth() + 1;
-        yPos[idx] = pos.y + box.getHeight() / 2;
-        break;
-      case RIGHT:
-        xPos[idx] = pos.x - 1;
-        yPos[idx] = pos.y + box.getHeight() / 2;
-        break;
-      case BOTTOM:
-        xPos[idx] = pos.x + box.getWidth() / 2;
-        yPos[idx] = pos.y + box.getHeight() + 1;
-        break;
-      default: // TOP
-        xPos[idx] = pos.x + box.getWidth() / 2;
-        yPos[idx] = pos.y - 1;
-        break;
-    }
-  }
-
-  /**
-   * Draw lines vert.
+   * Draw Bezier lines
    * 
    * @param graphics the graphics
    * @param box the box
    * @param orgLay the org lay
    */
   public void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay) {
+    CubicCurve2D line = new CubicCurve2D.Double();
     graphics.setColor(orgLay.getLineColor());
-    final int[] xPos = new int[2];
-    final int[] yPos = new int[2];
+    final int[] xPos = new int[4];
+    final int[] yPos = new int[4];
     setAnchorPos(box, anchorParent, 0, xPos, yPos);
     for (final UnitView child : box) {
-      setAnchorPos(child, anchorChild, 1, xPos, yPos);
-      graphics.drawPolyline(xPos, yPos, 2);
+      setAnchorPos(child, anchorChild, 3, xPos, yPos);
+      calcNode(anchorParent, xPos, yPos);
+      line.setCurve(xPos[0], yPos[0], xPos[1], yPos[1], xPos[2], yPos[2], xPos[3], yPos[3]);
+      graphics.draw(line);
     }
   }
 
