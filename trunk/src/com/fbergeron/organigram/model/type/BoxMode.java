@@ -21,9 +21,9 @@ package com.fbergeron.organigram.model.type;
  */
 public enum BoxMode {
 
-  /** BOX */
-  BOX,
   /** ROUND */
-  ROUND
+  ROUND,
+  /** BOX */
+  BOX
 
 }
