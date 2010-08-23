@@ -17,6 +17,7 @@
 package com.fbergeron.organigram.view.render.box;
 
 import java.awt.BasicStroke;
+import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -192,6 +193,9 @@ public class ClassicBoxRender implements BoxRender {
     final Insets padding = boxLay.getPadding(true);
     int xPos;
     int yPos = box.boxRect.y + padding.top;
+    Dimension min = box.getSmallSize();
+    Dimension cur = box.getSize();
+    yPos += (cur.height - min.height) / 2;
     final List<Line> lines = box.unit.getInfo();
     for (final Line text : lines) {
       if (text.isVisible()) {

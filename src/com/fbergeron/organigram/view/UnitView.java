@@ -55,8 +55,8 @@ public class UnitView implements Iterable<UnitView> {
   /** The space used. */
   private transient boolean spaceUsed = false;
 
-  /** The space. */
-  public transient final BoxSpace space = new BoxSpace();
+  /** The minimum size. */
+  transient public Dimension small = new Dimension();
 
   /**
    * Instantiates a new unit view.
@@ -167,24 +167,6 @@ public class UnitView implements Iterable<UnitView> {
   }
 
   /**
-   * Gets the full height.
-   * 
-   * @return the full height
-   */
-  public int getFullHeight() {
-    return space.full.height;
-  }
-
-  /**
-   * Gets the full width.
-   * 
-   * @return the full width
-   */
-  public int getFullWidth() {
-    return space.full.width;
-  }
-
-  /**
    * Gets the height.
    * 
    * @return the height
@@ -243,17 +225,8 @@ public class UnitView implements Iterable<UnitView> {
    * 
    * @return the small height
    */
-  public int getSmallHeight() {
-    return space.small.height;
-  }
-
-  /**
-   * Gets the small width.
-   * 
-   * @return the small width
-   */
-  public int getSmallWidth() {
-    return space.small.width;
+  public void setSmallSize(Dimension d) {
+    small.setSize(d);
   }
 
   /**
@@ -261,8 +234,8 @@ public class UnitView implements Iterable<UnitView> {
    * 
    * @return the space
    */
-  public BoxSpace getSpace() {
-    return space;
+  public Dimension getSmallSize() {
+    return small;
   }
 
   /**
@@ -395,18 +368,6 @@ public class UnitView implements Iterable<UnitView> {
   }
 
   /**
-   * Sets the required size.
-   * 
-   * @param size the size
-   * @param smallChild the small child
-   */
-  public void setRequiredSize(final BoxSpace size, final boolean smallChild) {
-    space.small.setSize(size.small);
-    space.full.setSize(size.full);
-    this.smallChild = smallChild;
-  }
-
-  /**
    * Sets the size.
    * 
    * @param size the new size
@@ -441,6 +402,13 @@ public class UnitView implements Iterable<UnitView> {
    */
   public void setUnit(final Unit unit) {
     this.unit = unit;
+  }
+
+  /**
+   * Update packed.
+   */
+  final public boolean isPacked() {
+    return ((small.width != boxRect.width) || (small.height != boxRect.height));
   }
 
   /*

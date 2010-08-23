@@ -89,7 +89,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param box the box
    * @return the dimension
    */
-  private Dimension calcBoxMaximum(final Graphics graphic, final UnitView box) {
+  private Dimension calcBoxSize(final Graphics graphic, final UnitView box) {
     final Dimension size = new Dimension();
     final Unit unit = box.getUnit();
     for (final Line element : unit.getInfo()) {
@@ -150,10 +150,11 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param level the level
    */
   private void calcBoxMaximumSize(final Graphics graphic, final UnitView box, final Dimension max, final int level) {
-    final Dimension boxMax = calcBoxMaximum(graphic, box);
+    final Dimension boxSize = calcBoxSize(graphic, box);
+    box.setSmallSize(boxSize);
     final Dimension levSiz = getBoxSize(level);
-    updateMax(boxMax, max);
-    updateMax(boxMax, levSiz);
+    updateMax(boxSize, max);
+    updateMax(boxSize, levSiz);
     final int newLevel = level + 1;
     for (final UnitView child : box) {
       calcBoxMaximumSize(graphic, child, max, newLevel);
