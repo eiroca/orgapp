@@ -25,7 +25,7 @@ import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgCharFixUp;
 import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.util.Utils;
-import com.fbergeron.organigram.view.OrganigramView;
+import com.fbergeron.organigram.view.OrganigramPanel;
 
 /**
  * The Class OrganigramApps.
@@ -42,7 +42,7 @@ public class OrganigramApp extends JFrame {
   private JPanel jContentPane = null;
 
   /** The view. */
-  private final OrganigramView view;
+  private final OrganigramPanel view;
 
   /**
    * The main method.
@@ -80,7 +80,7 @@ public class OrganigramApp extends JFrame {
       System.exit(ImageObserver.ERROR);
     }
     new OrgCharFixUp().execute(org, true, null);
-    view = new OrganigramView(org, null);
+    view = new OrganigramPanel(org, null);
     initialize();
   }
 

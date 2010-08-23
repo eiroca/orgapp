@@ -16,6 +16,7 @@
  */
 package com.fbergeron.organigram.view.render;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 /**
@@ -41,12 +42,16 @@ public interface OrganigramRender {
    * Paint the organigram.
    * 
    * @param graphics the graphics
+   * @param size the size
    */
-  void paint(final Graphics2D graphics);
+  void paint(final Graphics2D graphics, Dimension size);
 
   /**
-   * Invalidate.
+   * Do layout.
+   * 
+   * @param graphics the graphics
+   * @return the dimension
    */
-  void invalidate();
+  Dimension doLayout(Graphics2D graphics);
 
 }

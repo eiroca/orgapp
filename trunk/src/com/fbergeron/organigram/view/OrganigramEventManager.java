@@ -39,7 +39,7 @@ import com.fbergeron.organigram.util.Resources;
 public class OrganigramEventManager extends MouseAdapter implements MouseMotionListener {
 
   /** The organigram. */
-  private OrganigramView organigram;
+  private OrganigramPanel organigram;
 
   /** The current link. */
   private String currentLink;
@@ -57,7 +57,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
    * 
    * @param organigram the organigram
    */
-  public OrganigramEventManager(final OrganigramView organigram) {
+  public OrganigramEventManager(final OrganigramPanel organigram) {
     super();
     this.organigram = organigram;
   }
@@ -80,11 +80,12 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
     }
     else {
       final Point where = event.getPoint();
-      final UnitView unitView = contains(organigram.getRootUnitView(), where);
+      final OrganigramView view = organigram.getOrganigramView();
+      final UnitView unitView = contains(view.getRootUnitView(), where);
       if (unitView != null) {
         final BoxLayout layout = unitView.getLayout();
         layout.setExpanded(!layout.getExpanded(true));
-        organigram.getOrganigramRender().invalidate();
+        organigram.invalidate();
         organigram.repaint();
       }
     }
@@ -137,7 +138,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
   @Override
   public void mouseMoved(final MouseEvent event) {
     final Point where = event.getPoint();
-    final UnitView unitView = contains(organigram.getRootUnitView(), where);
+    final UnitView unitView = contains(organigram.getOrganigramView().getRootUnitView(), where);
     setCurrentLink(null);
     String tipText = null;
     if (unitView != null) {
@@ -235,7 +236,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
    * 
    * @return the organigram
    */
-  public OrganigramView getOrganigram() {
+  public OrganigramPanel getOrganigram() {
     return organigram;
   }
 
@@ -244,7 +245,7 @@ public class OrganigramEventManager extends MouseAdapter implements MouseMotionL
    * 
    * @param organigram the organigram to set
    */
-  public void setOrganigram(final OrganigramView organigram) {
+  public void setOrganigram(final OrganigramPanel organigram) {
     this.organigram = organigram;
   }
 

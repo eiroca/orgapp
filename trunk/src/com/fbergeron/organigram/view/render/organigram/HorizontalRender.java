@@ -51,7 +51,6 @@ public class HorizontalRender extends AbstractRender {
   public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level) {
     // pB is the first available position of the box in the current level
     // pN is the first available position of the box in the next level
-    validLayout = true;
     // Set dimension of the box to the dimension of the box of this level
     final Dimension sizLevB = getBoxSize(level);
     unit.setSize(sizLevB);

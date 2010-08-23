@@ -17,13 +17,8 @@
  */
 package com.fbergeron.organigram.view;
 
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.Unit;
@@ -42,10 +37,7 @@ import com.fbergeron.organigram.view.render.organigram.VerticalRender;
 /**
  * OrganigramView handles the organigram layout disposition.
  */
-public class OrganigramView extends JPanel {
-
-  /** The Constant serialVersionUID. */
-  private static final long serialVersionUID = 1L;
+public class OrganigramView {
 
   /** The organigram. */
   private Organigram organigram;
@@ -53,42 +45,68 @@ public class OrganigramView extends JPanel {
   /** The root. */
   public UnitView root;
 
-  /** The link manager. */
-  private OrganigramEventManager eventManager;
-
-  /** The preferred size. */
-  private final Dimension preferredSize = new Dimension(100, 100);
-
   /** The render. */
   private transient OrganigramRender organigramRender = null;
-
-  /** The owner. */
-  private JScrollPane owner;
 
   /**
    * Instantiates a new organigram view.
    * 
    * @param organigram the organigram
-   * @param target the target
    */
-  public OrganigramView(final Organigram organigram, final String target) {
+  public OrganigramView(final Organigram organigram) {
     super();
     this.organigram = organigram;
-    owner = new JScrollPane(this);
-    eventManager = new OrganigramEventManager(this);
-    eventManager.setBaseTarget(target);
     root = initUnitTreeRec(organigram.getRoot());
-    addMouseMotionListener(eventManager);
-    addMouseListener(eventManager);
-  }
-
-  /**
-   * Gets the event manager.
-   * 
-   * @return the eventManager
-   */
-  public OrganigramEventManager getEventManager() {
-    return eventManager;
+    Layout anchorParent;
+    Layout anchorChild;
+    Layout anchorCollapsed;
+    final OrganigramLayout orgLay = organigram.getOrganigramLayout();
+    LineRender lineRender;
+    ClassicBoxRender boxRender;
+    switch (orgLay.getLayout()) {
+      case LEFT:
+        anchorParent = Layout.LEFT;
+        anchorChild = Layout.RIGHT;
+        anchorCollapsed = Layout.RIGHT;
+        organigramRender = new VerticalRender(this, orgLay.isCompact(), false, false);
+        break;
+      case RIGHT:
+        anchorParent = Layout.RIGHT;
+        anchorChild = Layout.LEFT;
+        anchorCollapsed = Layout.LEFT;
+        organigramRender = new VerticalRender(this, orgLay.isCompact(), true, false);
+        break;
+      case BOTTOM:
+        anchorParent = Layout.TOP;
+        anchorChild = Layout.BOTTOM;
+        anchorCollapsed = Layout.TOP;
+        organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, true);
+        break;
+      default: // TOP
+        anchorParent = Layout.BOTTOM;
+        anchorChild = Layout.TOP;
+        anchorCollapsed = Layout.BOTTOM;
+        organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, false);
+        break;
+    }
+    switch (orgLay.getLineMode()) {
+      case CURVED:
+        lineRender = new BezierLineRender(anchorParent, anchorChild);
+        break;
+      case CONNECTOR:
+        lineRender = new GenericLineRender(anchorParent, anchorChild);
+        break;
+      default:
+        lineRender = new DirectLineRender(anchorParent, anchorChild);
+    }
+    if (orgLay.getBoxMode() == BoxMode.BOX) {
+      boxRender = new ClassicBoxRender(anchorCollapsed);
+    }
+    else {
+      boxRender = new RoundBoxRender(anchorCollapsed);
+    }
+    organigramRender.setLineRender(lineRender);
+    organigramRender.setBoxRender(boxRender);
   }
 
   /**
@@ -107,24 +125,6 @@ public class OrganigramView extends JPanel {
    */
   public OrganigramRender getOrganigramRender() {
     return organigramRender;
-  }
-
-  /**
-   * Gets the owner.
-   * 
-   * @return the owner
-   */
-  public JScrollPane getOwner() {
-    return owner;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see javax.swing.JComponent#getPreferredSize()
-   */
-  @Override
-  public Dimension getPreferredSize() {
-    return preferredSize;
   }
 
   /**
@@ -154,24 +154,6 @@ public class OrganigramView extends JPanel {
     return root;
   }
 
-  /*
-   * (non-Javadoc)
-   * @see javax.swing.JComponent#getToolTipText(java.awt.event.MouseEvent)
-   */
-  @Override
-  public String getToolTipText(final MouseEvent event) {
-    return organigram.getOrganigramLayout().isToolTipEnabled() ? super.getToolTipText(event) : null;
-  }
-
-  /**
-   * Get the view.
-   * 
-   * @return the owner
-   */
-  public Component getView() {
-    return owner;
-  }
-
   /**
    * Inits the unit tree rec.
    * 
@@ -187,74 +169,14 @@ public class OrganigramView extends JPanel {
     return box;
   }
 
-  /*
-   * (non-Javadoc)
-   * @see javax.swing.JComponent#paint(java.awt.Graphics)
-   */
-  @Override
-  public void paint(final Graphics graphics) {
-    Layout anchorParent;
-    Layout anchorChild;
-    Layout anchorCollapsed;
-    if (organigramRender == null) {
-      final OrganigramLayout orgLay = organigram.getOrganigramLayout();
-      LineRender lineRender;
-      ClassicBoxRender boxRender;
-      switch (orgLay.getLayout()) {
-        case LEFT:
-          anchorParent = Layout.LEFT;
-          anchorChild = Layout.RIGHT;
-          anchorCollapsed = Layout.RIGHT;
-          organigramRender = new VerticalRender(this, orgLay.isCompact(), false, false);
-          break;
-        case RIGHT:
-          anchorParent = Layout.RIGHT;
-          anchorChild = Layout.LEFT;
-          anchorCollapsed = Layout.LEFT;
-          organigramRender = new VerticalRender(this, orgLay.isCompact(), true, false);
-          break;
-        case BOTTOM:
-          anchorParent = Layout.TOP;
-          anchorChild = Layout.BOTTOM;
-          anchorCollapsed = Layout.TOP;
-          organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, true);
-          break;
-        default: // TOP
-          anchorParent = Layout.BOTTOM;
-          anchorChild = Layout.TOP;
-          anchorCollapsed = Layout.BOTTOM;
-          organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, false);
-          break;
-      }
-      switch (orgLay.getLineMode()) {
-        case CURVED:
-          lineRender = new BezierLineRender(anchorParent, anchorChild);
-          break;
-        case CONNECTOR:
-          lineRender = new GenericLineRender(anchorParent, anchorChild);
-          break;
-        default:
-          lineRender = new DirectLineRender(anchorParent, anchorChild);
-      }
-      if (orgLay.getBoxMode() == BoxMode.BOX) {
-        boxRender = new ClassicBoxRender(anchorCollapsed);
-      }
-      else {
-        boxRender = new RoundBoxRender(anchorCollapsed);
-      }
-      organigramRender.setLineRender(lineRender);
-      organigramRender.setBoxRender(boxRender);
-    }
-    organigramRender.paint((Graphics2D) graphics);
+  public Dimension doLayout(final Graphics2D graphics) {
+    final Dimension size = organigramRender.doLayout(graphics);
+    return size;
+
   }
 
-  /**
-   * Sets the event manager.
-   * 
-   * @param eventManager the eventManager to set
-   */
-  public void setEventManager(final OrganigramEventManager eventManager) {
-    this.eventManager = eventManager;
+  public void paint(final Graphics2D graphics, final Dimension size) {
+    organigramRender.paint(graphics, size);
   }
 
   /**
@@ -273,25 +195,6 @@ public class OrganigramView extends JPanel {
    */
   public void setOrganigramRender(final OrganigramRender organigramRender) {
     this.organigramRender = organigramRender;
-  }
-
-  /**
-   * Sets the owner.
-   * 
-   * @param owner the owner to set
-   */
-  public void setOwner(final JScrollPane owner) {
-    this.owner = owner;
-  }
-
-  /*
-   * (non-Javadoc)
-   * @see javax.swing.JComponent#setPreferredSize(java.awt.Dimension)
-   */
-  @Override
-  public void setPreferredSize(final Dimension preferredSize) {
-    this.preferredSize.setSize(preferredSize);
-    revalidate();
   }
 
   /**

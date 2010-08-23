@@ -24,7 +24,6 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 import com.fbergeron.organigram.util.Utils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UtilsTest.
  */

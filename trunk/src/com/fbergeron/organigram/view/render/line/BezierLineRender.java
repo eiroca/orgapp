@@ -44,8 +44,9 @@ public class BezierLineRender extends GenericLineRender {
    * @param box the box
    * @param orgLay the org lay
    */
+  @Override
   public void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay) {
-    CubicCurve2D line = new CubicCurve2D.Double();
+    final CubicCurve2D line = new CubicCurve2D.Double();
     graphics.setColor(orgLay.getLineColor());
     final int[] xPos = new int[4];
     final int[] yPos = new int[4];

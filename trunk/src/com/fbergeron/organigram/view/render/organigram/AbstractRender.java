@@ -57,9 +57,6 @@ abstract public class AbstractRender implements OrganigramRender {
   /** The compact. */
   protected transient boolean compact;
 
-  /** The valid layout. */
-  protected transient boolean validLayout = false;
-
   /** The flip x. */
   private transient final boolean flipX;
 
@@ -162,6 +159,8 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
+   * Gets the box max size level.
+   * 
    * @return the boxMaxSizeLevel
    */
   public List<Dimension> getBoxMaxSizeLevel() {
@@ -169,6 +168,8 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
+   * Gets the box render.
+   * 
    * @return the boxRender
    */
   public BoxRender getBoxRender() {
@@ -199,6 +200,8 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
+   * Gets the line render.
+   * 
    * @return the lineRender
    */
   public LineRender getLineRender() {
@@ -206,6 +209,8 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
+   * Gets the organigram view.
+   * 
    * @return the organigramView
    */
   public OrganigramView getOrganigramView() {
@@ -228,17 +233,20 @@ abstract public class AbstractRender implements OrganigramRender {
     return pointLevel.get(level);
   }
 
-  /* (non-Javadoc)
-   * @see com.fbergeron.organigram.view.render.OrganigramRender#invalidate()
+  /**
+   * Layout boxes.
+   * 
+   * @param orgLay the org lay
+   * @param unit the unit
+   * @param parent the parent
+   * @param level the level
    */
-  public void invalidate() {
-    validLayout = false;
-  }
+  abstract public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level);
 
   /*
-   * (non-Javadoc)
-   * @see com.fbergeron.organigram.view.render.GenericRender#layoutBoxes()
-   */
+  * (non-Javadoc)
+  * @see com.fbergeron.organigram.view.render.GenericRender#layoutBoxes()
+  */
   /**
    * Layout boxes.
    * 
@@ -271,8 +279,9 @@ abstract public class AbstractRender implements OrganigramRender {
    * Layout boxes.
    * 
    * @param graphic the graphic
+   * @return the dimension
    */
-  public void layoutBoxes(final Graphics graphic) {
+  private Dimension layoutBoxes(final Graphics graphic) {
     final Dimension organigramMaxSize = new Dimension();
     if (organigramView.root == null) {
       final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
@@ -285,35 +294,29 @@ abstract public class AbstractRender implements OrganigramRender {
       final Dimension size = layoutBoxes();
       organigramMaxSize.setSize(size);
     }
-    organigramView.setPreferredSize(organigramMaxSize);
+    return organigramMaxSize;
   }
 
-  /**
-   * Layout boxes.
-   * 
-   * @param orgLay the org lay
-   * @param unit the unit
-   * @param parent the parent
-   * @param level the level
+  /* (non-Javadoc)
+   * @see com.fbergeron.organigram.view.render.OrganigramRender#doLayout(java.awt.Graphics2D)
    */
-  public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level) {
-    validLayout = true;
+  public Dimension doLayout(final Graphics2D graphics) {
+    final Dimension size = layoutBoxes(graphics);
+    return size;
+
   }
 
   /**
    * Paint.
    * 
    * @param graphics the graphics
+   * @param size the size
    */
-  public void paint(final Graphics2D graphics) {
-    if (!validLayout) {
-      layoutBoxes(graphics);
-    }
-    final Dimension dim = organigramView.getSize();
+  public void paint(final Graphics2D graphics, final Dimension size) {
     final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
     // Draw background.
     graphics.setColor(orgLay.getBackgroundColor());
-    graphics.fillRect(0, 0, dim.width, dim.height);
+    graphics.fillRect(0, 0, size.width, size.height);
     if (organigramView.root != null) {
       paintBox(organigramView.root, graphics, orgLay);
     }
@@ -358,6 +361,8 @@ abstract public class AbstractRender implements OrganigramRender {
   }
 
   /**
+   * Sets the organigram view.
+   * 
    * @param organigramView the organigramView to set
    */
   public void setOrganigramView(final OrganigramView organigramView) {
