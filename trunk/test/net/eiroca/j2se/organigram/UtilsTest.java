@@ -17,6 +17,7 @@
  */
 package net.eiroca.j2se.organigram;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,11 @@ public class UtilsTest extends TestCase {
    * The Enum EIROCA.
    */
   enum EIROCA {
-    Enrico, Simona
+
+    /** The Enrico. */
+    Enrico,
+    /** The Simona. */
+    Simona
   }
 
   /**
@@ -102,6 +107,11 @@ public class UtilsTest extends TestCase {
     Assert.assertTrue(res != null);
   }
 
+  /**
+   * Test read as string.
+   * 
+   * @throws Exception the exception
+   */
   public void testReadAsString() throws Exception {
     final StringBuffer buf = new StringBuffer();
     for (int i = 0; i < 7000; i++) {
@@ -114,7 +124,7 @@ public class UtilsTest extends TestCase {
   }
 
   /**
-   * Test val.
+   * Test val()
    * 
    * @throws Exception the exception
    */
@@ -142,6 +152,19 @@ public class UtilsTest extends TestCase {
     Utils.writeHH(buf, 255);
     Utils.writeHH(buf, 256);
     Assert.assertEquals("00010a10ff100", buf.toString());
+  }
+
+  /**
+   * Test getExtension()
+   * 
+   * @throws Exception the exception
+   */
+  public void testGetExtension() throws Exception {
+    Assert.assertEquals(Utils.getExtension(null), null);
+    Assert.assertEquals(Utils.getExtension(new File(".")), null);
+    Assert.assertEquals(Utils.getExtension(new File("noext.")), null);
+    Assert.assertEquals(Utils.getExtension(new File(".ext")), "ext");
+    Assert.assertEquals(Utils.getExtension(new File("image.jpeg")), "jpeg");
   }
 
 }
