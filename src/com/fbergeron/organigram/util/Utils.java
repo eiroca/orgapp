@@ -269,4 +269,19 @@ public class Utils {
     }
   }
 
+  public static String getExtension(final File f) {
+    String ext = null;
+    if (f.isDirectory()) {
+      ext = null;
+    }
+    else {
+      final String s = f.getName();
+      final int i = s.lastIndexOf('.');
+      if ((i > 0) && (i < s.length() - 1)) {
+        ext = s.substring(i + 1).toLowerCase();
+      }
+    }
+    return ext;
+  }
+
 }

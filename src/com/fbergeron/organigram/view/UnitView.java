@@ -225,7 +225,7 @@ public class UnitView implements Iterable<UnitView> {
    * 
    * @return the small height
    */
-  public void setSmallSize(Dimension d) {
+  public void setSmallSize(final Dimension d) {
     small.setSize(d);
   }
 

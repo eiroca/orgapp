@@ -25,7 +25,7 @@ import com.fbergeron.organigram.util.OrgCharFixUp;
 import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.util.Utils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
-import com.fbergeron.organigram.view.OrganigramView;
+import com.fbergeron.organigram.view.OrganigramPanel;
 
 /**
  * The Class OrganigramApplet.
@@ -77,7 +77,7 @@ public class OrganigramApplet extends JApplet {
     }
     new OrgCharFixUp().execute(o, true, null);
     o.buidID();
-    final OrganigramView view = new OrganigramView(o, target);
+    final OrganigramPanel view = new OrganigramPanel(o, target);
     final Container me = getContentPane();
     me.setLayout(new BorderLayout());
     me.add(view.getView(), BorderLayout.CENTER);

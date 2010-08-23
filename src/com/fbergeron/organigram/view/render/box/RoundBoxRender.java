@@ -46,11 +46,12 @@ public class RoundBoxRender extends ClassicBoxRender {
    * @param box the box
    * @param boxLay the box lay
    */
+  @Override
   public void drawBox(final Graphics2D graphic, final UnitView box, final BoxLayout boxLay) {
-    RoundRectangle2D rect = new RoundRectangle2D.Double();
-    Insets padding = boxLay.getPadding(true);
-    int arcX = (padding.left + padding.right) / 2;
-    int arcY = (padding.top + padding.bottom) / 2;
+    final RoundRectangle2D rect = new RoundRectangle2D.Double();
+    final Insets padding = boxLay.getPadding(true);
+    final int arcX = (padding.left + padding.right) / 2;
+    final int arcY = (padding.top + padding.bottom) / 2;
     rect.setRoundRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height, arcX, arcY);
     graphic.setColor(boxLay.getBackgroundColor(true));
     graphic.fill(rect);
@@ -59,8 +60,8 @@ public class RoundBoxRender extends ClassicBoxRender {
       case NONE:
         break;
       case HIGHLIGHT:
-        Stroke oldStroke = graphic.getStroke();
-        BasicStroke stroke = new BasicStroke(2);
+        final Stroke oldStroke = graphic.getStroke();
+        final BasicStroke stroke = new BasicStroke(2);
         graphic.setStroke(stroke);
         graphic.draw(rect);
         graphic.setStroke(oldStroke);

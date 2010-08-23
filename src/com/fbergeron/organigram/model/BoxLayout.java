@@ -22,7 +22,6 @@ import java.io.Serializable;
 import com.fbergeron.organigram.model.type.Alignment;
 import com.fbergeron.organigram.model.type.BoxType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Layout definition of a Box.
  */

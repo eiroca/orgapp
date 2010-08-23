@@ -59,7 +59,7 @@ public class ClassicBoxRender implements BoxRender {
    * @param boxLay the box lay
    */
   public void drawBox(final Graphics2D graphic, final UnitView box, final BoxLayout boxLay) {
-    Rectangle2D rect = new Rectangle2D.Double();
+    final Rectangle2D rect = new Rectangle2D.Double();
     rect.setRect(box.boxRect.x, box.boxRect.y, box.boxRect.width, box.boxRect.height);
     graphic.setColor(boxLay.getBackgroundColor(true));
     graphic.fill(rect);
@@ -68,8 +68,8 @@ public class ClassicBoxRender implements BoxRender {
       case NONE:
         break;
       case HIGHLIGHT:
-        Stroke oldStroke = graphic.getStroke();
-        BasicStroke stroke = new BasicStroke(2);
+        final Stroke oldStroke = graphic.getStroke();
+        final BasicStroke stroke = new BasicStroke(2);
         graphic.setStroke(stroke);
         graphic.draw(rect);
         graphic.setStroke(oldStroke);
@@ -193,8 +193,8 @@ public class ClassicBoxRender implements BoxRender {
     final Insets padding = boxLay.getPadding(true);
     int xPos;
     int yPos = box.boxRect.y + padding.top;
-    Dimension min = box.getSmallSize();
-    Dimension cur = box.getSize();
+    final Dimension min = box.getSmallSize();
+    final Dimension cur = box.getSize();
     yPos += (cur.height - min.height) / 2;
     final List<Line> lines = box.unit.getInfo();
     for (final Line text : lines) {
