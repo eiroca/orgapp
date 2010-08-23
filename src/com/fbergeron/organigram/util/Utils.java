@@ -24,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Utils.
  */
@@ -195,14 +196,14 @@ public class Utils {
     return res;
   }
 
+  /** The Constant BUF_SIZE. */
   private static final int BUF_SIZE = 4 * 1024;
 
   /**
-   * Read as string form a URL
+   * Read as string form a URL.
    * 
    * @param sourceURL the source url
    * @return the string
-   * @throws IOException Signals that an I/O exception has occurred.
    */
   static public String readAsString(final URL sourceURL) {
     String res = null;
@@ -269,15 +270,21 @@ public class Utils {
     }
   }
 
+  /**
+   * Gets the extension.
+   * 
+   * @param f the f
+   * @return the extension
+   */
   public static String getExtension(final File f) {
     String ext = null;
-    if (f.isDirectory()) {
+    if ((f == null) || (f.isDirectory())) {
       ext = null;
     }
     else {
       final String s = f.getName();
       final int i = s.lastIndexOf('.');
-      if ((i > 0) && (i < s.length() - 1)) {
+      if ((i >= 0) && (i < s.length() - 1)) {
         ext = s.substring(i + 1).toLowerCase();
       }
     }
