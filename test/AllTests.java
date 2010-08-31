@@ -18,7 +18,9 @@
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import net.eiroca.j2se.organigram.DemoTest;
 import net.eiroca.j2se.organigram.OrgUtilsTest;
+import net.eiroca.j2se.organigram.OrganigramTest;
 import net.eiroca.j2se.organigram.UtilsTest;
 
 /**
@@ -36,6 +38,8 @@ public class AllTests {
     // $JUnit-BEGIN$
     suite.addTestSuite(UtilsTest.class);
     suite.addTestSuite(OrgUtilsTest.class);
+    suite.addTestSuite(OrganigramTest.class);
+    suite.addTestSuite(DemoTest.class);
     // $JUnit-END$
     return suite;
   }

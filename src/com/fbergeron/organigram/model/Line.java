@@ -44,6 +44,10 @@ public class Line {
     //
   }
 
+  public Line(final String text) {
+    this.text = text;
+  }
+
   /**
    * Instantiates a new line.
    * 

@@ -17,11 +17,13 @@
  */
 package com.fbergeron.organigram.model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import com.fbergeron.organigram.util.Utils;
 
 /**
  * Unit if the model of a box in an organigram.
@@ -54,6 +56,22 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
   public Unit(final Organigram owner) {
     setOrganigram(owner);
     boxLayout = new BoxLayout(owner.getBoxLayout());
+  }
+
+  public Unit init(final String id, final String title, final String message) {
+    this.id = id;
+    if (!Utils.isEmptyOrNull(title)) {
+      final Line tit = new Line(title);
+      tit.setColor(Color.RED);
+      info.add(tit);
+    }
+    if (!Utils.isEmptyOrNull(message)) {
+      final String[] lines = message.split("\n");
+      for (final String line : lines) {
+        info.add(new Line(line));
+      }
+    }
+    return this;
   }
 
   /**
@@ -208,12 +226,20 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
       res = this;
     }
     else if (hasChildren()) {
-      String uId;
       for (final Unit unit : this) {
-        uId = unit.getId();
-        if ((uId != null) && (aID.startsWith(uId))) {
-          res = unit.findByID(aID, exact);
-          break;
+        final String uId = unit.getId();
+        if (exact) {
+          final Unit f = unit.findByID(aID, exact);
+          if (f != null) {
+            res = f;
+            break;
+          }
+        }
+        else {
+          if ((uId != null) && (aID.startsWith(uId))) {
+            res = unit.findByID(aID, exact);
+            break;
+          }
         }
       }
     }
