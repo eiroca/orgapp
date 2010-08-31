@@ -1,7 +1,5 @@
 Todo
 ----
-- Offscreen
-- Scrollbars
 - More Optimization
 - Unit tests
 - ...

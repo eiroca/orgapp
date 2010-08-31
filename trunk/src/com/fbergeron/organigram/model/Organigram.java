@@ -28,7 +28,7 @@ public class Organigram implements MetaDataCollector {
   /** The box layout. */
   private BoxLayout boxLayout = new BoxLayout();
 
-  /** The org layout. */
+  /** The organigram layout. */
   private OrganigramLayout organigramLayout = new OrganigramLayout();
 
   /** The root. */
@@ -113,8 +113,14 @@ public class Organigram implements MetaDataCollector {
    * @return the unit
    */
   public Unit findByID(final String theID, final boolean exact) {
-    final Unit unit = root.findByID(theID, exact);
-    return (unit == null ? root : unit);
+    final Unit unit;
+    if (root != null) {
+      unit = root.findByID(theID, exact);
+    }
+    else {
+      unit = null;
+    }
+    return ((unit == null) && (!exact) ? root : unit);
   }
 
   /**
@@ -143,6 +149,43 @@ public class Organigram implements MetaDataCollector {
    */
   public void setOrganigramLayout(final OrganigramLayout organigramLayout) {
     this.organigramLayout = organigramLayout;
+  }
+
+  public Unit add(final String pid) throws IllegalArgumentException {
+    Unit node = null;
+    if (pid == null) {
+      if (root == null) {
+        node = new Unit(this);
+        root = node;
+      }
+      else {
+        throw new IllegalArgumentException("Root already definied");
+      }
+    }
+    else {
+      final Unit parent = findByID(pid, true);
+      if (parent == null) { throw new IllegalArgumentException("Invalid Parent ID: " + pid); }
+      node = new Unit(this);
+      parent.addChild(node);
+    }
+    return node;
+  }
+
+  public Unit add(final String id, final String pid, final String title, final String message) throws IllegalArgumentException {
+    if ((id != null) && (findByID(id, true) != null)) { throw new IllegalArgumentException("Invalid ID: " + id); }
+    final Unit node = add(pid);
+    if (node != null) {
+      node.init(id, title, message);
+    }
+    return node;
+  }
+
+  public Unit add(final String id, final String pid, final String title, final String message, final int w, final int h, final String image) throws IllegalArgumentException {
+    final Unit node = add(id, pid, title, message);
+    if (node != null) {
+      //
+    }
+    return node;
   }
 
 }

@@ -24,7 +24,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Utils.
  */
@@ -178,7 +177,7 @@ public class Utils {
   }
 
   /**
-   * Find a resuurce in current directory, classpath or internal resources.
+   * Find a resource in current directory, classpath or internal resources.
    * 
    * @param resName the name of the resource to be found
    * 
@@ -289,6 +288,16 @@ public class Utils {
       }
     }
     return ext;
+  }
+
+  /**
+   * Return true if a string is null or empty.
+   * 
+   * @param s the string to be checked
+   * @return true if null or ""
+   */
+  public static boolean isEmptyOrNull(final String s) {
+    return (s == null) || (s.equals(""));
   }
 
 }

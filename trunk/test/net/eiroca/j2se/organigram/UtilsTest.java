@@ -124,7 +124,7 @@ public class UtilsTest extends TestCase {
   }
 
   /**
-   * Test val()
+   * Test val().
    * 
    * @throws Exception the exception
    */
@@ -155,7 +155,7 @@ public class UtilsTest extends TestCase {
   }
 
   /**
-   * Test getExtension()
+   * Test getExtension().
    * 
    * @throws Exception the exception
    */
@@ -165,6 +165,15 @@ public class UtilsTest extends TestCase {
     Assert.assertEquals(Utils.getExtension(new File("noext.")), null);
     Assert.assertEquals(Utils.getExtension(new File(".ext")), "ext");
     Assert.assertEquals(Utils.getExtension(new File("image.jpeg")), "jpeg");
+  }
+
+  /**
+   * Test is null or empty.
+   */
+  public void testIsNullOrEmpty() {
+    Assert.assertTrue(Utils.isEmptyOrNull(null));
+    Assert.assertTrue(Utils.isEmptyOrNull(""));
+    Assert.assertFalse(Utils.isEmptyOrNull("A"));
   }
 
 }
