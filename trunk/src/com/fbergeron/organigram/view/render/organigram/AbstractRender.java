@@ -303,7 +303,6 @@ abstract public class AbstractRender implements OrganigramRender {
   public Dimension doLayout(final Graphics2D graphics) {
     final Dimension size = layoutBoxes(graphics);
     return size;
-
   }
 
   /**
