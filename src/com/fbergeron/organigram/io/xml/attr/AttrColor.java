@@ -79,7 +79,7 @@ public class AttrColor extends Attr<Color> {
    * @return the int
    */
   private static int expand(final int val) {
-    return val * 16 + val;
+    return (val * 16) + val;
   }
 
   /**

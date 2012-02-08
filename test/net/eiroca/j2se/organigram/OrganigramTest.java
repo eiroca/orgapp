@@ -21,8 +21,8 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgUtils;
-import com.fbergeron.organigram.util.Utils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
+import com.fbergeron.organigram.util.Utils;
 
 /**
  * The Class OrganigramTest.
@@ -51,7 +51,7 @@ public class OrganigramTest extends TestCase {
     org.add("/text/3", "/text", "title", "message1\nmesage2");
     org.add("/text/4", "/text", "title", "message1\nmesage2\nmessage3");
     final String actual = OrgUtils.writeOrganigram(org, OrganigramFormat.SOF, false).trim();
-    String expected = Utils.readAsString(Utils.findResource("data/org1.out")).trim();
+    final String expected = Utils.readAsString(Utils.findResource("data/org1.out")).trim();
     Assert.assertEquals(expected, actual);
   }
 
@@ -61,7 +61,7 @@ public class OrganigramTest extends TestCase {
       org.add("1");
       Assert.fail();
     }
-    catch (IllegalArgumentException e) {
+    catch (final IllegalArgumentException e) {
     }
     org.add(null).setId("1");
     org.add("1");
@@ -69,7 +69,7 @@ public class OrganigramTest extends TestCase {
       org.add("2");
       Assert.fail();
     }
-    catch (IllegalArgumentException e) {
+    catch (final IllegalArgumentException e) {
     }
   }
 

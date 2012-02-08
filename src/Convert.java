@@ -17,8 +17,8 @@
 import java.net.URL;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgUtils;
-import com.fbergeron.organigram.util.Utils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
+import com.fbergeron.organigram.util.Utils;
 
 /**
  * The Class Convert.

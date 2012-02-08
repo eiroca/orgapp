@@ -60,6 +60,7 @@ public class OrganigramApp extends JFrame {
     }
     SwingUtilities.invokeLater(new Runnable() {
 
+      @Override
       public void run() {
         final OrganigramApp thisClass = new OrganigramApp();
         thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

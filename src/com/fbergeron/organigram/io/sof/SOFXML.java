@@ -153,6 +153,7 @@ public final class SOFXML extends XMLHandler implements OrganigramReader, Organi
    * com.fbergeron.organigram.io.OrganigramWriter#writeOrganigram(com.fbergeron
    * .organigram.model.Organigram, boolean)
    */
+  @Override
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
     final StringBuffer buf = new StringBuffer(1024);
     buf.append("<?xml version=\"1.0\"?>");

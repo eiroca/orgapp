@@ -75,8 +75,8 @@ public class VerticalRender extends AbstractRender {
       }
       // Step 2 - center children with parent
       int yPosN = pntN.y;
-      final int centerB = pntB.y + height / 2;
-      final int centerN = (yPosN - yPosB) / 2 + yPosB;
+      final int centerB = pntB.y + (height / 2);
+      final int centerN = ((yPosN - yPosB) / 2) + yPosB;
       int delta;
       if (centerN < centerB) {
         delta = centerB - centerN;

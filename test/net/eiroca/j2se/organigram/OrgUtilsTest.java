@@ -22,8 +22,8 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgUtils;
-import com.fbergeron.organigram.util.Utils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
+import com.fbergeron.organigram.util.Utils;
 
 /**
  * The Class OrgUtilsTest.

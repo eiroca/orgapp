@@ -61,6 +61,7 @@ public class Tag implements TagProcessor {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#getName()
    */
+  @Override
   public String getName() {
     return name;
   }
@@ -68,6 +69,7 @@ public class Tag implements TagProcessor {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#start(com.fbergeron.organigram.io.OrganigramReader, org.xml.sax.Attributes)
    */
+  @Override
   public void start(final OrganigramReader reader, final Attributes attribs) {
     buf = new StringBuffer(200);
   }
@@ -75,6 +77,7 @@ public class Tag implements TagProcessor {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#characters(com.fbergeron.organigram.io.OrganigramReader, char[], int, int)
    */
+  @Override
   public void characters(final OrganigramReader reader, final char[] chr, final int start, final int length) {
     if (buf != null) {
       buf.append(new String(chr, start, length));
@@ -84,6 +87,7 @@ public class Tag implements TagProcessor {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.sitemap.TagProcessor#end(com.fbergeron.organigram.io.OrganigramReader)
    */
+  @Override
   public void end(final OrganigramReader reader) {
     if (buf != null) {
       final Map<String, String> info = reader.getData();

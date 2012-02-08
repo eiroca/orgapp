@@ -75,8 +75,8 @@ public class HorizontalRender extends AbstractRender {
       }
       // Step 2 - center children with parent
       int xPosN = pntN.x;
-      final int centerB = pntB.x + width / 2;
-      final int centerN = (xPosN - xPosB) / 2 + xPosB;
+      final int centerB = pntB.x + (width / 2);
+      final int centerN = ((xPosN - xPosB) / 2) + xPosB;
       int delta;
       if (centerN < centerB) {
         delta = centerB - centerN;

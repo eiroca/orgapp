@@ -40,6 +40,7 @@ public class TXTOrganigramReader implements OrganigramReader {
    *
    * @see com.fbergeron.organigram.io.OrganigramReader#readOrganigram(java.net.URL)
    */
+  @Override
   public Organigram readOrganigram(final InputStream source) {
     organigram = new Organigram();
     final Unit root = new Unit(organigram);
@@ -112,6 +113,7 @@ public class TXTOrganigramReader implements OrganigramReader {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#getData()
    */
+  @Override
   public Map<String, String> getData() {
     return null;
   }
@@ -119,6 +121,7 @@ public class TXTOrganigramReader implements OrganigramReader {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#getOrganigram()
    */
+  @Override
   public Organigram getOrganigram() {
     return organigram;
   }
@@ -126,6 +129,7 @@ public class TXTOrganigramReader implements OrganigramReader {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#setOrganigram(com.fbergeron.organigram.model.Organigram)
    */
+  @Override
   public void setOrganigram(final Organigram organigram) {
     this.organigram = organigram;
   }

@@ -17,13 +17,14 @@
  */
 package com.fbergeron.organigram.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * The Organigram model.
  */
-public class Organigram implements MetaDataCollector {
+public class Organigram implements MetaDataCollector, Serializable {
 
   /** The box layout. */
   private BoxLayout boxLayout = new BoxLayout();
@@ -64,6 +65,7 @@ public class Organigram implements MetaDataCollector {
    * @see com.fbergeron.organigram.model.MetaDataCollector#setMeta(java.lang.String,
    *      java.lang.String)
    */
+  @Override
   public void setMeta(final String name, final String value) {
     meta.put(name, value);
   }
@@ -73,6 +75,7 @@ public class Organigram implements MetaDataCollector {
    *
    * @see com.fbergeron.organigram.model.MetaDataCollector#getMeta(java.lang.String)
    */
+  @Override
   public String getMeta(final String name) {
     return meta.get(name);
   }

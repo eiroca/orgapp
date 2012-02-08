@@ -287,6 +287,7 @@ public class UnitView implements Iterable<UnitView> {
    * (non-Javadoc)
    * @see java.lang.Iterable#iterator()
    */
+  @Override
   public Iterator<UnitView> iterator() {
     return children.iterator();
   }

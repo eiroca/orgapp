@@ -48,6 +48,7 @@ public class XMLHandler extends DefaultHandler implements OrganigramReader {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#getOrganigram()
    */
+  @Override
   public Organigram getOrganigram() {
     return organigram;
   }
@@ -55,6 +56,7 @@ public class XMLHandler extends DefaultHandler implements OrganigramReader {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#setOrganigram(com.fbergeron.organigram.model.Organigram)
    */
+  @Override
   public void setOrganigram(final Organigram organigram) {
     this.organigram = organigram;
   }
@@ -62,6 +64,7 @@ public class XMLHandler extends DefaultHandler implements OrganigramReader {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.io.OrganigramReader#getData()
    */
+  @Override
   public Map<String, String> getData() {
     return data;
   }
@@ -109,6 +112,7 @@ public class XMLHandler extends DefaultHandler implements OrganigramReader {
    *
    * @see com.fbergeron.organigram.io.OrganigramReader#readOrganigram(java.net.URL)
    */
+  @Override
   public Organigram readOrganigram(final InputStream source) {
     setOrganigram(null);
     try {

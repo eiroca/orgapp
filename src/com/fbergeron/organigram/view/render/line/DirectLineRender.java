@@ -51,18 +51,18 @@ public class DirectLineRender extends AbstractLineRender {
     switch (anchor) {
       case LEFT:
         xPos[idx] = pos.x + box.getWidth() + 1;
-        yPos[idx] = pos.y + box.getHeight() / 2;
+        yPos[idx] = pos.y + (box.getHeight() / 2);
         break;
       case RIGHT:
         xPos[idx] = pos.x - 1;
-        yPos[idx] = pos.y + box.getHeight() / 2;
+        yPos[idx] = pos.y + (box.getHeight() / 2);
         break;
       case BOTTOM:
-        xPos[idx] = pos.x + box.getWidth() / 2;
+        xPos[idx] = pos.x + (box.getWidth() / 2);
         yPos[idx] = pos.y + box.getHeight() + 1;
         break;
       default: // TOP
-        xPos[idx] = pos.x + box.getWidth() / 2;
+        xPos[idx] = pos.x + (box.getWidth() / 2);
         yPos[idx] = pos.y - 1;
         break;
     }
@@ -75,6 +75,7 @@ public class DirectLineRender extends AbstractLineRender {
    * @param box the box
    * @param orgLay the org lay
    */
+  @Override
   public void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay) {
     graphics.setColor(orgLay.getLineColor());
     final int[] xPos = new int[2];
