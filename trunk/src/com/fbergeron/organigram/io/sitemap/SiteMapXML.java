@@ -58,6 +58,7 @@ public final class SiteMapXML extends XMLHandler implements OrganigramReader, Or
    * @see com.fbergeron.organigram.io.OrganigramWriter#writeOrganigram(com.fbergeron.organigram.model.Organigram,
    *      boolean)
    */
+  @Override
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
     StringBuffer buf;
     buf = new StringBuffer(1024);

@@ -114,6 +114,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * (non-Javadoc)
    * @see java.lang.Iterable#iterator()
    */
+  @Override
   public Iterator<Unit> iterator() {
     return children.iterator();
   }
@@ -167,6 +168,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * com.fbergeron.organigram.model.MetaDataCollector#setMeta(java.lang.String,
    * java.lang.String)
    */
+  @Override
   public void setMeta(final String name, final String val) {
     if (val == null) {
       meta.remove(name);
@@ -181,6 +183,7 @@ public class Unit implements Iterable<Unit>, MetaDataCollector {
    * @see
    * com.fbergeron.organigram.model.MetaDataCollector#getMeta(java.lang.String)
    */
+  @Override
   public String getMeta(final String name) {
     return meta.get(name);
   }

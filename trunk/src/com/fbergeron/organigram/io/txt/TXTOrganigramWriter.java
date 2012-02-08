@@ -70,6 +70,7 @@ public class TXTOrganigramWriter implements OrganigramWriter {
    * @see com.fbergeron.organigram.io.OrganigramWriter#writeOrganigram(com.fbergeron.organigram.model.Organigram,
    *      boolean)
    */
+  @Override
   public String writeOrganigram(final Organigram organigram, final boolean compact) {
     final StringBuffer buf = new StringBuffer(1024);
     final Unit unit = organigram.getRoot();

@@ -90,7 +90,7 @@ public class ClassicBoxRender implements BoxRender {
   private final Polygon leftArrow(final Insets margin, final UnitView box) {
     final Polygon pol = new Polygon();
     final int xPos = box.boxRect.x;
-    final int yPos = box.boxRect.y + box.boxRect.height / 2;
+    final int yPos = box.boxRect.y + (box.boxRect.height / 2);
     final int siz = margin.left / 2;
     pol.addPoint(xPos - siz, yPos);
     pol.addPoint(xPos, yPos - siz);
@@ -109,7 +109,7 @@ public class ClassicBoxRender implements BoxRender {
   private final Polygon leftRight(final Insets margin, final UnitView box) {
     final Polygon pol = new Polygon();
     final int xPos = box.boxRect.x + box.boxRect.width;
-    final int yPos = box.boxRect.y + box.boxRect.height / 2;
+    final int yPos = box.boxRect.y + (box.boxRect.height / 2);
     final int siz = margin.right / 2;
     pol.addPoint(xPos + siz, yPos);
     pol.addPoint(xPos, yPos - siz);
@@ -127,7 +127,7 @@ public class ClassicBoxRender implements BoxRender {
    */
   private final Polygon leftTop(final Insets margin, final UnitView box) {
     final Polygon pol = new Polygon();
-    final int xPos = box.boxRect.x + box.boxRect.width / 2;
+    final int xPos = box.boxRect.x + (box.boxRect.width / 2);
     final int yPos = box.boxRect.y;
     final int siz = margin.top / 2;
     pol.addPoint(xPos, yPos - siz);
@@ -146,7 +146,7 @@ public class ClassicBoxRender implements BoxRender {
    */
   private final Polygon leftBottom(final Insets margin, final UnitView box) {
     final Polygon pol = new Polygon();
-    final int xPos = box.boxRect.x + box.boxRect.width / 2;
+    final int xPos = box.boxRect.x + (box.boxRect.width / 2);
     final int yPos = box.boxRect.y + box.boxRect.height;
     final int siz = margin.bottom / 2;
     pol.addPoint(xPos, yPos + siz);
@@ -211,10 +211,10 @@ public class ClassicBoxRender implements BoxRender {
         final FontMetrics fontMetr = graphic.getFontMetrics();
         final int textWidth = fontMetr.stringWidth(text.getText());
         if (boxLay.getTextAlignment(true) == Alignment.CENTER) {
-          xPos = box.boxRect.x + (box.boxRect.width - textWidth) / 2;
+          xPos = box.boxRect.x + ((box.boxRect.width - textWidth) / 2);
         }
         else if (boxLay.getTextAlignment(true) == Alignment.RIGHT) {
-          xPos = box.boxRect.x + box.boxRect.width - textWidth - padding.right;
+          xPos = (box.boxRect.x + box.boxRect.width) - textWidth - padding.right;
         }
         else {
           xPos = box.boxRect.x + padding.left;
@@ -240,6 +240,7 @@ public class ClassicBoxRender implements BoxRender {
    * com.fbergeron.organigram.view.render.BoxRender#paint(java.awt.Graphics,
    * com.fbergeron.organigram.view.UnitView)
    */
+  @Override
   public void paint(final Graphics2D graphic, final UnitView box, final OrganigramLayout orgLay) {
     final BoxLayout boxLay = box.getLayout();
     drawBox(graphic, box, boxLay);

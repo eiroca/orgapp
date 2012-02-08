@@ -39,7 +39,9 @@ public class Utils {
    * @param set the set
    * @param val the value
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({
+      "unchecked", "rawtypes"
+  })
   static public void addEnum(final Map set, final Enum val) {
     if ((set == null) || (val == null)) { return; }
     final String name = val.name().toLowerCase();
@@ -283,7 +285,7 @@ public class Utils {
     else {
       final String s = f.getName();
       final int i = s.lastIndexOf('.');
-      if ((i >= 0) && (i < s.length() - 1)) {
+      if ((i >= 0) && (i < (s.length() - 1))) {
         ext = s.substring(i + 1).toLowerCase();
       }
     }

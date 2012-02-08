@@ -300,6 +300,7 @@ abstract public class AbstractRender implements OrganigramRender {
   /* (non-Javadoc)
    * @see com.fbergeron.organigram.view.render.OrganigramRender#doLayout(java.awt.Graphics2D)
    */
+  @Override
   public Dimension doLayout(final Graphics2D graphics) {
     final Dimension size = layoutBoxes(graphics);
     return size;
@@ -311,6 +312,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * @param graphics the graphics
    * @param size the size
    */
+  @Override
   public void paint(final Graphics2D graphics, final Dimension size) {
     final OrganigramLayout orgLay = organigramView.getOrganigram().getOrganigramLayout();
     // Draw background.
@@ -345,6 +347,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * com.fbergeron.organigram.view.render.OrganigramRender#setBoxRender(com.
    * fbergeron.organigram.view.render.BoxRender)
    */
+  @Override
   public void setBoxRender(final BoxRender boxRender) {
     this.boxRender = boxRender;
   }
@@ -355,6 +358,7 @@ abstract public class AbstractRender implements OrganigramRender {
    * com.fbergeron.organigram.view.render.OrganigramRender#setLineRender(com
    * .fbergeron.organigram.view.render.LineRender)
    */
+  @Override
   public void setLineRender(final LineRender lineRender) {
     this.lineRender = lineRender;
   }
