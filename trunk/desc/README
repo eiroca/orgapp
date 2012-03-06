@@ -1,0 +1,11 @@
+README
+======
+OrgApp is a Java library to handle and draw organization charts (organigrams).
+
+The library has also an applet and a Swing Java client able to view an organization 
+chart read from a file, in different formats (one of them based upon XML).
+
+The applet supports charts with different layouts and boxes with hyperlinks, 
+customizable colors, sizes, positions, … and it is easy to embed in an HTML page.
+
+See doc/index.html for further documentation.

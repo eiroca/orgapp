@@ -1,6 +1,6 @@
-README
-======
-To build the orgapp application from source, you will need:
+INSTALL
+=======
+To build the OrgApp package from source, you will need:
 
 - Ant (http://ant.apache.org)
 - Proguard (http://proguard.sourceforge.net/)

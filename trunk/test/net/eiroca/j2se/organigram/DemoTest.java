@@ -33,6 +33,9 @@ import com.fbergeron.organigram.view.OrganigramImage;
  */
 public class DemoTest extends TestCase {
 
+  /** Path where to store output image */
+  private static final String OUT_PATH = "demo1.png";
+
   /**
    * Test demo1.
    * 
@@ -81,6 +84,6 @@ public class DemoTest extends TestCase {
     layout.setMode(OrgMode.MIN);
     layout.setMargin(new Insets(10, 10, 10, 10));
     final OrganigramImage img = new OrganigramImage(org);
-    ImageIO.write(img.getImage(), "PNG", new File("demo1.png"));
+    ImageIO.write(img.getImage(), "PNG", new File(DemoTest.OUT_PATH));
   }
 }
