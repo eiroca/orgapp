@@ -44,43 +44,43 @@ public class OrganigramApplet extends JApplet {
     final String source = getParameter("DataSource");
     final String target = getParameter("Target");
     Organigram o;
-    if (source != null) {
-      final URL xmlSourceUrl = Utils.buildURL(getDocumentBase(), source);
-      o = OrgUtils.readOrganigram(xmlSourceUrl);
-    }
-    else {
-      final String data = getParameter("Data");
-      final String dataType = getParameter("DataType");
-      OrganigramFormat type = OrganigramFormat.SOF;
-      if (dataType != null) {
-        int val;
-        try {
-          val = Integer.parseInt(dataType);
-        }
-        catch (final NumberFormatException e) {//
-          val = 0;
-        }
-        switch (val) {
-          case 1:
-            type = OrganigramFormat.TXT;
-            break;
-          case 2:
-            type = OrganigramFormat.SITEMAP;
-            break;
-          default:
-            type = OrganigramFormat.SOF;
-            break;
-        }
+    try {
+      if (source != null) {
+        final URL xmlSourceUrl = Utils.buildURL(getDocumentBase(), source);
+        o = OrgUtils.readOrganigram(xmlSourceUrl);
       }
-      final ByteArrayInputStream src = new ByteArrayInputStream(data.getBytes());
-      o = OrgUtils.readOrganigram(src, type);
+      else {
+        final String data = getParameter("Data");
+        final String dataType = getParameter("DataType");
+        OrganigramFormat type = OrganigramFormat.SOF;
+        if (dataType != null) {
+          int val = Utils.val(dataType, 0);
+          switch (val) {
+            case 1:
+              type = OrganigramFormat.TXT;
+              break;
+            case 2:
+              type = OrganigramFormat.SITEMAP;
+              break;
+            default:
+              type = OrganigramFormat.SOF;
+              break;
+          }
+        }
+        final ByteArrayInputStream src = new ByteArrayInputStream(data.getBytes());
+        o = OrgUtils.readOrganigram(src, type);
+      }
+      new OrgCharFixUp().execute(o, true, null);
+      o.buidID();
     }
-    new OrgCharFixUp().execute(o, true, null);
-    o.buidID();
+    catch (Exception e) {
+      o = new Organigram();
+      o.add("err", null, "ERROR", "Invalid Data or URL");
+
+    }
     final OrganigramPanel view = new OrganigramPanel(o, target);
     final Container me = getContentPane();
     me.setLayout(new BorderLayout());
     me.add(view.getView(), BorderLayout.CENTER);
   }
-
 }

@@ -1,7 +1,7 @@
 <!-- Ant script for orgapp -->
 <!-- Author: Frederic Bergeron -->
 <!-- Author: Enrico Croce -->
-<project name="orgapp" default="build" basedir=".">
+<project name="orgapp" default="rebuild" basedir=".">
 
 	<!-- Custom properties -->
 	<property file="build.properties" />
@@ -10,24 +10,21 @@
 	<taskdef resource="proguard/ant/task.properties" classpath="${proguard.home}/lib/proguard.jar" />
 
 	<!-- Directories -->
+	<property name="version" value="0.5.0" />
 	<property name="base" value="." />
-	<property name="classes" value="classes" />
-	<property name="dist" value="dist" />
+	<property name="src" value="src" />
+	<property name="classes" value="${dist.dir}/classes" />
+	<property name="dist" value="${dist.dir}" />
 	<property name="doc" value="doc" />
 	<property name="javadoc" value="${doc}/javadoc" />
-	<property name="properties" value="properties" />
-	<property name="src" value="src" />
-	<property name="img" value="img" />
-	<property name="html" value="html" />
-	<property name="version" value="0.5.0" />
+	<property name="samples" value="${doc}/samples" />
 
 	<path id="classpath">
 		<pathelement location="${classes}" />
 	</path>
 
 	<target name="compile">
-		<mkdir dir="${classes}" />
-		<javac srcdir="${src}" destdir="${classes}" source="${build.compiler.source}" target="${build.compiler.target}" debug="${build.compiler.debug}" nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}">
+		<javac srcdir="${src}" destdir="${classes}" source="${build.compiler.source}" target="${build.compiler.target}" debug="${build.compiler.debug}" nowarn="${build.compiler.nowarn}" deprecation="${build.compiler.deprecation}" includeAntRuntime="false">
 			<classpath refid="classpath" />
 		</javac>
 		<copy todir="${classes}/com/fbergeron/organigram/">
@@ -42,17 +39,14 @@
 	</target>
 
 	<target name="clean">
-		<delete dir="${classes}" />
 		<delete dir="${dist}" />
-	</target>
-
-	<target name="cleanAll" depends="clean">
+		<delete dir="${classes}" />
 		<delete dir="${javadoc}" />
-	</target>
-
-	<target name="rebuild" depends="clean,build" />
-
-	<target name="build" depends="dist" description="Create release">
+		<delete dir="${samples}" />
+		<mkdir dir="${classes}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${javadoc}" />
+		<mkdir dir="${samples}" />
 	</target>
 
 	<target name="applet" depends="applet_shrink" description="Create applet">
@@ -60,8 +54,7 @@
 	</target>
 
 	<target name="applet_jar" depends="compile">
-		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/tmp_applet.jar" basedir="classes">
+		<jar destfile="${dist}/tmp_applet.jar" basedir="${classes}">
 		</jar>
 	</target>
 
@@ -83,8 +76,7 @@
 	</target>
 
 	<target name="app_jar" depends="compile">
-		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/tmp_app.jar" basedir="classes">
+		<jar destfile="${dist}/tmp_app.jar" basedir="${classes}">
 			<manifest>
 				<attribute name="Main-Class" value="OrganigramApp" />
 			</manifest>
@@ -109,8 +101,7 @@
 	</target>
 
 	<target name="convert_jar" depends="compile">
-		<mkdir dir="${dist}" />
-		<jar destfile="${dist}/tmp_convert.jar" basedir="classes">
+		<jar destfile="${dist}/tmp_convert.jar" basedir="${classes}">
 			<manifest>
 				<attribute name="Main-Class" value="Convert" />
 			</manifest>
@@ -130,33 +121,38 @@
     </proguard>
 	</target>
 
-	<target name="dist" depends="applet, app, convert, javadoc" description="Create distribution">
+	<target name="build" depends="applet, app, convert, javadoc" description="Create the distribution">
 		<echo>Convert application created.</echo>
-		<delete file="${dist}/tmp_app.jar" />
-		<delete file="${dist}/tmp_convert.jar" />
-		<delete file="${dist}/tmp_applet.jar" />
-		<mkdir dir="${dist}/${version}" />
 		<copy todir="${base}/server/php">
 			<fileset file="${dist}/OrgApplet.jar" />
 		</copy>
-		<copy todir="${html}">
-			<fileset file="${dist}/OrgApplet.jar" />
+		<copy todir="${samples}">
+			<fileset file="${base}/data/data1.sof" />
+			<fileset file="${base}/data/data2.sof" />
 		</copy>
-		<zip destfile="${dist}/${version}/orgapp-${version}-src.zip">
+		<zip destfile="${dist}/orgapp-${version}.zip">
 			<zipfileset dir="${base}/src" prefix="src" />
-			<zipfileset dir="${base}/data" prefix="data" />
 			<zipfileset dir="${base}/server" prefix="server" />
 			<zipfileset dir="${base}/doc" prefix="doc" />
+			<zipfileset dir="${base}/desc" />
 			<fileset file="${base}/build.xml" />
-			<fileset file="${base}/COPYING" />
-			<fileset file="${base}/COPYING.LESSER" />
-			<fileset file="${base}/README.txt" />
-			<fileset file="${base}/todo.txt" />
 			<fileset file="${base}/sample-build.properties" />
 			<fileset file="${dist}/OrgApplet.jar" />
 			<fileset file="${dist}/OrgApp.jar" />
 			<fileset file="${dist}/Convert.jar" />
 		</zip>
+		<delete file="${dist}/tmp_app.jar" />
+		<delete file="${dist}/tmp_convert.jar" />
+		<delete file="${dist}/tmp_applet.jar" />
+		<delete file="${dist}/OrgApplet.jar" />
+		<delete file="${dist}/OrgApp.jar" />
+		<delete file="${dist}/Convert.jar" />
+		<delete file="${dist}/mapping.log" />
+		<delete dir="${classes}" />
+	</target>
+
+	<target name="rebuild" depends="clean,build">
+		<echo>Rebuilding done.</echo>
 	</target>
 
 </project>

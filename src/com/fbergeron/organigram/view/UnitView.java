@@ -221,9 +221,9 @@ public class UnitView implements Iterable<UnitView> {
   }
 
   /**
-   * Gets the small height.
+   * Set the smallest size of the unit
    * 
-   * @return the small height
+   * @param d minimum size
    */
   public void setSmallSize(final Dimension d) {
     small.setSize(d);
