@@ -9,3 +9,12 @@ The applet supports charts with different layouts and boxes with hyperlinks,
 customizable colors, sizes, positions, … and it is easy to embed in an HTML page.
 
 See doc/index.html for further documentation.
+
+Changelog of version 0.5.0
+==========================
+- Graphical improvements (Bezier line for connectors, BoxMode, text vertically centered, ...)
+- New XML reader/writer architecture, minor changes in SOF schema
+- Helper method to define organigrams
+- Full ProGuard optimization
+- Organigram can be written to an image. Utility Convert can now produce an organigram in any Java ImageIO graphic format
+- Some unit tests and static code analysis
