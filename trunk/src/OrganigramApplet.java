@@ -54,7 +54,7 @@ public class OrganigramApplet extends JApplet {
         final String dataType = getParameter("DataType");
         OrganigramFormat type = OrganigramFormat.SOF;
         if (dataType != null) {
-          int val = Utils.val(dataType, 0);
+          final int val = Utils.val(dataType, 0);
           switch (val) {
             case 1:
               type = OrganigramFormat.TXT;
@@ -73,7 +73,7 @@ public class OrganigramApplet extends JApplet {
       new OrgCharFixUp().execute(o, true, null);
       o.buidID();
     }
-    catch (Exception e) {
+    catch (final Exception e) {
       o = new Organigram();
       o.add("err", null, "ERROR", "Invalid Data or URL");
 

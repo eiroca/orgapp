@@ -58,7 +58,7 @@ img {
 	<ul>
 		<li><b>Target</b> is the target used in links (unless a more specific will be present in the definition of the organigram node).</li>
 		<li><b>DataSource</b> is the URL of the resource that contains the definition of the orgnanigram in any of the supported formats.</li>
-		<li><b>Data</b>, if DataSource is not defined this fileds holds the embedded definition of the chart in one of the supported format.</li>
+		<li><b>Data</b>, if DataSource is not defined this fields holds the embedded definition of the chart in one of the supported format.</li>
 		<li><b>DataType</b> is the type of the embedded definition (0=SOF, 1=TXT, 2=sitemap).</li>
 	</ul>
 	<p>Check the source page to see a real usage.</p>
@@ -70,38 +70,40 @@ img {
 	</p>
 	<h3>Organigram Converter</h3>
 	<p>Convert.jar is a tool to transform an organigram file from a format to another, the syntax is:</p>
-	<pre>java -jar Convert.jar input_file output_type</pre>
+	<pre>java -jar Convert.jar input_file [output_type  | output_file] [fixup]</pre>
 	<p>
 		<i>input_file</i> is the path of the input organigram
 	</p>
 	<p>
-		<i>output_type</i> is the type of the output organigram, with the following encoding: 0 simple organigram format, 1 text organigram, 2 sitemap.
+		<i>output_type</i> (optional) is the type of the output organigram, with the following encoding: 0 simple organigram format, 1 text organigram, 2 sitemap. The output will be printed to the screen but can be redirected to a file (adding <i>&gt; path_to_output</i> to the command).
 	</p>
 	<p>
-		The output will be printed to the screen but can be redirected to a file (adding <i>&gt; path_to_output</i> to the command).
+		<i>output_file</i> (optional) if this path ends with a Java ImageIO supported format a picture of the organigram is generated.
+	</p>
+	<p>
+		<i>fixup</i> (optional) if this parameter is present a "fix-up" is run.
+
 	</p>
 	<p>The conversion form SOF format to another format can loose lot of information...</p>
 	<h3>Organigram File format</h3>
-	OrgApp support three organigram file formats.
+	<p>OrgApp support three organigram file formats.</p>
 	<ul>
 		<li><b>SOF</b>, Simple Organigram Format is a XML based file format</li>
 		<li><b>Text Format</b>, is a format where each node holds a line of the text file</li>
 		<li><b>Sitemap</b> format, as described in <a href="http://www.sitemaps.org/">http://www.sitemaps.org</a></li>
 	</ul>
 	<p>
-		See data file of the <a href="applet/data1.xml">first organigram</a> and of the <a href="applet/data2.xml">second one</a> for examples of the file format, or the SOF file format documentation
-		present inside the <i>doc</i> directory of the distribution.
+		See data file of the <a href="applet/data1.xml">first organigram</a> and of the <a href="applet/data2.xml">second one</a> for examples of the file format, or the SOF file format documentation present inside the <i>doc</i> directory of the distribution.
 	</p>
 	<h3>Server side helpers</h3>
-	The distribution contains server side libraru to easly integrate the applet.
-	<br />
-	<i>OrgApp.inc</i> is a PHP script to easly generate the HTML code necessary to draw the organization chart. Sample code:
-	<br />
+	<p>The distribution contains server side libraru to easly integrate the applet.</p>
+	<p>
+		<i>OrgApp.inc</i> is a PHP script to easly generate the HTML code necessary to draw the organization chart. Sample code:
+	</p>
 	<div style="background-color: #f8f8f8; margin: 10px 30px 10px 30px; padding: 10px; border-style: solid; border-width: 1px;">
 		<code>
-			require_once("lib\OrgApp.inc");<br /> $OC = new OrgApp();<br /> //Set the dimension of the chats $OC-&gt;width=400;<br /> $OC-&gt;height=300;<br /> //Generate a chart, the data is a URL<br />
-			$OC-&gt;emitRef('data.xml'); <br /> //Generate a chart, the data is read from a file and embedded in the html page<br /> $OC-&gt;emitFile('data.xml', 0); <br /> //Generate a chart with the data
-			given<br /> $OC-&gt;emitData('&lt;organigram&gt;&lt;unit name=&quot;Doe, John&quot; department=&quot;CEO&quot; role=&quot;H&quot;/&gt;&lt;/organigram&gt;', 0); <br />
+			require_once("lib\OrgApp.inc");<br /> $OC = new OrgApp();<br /> //Set the dimension of the chats $OC-&gt;width=400;<br /> $OC-&gt;height=300;<br /> //Generate a chart, the data is a URL<br /> $OC-&gt;emitRef('data.xml'); <br /> //Generate a chart, the data is read from a file and embedded in the html page<br /> $OC-&gt;emitFile('data.xml', 0); <br /> //Generate a chart with the data given<br /> $OC-&gt;emitData('&lt;organigram&gt;&lt;unit name=&quot;Doe, John&quot;
+			department=&quot;CEO&quot; role=&quot;H&quot;/&gt;&lt;/organigram&gt;', 0); <br />
 		</code>
 	</div>
 	<p>
@@ -109,8 +111,7 @@ img {
 	</p>
 	<h3>Screenshoots</h3>
 	<p>
-		<img src="res/img01.png" alt="Top layout" width="320" /> <img src="res/img02.png" alt="Left layout" width="320" /> <br /> <img src="res/img03.png" alt="Right layout" width="320" /> <img
-			src="res/img04.png" alt="Bottom layout" width="320" />
+		<img src="res/img01.png" alt="Top layout" width="320" /> <img src="res/img02.png" alt="Left layout" width="320" /> <br /> <img src="res/img03.png" alt="Right layout" width="320" /> <img src="res/img04.png" alt="Bottom layout" width="320" />
 	</p>
 	<h2>To Do</h2>
 	<ul>
@@ -134,10 +135,21 @@ img {
 	</ul>
 	<h2>Change log</h2>
 	<p>
+		<b>Version 0.5.0</b>
+	</p>
+	<ul>
+		<li>Graphical improvements (Bezier line for connectors, BoxMode, text vertically centered, ...)</li>
+		<li>New XML reader/writer architecture, minor changes in SOF schema</li>
+		<li>Helper method to define organigrams</li>
+		<li>Full ProGuard optimization</li>
+		<li>Organigram can be written to an image. Utility Convert can now procude an organigram in any Java ImageIO graphic format</li>
+		<li>Some unit tests and static code analysis</li>
+	</ul>
+	<p>
 		<b>Version 0.4.0</b>
 	</p>
 	<ul>
-		<li>PHP script to easly generate the applet tag to embed the chart</li>
+		<li>PHP script to easily generate the applet tag to embed the chart</li>
 		<li>New layouts: TOP (e.g. organization chart), LEFT (e.g. classic tree chart), BOTTOM (e.g. family tree), RIGHT (e.g. direct elimination matches)</li>
 		<li>It is possible to specify line mode (direct or connector) and use name instead of numbers (e.g. mode="grow" instead of mode="2")</li>
 		<li>Applet can take the chart definition from "Data" and "DataType" parameters</li>
@@ -187,16 +199,14 @@ img {
 		<li>2005/11/06 - Introduced scrollbars.</li>
 		<li>2005/10/30 - Added link tag for box lines.</li>
 	</ul>
-	<h2>Licence &amp; Copyright</h2>
+	<h2>License &amp; Copyright</h2>
 	<p>
-		<img src="res/lgplv3-88x31.png" alt="LGPL3" />Copyright (c) 2005-2012 Frédéric Bergeron & eIrOcA (eNrIcO Croce & sImOnA Burzio)
+		<img src="res/lgplv3-88x31.png" alt="LGPL3" />Copyright (c) 2005-2012 Frédéric Bergeron &amp; eIrOcA (eNrIcO Croce &amp; sImOnA Burzio)
 	</p>
-	<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3
-		of the License, or (at your option) any later version.</p>
-	<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-		Lesser General Public License for more details.</p>
+	<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+	<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</p>
 	<p>
-		You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <a href=http://www.gnu.org/licenses/" >http://www.gnu.org/licenses/</a>
+		You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>
 	</p>
 	<h2>References:</h2>
 	<ul>
