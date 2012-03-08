@@ -121,15 +121,15 @@ public class XMLHandler extends DefaultHandler implements OrganigramReader {
       parser.parse(source, this);
     }
     catch (final IOException e) {
-      Debug.error(e);
+      Debug.ignore(e);
     }
     catch (final ParserConfigurationException e) {
-      Debug.error(e);
+      Debug.ignore(e);
     }
     catch (final SAXException e) {
-      Debug.error(e);
+      Debug.ignore(e);
     }
-    return organigram;
+    return getOrganigram();
   }
 
 }

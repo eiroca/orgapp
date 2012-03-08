@@ -14,11 +14,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/
  */
+import java.io.File;
 import java.net.URL;
+import javax.imageio.ImageIO;
 import com.fbergeron.organigram.model.Organigram;
+import com.fbergeron.organigram.util.OrgCharFixUp;
 import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;
 import com.fbergeron.organigram.util.Utils;
+import com.fbergeron.organigram.view.OrganigramImage;
 
 /**
  * The Class Convert.
@@ -31,22 +35,21 @@ public class Convert {
    * @param args the arguments
    */
   public static void main(final String[] args) {
-    if (args.length != 2) {
+    if ((args.length < 2) || (args.length > 3)) {
       System.out.println("Usage: ");
-      System.out.println("java -jar Convert.jar file output_type");
-      System.out.println("output type: 0 simple organigram format, 1 text organigram, 2 sitemap");
+      System.out.println("java -jar Convert.jar file [output_type | output_file] [fixup]");
+      System.out.println("  output type: 0 simple organigram format, 1 text organigram, 2 sitemap");
+      System.out.println("  output_file: must end with a ImageIO supported format");
+      System.out.println("  fixup: if present, run fixup");
       System.exit(1);
     }
     final String inFile = args[0];
     OrganigramFormat type = OrganigramFormat.SOF;
-    int val;
-    try {
-      val = Integer.valueOf(args[1]);
-    }
-    catch (final NumberFormatException e) {//
-      val = 0;
-    }
+    final int val = Utils.val(args[1], -1);
     switch (val) {
+      case 0:
+        type = OrganigramFormat.SOF;
+        break;
       case 1:
         type = OrganigramFormat.TXT;
         break;
@@ -59,7 +62,27 @@ public class Convert {
     }
     final URL xmlSource = Utils.findResource(inFile);
     final Organigram org = OrgUtils.readOrganigram(xmlSource);
-    System.out.println(OrgUtils.writeOrganigram(org, type, false));
+    if (org != null) {
+      if (args.length == 3) {
+        new OrgCharFixUp().execute(org, true, null);
+      }
+      try {
+        if (val == -1) {
+          final OrganigramImage img = new OrganigramImage(org);
+          final File output = new File(args[1]);
+          ImageIO.write(img.getImage(), Utils.getExtension(output), output);
+        }
+        else {
+          System.out.println(OrgUtils.writeOrganigram(org, type, false));
+        }
+      }
+      catch (final Exception e) {
+        System.err.println("Output error -> " + e.toString());
+      }
+    }
+    else {
+      System.err.println("Invalid organigram -> " + args[0]);
+    }
   }
 
 }

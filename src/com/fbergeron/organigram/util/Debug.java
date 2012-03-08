@@ -27,7 +27,7 @@ public class Debug {
    * @param e the e
    */
   public static void ignore(final Throwable e) {
-    //
+    System.out.println("Ignoring: " + e);
   }
 
   /**
@@ -36,7 +36,7 @@ public class Debug {
    * @param e the e
    */
   public static void error(final Throwable e) {
-    e.printStackTrace();
+    System.err.println("E=>" + e);
   }
 
   /**
@@ -45,7 +45,7 @@ public class Debug {
    * @param msg the msg
    */
   public static void error(final String msg) {
-    System.err.println(msg);
+    System.err.println("E=>" + msg);
   }
 
 }

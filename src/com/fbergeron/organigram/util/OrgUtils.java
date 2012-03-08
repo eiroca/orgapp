@@ -69,7 +69,7 @@ public class OrgUtils {
    * @param type the type
    * @return the organigram
    */
-  static public Organigram readOrganigram(final InputStream source, final OrganigramFormat type) {
+  static synchronized public Organigram readOrganigram(final InputStream source, final OrganigramFormat type) {
     OrganigramReader handler;
     switch (type) {
       case TXT:
