@@ -33,8 +33,8 @@ public class BezierLineRender extends GenericLineRender {
    * @param anchorParent the anchor parent
    * @param anchorChild the anchor child
    */
-  public BezierLineRender(final Layout anchorParent, final Layout anchorChild) {
-    super(anchorParent, anchorChild);
+  public BezierLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
+    super(anchorParent, anchorChildNormal, anchorChildFlipped);
   }
 
   /**
@@ -46,14 +46,15 @@ public class BezierLineRender extends GenericLineRender {
    */
   @Override
   public void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay) {
+    final boolean flipped = orgLay.isFlipped() && box.isFlippable();
     final CubicCurve2D line = new CubicCurve2D.Double();
     graphics.setColor(orgLay.getLineColor());
     final int[] xPos = new int[4];
     final int[] yPos = new int[4];
     setAnchorPos(box, anchorParent, 0, xPos, yPos);
     for (final UnitView child : box) {
-      setAnchorPos(child, anchorChild, 3, xPos, yPos);
-      calcNode(anchorParent, xPos, yPos);
+      setAnchorPos(child, getAnchorChild(flipped), 3, xPos, yPos);
+      calcNode(anchorParent, xPos, yPos, flipped);
       line.setCurve(xPos[0], yPos[0], xPos[1], yPos[1], xPos[2], yPos[2], xPos[3], yPos[3]);
       graphics.draw(line);
     }

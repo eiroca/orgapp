@@ -32,8 +32,8 @@ public class GenericLineRender extends DirectLineRender {
    * @param anchorParent the anchor parent
    * @param anchorChild the anchor child
    */
-  public GenericLineRender(final Layout anchorParent, final Layout anchorChild) {
-    super(anchorParent, anchorChild);
+  public GenericLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
+    super(anchorParent, anchorChildNormal, anchorChildFlipped);
   }
 
   /**
@@ -43,21 +43,40 @@ public class GenericLineRender extends DirectLineRender {
    * @param xPos the xx
    * @param yPos the yy
    */
-  final protected void calcNode(final Layout anchor, final int[] xPos, final int[] yPos) {
-    switch (anchor) {
-      case LEFT:
-      case RIGHT:
-        xPos[1] = (xPos[0] + xPos[3]) / 2;
-        xPos[2] = xPos[1];
-        yPos[1] = yPos[0];
-        yPos[2] = yPos[3];
-        break;
-      default: // TOP, BOTTOM
-        yPos[1] = (yPos[0] + yPos[3]) / 2;
-        yPos[2] = yPos[1];
-        xPos[1] = xPos[0];
-        xPos[2] = xPos[3];
-        break;
+  final protected void calcNode(final Layout anchor, final int[] xPos, final int[] yPos, final boolean flipped) {
+    if (flipped) {
+      switch (anchor) {
+        case LEFT:
+        case RIGHT:
+          xPos[1] = xPos[0];
+          yPos[1] = yPos[0];
+          xPos[2] = xPos[3];
+          yPos[2] = yPos[0];
+          break;
+        default: // TOP, BOTTOM
+          xPos[1] = xPos[0];
+          yPos[1] = yPos[0];
+          xPos[2] = xPos[0];
+          yPos[2] = yPos[3];
+          break;
+      }
+    }
+    else {
+      switch (anchor) {
+        case LEFT:
+        case RIGHT:
+          xPos[1] = (xPos[0] + xPos[3]) / 2;
+          yPos[1] = yPos[0];
+          xPos[2] = xPos[1];
+          yPos[2] = yPos[3];
+          break;
+        default: // TOP, BOTTOM
+          yPos[1] = (yPos[0] + yPos[3]) / 2;
+          xPos[1] = xPos[0];
+          yPos[2] = yPos[1];
+          xPos[2] = xPos[3];
+          break;
+      }
     }
   }
 
@@ -73,10 +92,13 @@ public class GenericLineRender extends DirectLineRender {
     graphics.setColor(orgLay.getLineColor());
     final int[] xPos = new int[4];
     final int[] yPos = new int[4];
-    setAnchorPos(box, anchorParent, 0, xPos, yPos);
+    final boolean flipped = orgLay.isFlipped() && box.isFlippable();
+    final Layout prntAnchor = getAnchorParent();
+    final Layout chldAnchor = getAnchorChild(flipped);
+    setAnchorPos(box, prntAnchor, 0, xPos, yPos);
     for (final UnitView child : box) {
-      setAnchorPos(child, anchorChild, 3, xPos, yPos);
-      calcNode(anchorParent, xPos, yPos);
+      setAnchorPos(child, chldAnchor, 3, xPos, yPos);
+      calcNode(prntAnchor, xPos, yPos, flipped);
       graphics.drawPolyline(xPos, yPos, 4);
     }
   }

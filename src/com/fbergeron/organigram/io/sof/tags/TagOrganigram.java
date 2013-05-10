@@ -42,6 +42,7 @@ public class TagOrganigram extends Tag {
   public static final String ATR_LAYOUT = "layout";
   public static final String ATR_ORGMODE = "mode";
   public static final String ATR_COMPACT = "compact";
+  public static final String ATR_FLIPPED = "flipped";
   public static final String ATR_BACKGROUND = "backgroundColor";
   public static final String ATR_BOXMODE = "boxMode";
   public static final String ATR_LINEMODE = "lineMode";
@@ -60,6 +61,7 @@ public class TagOrganigram extends Tag {
   public transient AttrLayout aLayout = new AttrLayout(TagOrganigram.ATR_LAYOUT, OrganigramLayout.DEF_LAYOUT);
   public transient AttrOrgMode aOrgMode = new AttrOrgMode(TagOrganigram.ATR_ORGMODE, OrganigramLayout.DEF_ORGMODE);
   public transient AttrBoolean aCompact = new AttrBoolean(TagOrganigram.ATR_COMPACT, OrganigramLayout.DEF_COMPACT);
+  public transient AttrBoolean aFlipped = new AttrBoolean(TagOrganigram.ATR_FLIPPED, OrganigramLayout.DEF_FLIPPED);
   public transient AttrColor aBackground = new AttrColor(TagOrganigram.ATR_BACKGROUND, OrganigramLayout.DEF_BACKGROUND);
   public transient AttrBoxMode aBoxMode = new AttrBoxMode(TagOrganigram.ATR_BOXMODE, OrganigramLayout.DEF_BOXMODE);
   public transient AttrLineMode aLineMode = new AttrLineMode(TagOrganigram.ATR_LINEMODE, OrganigramLayout.DEF_LINEMODE);
@@ -83,6 +85,7 @@ public class TagOrganigram extends Tag {
     addAttribute(aLayout);
     addAttribute(aOrgMode);
     addAttribute(aCompact);
+    addAttribute(aFlipped);
     addAttribute(aBackground);
     addAttribute(aBoxMode);
     addAttribute(aLineMode);
@@ -128,6 +131,7 @@ public class TagOrganigram extends Tag {
     orgLay.setLayout(aLayout.getLastVal());
     orgLay.setMode(aOrgMode.getLastVal());
     orgLay.setCompact(aCompact.getLastVal());
+    orgLay.setFlipped(aFlipped.getLastVal());
     orgLay.setBackgroundColor(aBackground.getLastVal());
     orgLay.setBoxMode(aBoxMode.getLastVal());
     orgLay.setLineMode(aLineMode.getLastVal());

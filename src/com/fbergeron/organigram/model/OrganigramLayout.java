@@ -1,4 +1,4 @@
-/** LGPL > 3.0 
+/** LGPL > 3.0
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -37,6 +37,9 @@ public class OrganigramLayout {
   /** The Constant DEF_COMPACT. */
   public static final boolean DEF_COMPACT = Boolean.TRUE;
 
+  /** The Constant DEF_FLIPPED. */
+  public static final boolean DEF_FLIPPED = Boolean.FALSE;
+
   /** The Constant DEF_BACKGROUND. */
   public static final Color DEF_BACKGROUND = Color.white;
 
@@ -61,8 +64,11 @@ public class OrganigramLayout {
   /** The mode. */
   private OrgMode mode = OrganigramLayout.DEF_ORGMODE;
 
-  /** The compact. */
+  /** The compact flag. */
   private boolean compact = OrganigramLayout.DEF_COMPACT;
+
+  /** The flipped flag. */
+  private boolean flipped = OrganigramLayout.DEF_FLIPPED;
 
   /** The background color. */
   private Color backgroundColor = OrganigramLayout.DEF_BACKGROUND;
@@ -107,6 +113,14 @@ public class OrganigramLayout {
    */
   public boolean isCompact() {
     return compact;
+  }
+
+  public boolean isFlipped() {
+    return flipped;
+  }
+
+  public void setFlipped(final boolean flipped) {
+    this.flipped = flipped;
   }
 
   /**

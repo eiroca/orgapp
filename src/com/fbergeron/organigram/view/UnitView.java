@@ -285,6 +285,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /*
    * (non-Javadoc)
+   *
    * @see java.lang.Iterable#iterator()
    */
   @Override
@@ -414,6 +415,7 @@ public class UnitView implements Iterable<UnitView> {
 
   /*
    * (non-Javadoc)
+   *
    * @see java.lang.Object#toString()
    */
   @Override
@@ -426,6 +428,14 @@ public class UnitView implements Iterable<UnitView> {
     }
     str.append(" ])");
     return str.toString();
+  }
+
+  public boolean isFlippable() {
+    if (countChildren() < 2) { return false; }
+    for (final UnitView child : children) {
+      if (child.hasChildren()) { return false; }
+    }
+    return true;
   }
 
 }

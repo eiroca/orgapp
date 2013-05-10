@@ -20,8 +20,11 @@ package net.eiroca.j2se.organigram;
 import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+
 import junit.framework.TestCase;
+
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.model.OrganigramLayout;
 import com.fbergeron.organigram.model.type.LineMode;

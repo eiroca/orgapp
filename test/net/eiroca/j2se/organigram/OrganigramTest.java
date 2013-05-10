@@ -19,6 +19,7 @@ package net.eiroca.j2se.organigram;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+
 import com.fbergeron.organigram.model.Organigram;
 import com.fbergeron.organigram.util.OrgUtils;
 import com.fbergeron.organigram.util.OrgUtils.OrganigramFormat;

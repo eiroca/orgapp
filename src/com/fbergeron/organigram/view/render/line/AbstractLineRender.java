@@ -32,12 +32,14 @@ public abstract class AbstractLineRender implements LineRender {
   protected Layout anchorParent;
 
   /** The anchor child. */
-  protected Layout anchorChild;
+  protected Layout anchorChildNormal;
+  protected Layout anchorChildFlipped;
 
-  public AbstractLineRender(final Layout anchorParent, final Layout anchorChild) {
+  public AbstractLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
     super();
     this.anchorParent = anchorParent;
-    this.anchorChild = anchorChild;
+    this.anchorChildNormal = anchorChildNormal;
+    this.anchorChildFlipped = anchorChildFlipped;
   }
 
   /**
@@ -67,31 +69,8 @@ public abstract class AbstractLineRender implements LineRender {
     return anchorParent;
   }
 
-  /**
-   * Sets the anchor parent.
-   * 
-   * @param anchorParent the new anchor parent
-   */
-  public void setAnchorParent(final Layout anchorParent) {
-    this.anchorParent = anchorParent;
-  }
-
-  /**
-   * Gets the anchor child.
-   * 
-   * @return the anchor child
-   */
-  public Layout getAnchorChild() {
-    return anchorChild;
-  }
-
-  /**
-   * Sets the anchor child.
-   * 
-   * @param anchorChild the new anchor child
-   */
-  public void setAnchorChild(final Layout anchorChild) {
-    this.anchorChild = anchorChild;
+  public Layout getAnchorChild(final boolean flipped) {
+    return (flipped ? anchorChildFlipped : anchorChildNormal);
   }
 
 }

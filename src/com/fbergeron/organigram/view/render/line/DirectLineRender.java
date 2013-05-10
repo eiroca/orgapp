@@ -33,8 +33,8 @@ public class DirectLineRender extends AbstractLineRender {
    * @param anchorParent the anchor parent
    * @param anchorChild the anchor child
    */
-  public DirectLineRender(final Layout anchorParent, final Layout anchorChild) {
-    super(anchorParent, anchorChild);
+  public DirectLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
+    super(anchorParent, anchorChildNormal, anchorChildFlipped);
   }
 
   /**
@@ -77,12 +77,13 @@ public class DirectLineRender extends AbstractLineRender {
    */
   @Override
   public void paint(final Graphics2D graphics, final UnitView box, final OrganigramLayout orgLay) {
+    final boolean flipped = orgLay.isFlipped() && box.isFlippable();
     graphics.setColor(orgLay.getLineColor());
     final int[] xPos = new int[2];
     final int[] yPos = new int[2];
     setAnchorPos(box, anchorParent, 0, xPos, yPos);
     for (final UnitView child : box) {
-      setAnchorPos(child, anchorChild, 1, xPos, yPos);
+      setAnchorPos(child, getAnchorChild(flipped), 1, xPos, yPos);
       graphics.drawPolyline(xPos, yPos, 2);
     }
   }
