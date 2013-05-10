@@ -1,17 +1,17 @@
 /** LGPL > 3.0
  * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/
  */
@@ -37,8 +37,13 @@ import com.fbergeron.organigram.model.Unit;
  */
 public final class SOFXML extends XMLHandler implements OrganigramReader, OrganigramWriter {
 
+  /** The organigram Tag. */
   public final transient TagOrganigram tOrganigram = new TagOrganigram();
+  
+  /** The unit Tag. */
   public final transient TagUnit tUnit = new TagUnit();
+  
+  /** The info Tag. */
   public final transient TagInfo tInfo = new TagInfo();
 
   /** The parent units. */
@@ -163,6 +168,7 @@ public final class SOFXML extends XMLHandler implements OrganigramReader, Organi
     tOrganigram.aLayout.setLastVal(orgLay.getLayout());
     tOrganigram.aOrgMode.setLastVal(orgLay.getMode());
     tOrganigram.aCompact.setLastVal(orgLay.isCompact());
+    tOrganigram.aFlipped.setLastVal(orgLay.isFlipped());
     tOrganigram.aBackground.setLastVal(orgLay.getBackgroundColor());
     tOrganigram.aLineMode.setLastVal(orgLay.getLineMode());
     tOrganigram.aLineColor.setLastVal(orgLay.getLineColor());

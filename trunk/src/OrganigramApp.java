@@ -1,5 +1,5 @@
-/** LGPL > 3.0 
- * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net) 
+/** LGPL > 3.0
+ * Copyright (C) 2005 Frédéric Bergeron (fbergeron@users.sourceforge.net)
  * Copyright (C) 2006-2010 eIrOcA (eNrIcO Croce & sImOnA Burzio)
  *
  * This program is free software: you can redistribute it and/or modify it under

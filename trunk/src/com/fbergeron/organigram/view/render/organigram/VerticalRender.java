@@ -42,20 +42,20 @@ public class VerticalRender extends AbstractRender {
 
   /*
    * (non-Javadoc)
+   *
    * @see
    * com.fbergeron.organigram.view.render.NewRender#layoutBoxes(com.fbergeron
    * .organigram.model.OrganigramLayout, com.fbergeron.organigram.view.UnitView,
    * com.fbergeron.organigram.view.UnitView, int)
    */
   @Override
-  public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level) {
+  public void layoutBoxes(final OrganigramLayout orgLay, final UnitView unit, final UnitView parent, final int level, final Dimension rect) {
     // pB is the first available position of the box in the current level
     // pN is the first available position of the box in the next level
     // Set dimension of the box to the dimension of the box of this level
-    final Dimension sizLevB = getBoxSize(level);
-    unit.setSize(sizLevB);
+    final Dimension sizLevB = unit.getSize();
     final Insets margin = orgLay.getMargin();
-    final Point pntB = getPoint(level, margin.left, margin.top);
+    Point pntB = getPoint(level, margin.left, margin.top);
     final int height = sizLevB.height + margin.top + margin.bottom;
     final int width = margin.left + margin.right + unit.getWidth();
     final Point pntN = getPoint(level + 1, pntB.x + width, margin.top);
@@ -68,48 +68,71 @@ public class VerticalRender extends AbstractRender {
       }
     }
     if (unit.hasChildren()) {
-      // Step 1 - layout children
-      int yPosB = pntN.y;
-      for (final UnitView child : unit) {
-        layoutBoxes(orgLay, child, unit, level + 1);
-      }
-      // Step 2 - center children with parent
-      int yPosN = pntN.y;
-      final int centerB = pntB.y + (height / 2);
-      final int centerN = ((yPosN - yPosB) / 2) + yPosB;
-      int delta;
-      if (centerN < centerB) {
-        delta = centerB - centerN;
-      }
-      else {
-        delta = 0;
-      }
-      if (delta > 0) {
+      if (unit.isFlippable() && orgLay.isFlipped()) {
+        // be sure to remove "compact"
+        if (pntN.y < pntB.y) {
+          pntN.y = pntB.y;
+        }
+        if (pntB.y < pntN.y) {
+          unit.move(pntN.y - pntB.y, 0, false);
+          pntB.y = pntN.y;
+        }
+        final Point pnt = new Point(pntN);
+        pnt.y += height / 2;
+        pntB = getPoint(level, 0, 0);
+        int curLev = level + 1;
         for (final UnitView child : unit) {
-          child.move(0, delta, true);
+          child.setLocation(pnt);
+          final Point p = getPoint(curLev, 0, 0);
+          p.x = pnt.x;
+          p.y = pnt.y + height;
+          pnt.x += child.getSize().width + margin.left + margin.right;
+          curLev++;
         }
-        pntN.y = pntN.y + delta;
-        yPosB += delta;
-        yPosN += delta;
+        if (rect.width < pnt.x) {
+          rect.width = pnt.x;
+        }
       }
       else {
-        // Step 3 - center parent with children
-        delta = (yPosN - yPosB - height);
-        if (delta > 0) {
-          delta = ((delta + 1) / 2) + yPosB;
-          if (delta > pntB.y) {
-            pntB.y = delta;
-          }
+        // Step 1 - layout children
+        int yPosB = pntN.y;
+        for (final UnitView child : unit) {
+          layoutBoxes(orgLay, child, unit, level + 1, rect);
         }
-        else if (yPosB > pntB.y) {
-          // Adjust parent to be aligned with children
-          pntB.y = yPosB;
+        // Step 2 - center children with parent
+        int yPosN = pntN.y;
+        final int centerB = pntB.y + (height / 2);
+        int centerN = ((yPosN - yPosB) / 2) + yPosB;
+        if (centerN < centerB) {
+          final int delta = centerB - centerN;
+          for (final UnitView child : unit) {
+            child.move(0, delta, true);
+          }
+          pntN.y = pntN.y + delta;
+          yPosB += delta;
+          yPosN += delta;
+        }
+        if (centerB < centerN) {
+          // Step 3 - center parent with children
+          yPosB = unit.getChildren().get(0).getLocation().y;
+          centerN = ((yPosN - yPosB) / 2) + yPosB;
+          final int delta = centerN - centerB;
+          pntB.y += delta;
+          if (pntB.y < yPosB) {
+            pntB.y = yPosB;
+          }
         }
       }
     }
     // Update box position
     unit.setLocation(pntB);
     pntB.y = pntB.y + height;
+    if (rect.width < pntB.x) {
+      rect.width = pntB.x;
+    }
+    if (rect.height < pntB.y) {
+      rect.height = pntB.y;
+    }
   }
 
 }

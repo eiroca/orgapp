@@ -58,7 +58,8 @@ public class OrganigramView {
     this.organigram = organigram;
     root = initUnitTreeRec(organigram.getRoot());
     Layout anchorParent;
-    Layout anchorChild;
+    Layout anchorChildNormal;
+    Layout anchorChildFlipped;
     Layout anchorCollapsed;
     final OrganigramLayout orgLay = organigram.getOrganigramLayout();
     LineRender lineRender;
@@ -66,38 +67,42 @@ public class OrganigramView {
     switch (orgLay.getLayout()) {
       case LEFT:
         anchorParent = Layout.LEFT;
-        anchorChild = Layout.RIGHT;
         anchorCollapsed = Layout.RIGHT;
+        anchorChildNormal = Layout.RIGHT;
+        anchorChildFlipped = Layout.TOP;
         organigramRender = new VerticalRender(this, orgLay.isCompact(), false, false);
         break;
       case RIGHT:
         anchorParent = Layout.RIGHT;
-        anchorChild = Layout.LEFT;
-        anchorCollapsed = Layout.LEFT;
+        anchorCollapsed = Layout.TOP;
+        anchorChildNormal = Layout.LEFT;
+        anchorChildFlipped = Layout.TOP;
         organigramRender = new VerticalRender(this, orgLay.isCompact(), true, false);
         break;
       case BOTTOM:
         anchorParent = Layout.TOP;
-        anchorChild = Layout.BOTTOM;
         anchorCollapsed = Layout.TOP;
+        anchorChildNormal = Layout.BOTTOM;
+        anchorChildFlipped = Layout.RIGHT;
         organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, true);
         break;
       default: // TOP
         anchorParent = Layout.BOTTOM;
-        anchorChild = Layout.TOP;
         anchorCollapsed = Layout.BOTTOM;
+        anchorChildNormal = Layout.TOP;
+        anchorChildFlipped = Layout.RIGHT;
         organigramRender = new HorizontalRender(this, orgLay.isCompact(), false, false);
         break;
     }
     switch (orgLay.getLineMode()) {
       case CURVED:
-        lineRender = new BezierLineRender(anchorParent, anchorChild);
+        lineRender = new BezierLineRender(anchorParent, anchorChildNormal, anchorChildFlipped);
         break;
       case CONNECTOR:
-        lineRender = new GenericLineRender(anchorParent, anchorChild);
+        lineRender = new GenericLineRender(anchorParent, anchorChildNormal, anchorChildFlipped);
         break;
       default:
-        lineRender = new DirectLineRender(anchorParent, anchorChild);
+        lineRender = new DirectLineRender(anchorParent, anchorChildNormal, anchorChildFlipped);
     }
     if (orgLay.getBoxMode() == BoxMode.BOX) {
       boxRender = new ClassicBoxRender(anchorCollapsed);
