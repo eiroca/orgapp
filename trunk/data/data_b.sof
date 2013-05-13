@@ -1,25 +1,51 @@
 <?xml version="1.0"?>
-<organigram layout="left" firm="Test Tree">
- <unit name="A0">
-  <unit name="A1">
-   <unit name="A2" />
+<organigram flipped="false" compact="true" layout="top" marginTop="10" marginBottom="10" marginLeft="16" marginRight="16" firm="Test Tree" lineMode="connector">
+ <unit name="0">
+  <unit name="0.1">
+   <unit name="0.1.1" />
   </unit>
-  <unit name="B1">
-   <unit name="B2">
-    <unit name="A3" />
+  <unit name="0.2">
+   <unit name="0.2.1">
+    <unit name="0.2.1.1" />
+    <unit name="0.2.1.2" />
    </unit>
-   <unit name="C2" />
-  </unit>
-  <unit name="C1">
-   <unit name="D2" />
-   <unit name="E2" />
-   <unit name="F2">
-    <unit name="B3" />
-    <unit name="C3" />
-    <unit name="D3">
-     <unit name="A4" />
-     <unit name="B4" />
+   <unit name="0.2.2" >
+    <unit name="0.2.2.1" />
     </unit>
+   <unit name="0.2.3" >
+    <unit name="0.2.2.1" />
+    </unit>
+  </unit>
+  <unit name="0.3">
+   <unit name="0.3.1" >
+     <unit name="0.3.1.1" />
+   </unit>
+   <unit name="0.3.2" />
+   <unit name="0.3.3">
+    <unit name="0.3.3.1" />
+    <unit name="0.3.3.2" />
+    <unit name="0.3.3.3">
+     <unit name="0.3.3.3.1" />
+     <unit name="0.3.3.3.2" />
+     <unit name="0.3.3.3.3" />
+     <unit name="0.3.3.3.4" />
+     <unit name="0.3.3.3.5" />
+    </unit>
+   </unit>
+   <unit name="0.3.4">
+    <unit name="0.3.4.1" />
+   </unit>
+  </unit>
+  <unit name="0.4">
+   <unit name="0.4.1" >
+     <unit name="0.4.1.1" >
+      <unit name="0.4.1.1.1" >
+       <unit name="0.4.1.1.1.1" >
+        <unit name="0.4.1.1.1.1.1" >
+        </unit>
+       </unit>
+      </unit>
+     </unit>
    </unit>
   </unit>
  </unit>
