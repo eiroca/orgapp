@@ -1,116 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
- <xs:element name="organigram">
-  <xs:complexType>
-   <xs:sequence>
-    <xs:element type="Unit" minOccurs="1" maxOccurs="unbounded">
-    </xs:element>
-   </xs:sequence>
-   <!--  -->
-   <xs:attribute name="layout" use="optional" type="Alignment" />
-   <xs:attribute name="mode" use="optional" type="OrgMode" />
-   <xs:attribute name="compact" use="optional" type="xs:boolean" />
-   <xs:attribute name="backgroundColor" use="optional" type="Color" />
-   <xs:attribute name="boxMode" use="optional" type="BoxMode" />
-   <xs:attribute name="lineMode" use="optional" type="LineMode" />
-   <xs:attribute name="lineColor" use="optional" type="Color" />
-   <xs:attribute name="marginTop" use="optional" type="xs:integer" />
-   <xs:attribute name="marginLeft" use="optional" type="xs:integer" />
-   <xs:attribute name="marginBottom" use="optional" type="xs:integer" />
-   <xs:attribute name="marginRight" use="optional" type="xs:integer" />
-   <xs:attribute name="isToolTipEnabled" use="optional" type="xs:boolean" />
-   <!--  -->
-   <xs:attribute name="boxType" use="optional" type="BoxType" />
-   <xs:attribute name="boxExpended" use="optional" type="xs:boolean" />
-   <xs:attribute name="boxTextAlignment" use="optional" type="Alignment" />
-   <xs:attribute name="boxBackgroundColor" use="optional" type="Color" />
-   <xs:attribute name="boxForegroundColor" use="optional" type="Color" />
-   <xs:attribute name="boxFrameColor" use="optional" type="Color" />
-   <xs:attribute name="boxPaddingTop" use="optional" type="xs:integer" />
-   <xs:attribute name="boxPaddingLeft" use="optional" type="xs:integer" />
-   <xs:attribute name="boxPaddingBottom" use="optional" type="xs:integer" />
-   <xs:attribute name="boxPaddingRight" use="optional" type="xs:integer" />
-   <xs:anyAttribute />
+  <xs:element name="organigram">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="Unit" minOccurs="1" maxOccurs="unbounded">
+        </xs:element>
+      </xs:sequence>
+      <!-- -->
+      <xs:attribute name="layout" use="optional" type="Alignment" />
+      <xs:attribute name="mode" use="optional" type="OrgMode" />
+      <xs:attribute name="compact" use="optional" type="xs:boolean" default="true" />
+      <xs:attribute name="flipped" use="optional" type="xs:boolean" default="false" />
+      <xs:attribute name="backgroundColor" use="optional" type="Color" />
+      <xs:attribute name="boxMode" use="optional" type="BoxMode" />
+      <xs:attribute name="lineMode" use="optional" type="LineMode" />
+      <xs:attribute name="lineColor" use="optional" type="Color" />
+      <xs:attribute name="marginTop" use="optional" type="xs:integer" />
+      <xs:attribute name="marginLeft" use="optional" type="xs:integer" />
+      <xs:attribute name="marginBottom" use="optional" type="xs:integer" />
+      <xs:attribute name="marginRight" use="optional" type="xs:integer" />
+      <xs:attribute name="isToolTipEnabled" use="optional" type="xs:boolean" />
+      <!-- -->
+      <xs:attribute name="boxType" use="optional" type="BoxType" />
+      <xs:attribute name="boxExpended" use="optional" type="xs:boolean" />
+      <xs:attribute name="boxTextAlignment" use="optional" type="Alignment" />
+      <xs:attribute name="boxBackgroundColor" use="optional" type="Color" />
+      <xs:attribute name="boxForegroundColor" use="optional" type="Color" />
+      <xs:attribute name="boxFrameColor" use="optional" type="Color" />
+      <xs:attribute name="boxPaddingTop" use="optional" type="xs:integer" />
+      <xs:attribute name="boxPaddingLeft" use="optional" type="xs:integer" />
+      <xs:attribute name="boxPaddingBottom" use="optional" type="xs:integer" />
+      <xs:attribute name="boxPaddingRight" use="optional" type="xs:integer" />
+      <xs:anyAttribute />
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Unit" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element type="Unit" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element type="Info" minOccurs="0" maxOccurs="unbounded" />
+    </xs:choice>
+    <xs:attribute name="id" use="optional" type="xs:string" />
+    <xs:attribute name="link" use="optional" type="xs:anyURI" />
+    <xs:attribute name="target" use="optional" type="xs:string" />
+    <xs:attribute name="type" use="optional" type="BoxType" />
+    <xs:attribute name="expended" use="optional" type="xs:boolean" />
+    <xs:attribute name="backgroundColor" use="optional" type="Color" />
+    <xs:attribute name="foregroundColor" use="optional" type="Color" />
+    <xs:attribute name="frameColor" use="optional" type="Color" />
+    <xs:attribute name="textAlignment" use="optional" type="Alignment" />
+    <xs:attribute name="paddingTop" use="optional" type="xs:integer" />
+    <xs:attribute name="paddingLeft" use="optional" type="xs:integer" />
+    <xs:attribute name="paddingBottom" use="optional" type="xs:integer" />
+    <xs:attribute name="paddingRight" use="optional" type="xs:integer" />
+    <xs:anyAttribute />
   </xs:complexType>
- </xs:element>
- <xs:complexType name="Unit" mixed="true">
-  <xs:choice minOccurs="0" maxOccurs="unbounded">
-   <xs:element type="Unit" minOccurs="0" maxOccurs="unbounded" />
-   <xs:element type="Info" minOccurs="0" maxOccurs="unbounded" />
-  </xs:choice>
-  <xs:attribute name="id" use="optional" type="xs:string" />
-  <xs:attribute name="link" use="optional" type="xs:anyURI" />
-  <xs:attribute name="target" use="optional" type="xs:string" />
-  <xs:attribute name="type" use="optional" type="BoxType" />
-  <xs:attribute name="expended" use="optional" type="xs:boolean" />
-  <xs:attribute name="backgroundColor" use="optional" type="Color" />
-  <xs:attribute name="foregroundColor" use="optional" type="Color" />
-  <xs:attribute name="frameColor" use="optional" type="Color" />
-  <xs:attribute name="textAlignment" use="optional" type="Alignment" />
-  <xs:attribute name="paddingTop" use="optional" type="xs:integer" />
-  <xs:attribute name="paddingLeft" use="optional" type="xs:integer" />
-  <xs:attribute name="paddingBottom" use="optional" type="xs:integer" />
-  <xs:attribute name="paddingRight" use="optional" type="xs:integer" />
-  <xs:anyAttribute />
- </xs:complexType>
- <xs:complexType name="Info" mixed="true">
-  <xs:attribute name="fontColor" use="optional" type="Color" />
-  <xs:attribute name="fontName" use="optional" type="xs:string" />
-  <xs:attribute name="fontStyle" use="optional" type="FontStyle" />
- </xs:complexType>
- <xs:simpleType name="Alignment">
-  <xs:restriction base="xs:string">
-   <xs:enumeration value="top"></xs:enumeration>
-   <xs:enumeration value="left"></xs:enumeration>
-   <xs:enumeration value="right"></xs:enumeration>
-   <xs:enumeration value="bottom"></xs:enumeration>
-  </xs:restriction>
- </xs:simpleType>
- <xs:simpleType name="LineMode">
-  <xs:restriction base="xs:string">
-   <xs:enumeration value="line"></xs:enumeration>
-   <xs:enumeration value="connector"></xs:enumeration>
-   <xs:enumeration value="curved"></xs:enumeration>
-  </xs:restriction>
- </xs:simpleType>
- <xs:simpleType name="OrgMode">
-  <xs:restriction base="xs:string">
-   <xs:enumeration value="min"></xs:enumeration>
-   <xs:enumeration value="max"></xs:enumeration>
-   <xs:enumeration value="grow"></xs:enumeration>
-  </xs:restriction>
- </xs:simpleType>
- <xs:simpleType name="Color">
-  <xs:annotation>
-   <xs:documentation>Color could be definied as in HTML (default color label, #hexnumber or rgb(r,g,b)) or with a rgb triplet. Valid examples for the red color: "red" "255,0,0" "#f00" "#ff0000" "rgb(255,0,0)".</xs:documentation>
-  </xs:annotation>
-  <xs:restriction base="xs:string">
-   <xs:pattern value="#[0-9A-Z]{3}"></xs:pattern>
-   <xs:pattern value="#[0-9A-Z]{6}"></xs:pattern>
-   <xs:pattern value="\d{1,3},\d{1,3},\d{1,3}"></xs:pattern>
-   <xs:pattern value="rgb[(]\d{1,3},\d{1,3},\d{1,3}[)]"></xs:pattern>
-   <xs:pattern value=".+"></xs:pattern>
-  </xs:restriction>
- </xs:simpleType>
- <xs:simpleType name="FontStyle">
-  <xs:restriction base="xs:string">
-   <xs:enumeration value="italic"></xs:enumeration>
-   <xs:enumeration value="bold"></xs:enumeration>
-   <xs:enumeration value="bold+italic"></xs:enumeration>
-   <xs:enumeration value="italic+bold"></xs:enumeration>
-  </xs:restriction>
- </xs:simpleType>
- <xs:simpleType name="BoxMode">
-  <xs:restriction base="xs:string">
-   <xs:enumeration value="box"></xs:enumeration>
-   <xs:enumeration value="round"></xs:enumeration>
-  </xs:restriction>
- </xs:simpleType>
- <xs:simpleType name="BoxType">
-  <xs:restriction base="xs:string">
-   <xs:enumeration value="normal"></xs:enumeration>
-   <xs:enumeration value="highlight"></xs:enumeration>
-   <xs:enumeration value="none"></xs:enumeration>
-  </xs:restriction>
- </xs:simpleType>
+  <xs:complexType name="Info" mixed="true">
+    <xs:attribute name="fontColor" use="optional" type="Color" />
+    <xs:attribute name="fontName" use="optional" type="xs:string" />
+    <xs:attribute name="fontStyle" use="optional" type="FontStyle" />
+  </xs:complexType>
+  <xs:simpleType name="Alignment">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="top"></xs:enumeration>
+      <xs:enumeration value="left"></xs:enumeration>
+      <xs:enumeration value="right"></xs:enumeration>
+      <xs:enumeration value="bottom"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LineMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="line"></xs:enumeration>
+      <xs:enumeration value="connector"></xs:enumeration>
+      <xs:enumeration value="curved"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrgMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="min"></xs:enumeration>
+      <xs:enumeration value="max"></xs:enumeration>
+      <xs:enumeration value="grow"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Color">
+    <xs:annotation>
+      <xs:documentation>Color could be defined as in HTML (default color label, #hexnumber or rgb(r,g,b)) or with a rgb triplet. Valid examples for the red color: "red" "255,0,0" "#f00" "#ff0000" "rgb(255,0,0)".</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="#[0-9A-Z]{3}"></xs:pattern>
+      <xs:pattern value="#[0-9A-Z]{6}"></xs:pattern>
+      <xs:pattern value="\d{1,3},\d{1,3},\d{1,3}"></xs:pattern>
+      <xs:pattern value="rgb[(]\d{1,3},\d{1,3},\d{1,3}[)]"></xs:pattern>
+      <xs:pattern value=".+"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FontStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="italic"></xs:enumeration>
+      <xs:enumeration value="bold"></xs:enumeration>
+      <xs:enumeration value="bold+italic"></xs:enumeration>
+      <xs:enumeration value="italic+bold"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BoxMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="box"></xs:enumeration>
+      <xs:enumeration value="round"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BoxType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="normal"></xs:enumeration>
+      <xs:enumeration value="highlight"></xs:enumeration>
+      <xs:enumeration value="none"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

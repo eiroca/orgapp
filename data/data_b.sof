@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<organigram flipped="false" compact="true" layout="top" marginTop="10" marginBottom="10" marginLeft="16" marginRight="16" firm="Test Tree" lineMode="connector">
+<organigram flipped="true" compact="true" layout="top" marginTop="10" marginBottom="10" marginLeft="16" marginRight="16" firm="Test Tree" lineMode="connector">
  <unit name="0">
   <unit name="0.1">
    <unit name="0.1.1" />
