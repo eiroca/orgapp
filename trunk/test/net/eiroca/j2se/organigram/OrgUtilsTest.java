@@ -19,7 +19,7 @@ package net.eiroca.j2se.organigram;
 
 import java.net.URL;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import junit.framework.TestCase;
 
 import com.fbergeron.organigram.model.Organigram;
