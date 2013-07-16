@@ -30,8 +30,9 @@ public class DirectLineRender extends AbstractLineRender {
   /**
    * Instantiates a new direct line render.
    * 
-   * @param anchorParent the anchor parent
-   * @param anchorChild the anchor child
+   * @param anchorParent
+   * @param anchorChildNormal
+   * @param anchorChildFlipped
    */
   public DirectLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
     super(anchorParent, anchorChildNormal, anchorChildFlipped);
