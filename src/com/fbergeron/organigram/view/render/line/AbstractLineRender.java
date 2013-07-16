@@ -31,8 +31,10 @@ public abstract class AbstractLineRender implements LineRender {
   /** The anchor parent. */
   protected Layout anchorParent;
 
-  /** The anchor child. */
+  /** The anchor child - normal */
   protected Layout anchorChildNormal;
+
+  /** The anchor child - flipped */
   protected Layout anchorChildFlipped;
 
   public AbstractLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {

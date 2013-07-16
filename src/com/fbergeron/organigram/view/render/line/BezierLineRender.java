@@ -30,8 +30,9 @@ public class BezierLineRender extends GenericLineRender {
   /**
    * Instantiates a new Bezier line render.
    * 
-   * @param anchorParent the anchor parent
-   * @param anchorChild the anchor child
+   * @param anchorParent
+   * @param anchorChildNormal
+   * @param anchorChildFlipped
    */
   public BezierLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
     super(anchorParent, anchorChildNormal, anchorChildFlipped);

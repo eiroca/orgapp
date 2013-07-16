@@ -29,8 +29,9 @@ public class GenericLineRender extends DirectLineRender {
   /**
    * Instantiates a new generic line render.
    * 
-   * @param anchorParent the anchor parent
-   * @param anchorChild the anchor child
+   * @param anchorParent
+   * @param anchorChildNormal
+   * @param anchorChildFlipped
    */
   public GenericLineRender(final Layout anchorParent, final Layout anchorChildNormal, final Layout anchorChildFlipped) {
     super(anchorParent, anchorChildNormal, anchorChildFlipped);
