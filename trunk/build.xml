@@ -10,7 +10,7 @@
 	<taskdef resource="proguard/ant/task.properties" classpath="${proguard.home}/lib/proguard.jar" />
 
 	<!-- Directories -->
-	<property name="version" value="0.5.0" />
+	<property name="version" value="0.6.0" />
 	<property name="base" value="." />
 	<property name="src" value="src" />
 	<property name="classes" value="${dir.out}" />

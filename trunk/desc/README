@@ -8,7 +8,13 @@ The applet supports charts with different layouts and boxes with hyperlinks, cus
 
 See doc/index.html for further documentation.
 
-Changelog of version 0.5.0
+Change log of version 0.6.0
+==========================
+- Added Flipped layout
+- Moved to JUnit 4
+- Minor fixes
+
+Change log of version 0.5.0
 ==========================
 - Graphical improvements (Bezier line for connectors, BoxMode, text vertically centered, ...)
 - New XML reader/writer architecture, minor changes in SOF schema
