@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<organigram backgroundColor="#eee8f7" boxBackgroundColor="#a981d3" boxForegroundColor="#ffffff" firm="Test Tree">
+<organigram backgroundColor="#eee8f7" boxBackgroundColor="#a981d3" boxForegroundColor="#ffffff" firm="Test Tree" flipped="true" >
  <unit name="Doe, John" role="H" department="CEO">
   <unit>
    <info>com</info>
