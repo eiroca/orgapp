@@ -137,7 +137,10 @@
 			<zipfileset dir="${base}/src" prefix="src" />
 			<zipfileset dir="${base}/server" prefix="server" />
 			<zipfileset dir="${base}/doc" prefix="doc" />
-			<zipfileset dir="${base}/desc" />
+			<fileset file="${base}/README" />
+			<fileset file="${base}/INSTALL" />
+			<fileset file="${base}/COPYING" />
+			<fileset file="${base}/COPYING.LESSER" />
 			<fileset file="${base}/build.xml" />
 			<fileset file="${base}/sample-build.properties" />
 			<fileset file="${temp}/OrgApplet.jar" />
